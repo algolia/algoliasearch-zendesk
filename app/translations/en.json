@@ -1,0 +1,90 @@
+{
+  "app": {
+    "package": "Algolia Search",
+    "description": {
+      "value": "This app integrates Algolia super fast search in your Zendesk app. It comes with an autocomplete bar and a full results page.",
+      "title": "app description"
+    },
+    "name": {
+      "value": "Algolia Search",
+      "title": "app name"
+    },
+    "instructions": {
+      "value": "The process is really fast and simple. Just register on <a href=\"https://zendesk.algolia.com/signup\">https://zendesk.algolia.com/signup</a>, and follow the instructions there.",
+      "title": "app instructions"
+    },
+    "parameters": {
+      "app_id": {
+        "label": {
+          "value": "App ID",
+          "title": "app app_id label"
+        },
+        "placeholder": {
+          "value": "Your Algolia App ID",
+          "title": "app app_id placeholder"
+        }
+      },
+      "api_key": {
+        "label": {
+          "value": "Api Key",
+          "title": "app api_key label"
+        },
+        "placeholder": {
+          "value": "Your Algolia search-only API key",
+          "title": "app api_key placeholder"
+        }
+      },
+      "index_prefix": {
+        "label": {
+          "value": "Algolia index prefix",
+          "title": "app index_prefix"
+        },
+        "placeholder": {
+          "value": "An index_prefix on algolia",
+          "title": "app index_prefix placeholder"
+        }
+      }
+    }
+  },
+
+  "loading": {
+    "value": "Welcome to Algolia Search",
+    "title": "loading placeholder"
+  },
+
+  "fetch": {
+    "done": {
+      "value": "Good",
+      "title": "fetch success"
+    },
+    "fail": {
+      "value": "Failed to fecth information from the server",
+      "title": "fetch failure"
+    }
+  },
+
+  "id": {
+    "value": "ID",
+    "title": "user id"
+  },
+
+  "email": {
+    "value": "Email",
+    "title": "user email"
+  },
+
+  "name": {
+    "value": "Name",
+    "title": "user name"
+  },
+
+  "role": {
+    "value": "Role",
+    "title": "user role"
+  },
+
+  "groups": {
+    "value": "Groups",
+    "title": "user groups"
+  }
+}

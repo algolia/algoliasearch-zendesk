@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Algolia's Zendesk Search</title>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <div id="loading"><img src="img/loading.gif" alt="Loading..."/></div>
+  <div id="loaded" class="hidden">
+    <div id="logo" class="hidden">
+      <img src="img/algolia.jpg" alt="Algolia Search" />
+    </div>
+    <div id="facets" class="hidden"></div>
+    <div id="input-container">
+      <input id="search-bar" class="tt-input" type="text" placeholder="What are you looking for ?" autocomplete="off" spellcheck="false" autocorrect="off" />
+      <a href="//www.algolia.com/" target="_parent"><img id="mini-logo" class="hidden" src="img/mini-algolia.png" alt="Search"/></a>
+    </div>
+    <div id="results" class="hidden"></div>
+    <div id="pagination" class="hidden"></div>
+  </div>
+
+  <script type="text/template" id="ticket-hit-template">
+    <div class="ticket">
+      <div class="overflow-block-container">
+        <p class="title overflow-block">
+          {{#full_results}}
+            <span class="subject">{{{ _highlightResult.subject.value }}}</span>
+          {{/full_results}}
+          <span class="id">#{{ objectID }}</span>
+          <span class="caracs">
+            <span class="type {{ type }}">{{{ _highlightResult.type.value }}}</span>
+            <span class="status {{ status }}">{{{ _highlightResult.status.value }}}</span>
+            {{#priority}}
+              <span class="priority {{ priority }}">{{{ _highlightResult.priority.value }}}</span>
+            {{/priority}}
+          </span>
+          {{^full_results}}
+            <span class="subject">{{{ _highlightResult.subject.value }}}</span>
+          {{/full_results}}
+        </p>
+      </div>
+      <div class="overflow-block-container">
+        <p class="overflow-block">
+          <span class="requester">
+            <span class="name">{{{ _highlightResult.requester.name.value }}}</span>
+            <span class="email"> {{ requester_sep }} {{{ _highlightResult.requester.email.value }}}</span>
+            -
+          </span>
+          <span class="additional_info">
+            {{{ additional_info }}}
+            <span class="time">
+              - <time data-datetime="calendar" datetime="{{ created_at_iso }}"></time>
+              - Last update <time data-datetime="relative" datetime="{{ updated_at_iso }}"></time>
+            </span>
+          </span>
+        </p>
+      </div>
+      {{#_snippetResult.description.value}}<p class="description">{{{ _snippetResult.description.value }}}</p>{{/_snippetResult.description.value}}
+    </div>
+  </script>
+  <script type="text/template" id="user-hit-template">
+    <div class="user">
+      <div class="picture {{^photo}}no-pic{{/photo}}">{{#photo}}<img src="{{ photo }}" />{{/photo}}</div>
+      <div class="info">
+        <p class="overflow-block-container">
+          <span class="name overflow-block">
+            {{{ _highlightResult.name.value }}}
+          </span>
+          <span class="email overflow-block">
+            {{{ _highlightResult.email.value }}}
+          </span>
+        </p>
+        <div class="overflow-block-container">
+          {{#full_results}}
+            <p class="tags overflow-block">
+              {{#_highlightResult.tags}}
+                <span class="tag">{{{ value }}}</span>
+              {{/_highlightResult.tags}}
+            </p>
+            <p class="overflow-block">{{{ _snippetResult.notes.value }}}</p>
+            <p class="overflow-block">{{{ _snippetResult.details.value }}}</p>
+          {{/full_results}}
+          <p class="additional_info overflow-block">{{{ additional_info }}}</p>
+        </div>
+      </div>
+    </div>
+  </script>
+  <script type="text/template" id="organization-hit-template">
+    <div class="organization">
+      <div class="picture"></div>
+      <div class="info">
+        <p class="overflow-block-container">
+          <span class="name overflow-block">
+            {{{ _highlightResult.name.value }}}
+          </span>
+          <span class="domains overflow-block">
+            {{{ domains_text }}}
+          </span>
+        </p>
+        <div class="overflow-block-container">
+          {{#full_results}}
+            <p class="tags overflow-block">
+              {{#_highlightResult.tags}}
+                <span class="tag">{{{ value }}}</span>
+              {{/_highlightResult.tags}}
+            </p>
+            <p class="overflow-block">{{{ _snippetResult.notes.value }}}</p>
+            <p class="overflow-block">{{{ _snippetResult.details.value }}}</p>
+          {{/full_results}}
+          <p class="additional_info overflow-block">{{{ additional_info }}}</p>
+        </div>
+      </div>
+    </div>
+  </script>
+  <script type="text/template" id="article-hit-template">
+    <div class="article">
+      <div class="picture"></div>
+      <div class="info">
+        <div class="overflow-block-container">
+          <p class="title overflow-block">
+            <span class="name">{{{ _highlightResult.title.value }}}</span>
+          </p>
+          <p class="author overflow-block">
+            <span class="name">{{{ _highlightResult.author.name.value }}}</span>
+            <span class="email"> {{ author_sep }} {{{ _highlightResult.author.email.value }}}</span>
+          </p>
+        </div>
+        <div class="overflow-block-container">
+          <p class="overflow-block">{{{ _snippetResult.body_safe.value }}}</p>
+          <p class="additional_info overflow-block">
+            {{{ additional_info }}}
+            <span class="time">
+              - <time data-datetime="calendar" datetime="{{ created_at_iso }}"></time>
+              - Last update <time data-datetime="relative" datetime="{{ updated_at_iso }}"></time>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </script>
+  <script type="text/template" id="facet-template">
+    <div class="facet">
+      <ul class="{{ facet }}">
+        <li class="title">{{ title }}</li>
+        {{#values}}
+          <li {{#refined}}class="refined"{{/refined}} onclick="toggleRefine('{{ type }}', '{{ facet }}', '{{ value }}'); return false;">
+            {{#disjunctive}}
+              <input class="checkbox" type="checkbox" {{#refined}}checked="checked"{{/refined}}>
+            {{/disjunctive}}
+            <span>{{ label }}</span> ({{ count }})
+          </li>
+        {{/values}}
+      </ul>
+    </div>
+  </script>
+  <script type="text/template" id="pagination-template">
+    <div class="text-center">
+      <ul class="pagination">
+        <li {{^prev_page}}class="disabled"{{/prev_page}}><a href="#" onclick="{{#prev_page}}gotoPage('{{ type }}', {{ prev_page }});{{/prev_page}} return false;">&laquo;</a></li>
+        {{#pages}}
+          <li class="{{#current}}active{{/current}}{{#disabled}}disabled{{/disabled}}"><a href="#" onclick="{{^disabled}}gotoPage('{{ type }}', {{ number }});{{/disabled}} return false;">{{ number }}</a></li>
+        {{/pages}}
+        <li {{^next_page}}class="disabled"{{/next_page}}><a href="#" onclick="{{#next_page}}gotoPage('{{ type }}', {{ next_page }});{{/next_page}} return false;">&raquo;</a></li>
+      </ul>
+    </div>
+  </script>
+
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1.11.1/jquery.min.js"></script>
+  <!--
+    If you want to update typeahead.js, be warned that it might break the datasetRendered event which isn't exposed as a custom event
+    See https://github.com/twitter/typeahead.js/issues/644
+    And https://github.com/twitter/typeahead.js/issues/141
+    As stated in the milestone for v0.11.0, it will be implemented as an event named typeahead:rendered
+    https://github.com/twitter/typeahead.js/milestones/v0.11.0
+  -->
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/hogan.js/3.0.0/hogan.common.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/algoliasearch/2.9.2/algoliasearch.min.js"></script>
+  <script type="text/javascript" src="//assets.zendesk.com/apps/sdk/latest/zaf_sdk.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/2.9.0/moment-with-locales.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+</body>
+</html>
