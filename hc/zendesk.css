@@ -1,0 +1,119 @@
+/* Algolia */
+
+/* We want our autocomplete to be as long as our input */
+.twitter-typeahead {
+  width: 100%;
+}
+
+/* This is the global container for the autocomplete results container */
+.tt-dropdown-menu {
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  font-weight: lighter;
+  border-right: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+  border-left: 1px solid #DDD;
+}
+
+.tt-dropdown-menu a {
+  padding: 2px 0;
+  padding: 7px 0;
+}
+
+.tt-dropdown-menu a:hover {
+  text-decoration: none;
+}
+
+/* You can configure this with Algolia, but by default, text that matches the query (highlighted) will be surrounded by em tags */
+.tt-dropdown-menu em, #hits em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+.tt-dropdown-menu .header {
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 10px 20px 5px 20px;
+}
+
+.tt-dropdown-menu .title {
+  font-size: 14px;
+  padding: 0 20px;
+}
+
+.tt-dropdown-menu .body {
+  color: #555;
+  font-size: 12px;
+  padding: 0 20px 0 40px;
+}
+
+.tt-dropdown-menu .hit-article,
+.tt-dropdown-menu .hit-section {
+  padding: 3px 0;
+  display: block;
+}
+
+.tt-dropdown-menu .hit-other {
+  font-size: 12px;
+  padding: 5px 0px 5px 20px;
+  cursor: pointer;
+  background: #f9f9f9;
+  margin: 5px 0 0 0;
+}
+
+.tt-dropdown-menu a.others {
+  color: $color_4
+}
+
+.tt-dropdown-menu a.others:hover {
+  text-decoration: underline;
+}
+
+/*
+ * When hovering or navigating with arrows in the autocomplete, the .tt-cursor class is appended
+ * Use this to style how selecting a result should look like
+ */
+.tt-suggestion.tt-cursor {
+  background-color: #F0ECEB;
+}
+
+/* The input where the query is typed */
+#query {
+  outline: none;
+}
+
+/* Styling of the pagination */
+#pagination li {
+  float: none !important;
+  cursor: pointer;
+  padding: 5px;
+}
+
+#pagination li:hover {
+  background-color: #F0ECEB;
+}
+
+#pagination li.active {
+  color: #E63307;
+}
+
+#pagination li.disabled {
+  color: #AAA;
+  cursor: default;
+}
+
+#pagination li.disabled:hover {
+  background-color: transparent;
+}
+
+/* Here we reduce the huge space between the header and the top of the page */
+h1.search-results-header {
+  margin-top: 0px;
+}
+
+nav.sub-nav {
+  padding-bottom: 0px;
+}
+
+/* /Algolia */

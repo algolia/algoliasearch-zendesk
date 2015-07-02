@@ -1,145 +1,15 @@
-# Algolia for Zendesk
-
-This repository holds the zendesk app code and some various scripts.
-
-## Zendesk app
-
-### Dev mode
-
-To develop, you'll need to use the
-[Zendesk App Tools (zat)](https://developer.zendesk.com/apps/docs/agent/tools).
-To download it, just follow the instructions on
-[this link](https://support.zendesk.com/hc/en-us/articles/203691236-Installing-and-using-the-Zendesk-apps-tools).
-
-More information are present on the presentation link,
-but here are some info to get you started.
-
-#### Index data
-
-First you'll need to have your data indexed. To do this, follow the
-instructions of the Zendesk connector in `AlgoliaConnectors`.
-
-
-#### Run everything locally
-
-To run the server locally, you'll need to do
-
-    cd app && zat server
-
-Now, open your browser, and go to [http://{your-zendesk-subdomain}.zendesk.com/agent]
-(http://subdomain.zendesk.com/agent). Once the page is loaded, add `?zat=true` to
-the end of the url and load the page.  
-You should now see a shield icon somewhere in your location bar. Click on it
-and choose something like `Allow scripts`. The page will reload automatically.
-
-Modifications made to any file are directly taken into account, no need
-to reload the server but you'll need to reload your app in the zendesk page.
-For this, no need to do a full refresh, just click on the icon in the top right
-corner next to the algolia icon.
-
-If you also want to run the iframe content locally, pull
-the `demos` repository, navigate to the `zendesk-agent` folder
-and run a basic server to serve static files, like `http-server`.
-Then modify in `app/app.js` the `IFRAME_URL` to point to your
-local webserver.
-
-#### Packaging the app
-
-To package the app into a zip uploadable to any zendesk account,
-you'll just need to do
-
-    cd app && zat package
-
-If everything runs fine, your app will now be in `./app/tmp/*.zip`.
-
-## Integrate Algolia in the help center
-
-In this description, we'll present our integration in
-[*Remember The Date* Help Center](https://rememberthedate.zendesk.com/hc/).
-It should give enough details for you to change it for it to match your
-implementation.
-You can access the files directly in the [hc/](hc/) folder.  
-However, we recommend you to read this README instead.
-
-### Accesing the customization panel
-
-First, go to [http://{your-zendesk-subdomain}.zendesk.com/hc]
-(http://subdomain.zendesk.com/hc) and log in.
-
-Once logged in, you should have in the lower right corner an option named
-`Customize design`. In the panel that just opened, click on `Edit theme`.
-
-### HTML
-
-Now you'll need to modify several **HTML** parts :
-
-- **Footer** We'll include necessary **JS** files here
-  ```HTML
-  [...]
-  </footer>
-
-  <!-- Algolia -->
-    <script src="//cdn.jsdelivr.net/typeahead.js/0.10/typeahead.jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/hogan.js/3/hogan.min.common.js"></script>
-    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-    <script src="//cdn.jsdelivr.net/algoliasearch.helper/2/algoliasearch.helper.min.js"></script>
-  <!-- /Algolia -->
-  ```
-
-- **Search results** Replace the current **HTML** code used to display the results which looks like :
-  ```HTML
-  <div class="search-results">
-    <h1>{{result_heading}}</h1>
-    {{results}}
-  </div>
-  ```
-  by
-  ```HTML
-  <!-- Algolia -->
-  <div class="search-results clearfix">
-    <h1 class="search-results-heading" style="display: none">{{result_heading}}</h1>
-    <script type="text/javascript">
-      // This allow us to detect if we're using algolia for autocompletion
-      // or instant search
-      window.resultsPage = true;
-    </script>
-    <ul class="search-results-list" id="hits">
-    </ul>
-  </div>
-  <div id="pagination"></div>
-  <!-- /Algolia -->
-  ```
-
-### JavaScript
-
-We'll add a little bit of **JS** now.  
-Open the **JS** tab, and add a `jQuery` wrapper waiting for the page to load.  
-*If it already exists, create a new one, the code splitting will be easier*
-
-```js
 /* Algolia */
-$(document).ready(function() {
+
+$(document).ready(function () {
   'use strict';
 
-  // Append here the code described after
-}
-/* /Algolia */
-```
-
-Now let's split the remaining of the code :
-
-- **Initialization** Replace `{{ application_id }}`, `{{ api_key }}` and `{{ zendesk_domain }}` according to your configuration  
-  Be sure to use the public search API key, so that users won't be able to acces the remaining of your data
-  ```js
   // Algolia public credentials
-  var APPLICATION_ID = '{{ application_id }}';
-  var API_KEY = '{{ api_key }}';
+  var APPLICATION_ID = '';
+  var API_KEY = '';
 
   // Your zendesk credentials
-  var ZENDESK_SUBDOMAIN = '{{ zendesk_domain }}';
-  ```
-  You can also change these constants to control how many things are displayed:
-  ```js
+  var ZENDESK_SUBDOMAIN = '';
+
   // Used to control how many pages we want to display
   // in the pagination
   var PAGINATION_PADDING = 4;
@@ -150,21 +20,14 @@ Now let's split the remaining of the code :
 
   // How many results do we display in instant search?
   var INSTANT_SEARCH_NB_HITS = 10;
-  ```
-  Finally, we initialize Algolia
-  ```js
+
   // Our main algolia object
   var algolia = algoliasearch(APPLICATION_ID, API_KEY);
 
   // The two indices we'll search in
   var articles = algolia.initIndex('zendesk_' + ZENDESK_SUBDOMAIN + '_public_articles');
   var sections = algolia.initIndex('zendesk_' + ZENDESK_SUBDOMAIN + '_public_sections');
-  ```
 
-- **Templates**
-  For the templates, we'll use the [Hogan.js](http://twitter.github.io/hogan.js/) templating engine.
-  Feel free to use another one if you wish.
-  ```js
   // Autocompletion template for a section
   var templateSection = Hogan.compile('' +
     '<div class="hit-section">' +
@@ -234,10 +97,7 @@ Now let's split the remaining of the code :
     '    </ul>' +
     '  </div>' +
     '{{/ pages.length }}');
-  ```
 
-- **Initialization** of some variables and functions
-  ```js
   // Often used jquery selectors
   var $query = $('#query');
 
@@ -284,9 +144,7 @@ Now let's split the remaining of the code :
       return query;
     }
   };
-  ```
-- **Full results**: Instant search
-  ```js
+
   if (window.resultsPage) {
     // Often used jquery selectors
     var $title = $('.search-results-heading');
@@ -443,12 +301,7 @@ Now let's split the remaining of the code :
 
     // Call search on the first load
     search();
-  }
-  ```
-
-- **Autocomplete**
-  ```js
-  else {
+  } else {
     // This function will be used to link Algolia and typeahead.js
     // algoliasearch.js already provides an adapter for typeahead, but
     // since we want to handle stop words, we'll need to redefine it
@@ -543,133 +396,6 @@ Now let's split the remaining of the code :
       }
     }).focus();
   }
-  ```
+});
 
-**You can also find the [full file](hc/zendesk.js) in the hc folder**.
-
-### CSS
-
-Now let's talk about the most customizable part : the **CSS**.  
-Open the **CSS** tab, and copy paste this code at the beginning :
-
-```css
-/* We want our autocomplete to be as long as our input */
-.twitter-typeahead {
-  width: 100%;
-}
-
-/* This is the global container for the autocomplete results container */
-.tt-dropdown-menu {
-  padding: 0;
-  margin: 0;
-  background-color: white;
-  font-weight: lighter;
-  border-right: 1px solid #DDD;
-  border-bottom: 1px solid #DDD;
-  border-left: 1px solid #DDD;
-}
-
-.tt-dropdown-menu a {
-  padding: 2px 0;
-  padding: 7px 0;
-}
-
-.tt-dropdown-menu a:hover {
-  text-decoration: none;
-}
-
-/* You can configure this with Algolia, but by default, text that matches the query (highlighted) will be surrounded by em tags */
-.tt-dropdown-menu em, #hits em {
-  font-weight: bold;
-  font-style: normal;
-}
-
-.tt-dropdown-menu .header {
-  font-size: 14px;
-  text-transform: uppercase;
-  padding: 10px 20px 5px 20px;
-}
-
-.tt-dropdown-menu .title {
-  font-size: 14px;
-  padding: 0 20px;
-}
-
-.tt-dropdown-menu .body {
-  color: #555;
-  font-size: 12px;
-  padding: 0 20px 0 40px;
-}
-
-.tt-dropdown-menu .hit-article,
-.tt-dropdown-menu .hit-section {
-  padding: 3px 0;
-  display: block;
-}
-
-.tt-dropdown-menu .hit-other {
-  font-size: 12px;
-  padding: 5px 0px 5px 20px;
-  cursor: pointer;
-  background: #f9f9f9;
-  margin: 5px 0 0 0;
-}
-
-.tt-dropdown-menu a.others {
-  color: $color_4
-}
-
-.tt-dropdown-menu a.others:hover {
-  text-decoration: underline;
-}
-
-/*
- * When hovering or navigating with arrows in the autocomplete, the .tt-cursor class is appended
- * Use this to style how selecting a result should look like
- */
-.tt-suggestion.tt-cursor {
-  background-color: #F0ECEB;
-}
-
-/* The input where the query is typed */
-#query {
-  outline: none;
-}
-
-/* Styling of the pagination */
-#pagination li {
-  float: none !important;
-  cursor: pointer;
-  padding: 5px;
-}
-
-#pagination li:hover {
-  background-color: #F0ECEB;
-}
-
-#pagination li.active {
-  color: #E63307;
-}
-
-#pagination li.disabled {
-  color: #AAA;
-  cursor: default;
-}
-
-#pagination li.disabled:hover {
-  background-color: transparent;
-}
-
-/* Here we reduce the huge space between the header and the top of the page */
-h1.search-results-header {
-  margin-top: 0px;
-}
-
-nav.sub-nav {
-  padding-bottom: 0px;
-}
-```
-
-It will probably not match your theme, since it has been written for
-[rememberthedate](https://rememberthedate.zendesk.com/hc), but it will
-give you a starting point to customize it to your needs.
+/* /Algolia */
