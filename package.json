@@ -1,0 +1,56 @@
+{
+  "name": "algoliasearch.zendesk-hc",
+  "description": "Algolia Search for Zendesk's Help Center",
+  "keywords": [
+    "algolia",
+    "search",
+    "zendesk",
+    "help center"
+  ],
+  "homepage": "https://github.com/algolia/algoliasearch-zendesk",
+  "bugs": "https://github.com/algolia/algoliasearch-zendesk/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/algolia/algoliasearch-zendesk.git"
+  },
+  "dependencies": {
+    "algoliasearch": "^3.9.2",
+    "autocomplete.js": "^0.14.0",
+    "hogan.js": "^3.0.2"
+  },
+  "peerDependencies": {
+    "jquery": ">= 1.7"
+  },
+  "devDependencies": {
+    "eslint": "^1.5.1",
+    "eslint-config-airbnb": "0.1.0",
+    "eslint-config-algolia": "3.0.0",
+    "grunt": "~0.4.1",
+    "grunt-banner": "^0.6.0",
+    "grunt-cli": "0.1.13",
+    "grunt-concurrent": "^2.0.0",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-connect": "^0.11.2",
+    "grunt-contrib-uglify": "^0.9.2",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-eslint": "^17.2.0",
+    "grunt-exec": "~0.4.6",
+    "grunt-sed": "~0.1.1",
+    "grunt-step": "~0.2.0",
+    "grunt-umd": "^2.3.3",
+    "grunt-webpack": "^1.0.11",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0",
+    "yiewd": "^0.6.0"
+  },
+  "scripts": {
+    "build": "grunt",
+    "dev": "grunt dev",
+    "lint": "grunt lint",
+    "start": "grunt server"
+  },
+  "version": "0.0.1",
+  "main": "index.js"
+}
