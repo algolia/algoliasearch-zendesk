@@ -1,5 +1,0 @@
-<header class="hidden">
-  <h3>{{setting "name"}}</h3>
-</header>
-<a id="algolia-clicker"></a>
-<section class="iframe-wrapper" data-main />
