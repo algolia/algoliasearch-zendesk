@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "algoliasearch": "^3.9.2",
-    "autocomplete.js": "^0.14.0",
+    "autocomplete.js": "^0.14.1",
     "hogan.js": "^3.0.2"
   },
   "peerDependencies": {
