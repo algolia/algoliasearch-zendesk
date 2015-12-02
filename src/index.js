@@ -5,7 +5,20 @@ if (!$) {
   throw new Error('Cannot find required dependency to jQuery.');
 }
 
-var algoliasearch = require('algoliasearch');
+// hide the regular search results
+function addcss(css) {
+  var head = document.getElementsByTagName('head')[0];
+  var s = document.createElement('style');
+  s.setAttribute('type', 'text/css');
+  if (s.styleSheet) {
+    s.styleSheet.cssText = css;
+  } else {
+    s.appendChild(document.createTextNode(css));
+  }
+  head.appendChild(s);
+}
+addcss('.search-results h1:first-child {display: none !important;} .search-results-column {display: none !important;}');
+
 var instantsearch = require('./instantsearch.js');
 var autocomplete = require('./autocomplete.js');
 
@@ -28,26 +41,18 @@ function algoliasearchZendeskHC(options) {
     options.baseUrl = '/hc/';
   }
 
-  // initialize API client
-  var client = algoliasearch(options.applicationId, options.apiKey);
-
-  // initialize indices
-  var indexPrefix = options.indexPrefix || '';
-  var articles = client.initIndex(indexPrefix + options.subdomain + '_articles');
-  var sections = client.initIndex(indexPrefix + options.subdomain + '_sections');
-
   // once the DOM is initialized
   $(document).ready(function() {
     console.log('init');
 
     // autocompletion menu
     if (options.autocomplete.enabled) {
-      autocomplete(articles, sections, options);
+      autocomplete(options);
     }
 
     // instant search result page
     if (options.instantsearch.enabled) {
-      instantsearch(articles, sections, options);
+      instantsearch(options);
     }
   });
 }

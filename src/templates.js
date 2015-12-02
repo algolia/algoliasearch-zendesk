@@ -54,26 +54,6 @@ module.exports = {
       '  <div class="search-result-body">' +
       '    {{{ _highlightResult.body.value }}}' +
       '  </div>' +
-      '</li>'),
-
-    // Pagination template for the instant search page
-    pagination: Hogan.compile('' +
-      '{{# pages.length }}' +
-      '  <div id="pagination">' +
-      '    <ul class="pagination">' +
-      '      <li class="{{# prev_page }}prev-page{{/ prev_page }} {{^ prev_page }}disabled{{/ prev_page }}">' +
-      '        &laquo;' +
-      '      </li>' +
-      '      {{# pages }}' +
-      '        <li class="page {{# current }}active{{/ current }}{{# disabled }}disabled{{/ disabled }}" data-page="{{ number }}">' +
-      '          {{  number  }}' +
-      '        </li>' +
-      '      {{/ pages }}' +
-      '      <li class="{{# next_page }}next-page{{/ next_page }} {{^ next_page }}disabled{{/ next_page }}">' +
-      '        &raquo;' +
-      '      </li>' +
-      '    </ul>' +
-      '  </div>' +
-      '{{/ pages.length }}')
+      '</li>')
   }
 };

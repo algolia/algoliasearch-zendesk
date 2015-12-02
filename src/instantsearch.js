@@ -3,15 +3,23 @@
 /* global I18n, moment */
 
 var $ = require('jquery');
+var instantsearch = require('instantsearch.js/dist/instantsearch.js');
 var templates = require('./templates.js');
 
-module.exports = function(articles, sections, options) {
-  console.log('instantsearch init');
-  var page = 0;
-  var $title = $('.search-results-heading');
-  var $query = $('#query');
-  var $hits = $('#hits');
-  var $pagination = $('#pagination');
+module.exports = function(options) {
+  var $searchResults = $('.search-results');
+  if ($searchResults.length === 0) {
+    return;
+  }
+  var container = $searchResults.find('.search-results-column');
+  var $query = $('<input type="text" id="algolia-query" />');
+  container.before($query);
+  var $stats = $('<div id="algolia-stats" />');
+  container.before($stats);
+  var $hits = $('<div id="algolia-hits" />');
+  container.before($hits);
+  var $pagination = $('<div id="algolia-pagination" />');
+  container.before($pagination);
 
   function displayTimes() {
     // Extracted from formatDateTime.js
@@ -36,75 +44,62 @@ module.exports = function(articles, sections, options) {
     });
   }
 
-  function displayPagination(curr, total) {
-    var pages = [];
-    if (curr > 5) {
-      pages.push({ current: false, number: 1 });
-      pages.push({ current: false, number: '...', disabled: true });
+  var q = $(options.autocomplete.inputSelector || '#query');
+  var query = q.val();
+  q.val('');
+
+  var search = instantsearch({
+    appId: options.applicationId,
+    apiKey: options.apiKey,
+    indexName: options.indexPrefix + options.subdomain + '_sections',
+    searchParameters: {
+      query: query
     }
-    for (var p = curr - 5; p < curr + 5; ++p) {
-      if (p < 0 || p >= total) {
-        continue;
+  });
+
+  search.addWidget(
+    instantsearch.widgets.searchBox({
+      container: '#algolia-query',
+      placeholder: 'Search for articles',
+      poweredBy: true
+    })
+  );
+
+  search.addWidget(
+    instantsearch.widgets.stats({
+      container: '#algolia-stats'
+    })
+  );
+
+  search.addWidget(
+    instantsearch.widgets.stats({
+      container: '#algolia-stats'
+    })
+  );
+
+  search.addWidget(
+    instantsearch.widgets.pagination({
+      container: '#algolia-pagination',
+      cssClasses: {
+        root: 'pagination'
       }
-      pages.push({ current: curr === p, number: (p + 1) });
-    }
-    if (curr + 5 < total) {
-      pages.push({ current: false, number: '...', disabled: true });
-      pages.push({ current: false, number: total });
-    }
-    if (pages.length) {
-      $pagination.html(templates.instantsearch.pagination.render({ pages: pages, prev_page: (curr > 0 ? curr : false), next_page: (curr + 1 < total ? curr + 2 : false) }));
-    } else {
-      $pagination.html('');
-    }
-  }
+    })
+  );
 
-  function searchCallback(error, content) {
-    if (error) {
-      $title.hide();
-      $hits.empty();
-      $pagination.empty();
-      return;
-    }
+  search.addWidget(
+    instantsearch.widgets.hits({
+      container: '#algolia-hits',
+      templates: {
+        item: function(data) {
+          return templates.instantsearch.hit.render(data);
+        }
+      }
+    })
+  );
 
-    $title.html((content.nbHits ?
-                '<b>' + content.nbHits + '</b> ' + I18n.translations['txt.help_center.views.admin.appearance.template_title.search_results'] :
-                I18n.translations['txt.help_center.javascripts.tag_selector.no_results_matched']) + ': ' + '"' + $query.val() + '"').show();
-
-    var html = '';
-    for (var i = 0; i < content.hits.length; ++i) {
-      html += templates.instantsearch.hit.render(content.hits[i]);
-    }
-    $hits.html(html);
-    displayPagination(content.page, content.nbPages);
+  search.on('render', function() {
     displayTimes();
-  }
+  })
 
-  var lastQuery = null;
-  var localeFilter = '["locale.locale:' + I18n.locale + '"]';
-  function search() {
-    var q = $query.val();
-    if (q !== lastQuery) {
-      articles.search(q, { hitsPerPage: 10, page: page, facetFilters: localeFilter, removeStopWords: true }, searchCallback);
-      lastQuery = q;
-    }
-  }
-
-  $query.on('keyup change', search);
-
-  var originalQuery = $('.search-results-heading').text().match(/"([^"]+)"/);
-  if (originalQuery) {
-    originalQuery = originalQuery.slice(-1)[0];
-    if (originalQuery !== '') {
-      $query.val(originalQuery).trigger('change');
-    }
-  }
-
-  window.gotoPage = function(number) {
-    page = number - 1;
-    $(window).scrollTop($query.offset().top - 5);
-    search();
-  };
-
-  search();
+  search.start();
 };

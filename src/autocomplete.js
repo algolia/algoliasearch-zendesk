@@ -3,12 +3,12 @@
 /* global I18n */
 
 var $ = require('jquery');
+var algoliasearch = require('algoliasearch');
 require('autocomplete.js/index_jquery.js');
 var templates = require('./templates.js');
 
-module.exports = function(articles, sections, options) {
+module.exports = function(options) {
   var $query = $(options.autocomplete.inputSelector || '#query');
-  console.log('autocomplete init', $query);
 
   function adapter(index, params) {
     var localeFilter = '["locale.locale:' + I18n.locale + '"]';
@@ -25,6 +25,13 @@ module.exports = function(articles, sections, options) {
     }
     return res.toLowerCase();
   }
+
+  // initialize API client
+  var client = algoliasearch(options.applicationId, options.apiKey);
+
+  // initialize indices
+  var articles = client.initIndex(options.indexPrefix + options.subdomain + '_articles');
+  var sections = client.initIndex(options.indexPrefix + options.subdomain + '_sections');
 
   // typeahead.js initialization
   $query.autocomplete({
@@ -58,5 +65,5 @@ module.exports = function(articles, sections, options) {
     } else if (dataset === 'other') {
       location.href = options.baseUrl + I18n.locale + '/search?query=' + suggestion.query;
     }
-  }).focus();
+  });
 };
