@@ -6,6 +6,7 @@ var $ = require('jquery');
 var templates = require('./templates.js');
 
 module.exports = function(articles, sections, options) {
+  console.log('instantsearch init');
   var page = 0;
   var $title = $('.search-results-heading');
   var $query = $('#query');
@@ -52,7 +53,7 @@ module.exports = function(articles, sections, options) {
       pages.push({ current: false, number: total });
     }
     if (pages.length) {
-      $pagination.html(templates.pagination.render({ pages: pages, prev_page: (curr > 0 ? curr : false), next_page: (curr + 1 < total ? curr + 2 : false) }));
+      $pagination.html(templates.instantsearch.pagination.render({ pages: pages, prev_page: (curr > 0 ? curr : false), next_page: (curr + 1 < total ? curr + 2 : false) }));
     } else {
       $pagination.html('');
     }
@@ -72,7 +73,7 @@ module.exports = function(articles, sections, options) {
 
     var html = '';
     for (var i = 0; i < content.hits.length; ++i) {
-      html += templates.hit.render(content.hits[i]);
+      html += templates.instantsearch.hit.render(content.hits[i]);
     }
     $hits.html(html);
     displayPagination(content.page, content.nbPages);
