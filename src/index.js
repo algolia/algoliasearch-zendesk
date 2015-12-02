@@ -41,10 +41,12 @@ function algoliasearchZendeskHC(options) {
     options.baseUrl = '/hc/';
   }
 
+  options.colors = options.colors || {};
+  options.colors.primary = options.colors.primary || '#D4D4D4';
+  options.colors.secondary = options.colors.secondary || '#D4D4D4';
+
   // once the DOM is initialized
   $(document).ready(function() {
-    console.log('init');
-
     // autocompletion menu
     if (options.autocomplete.enabled) {
       autocomplete(options);

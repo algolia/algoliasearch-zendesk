@@ -12,10 +12,12 @@ module.exports = function(options) {
     return;
   }
   var container = $searchResults.find('.search-results-column');
-  var $query = $('<input type="text" id="algolia-query" />');
+  var $query = $('<input type="text" id="algolia-query" autofocus="autofocus" />');
   container.before($query);
   var $stats = $('<div id="algolia-stats" />');
   container.before($stats);
+  var $facets = $('<div id="algolia-facets"><div id="algolia-categories" /><div id="algolia-labels" /></div>');
+  container.before($facets);
   var $hits = $('<div id="algolia-hits" />');
   container.before($hits);
   var $pagination = $('<div id="algolia-pagination" />');
@@ -46,14 +48,22 @@ module.exports = function(options) {
 
   var q = $(options.autocomplete.inputSelector || '#query');
   var query = q.val();
-  q.val('');
+  if (q.autocomplete) {
+    q.autocomplete('val', '');
+  } else {
+    q.val('');
+  }
+  q.attr('autofocus', null);
 
   var search = instantsearch({
     appId: options.applicationId,
     apiKey: options.apiKey,
-    indexName: options.indexPrefix + options.subdomain + '_sections',
+    indexName: options.indexPrefix + options.subdomain + '_articles',
+    urlSync: {},
     searchParameters: {
-      query: query
+      query: query,
+      attributesToSnippet: ['body_safe:60']
+      //,optionalFacetFilters: '["locale.locale:' + I18n.locale + '"]'
     }
   });
 
@@ -61,13 +71,8 @@ module.exports = function(options) {
     instantsearch.widgets.searchBox({
       container: '#algolia-query',
       placeholder: 'Search for articles',
+      autofocus: true,
       poweredBy: true
-    })
-  );
-
-  search.addWidget(
-    instantsearch.widgets.stats({
-      container: '#algolia-stats'
     })
   );
 
@@ -87,19 +92,45 @@ module.exports = function(options) {
   );
 
   search.addWidget(
+    instantsearch.widgets.menu({
+      container: '#algolia-categories',
+      attributeName: 'category.title',
+      templates: {
+        header: I18n.translations['txt.help_center.javascripts.arrange_content.categories']
+      }
+    })
+  );
+
+  search.addWidget(
+    instantsearch.widgets.refinementList({
+      container: '#algolia-labels',
+      attributeName: 'label_names',
+      operator: 'and',
+      templates: {
+        header: 'Tags'
+      }
+    })
+  );
+
+  search.addWidget(
     instantsearch.widgets.hits({
       container: '#algolia-hits',
       templates: {
-        item: function(data) {
-          return templates.instantsearch.hit.render(data);
+        item: function(hit) {
+          return templates.instantsearch.hit.render(hit);
         }
+      },
+      transformData: function(hit) {
+        hit.colors = options.colors;
+        hit.baseUrl = options.baseUrl;
+        return hit;
       }
     })
   );
 
   search.on('render', function() {
     displayTimes();
-  })
+  });
 
   search.start();
 };
