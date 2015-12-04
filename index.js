@@ -1,3 +1,2 @@
-'use strict';
-
-module.exports = require('./src/index.js');
+import main from './src/index.js';
+export default main;

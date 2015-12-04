@@ -1,39 +1,38 @@
-'use strict';
-
 /* global I18n, moment */
 
-var $ = require('jquery');
-var instantsearch = require('instantsearch.js/dist/instantsearch.js');
-var templates = require('./templates.js');
+import $ from 'jquery';
+import instantsearch from 'instantsearch.js/dist/instantsearch.js';
+import templates from './templates.js';
 
-module.exports = function(options) {
-  var $searchResults = $('.search-results');
+export default (options) => {
+  let $searchResults = $('.search-results');
   if ($searchResults.length === 0) {
     return;
   }
-  var container = $searchResults.find('.search-results-column');
-  var $query = $('<input type="text" id="algolia-query" autofocus="autofocus" />');
-  container.before($query);
-  var $stats = $('<div id="algolia-stats" />');
-  container.before($stats);
-  var $facets = $('<div id="algolia-facets"><div id="algolia-categories" /><div id="algolia-labels" /></div>');
-  container.before($facets);
-  var $hits = $('<div id="algolia-hits" />');
-  container.before($hits);
-  var $pagination = $('<div id="algolia-pagination" />');
-  container.before($pagination);
+  let $container = $searchResults.find('.search-results-column');
+  $container.html(`
+    <div>
+      <input type="text" id="algolia-query" autofocus="autofocus" />
+      <div id="algolia-stats"></div>
+      <div id="algolia-facets">
+        <div id="algolia-categories"></div>
+        <div id="algolia-labels"></div>
+      </div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination"></div>
+    </div>`);
 
   function displayTimes() {
     // Extracted from formatDateTime.js
     // Maybe we could call it directly, but I don't know
     // backbone.js at all
-    var timezoneOffset = moment().zone();
+    const timezoneOffset = moment().zone();
     moment().lang(I18n.locale, I18n.datetime_translations);
-    $('time').each(function() {
-      var $this = $(this);
-      var datetime = $this.attr('datetime');
-      var formattedDatetime = moment(datetime).utc().zone(timezoneOffset);
-      var isoTitle = formattedDatetime.format('YYYY-MM-DD HH:mm');
+    $('time').each(() => {
+      let $this = $(this);
+      const datetime = $this.attr('datetime');
+      const formattedDatetime = moment(datetime).utc().zone(timezoneOffset);
+      const isoTitle = formattedDatetime.format('YYYY-MM-DD HH:mm');
 
       $this.attr('title', isoTitle);
 
@@ -46,16 +45,16 @@ module.exports = function(options) {
     });
   }
 
-  var q = $(options.autocomplete.inputSelector || '#query');
-  var query = q.val();
-  if (q.autocomplete) {
-    q.autocomplete('val', '');
+  let $q = $(options.autocomplete.inputSelector || '#query');
+  const query = $q.val();
+  if ($q.autocomplete) {
+    $q.autocomplete('val', '');
   } else {
-    q.val('');
+    $q.val('');
   }
-  q.attr('autofocus', null);
+  $q.attr('autofocus', null);
 
-  var search = instantsearch({
+  let search = instantsearch({
     appId: options.applicationId,
     apiKey: options.apiKey,
     indexName: options.indexPrefix + options.subdomain + '_articles',
@@ -63,7 +62,7 @@ module.exports = function(options) {
     searchParameters: {
       query: query,
       attributesToSnippet: ['body_safe:60']
-      //,optionalFacetFilters: '["locale.locale:' + I18n.locale + '"]'
+      // ,optionalFacetFilters: `["locale.locale:${I18n.locale}"]`
     }
   });
 
@@ -116,11 +115,11 @@ module.exports = function(options) {
     instantsearch.widgets.hits({
       container: '#algolia-hits',
       templates: {
-        item: function(hit) {
+        item: (hit) => {
           return templates.instantsearch.hit.render(hit);
         }
       },
-      transformData: function(hit) {
+      transformData: (hit) => {
         hit.colors = options.colors;
         hit.baseUrl = options.baseUrl;
         return hit;
@@ -128,7 +127,7 @@ module.exports = function(options) {
     })
   );
 
-  search.on('render', function() {
+  search.on('render', () => {
     displayTimes();
   });
 

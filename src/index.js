@@ -1,31 +1,52 @@
-'use strict';
+import $ from 'jquery';
 
-var $ = require('jquery');
 if (!$) {
   throw new Error('Cannot find required dependency to jQuery.');
 }
 
 // hide the regular search results
-function addcss(css) {
-  var head = document.getElementsByTagName('head')[0];
-  var s = document.createElement('style');
-  s.setAttribute('type', 'text/css');
-  if (s.styleSheet) {
-    s.styleSheet.cssText = css;
+function addCss(css) {
+  const head = document.getElementsByTagName('head')[0];
+  let styleTag = document.createElement('style');
+  styleTag.setAttribute('type', 'text/css');
+  if (styleTag.styleSheet) {
+    styleTag.styleSheet.cssText = css;
   } else {
-    s.appendChild(document.createTextNode(css));
+    styleTag.appendChild(document.createTextNode(css));
   }
-  head.appendChild(s);
+  head.appendChild(styleTag);
 }
-addcss('.search-results h1:first-child {display: none !important;} .search-results-column {display: none !important;}');
+const hidingCss = `
+.search-results h1:first-child {
+    display: none !important;
+}
+.search-results-column {
+  display: none !important;
+}`;
+addCss(hidingCss);
 
-var instantsearch = require('./instantsearch.js');
-var autocomplete = require('./autocomplete.js');
+let instantsearch = require('./instantsearch.js');
+let autocomplete = require('./autocomplete.js');
 
-function algoliasearchZendeskHC(options) {
+const usage = `Usage:
+algoliasearchZendeskHC({
+  applicationId,
+  apiKey,
+  subdomain,
+  indexPrefix,
+  [ autocomplete ],
+  [ instantsearch ]
+})
+`;
+export default (options) => {
   // check mandatory options
-  if (!options.applicationId || !options.apiKey || typeof options.subdomain === 'undefined' || typeof options.indexPrefix === 'undefined') {
-    throw new Error('usage: algoliasearchZendeskHC({applicationId, apiKey, subdomain, indexPrefix, [autocomplete, instantsearch]})');
+  if (
+    !options.applicationId ||
+    !options.apiKey ||
+    options.subdomain === undefined ||
+    options.indexPrefix === undefined
+  ) {
+    throw new Error(usage);
   }
 
   options.autocomplete = options.autocomplete || {};
@@ -46,7 +67,7 @@ function algoliasearchZendeskHC(options) {
   options.colors.secondary = options.colors.secondary || '#D4D4D4';
 
   // once the DOM is initialized
-  $(document).ready(function() {
+  $(document).ready(() => {
     // autocompletion menu
     if (options.autocomplete.enabled) {
       autocomplete(options);
@@ -57,6 +78,4 @@ function algoliasearchZendeskHC(options) {
       instantsearch(options);
     }
   });
-}
-
-module.exports = algoliasearchZendeskHC;
+};
