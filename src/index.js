@@ -25,7 +25,7 @@ var autocomplete = require('./autocomplete.js');
 function algoliasearchZendeskHC(options) {
   // check mandatory options
   if (!options.applicationId || !options.apiKey || typeof options.subdomain === 'undefined' || typeof options.indexPrefix === 'undefined') {
-    throw new Error('usage: algoliasearchZendeskHC({applicationId, apiKey, subdomain, indexPrefix, [autcomplete, instantsearch]})');
+    throw new Error('usage: algoliasearchZendeskHC({applicationId, apiKey, subdomain, indexPrefix, [autocomplete, instantsearch]})');
   }
 
   options.autocomplete = options.autocomplete || {};
