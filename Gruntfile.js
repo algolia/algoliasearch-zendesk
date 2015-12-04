@@ -37,6 +37,7 @@ module.exports = function(grunt) {
     webpack: {
       main: {
         entry: './index.js',
+        devtool: 'source-map',
         output: {
           path: '<%= buildDir %>',
           filename: 'algoliasearch.zendesk-hc.js',
@@ -45,6 +46,11 @@ module.exports = function(grunt) {
         },
         externals: {
           jquery: 'jQuery'
+        },
+        module: {
+          loaders: [{
+            test: /\.js$/, exclude: /node_modules/, loader: 'babel'
+          }]
         }
       }
     },

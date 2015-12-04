@@ -1,11 +1,7 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "airbnb/base",
-    "algolia/es5"
-  ],
+  "extends": "algolia",
   "rules": {
-    "id-length": 0,
-    "no-cond-assign": 0
+    "no-var": 2,
+    "algolia/relative-require": 2
   }
 }
