@@ -1,2 +1,2 @@
-import main from './src/index.js';
-export default main;
+/* eslint algolia/no-module-exports: 0 */
+module.exports = require('./src/index.js');
