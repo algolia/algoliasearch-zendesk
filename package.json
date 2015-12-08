@@ -57,7 +57,8 @@
     "build": "grunt",
     "dev": "grunt dev",
     "lint": "grunt lint",
-    "start": "grunt server"
+    "start": "grunt server",
+    "release": "./scripts/release.sh"
   },
   "version": "0.0.1",
   "main": "dist/index.js"
