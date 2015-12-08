@@ -32,6 +32,25 @@ module.exports = function (grunt) {
       }
     },
 
+    cssmin: {
+      options: {
+        report: 'gzip',
+        sourceMap: true
+      },
+      target: {
+        files: {
+          'dist/algoliasearch.zendesk-hc.min.css': ['dist/algoliasearch.zendesk-hc.css']
+        }
+      }
+    },
+
+    concat: {
+      css: {
+        src: ['css/style.css'],
+        dest: 'dist/algoliasearch.zendesk-hc.css'
+      }
+    },
+
     webpack: {
       main: {
         entry: './index.js',
@@ -55,15 +74,6 @@ module.exports = function (grunt) {
             }
           }]
         }
-      }
-    },
-
-    copy: {
-      css: {
-        expand: true,
-        cwd: 'css/',
-        src: '**',
-        dest: 'dist/'
       }
     },
 
@@ -116,7 +126,9 @@ module.exports = function (grunt) {
   // -------
 
   grunt.registerTask('default', 'build');
-  grunt.registerTask('build', ['clean', 'webpack', 'sed:version', 'uglify', 'usebanner', 'copy:css']);
+  grunt.registerTask('build', ['clean', 'build:js', 'build:css']);
+  grunt.registerTask('build:js', ['webpack', 'sed:version', 'uglify', 'usebanner']);
+  grunt.registerTask('build:css', ['concat:css', 'cssmin']);
   grunt.registerTask('server', 'connect:server');
   grunt.registerTask('lint', 'eslint');
   grunt.registerTask('dev', 'concurrent:dev');
@@ -129,11 +141,11 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-step');
   grunt.loadNpmTasks('grunt-banner');
   grunt.loadNpmTasks('grunt-concurrent');
-  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-webpack');
