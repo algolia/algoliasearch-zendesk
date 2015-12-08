@@ -61,5 +61,8 @@
     "release": "./scripts/release.sh"
   },
   "version": "1.0.0",
+  "files": [
+    "dist/"
+  ],
   "main": "dist/index.js"
 }
