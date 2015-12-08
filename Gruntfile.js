@@ -58,6 +58,15 @@ module.exports = function (grunt) {
       }
     },
 
+    copy: {
+      css: {
+        expand: true,
+        cwd: 'css/',
+        src: '**',
+        dest: 'dist/'
+      }
+    },
+
     sed: {
       version: {
         pattern: '%VERSION%',
@@ -107,7 +116,7 @@ module.exports = function (grunt) {
   // -------
 
   grunt.registerTask('default', 'build');
-  grunt.registerTask('build', ['webpack', 'sed:version', 'uglify', 'usebanner']);
+  grunt.registerTask('build', ['clean', 'webpack', 'sed:version', 'uglify', 'usebanner', 'copy:css']);
   grunt.registerTask('server', 'connect:server');
   grunt.registerTask('lint', 'eslint');
   grunt.registerTask('dev', 'concurrent:dev');
@@ -120,6 +129,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-step');
   grunt.loadNpmTasks('grunt-banner');
   grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-uglify');
