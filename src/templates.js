@@ -1,6 +1,6 @@
 import Hogan from 'hogan.js';
 
-module.exports = {
+export default {
   autocomplete: {
     // Autocompletion template for a section
     section: Hogan.compile(`

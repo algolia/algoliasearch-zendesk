@@ -71,7 +71,7 @@ module.exports = function (grunt) {
       options: {
         config: '.eslintrc'
       },
-      src: ['index.js', 'src/**/*.js', 'Gruntfile.js']
+      src: ['index.js', 'src/**/*.js']
     },
 
     watch: {

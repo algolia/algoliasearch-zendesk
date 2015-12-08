@@ -1,4 +1,6 @@
 import $ from 'jquery';
+import autocomplete from './autocomplete.js';
+import instantsearch from './instantsearch.js';
 
 if (!$) {
   throw new Error('Cannot find required dependency to jQuery.');
@@ -16,6 +18,7 @@ function addCss(css) {
   }
   head.appendChild(styleTag);
 }
+
 const hidingCss = `
 .search-results h1:first-child {
     display: none !important;
@@ -24,9 +27,6 @@ const hidingCss = `
   display: none !important;
 }`;
 addCss(hidingCss);
-
-let instantsearch = require('./instantsearch.js');
-let autocomplete = require('./autocomplete.js');
 
 const usage = `Usage:
 algoliasearchZendeskHC({

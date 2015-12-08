@@ -3,7 +3,7 @@
 import $ from 'jquery';
 import algoliasearch from 'algoliasearch';
 import templates from './templates.js';
-require('autocomplete.js/index_jquery.js');
+import 'autocomplete.js/index_jquery.js';
 
 export default (options) => {
   let $query = $(options.autocomplete.inputSelector || '#query');
