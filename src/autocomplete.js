@@ -50,7 +50,7 @@ export default (options) => {
   let sources = [];
   if (options.autocomplete.sections.enabled) {
     sources.push({
-      source: adapter(sections, {hitsPerPage: (options.autocomplete.sectionHits || 3)}),
+      source: adapter(sections, {hitsPerPage: (options.autocomplete.hits || 3)}),
       name: 'sections',
       templates: {
         header: header(I18n.translations['txt.help_center.javascripts.arrange_content.sections']),
@@ -64,7 +64,7 @@ export default (options) => {
   }
   if (options.autocomplete.articles.enabled) {
     sources.push({
-      source: adapter(articles, {hitsPerPage: (options.autocomplete.articleHits || 3)}),
+      source: adapter(articles, {hitsPerPage: (options.autocomplete.hits || 5)}),
       name: 'articles',
       templates: {
         header: header(I18n.translations['txt.help_center.javascripts.arrange_content.articles']),
