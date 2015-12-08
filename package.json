@@ -60,6 +60,6 @@
     "start": "grunt server",
     "release": "./scripts/release.sh"
   },
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "dist/index.js"
 }
