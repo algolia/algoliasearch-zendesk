@@ -61,7 +61,7 @@
     "start": "grunt server",
     "release": "./scripts/release.sh"
   },
-  "version": "1.0.4",
+  "version": "1.0.5",
   "files": [
     "dist/"
   ],
