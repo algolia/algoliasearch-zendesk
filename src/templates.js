@@ -3,8 +3,8 @@ import Hogan from 'hogan.js';
 export default {
   autocomplete: {
     // Autocompletion template for a section
-    section: Hogan.compile(`
-      <div class="hit-section" style="border-bottom-color: {{colors.secondary}}">
+    section: Hogan.compile(
+      `<div class="hit-section" style="border-bottom-color: {{colors.secondary}}">
         <div class="title overflow-block-container">
           <span class="overflow-block">
             {{{ _highlightResult.category.title.value }}} > {{{ _highlightResult.title.value }}}
@@ -15,8 +15,8 @@ export default {
       </div>`),
 
     // Autocompletion template for an article
-    article: Hogan.compile(`
-      <div class="hit-article" style="border-bottom-color: {{colors.secondary}}">
+    article: Hogan.compile(
+      `<div class="hit-article" style="border-bottom-color: {{colors.secondary}}">
         <div class="title overflow-block-container">
           <span class="overflow-block">
             {{{ _highlightResult.title.value }}}
@@ -28,8 +28,8 @@ export default {
 
   instantsearch: {
     // Instant search result template
-    hit: Hogan.compile(`
-      <div class="search-result" style="border-color: {{colors.tertiary}}">
+    hit: Hogan.compile(
+      `<div class="search-result" style="border-color: {{colors.tertiary}}">
         <a class="search-result-link" href="{{baseUrl}}{{ locale.locale }}/articles/{{ id }}">
           {{{ _highlightResult.title.value }}}
         </a>

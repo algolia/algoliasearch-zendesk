@@ -34,10 +34,11 @@ export default (options) => {
   }
 
   function header(text) {
-    return `
-      <div class="aa-header" style="background-color: ${options.colors.primary}">
+    return (
+      `<div class="aa-header" style="background-color: ${options.colors.primary}">
         ${text}
-      </div>`;
+      </div>`
+    );
   }
 
   // initialize API client
@@ -81,15 +82,17 @@ export default (options) => {
     hint: false,
     debug: true,
     templates: {
-      footer: `<div class="ais-search-box--powered-by">
-        Search by
-        <a
-          href="https://www.algolia.com/?utm_source=zendesk_hc&utm_medium=link&utm_campaign=autocomplete"
-          class="ais-search-box--powered-by-link"
-        >
-          Algolia
-        </a>
-      </div>`
+      footer: (
+        `<div class="ais-search-box--powered-by">
+          Search by
+          <a
+            href="https://www.algolia.com/?utm_source=zendesk_hc&utm_medium=link&utm_campaign=autocomplete"
+            class="ais-search-box--powered-by-link"
+          >
+            Algolia
+          </a>
+        </div>`
+      )
     }
   }, sources).on('autocomplete:selected', (event, suggestion, dataset) => {
     if (dataset === 'sections' || dataset === 'articles') {
