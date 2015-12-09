@@ -58,6 +58,9 @@ export default (options) => {
   if (typeof options.instantsearch.enabled === 'undefined') {
     options.instantsearch.enabled = true;
   }
+  if (typeof options.instantsearch.tagsLimit === 'undefined') {
+    options.instantsearch.tagsLimit = 15;
+  }
 
   if (typeof options.baseUrl === 'undefined') {
     options.baseUrl = '/hc/';

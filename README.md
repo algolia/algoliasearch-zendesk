@@ -59,7 +59,8 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
     //   }
     // },
     // instantsearch: {
-    //   enabled: true
+    //   enabled: true,
+    //   tagsLimit: 15             // Maximum number of tags to display
     // }
   });
 </script>

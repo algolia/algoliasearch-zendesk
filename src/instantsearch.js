@@ -107,7 +107,8 @@ export default (options) => {
       operator: 'and',
       templates: {
         header: 'Tags'
-      }
+      },
+      limit: options.instantsearch.tagsLimit
     })
   );
 
