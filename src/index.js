@@ -24,7 +24,8 @@ const hidingCss = `
     display: none !important;
 }
 .search-results-column {
-  display: none !important;
+  display: none;
+  visibility: hidden;
 }`;
 addCss(hidingCss);
 

@@ -132,4 +132,5 @@ export default (options) => {
   });
 
   search.start();
+  $('.search-results-column').css('display', 'block').css('visibility', 'visible');
 };
