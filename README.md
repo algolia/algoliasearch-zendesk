@@ -34,9 +34,9 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
 <script type="text/javascript" src="//cdn.jsdelivr/algoliasearch-zendesk/1/algoliasearch-zendesk.min.js"></script>
 <script type="text/javascript">
   algoliasearchZendeskHC({
-    application_id: '<YOUR APPLICATION_ID>',
-    api_key: '<YOUR SEARCH ONLY API KEY>',
-    sudomain: '<YOUR ZENDESK APPLICATION NAME>'
+    applicationId: '<YOUR APPLICATION_ID>',
+    apiKey: '<YOUR SEARCH ONLY API KEY>',
+    subdomain: '<YOUR ZENDESK APPLICATION NAME>'
     //
     // Optional configuration:
     //
