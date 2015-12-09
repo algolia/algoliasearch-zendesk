@@ -91,9 +91,10 @@ export default (options) => {
   );
 
   search.addWidget(
-    instantsearch.widgets.menu({
+    instantsearch.widgets.hierarchicalMenu({
       container: '#algolia-categories',
-      attributeName: 'category.title',
+      attributes: ['category.title', 'section.full_path'],
+      separator: ' > ',
       templates: {
         header: I18n.translations['txt.help_center.javascripts.arrange_content.categories']
       }
