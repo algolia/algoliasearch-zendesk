@@ -61,8 +61,8 @@ export default (options) => {
     urlSync: {},
     searchParameters: {
       query: query,
-      attributesToSnippet: ['body_safe:60']
-      // ,optionalFacetFilters: `["locale.locale:${I18n.locale}"]`
+      attributesToSnippet: ['body_safe:60'],
+      facetFilters: `["locale.locale:${I18n.locale}"]`
     }
   });
 

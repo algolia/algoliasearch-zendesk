@@ -18,8 +18,7 @@ export default (options) => {
   }
 
   function adapter(index, params) {
-    const localeFilter = `["locale.locale:${I18n.locale}"]`;
-    params = $.extend({optionalFacetFilters: localeFilter}, params);
+    params = $.extend({facetFilters: `["locale.locale:${I18n.locale}"]`}, params);
     return $.fn.autocomplete.sources.hits(index, params);
   }
 
