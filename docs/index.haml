@@ -1,0 +1,35 @@
+---
+layout: default
+---
+
+.main-content
+  .jumbotron
+    .container
+      %h1 {{ site.title }}
+
+      %p {{ site.description }}
+
+      %p.text-center <button type="button" class="btn btn-primary">Request search on your website</button>
+
+  .container
+    %h1 Showcase
+    .row.text-center
+      .col-sm-4.col-sm-offset-4.showcase
+        %a{href: 'https://rememberthedate.zendesk.com/'}
+          %img.img-responsive.showcase--image{src: 'img/showcase/rememberthedate.png'}
+          %p RememberTheDate
+
+    %h1 Features
+    .row.text-center
+      .col-sm-4
+        %img{src: 'http://placehold.it/200x200'}
+        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, sit, veritatis tempora ipsum, provident fugiat quas, eum dicta architecto
+      .col-sm-4
+        %img{src: 'http://placehold.it/200x200'}
+        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, sit, veritatis tempora ipsum, provident fugiat quas, eum dicta architecto
+      .col-sm-4
+        %img{src: 'http://placehold.it/200x200'}
+        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, sit, veritatis tempora ipsum, provident fugiat quas, eum dicta architecto
+
+
+    %p Here are some examples of what you could build with documentationsearch.js.

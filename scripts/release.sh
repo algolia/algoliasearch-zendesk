@@ -12,3 +12,11 @@ npm run build
 git push
 git push --tags
 npm publish
+
+cd docs
+bundle install
+rm -rf _site
+JEKYLL_ENV=production VERSION=$version bundle exec jekyll build
+cd ..
+npm run docs
+node ./scripts/publish-docs.js
