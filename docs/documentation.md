@@ -1,3 +1,12 @@
+---
+layout: page
+title: Documentation
+permalink: /documentation/
+---
+
+* Table of Contents
+{:toc}
+
 Algolia Search for Zendesk
 =================
 

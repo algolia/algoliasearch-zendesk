@@ -48,6 +48,10 @@ module.exports = function (grunt) {
       css: {
         src: ['css/style.css'],
         dest: 'dist/algoliasearch.zendesk-hc.css'
+      },
+      docs: {
+        src: ['docs/headers/documentation.yml', 'README.md'],
+        dest: 'docs/documentation.md'
       }
     },
 
@@ -132,6 +136,7 @@ module.exports = function (grunt) {
   grunt.registerTask('server', 'connect:server');
   grunt.registerTask('lint', 'eslint');
   grunt.registerTask('dev', 'concurrent:dev');
+  grunt.registerTask('docs', 'concat:docs');
 
   // load tasks
   // ----------

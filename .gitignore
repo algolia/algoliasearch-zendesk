@@ -1,3 +1,5 @@
 dist/
+docs/_site
+docs/.saas-cache/
 node_modules/
 npm-debug.log

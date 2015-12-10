@@ -12,3 +12,5 @@ npm run build
 git push
 git push --tags
 npm publish
+
+node ./scripts/publish-docs.js
