@@ -2,7 +2,7 @@ This JavaScript library allows you to replace the default search of your Zendesk
 
 We'll crawl your Zendesk API to extract your Help Center content and provide you a small code snippet to power your search with Algolia.
 
-## Setup
+## Documentation
 
 To be able to setup your new search on your Zendesk Help Center you'll need to have an Algolia account with a configured Zendesk Help Center crawler.
 
