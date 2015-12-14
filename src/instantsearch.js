@@ -61,8 +61,14 @@ export default (options) => {
     urlSync: {},
     searchParameters: {
       query: query,
-      attributesToSnippet: ['body_safe:60'],
-      facetFilters: `["locale.locale:${I18n.locale}"]`
+      attributesToSnippet: ['body_safe:60']
+    }
+  });
+
+  search.addWidget({
+    getConfiguration: () => ({facets: ['locale.locale']}),
+    init: ({helper}) => {
+      helper.toggleRefine('locale.locale', I18n.locale);
     }
   });
 
