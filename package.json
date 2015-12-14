@@ -62,7 +62,8 @@
     "docs": "grunt docs",
     "lint": "grunt lint",
     "start": "grunt server",
-    "release": "./scripts/release.sh"
+    "release": "./scripts/release.sh",
+    "release-docs": "./scripts/release-docs.sh"
   },
   "version": "1.1.4",
   "files": [
