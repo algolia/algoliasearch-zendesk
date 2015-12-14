@@ -1,3 +1,5 @@
+/* eslint algolia/no-module-exports: 0 */
+
 module.exports = function (grunt) {
   grunt.initConfig({
     version: grunt.file.readJSON('package.json').version,
@@ -26,6 +28,10 @@ module.exports = function (grunt) {
     },
 
     uglify: {
+      options: {
+        sourceMap: true,
+        preserveComments: 'some'
+      },
       main: {
         src: '<%= buildDir %>/algoliasearch.zendesk-hc.js',
         dest: '<%= buildDir %>/algoliasearch.zendesk-hc.min.js'
@@ -58,7 +64,6 @@ module.exports = function (grunt) {
     webpack: {
       main: {
         entry: './index.js',
-        devtool: 'source-map',
         output: {
           path: '<%= buildDir %>',
           filename: 'algoliasearch.zendesk-hc.js',
@@ -131,7 +136,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', 'build');
   grunt.registerTask('build', ['clean', 'build:js', 'build:css']);
-  grunt.registerTask('build:js', ['webpack', 'sed:version', 'uglify', 'usebanner']);
+  grunt.registerTask('build:js', ['webpack', 'sed:version', 'usebanner', 'uglify']);
   grunt.registerTask('build:css', ['concat:css', 'cssmin']);
   grunt.registerTask('server', 'connect:server');
   grunt.registerTask('lint', 'eslint');
