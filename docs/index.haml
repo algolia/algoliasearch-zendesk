@@ -7,29 +7,60 @@ layout: default
     .container
       %h1 {{ site.title }}
 
-      %p {{ site.description }}
+      .row
+        .col-sm-8
+          %p Empower your Zendesk Help Center with Algolia Search and provide your users a Google-like search experience.
 
-      %p.text-center <button type="button" class="btn btn-primary">Request search on your website</button>
+      .spacer50
+      %p.text-center
+        %button.btn.btn-primary.btn-lg
+          Join the beta
+          %i.fa.fa-envelope-o
 
   .container
-    %h1 Showcase
+    .spacer50
+    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam commodi possimus voluptate necessitatibus culpa incidunt, sunt voluptatum! Repudiandae, architecto est. Libero eveniet totam rem natus aut voluptate, dicta alias sed.
+
+    .spacer100
+    %h1.headline Features
+    .features
+      .row
+        .col-sm-4.col-sm-offset-3
+          %h3 Auto-suggestions menu
+          %p Offer End-Users immediate access to your whole help center from the dropdown menu, whatever your number of sections or articles.
+        .col-sm-2.hidden-xs
+          %img.img-responsive{src: 'http://placehold.it/200x200'}
+      .row
+        .col-sm-2.col-sm-offset-3.hidden-xs
+          %img.img-responsive{src: 'http://placehold.it/200x200'}
+        .col-sm-4
+          %h3 Instant & Faceted Search
+          %p Have your search results page, navigation and pagination updated in realtime, after each keystroke.
+      .row
+        .col-sm-4.col-sm-offset-3
+          %h3 Relevance
+          %p Increase customer satisfaction by serving relevant results.
+        .col-sm-2.hidden-xs
+          %img.img-responsive{src: 'http://placehold.it/200x200'}
+      .row
+        .col-sm-2.col-sm-offset-3.hidden-xs
+          %img.img-responsive{src: 'http://placehold.it/200x200'}
+        .col-sm-4
+          %h3 Customizable
+          %p Our code is open-source and hosted on GitHub, feel free to customize it.
+
+    .spacer100
+    %h1.headline Showcase
     .row.text-center
-      .col-sm-4.col-sm-offset-4.showcase
+      .col-sm-4.showcase
         %a{href: 'https://rememberthedate.zendesk.com/'}
           %img.img-responsive.showcase--image{src: 'img/showcase/rememberthedate.png'}
-          %p RememberTheDate
-
-    %h1 Features
-    .row.text-center
-      .col-sm-4
-        %img{src: 'http://placehold.it/200x200'}
-        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, sit, veritatis tempora ipsum, provident fugiat quas, eum dicta architecto
-      .col-sm-4
-        %img{src: 'http://placehold.it/200x200'}
-        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, sit, veritatis tempora ipsum, provident fugiat quas, eum dicta architecto
-      .col-sm-4
-        %img{src: 'http://placehold.it/200x200'}
-        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, sit, veritatis tempora ipsum, provident fugiat quas, eum dicta architecto
-
-
-    %p Here are some examples of what you could build with documentationsearch.js.
+          %p Remember The Date
+      .col-sm-4.showcase
+        %a{href: 'https://https://support.sorba.ch/hc'}
+          %img.img-responsive.showcase--image{src: 'http://placehold.it/200x200'}
+          %p SORBA
+      .col-sm-4.showcase
+        %a{href: 'https://rememberthedate.zendesk.com/'}
+          %img.img-responsive.showcase--image{src: 'http://placehold.it/200x200'}
+          %p FIXME
