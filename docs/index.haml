@@ -55,16 +55,16 @@ layout: default
 
     .spacer100
     %h1.headline Showcase
-    .row.text-center
-      .col-sm-4.showcase
-        %a{href: 'https://rememberthedate.zendesk.com/hc'}
-          %img.img-responsive.showcase--image{src: 'img/showcase/rememberthedate.png'}
+    .showcases
+      .row
+        .col-sm-4
+          %a.showcase{href: 'https://rememberthedate.zendesk.com/hc'}
+            %img.img-responsive{src: 'img/showcase/rememberthedate.png'}
           %p Remember The Date
-      .col-sm-4.showcase
-        %a{href: 'https://https://support.sorba.ch/hc'}
-          %img.img-responsive.showcase--image{src: 'http://placehold.it/200x200'}
+        .col-sm-4
+          %a.showcase{href: 'https://https://support.sorba.ch/hc'}
+            %img.img-responsive{src: 'img/showcase/sorba.png'}
           %p SORBA
-      .col-sm-4.showcase
-        %a{href: '#'}
-          %img.img-responsive.showcase--image{src: 'http://placehold.it/200x200'}
-          %p FIXME
+        .col-sm-4
+          .showcase.fixme{href: '#'} You?
+          %p Join us!
