@@ -36,8 +36,16 @@ h2 {
     }
   }
 
-  img {
+  .bubble {
     border: 10px solid rgba(194, 215, 136, .5);
     border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+
+    img {
+      width: 200%;
+      margin-left: 10px;
+    }
   }
 }
