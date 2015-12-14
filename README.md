@@ -54,6 +54,27 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
     // instantsearch: {
     //   enabled: true,
     //   tagsLimit: 15             // Maximum number of tags to display
+    // },
+    // translations: {             // These accept strings or objects associating locale with value
+    //                             // e.g. {
+    //                             //   found_in: {
+    //                             //     'en-us': 'Found in',
+    //                             //     'fr': 'En'
+    //                             //   }
+    //                             // }
+    //   article: 'Article'
+    //   articles: 'Articles'
+    //   categories: 'Categories'
+    //   sections: 'Sections'
+    //   tags: 'Tags'
+    //   search_by: 'Search by'
+    //   no_result: 'No result'
+    //   result: 'Result'
+    //   results: 'Results'
+    //   found_in: 'Found in'
+    //   search_by: 'Search by'
+    //   placeholder_autocomplete: 'Search in sections and articles'
+    //   placeholder_instantsearch: 'Search in articles'
     // }
   });
 </script>

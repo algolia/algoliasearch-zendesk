@@ -75,7 +75,7 @@ export default (options) => {
   search.addWidget(
     instantsearch.widgets.searchBox({
       container: '#algolia-query',
-      placeholder: 'Search for articles',
+      placeholder: options.translations.placeholder_instantsearch,
       autofocus: true,
       poweredBy: true
     })
@@ -83,7 +83,17 @@ export default (options) => {
 
   search.addWidget(
     instantsearch.widgets.stats({
-      container: '#algolia-stats'
+      container: '#algolia-stats',
+      templates: {
+        body: `
+          {{#hasNoResults}}${options.translations.no_result}{{/hasNoResults}}
+          {{#hasOneResult}}1 ${options.translations.result.toLowerCase()}{{/hasOneResult}}
+          {{#hasManyResults}}
+            {{#helpers.formatNumber}}{{nbHits}}{{/helpers.formatNumber}}
+            ${options.translations.results.toLowerCase()}
+          {{/hasManyResults}}
+          <span class="{{cssClasses.time}}">${options.translations.found_in.toLowerCase()} {{processingTimeMS}}ms</span>`
+      }
     })
   );
 
@@ -102,7 +112,7 @@ export default (options) => {
       attributes: ['category.title', 'section.full_path'],
       separator: ' > ',
       templates: {
-        header: I18n.translations['txt.help_center.javascripts.arrange_content.categories']
+        header: options.translations.categories
       }
     })
   );
@@ -113,7 +123,7 @@ export default (options) => {
       attributeName: 'label_names',
       operator: 'and',
       templates: {
-        header: 'Tags'
+        header: options.translations.tags
       },
       limit: options.instantsearch.tagsLimit
     })

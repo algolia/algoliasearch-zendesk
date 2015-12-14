@@ -23,13 +23,7 @@ export default (options) => {
   }
 
   function articleLocale(nbArticles) {
-    let res;
-    if (nbArticles <= 1) {
-      res = I18n.translations['txt.help_center.views.admin.manage_knowledge_base.table.article'];
-    } else {
-      res = I18n.translations['txt.help_center.javascripts.arrange_content.articles'];
-    }
-    return res.toLowerCase();
+    return options.translations[`article${nbArticles <= 1 ? '' : 's'}`].toLowerCase();
   }
 
   function header(text) {
@@ -53,7 +47,7 @@ export default (options) => {
       source: adapter(sections, {hitsPerPage: (options.autocomplete.hits || 3)}),
       name: 'sections',
       templates: {
-        header: header(I18n.translations['txt.help_center.javascripts.arrange_content.sections']),
+        header: header(options.translations.sections),
         suggestion: (hit) => {
           hit.nb_articles_text = `${hit.nb_articles} ${articleLocale(hit.nb_articles)}`;
           hit.colors = options.colors;
@@ -67,7 +61,7 @@ export default (options) => {
       source: adapter(articles, {hitsPerPage: (options.autocomplete.hits || 5)}),
       name: 'articles',
       templates: {
-        header: header(I18n.translations['txt.help_center.javascripts.arrange_content.articles']),
+        header: header(options.translations.articles),
         suggestion: (hit) => {
           hit.colors = options.colors;
           return templates.autocomplete.article.render(hit);
@@ -76,28 +70,32 @@ export default (options) => {
     });
   }
 
-  // typeahead.js initialization
-  $query.autocomplete({
-    hint: false,
-    debug: true,
-    templates: {
-      footer: (
-        `<div class="ais-search-box--powered-by">
-          Search by
-          <a
-            href="https://www.algolia.com/?utm_source=zendesk_hc&utm_medium=link&utm_campaign=autocomplete"
-            class="ais-search-box--powered-by-link"
-          >
-            Algolia
-          </a>
-        </div>`
-      )
-    }
-  }, sources).on('autocomplete:selected', (event, suggestion, dataset) => {
-    if (dataset === 'sections' || dataset === 'articles') {
-      location.href = `${options.baseUrl}${I18n.locale}/${dataset}/${suggestion.id}`;
-    } else if (dataset === 'other') {
-      location.href = `${options.baseUrl}${I18n.locale}/search?query=${suggestion.query}`;
-    }
-  });
+  // autocomplete.js initialization
+  console.log('hey');
+  $query
+    .attr('placeholder', options.translations.placeholder_autocomplete)
+    .autocomplete({
+      hint: false,
+      debug: true,
+      templates: {
+        footer: (
+          `<div class="ais-search-box--powered-by">
+            ${options.translations.search_by}
+            <a
+              href="https://www.algolia.com/?utm_source=zendesk_hc&utm_medium=link&utm_campaign=autocomplete"
+              class="ais-search-box--powered-by-link"
+            >
+              Algolia
+            </a>
+          </div>`
+        )
+      }
+    }, sources)
+    .on('autocomplete:selected', (event, suggestion, dataset) => {
+      if (dataset === 'sections' || dataset === 'articles') {
+        location.href = `${options.baseUrl}${I18n.locale}/${dataset}/${suggestion.id}`;
+      } else if (dataset === 'other') {
+        location.href = `${options.baseUrl}${I18n.locale}/search?query=${suggestion.query}`;
+      }
+    });
 };

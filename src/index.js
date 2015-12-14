@@ -1,6 +1,10 @@
 import $ from 'jquery';
+import loadTranslations from './translations.js';
 import autocomplete from './autocomplete.js';
 import instantsearch from './instantsearch.js';
+
+import isUndefined from 'lodash/lang/isUndefined';
+import isPlainObject from 'lodash/lang/isPlainObject';
 
 if (!$) {
   throw new Error('Cannot find required dependency to jQuery.');
@@ -51,19 +55,24 @@ export default (options) => {
   }
 
   options.autocomplete = options.autocomplete || {};
-  if (typeof options.autocomplete.enabled === 'undefined') {
+  if (isUndefined(options.autocomplete.enabled)) {
     options.autocomplete.enabled = true;
   }
   options.instantsearch = options.instantsearch || {};
-  if (typeof options.instantsearch.enabled === 'undefined') {
+  if (isUndefined(options.instantsearch.enabled)) {
     options.instantsearch.enabled = true;
   }
-  if (typeof options.instantsearch.tagsLimit === 'undefined') {
+
+  if (isUndefined(options.instantsearch.tagsLimit)) {
     options.instantsearch.tagsLimit = 15;
   }
 
-  if (typeof options.baseUrl === 'undefined') {
+  if (isUndefined(options.baseUrl)) {
     options.baseUrl = '/hc/';
+  }
+
+  if (!isPlainObject(options.translations)) {
+    options.translations = {};
   }
 
   options.colors = options.colors || {};
@@ -72,6 +81,8 @@ export default (options) => {
 
   // once the DOM is initialized
   $(document).ready(() => {
+    loadTranslations(options);
+
     // autocompletion menu
     if (options.autocomplete.enabled) {
       autocomplete(options);
