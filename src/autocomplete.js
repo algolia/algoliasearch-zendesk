@@ -71,7 +71,6 @@ export default (options) => {
   }
 
   // autocomplete.js initialization
-  console.log('hey');
   $query
     .attr('placeholder', options.translations.placeholder_autocomplete)
     .autocomplete({
