@@ -4,9 +4,6 @@ title: Documentation
 permalink: /documentation/
 ---
 
-* Table of Contents
-{:toc}
-
 This JavaScript library allows you to replace the default search of your Zendesk Help Center by Algolia. [Algolia](https://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
 
 ## Setup
