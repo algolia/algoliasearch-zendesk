@@ -30,7 +30,7 @@ module.exports = function (grunt) {
     uglify: {
       options: {
         sourceMap: true,
-        preserveComments: 'some'
+        banner: '<%= banner %>'
       },
       main: {
         src: '<%= buildDir %>/algoliasearch.zendesk-hc.js',
