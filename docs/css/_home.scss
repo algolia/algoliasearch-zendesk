@@ -14,7 +14,7 @@ h2 {
 }
 
 .jumbotron {
-  background: #eee5d9;
+  background: #eee5d9 url(../img/zendesk-logo.png) scroll 100% 40px no-repeat;
   color: #363636;
 }
 
@@ -37,7 +37,7 @@ h2 {
   }
 
   img {
-    border: 10px solid #efefef;
+    border: 10px solid rgba(194, 215, 136, .5);
     border-radius: 50%;
   }
 }
