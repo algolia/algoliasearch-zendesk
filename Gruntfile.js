@@ -160,8 +160,8 @@ module.exports = function (grunt) {
         for (var i = 0; i < arr.length; ++i) {
           var line = arr[i];
           if (keeping && line.match(/^##[^#]/)) break;
-          if (!keeping && line.match(/^## Documentation$/)) keeping = true;
           if (keeping) keep.push(line);
+          if (!keeping && line.match(/^## Documentation$/)) keeping = true;
         }
         resolve(keep.join('\n'));
       });

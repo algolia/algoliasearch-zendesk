@@ -4,7 +4,6 @@ title: Documentation
 permalink: /documentation/
 ---
 
-## Documentation
 
 To be able to setup your new search on your Zendesk Help Center you'll need to have an Algolia account with a configured Zendesk Help Center crawler.
 
