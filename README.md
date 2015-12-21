@@ -11,7 +11,7 @@ To be able to setup your new search on your Zendesk Help Center you'll need to h
 This crawler feature is still in beta, just send us an email to be part of the program!
 
  * An Algolia account (our Hacker/FREE plan probably fits your need)
- * A Zendesk API token ([generate it following those steps](FIXME))
+ * A Zendesk API token
  * The associated Zendesk application name & email
 
 ### Updating your Help Center theme
