@@ -2,6 +2,27 @@
 layout: default
 ---
 
+#join.modal.fade{tabindex: '-1', role: 'dialog', 'aria-labelledby' => 'join-label'}
+  .modal-dialog
+    .modal-content
+      %form{method: 'get', action: 'https://www.algolia.com/zendesk/auth'}
+        .modal-header
+          %button.close{type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
+          %h4#join-label.modal-title Join the beta
+        .modal-body
+          :markdown
+            You'll first need to be logged in on your
+            [Algolia account](https://www.algolia.com/dashboard)
+            in order to use this integration.  
+            [Click here to create one](https://www.algolia.com/users/sign_up)
+          %hr
+          .form-group
+            %label{for: 'join-subdomain'} Zendesk subdomain
+            %input#join-subdomain.form-control{type: 'text', name: 'subdomain', placeholder: 'your-zendesk-instance(.zendesk.com)'}
+        .modal-footer
+          %button.btn.btn-default{type: 'button', 'data-dismiss' => 'modal'} Close
+          %button.btn.btn-primary{type: 'submit'} Submit
+
 .main-content
   .jumbotron
     .container
@@ -13,9 +34,8 @@ layout: default
 
       .spacer50
       %p.text-center
-        %a.btn.btn-primary.btn-lg{href: 'mailto:hey@algolia.com?subject=Join%20the%20Zendesk%20beta'}
+        %a.btn.btn-primary.btn-lg{'data-toggle' => 'modal', 'data-target' => '#join'}
           Join the beta
-          %i.fa.fa-envelope-o
 
   .container
 
