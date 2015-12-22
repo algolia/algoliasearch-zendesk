@@ -11,9 +11,10 @@ zendesk = ZendeskAPI::Client.new do |config|
   config.token = CONFIG['zendesk']['api_key']
 end
 
-File.open 'locales.rb', 'w' do |f|
+File.open 'locales.json', 'w' do |f|
   locales = zendesk.locales.map do |l|
-    [l.locale, { locale: l.locale, name: l.presentation_name, rtl: l.rtl }]
+    locale = l.locale.downcase
+    [locale, { locale: locale, name: l.presentation_name, rtl: l.rtl }]
   end.to_h.to_json
-  f.write 'LOCALES = ' + locales
+  f.write locales
 end
