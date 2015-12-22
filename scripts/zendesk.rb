@@ -12,6 +12,13 @@ module ZendeskAPI
   class Section < Resource; end
   class Translation < Resource; end
   class AccessPolicy < Resource; end
+  class HcLocale < Resource
+    namespace 'help_center'
+
+    def self.singular_resource_name
+      "locale"
+    end
+  end
   class Ticket < Resource
     def self.incremental(client, start_time)
       ZendeskAPI::Collection.new(client, self, :path => "incremental/tickets.json?start_time=#{start_time.to_i}")
