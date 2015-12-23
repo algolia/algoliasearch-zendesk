@@ -1,6 +1,6 @@
 #! /bin/sh
 
-if test -n "$(git status --porcelain)"; then
+if [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]]; then
   echo "Your git directory is unclean"
   exit
 fi
