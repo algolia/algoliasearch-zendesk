@@ -23,7 +23,18 @@ export default {
           </span>
         </div>
         <div class="body">{{{ _snippetResult.body_safe.value }}} [...]</div>
-      </div>`)
+      </div>`),
+
+    // Powered By
+    footer: Hogan.compile(`<div class="ais-search-box--powered-by" style="border-top-color: {{colors.secondary}}">
+      {{ translations.search_by }}
+      <a
+        href="https://www.algolia.com/?utm_source=zendesk_hc&utm_medium=link&utm_campaign=autocomplete"
+        class="ais-search-box--powered-by-link"
+      >
+        Algolia
+      </a>
+    </div>`)
   },
 
   instantsearch: {

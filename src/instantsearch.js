@@ -77,7 +77,7 @@ export default (options) => {
       container: '#algolia-query',
       placeholder: options.translations.placeholder_instantsearch,
       autofocus: true,
-      poweredBy: true
+      poweredBy: options.poweredBy
     })
   );
 

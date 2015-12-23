@@ -70,25 +70,18 @@ export default (options) => {
     });
   }
 
+  let autocompleteTemplates = {};
+  if (options.poweredBy === true) {
+    autocompleteTemplates.footer = templates.autocomplete.footer.render(options);
+  }
+
   // autocomplete.js initialization
   $query
     .attr('placeholder', options.translations.placeholder_autocomplete)
     .autocomplete({
       hint: false,
       debug: false,
-      templates: {
-        footer: (
-          `<div class="ais-search-box--powered-by">
-            ${options.translations.search_by}
-            <a
-              href="https://www.algolia.com/?utm_source=zendesk_hc&utm_medium=link&utm_campaign=autocomplete"
-              class="ais-search-box--powered-by-link"
-            >
-              Algolia
-            </a>
-          </div>`
-        )
-      }
+      templates: autocompleteTemplates
     }, sources)
     .on('autocomplete:selected', (event, suggestion, dataset) => {
       if (dataset === 'sections' || dataset === 'articles') {
