@@ -2,7 +2,7 @@
 
 version=`cat package.json | json version`
 
-npm run docs
+grunt build:docs
 git add docs
 git commit docs -m "docs(release): v$version"
 git push
