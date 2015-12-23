@@ -6,13 +6,13 @@ We'll crawl your Zendesk API to extract your Help Center content and provide you
 
 To be able to setup your new search on your Zendesk Help Center you'll need to have an Algolia account with a configured Zendesk Help Center crawler.
 
-### Extracting your data to Algolia
+### Synchronize Algolia with your Help Center data
 
-This crawler feature is still in beta, just send us an email to be part of the program!
-
- * An Algolia account (our Hacker/FREE plan probably fits your need)
- * A Zendesk API token
- * The associated Zendesk application name & email
+1. [Login](https://www.algolia.com/users/sign_in) or [sign-up](https://www.algolia.com/users/sign_up) on Algolia
+2. Visit our [Zendesk community page](https://www.community.algolia.com/zendesk/) and click `Join the beta`
+3. Enter your zendesk subdomain (`your_subdomain` in `your_subdomain.zendesk.com`)
+4. When Zendesk asks you to approve Algolia in your Zendesk instance, click `Allow`
+5. That's it! Algolia now automatically handles the indexing of your Help Center
 
 ### Updating your Help Center theme
 
