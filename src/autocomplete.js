@@ -1,6 +1,6 @@
 /* global I18n */
 
-import $ from 'jquery';
+import $ from './jQuery.js';
 import algoliasearch from 'algoliasearch';
 import templates from './templates.js';
 import 'autocomplete.js/index_jquery.js';
