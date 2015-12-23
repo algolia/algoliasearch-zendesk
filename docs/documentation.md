@@ -36,6 +36,7 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
     //
     indexPrefix: 'zendesk_',    // or you custom <INDEX_PREFIX>
     baseUrl: '/hc/',            // the base URL of your Help Center
+    poweredBy: true,            // show the poweredBy link (requirement of Algolia's free plan)
     colors: {
       primary: '#D4D4D4',       // the primary color
       secondary: '#D4D4D4'      // the secondary color
