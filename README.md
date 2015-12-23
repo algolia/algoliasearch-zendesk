@@ -62,18 +62,18 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
                                 //     'fr': 'En'
                                 //   }
                                 // }
-      article: 'Article'
-      articles: 'Articles'
-      categories: 'Categories'
-      sections: 'Sections'
-      tags: 'Tags'
-      search_by: 'Search by'
-      no_result: 'No result'
-      result: 'Result'
-      results: 'Results'
-      found_in: 'Found in'
-      search_by: 'Search by'
-      placeholder_autocomplete: 'Search in sections and articles'
+      article: 'Article',
+      articles: 'Articles',
+      categories: 'Categories',
+      sections: 'Sections',
+      tags: 'Tags',
+      search_by: 'Search by',
+      no_result: 'No result',
+      result: 'Result',
+      results: 'Results',
+      found_in: 'Found in',
+      search_by: 'Search by',
+      placeholder_autocomplete: 'Search in sections and articles',
       placeholder_instantsearch: 'Search in articles'
     }
   });
