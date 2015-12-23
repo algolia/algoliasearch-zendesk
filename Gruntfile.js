@@ -106,6 +106,10 @@ module.exports = function (grunt) {
       css: {
         files: ['css/**/*.css'],
         tasks: 'build:css'
+      },
+      docs: {
+        files: ['README.md'],
+        tasks: 'build:docs'
       }
     },
 
@@ -135,7 +139,7 @@ module.exports = function (grunt) {
   // -------
 
   grunt.registerTask('default', 'build');
-  grunt.registerTask('build', ['clean', 'build:js', 'build:css']);
+  grunt.registerTask('build', ['clean', 'build:js', 'build:css', 'build:docs']);
   grunt.registerTask('build:js', ['webpack', 'sed:version', 'usebanner', 'uglify']);
   grunt.registerTask('build:css', ['concat:css', 'cssmin']);
   grunt.registerTask('build:docs', 'build:docs:documentation.md');
