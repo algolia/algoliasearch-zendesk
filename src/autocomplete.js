@@ -75,7 +75,7 @@ export default (options) => {
     .attr('placeholder', options.translations.placeholder_autocomplete)
     .autocomplete({
       hint: false,
-      debug: true,
+      debug: false,
       templates: {
         footer: (
           `<div class="ais-search-box--powered-by">
