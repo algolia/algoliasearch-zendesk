@@ -101,7 +101,11 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: ['index.js', 'src/**/*.js'],
-        tasks: 'build'
+        tasks: 'build:js'
+      },
+      css: {
+        files: ['css/**/*.css'],
+        tasks: 'build:css'
       }
     },
 
@@ -117,7 +121,7 @@ module.exports = function (grunt) {
 
     concurrent: {
       options: {logConcurrentOutput: true},
-      dev: ['server', 'watch']
+      dev: ['build', 'server', 'watch']
     },
 
     step: {
