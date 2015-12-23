@@ -1,7 +1,6 @@
 import $ from './jQuery.js';
 
 import all from 'lodash/collection/all';
-import map from 'lodash/collection/map';
 
 import isString from 'lodash/lang/isString';
 import isUndefined from 'lodash/lang/isUndefined';
