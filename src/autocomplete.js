@@ -80,7 +80,7 @@ export default (options) => {
     .attr('placeholder', options.translations.placeholder_autocomplete)
     .autocomplete({
       hint: false,
-      debug: false,
+      debug: process.env.NODE_ENV === 'development',
       templates: autocompleteTemplates
     }, sources)
     .on('autocomplete:selected', (event, suggestion, dataset) => {

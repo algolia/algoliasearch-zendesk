@@ -1,4 +1,6 @@
-/* eslint algolia/no-module-exports: 0, no-var: 0 */
+/* eslint algolia/force-import-root: 0, algolia/no-module-exports: 0, no-var: 0 */
+
+var webpack = require('webpack');
 
 module.exports = function (grunt) {
   grunt.initConfig({
@@ -13,6 +15,15 @@ module.exports = function (grunt) {
       ' * Copyright <%= grunt.template.today("yyyy") %> Algolia, Inc. and other contributors; Licensed MIT',
       ' */'
     ].join('\n'),
+
+    env: {
+      prod: {
+        NODE_ENV: 'production'
+      },
+      dev: {
+        NODE_ENV: 'development'
+      }
+    },
 
     usebanner: {
       all: {
@@ -75,10 +86,18 @@ module.exports = function (grunt) {
             query: {
               // If the build takes two much time, we can try this
               // cacheDirectory: true,
-              presets: ['es2015']
+              presets: ['es2015'],
+              plugins: ['transform-node-env-inline']
             }
           }]
-        }
+        },
+        plugins: [
+          new webpack.DefinePlugin({
+            'process.env': {
+              NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+            }
+          })
+        ]
       }
     },
 
@@ -139,15 +158,19 @@ module.exports = function (grunt) {
   // -------
 
   grunt.registerTask('default', 'build');
+
+  grunt.registerTask('release', ['env:prod', 'build']);
+
   grunt.registerTask('build', ['clean', 'build:js', 'build:css', 'build:docs']);
   grunt.registerTask('build:js', ['webpack', 'sed:version', 'usebanner', 'uglify']);
   grunt.registerTask('build:css', ['concat:css', 'cssmin']);
   grunt.registerTask('build:docs', 'build:docs:documentation.md');
-  grunt.registerTask('server', 'connect:server');
-  grunt.registerTask('lint', 'eslint');
-  grunt.registerTask('dev', 'concurrent:dev');
-
   grunt.registerTask('build:docs:documentation.md', require('./grunt/build/docs/documentation.md.js'));
+
+  grunt.registerTask('server', 'connect:server');
+  grunt.registerTask('dev', ['env:dev', 'concurrent:dev']);
+
+  grunt.registerTask('lint', 'eslint');
 
   // load tasks
   // ----------
@@ -163,6 +186,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-webpack');
 };

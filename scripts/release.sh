@@ -8,7 +8,7 @@ fi
 current=`cat package.json | json version`
 read -p "New version number (current is ${current}): " version
 npm version $version
-npm run build
+grunt release
 git push
 git push --tags
 npm publish
