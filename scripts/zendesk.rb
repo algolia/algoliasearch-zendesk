@@ -60,8 +60,12 @@ end
 
 zendesk = ZendeskAPI::Client.new do |config|
   config.url = CONFIG['zendesk']['url']
-  config.username = CONFIG['zendesk']['email']
-  config.token = CONFIG['zendesk']['api_key']
+  if CONFIG['zendesk']['oauth_token'].nil?
+    config.username = CONFIG['zendesk']['email']
+    config.token = CONFIG['zendesk']['api_key']
+  else
+    config.access_token = CONFIG['zendesk']['oauth_token']
+  end
   config.logger = Logger.new STDOUT
 end
 zendesk.tickets.include(:comments)
