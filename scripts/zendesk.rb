@@ -11,7 +11,7 @@ module ZendeskAPI
   class Article < Resource; end
   class Section < Resource; end
   class Translation < Resource; end
-  class AccessPolicy < Resource; end
+  class AccessPolicy < SingularResource; end
   class HcLocale < Resource
     namespace 'help_center'
 
@@ -45,7 +45,15 @@ module ZendeskAPI
     has_many Article
     has_many Translation
     has Category
-    has :access_policy, class: AccessPolicy
+
+    def access_policy(opts = {})
+      return @access_policy if @access_policy && !opts[:reload]
+
+      association = ZendeskAPI::Association.new(class: AccessPolicy, parent: self, path: 'access_policy')
+      collection = ZendeskAPI::Collection.new(@client, AccessPolicy, opts.merge(association: association))
+      collection.fetch
+      @access_policy = collection.response.body
+    end
   end
   class Article < Resource
     namespace 'help_center'
