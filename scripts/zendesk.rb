@@ -58,6 +58,7 @@ module ZendeskAPI
   class Article < Resource
     namespace 'help_center'
     has_many Translation
+    has Section
     has :author, class: User
 
     def self.incremental(client, start_time)
