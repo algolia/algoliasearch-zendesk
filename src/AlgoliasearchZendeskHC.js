@@ -15,7 +15,7 @@ algoliasearchZendeskHC({
   applicationId,
   apiKey,
   subdomain,
-  indexPrefix,
+  [ indexPrefix ],
   [ autocomplete ],
   [ instantsearch ]
 })
@@ -23,6 +23,10 @@ algoliasearchZendeskHC({
 class AlgoliasearchZendeskHC {
   constructor(options) {
     this._checkOptions(options);
+
+    if (isUndefined(options.indexPrefix)) {
+      options.indexPrefix = 'zendesk_';
+    }
 
     options.autocomplete = options.autocomplete || {};
     if (isUndefined(options.autocomplete.enabled)) {
@@ -70,7 +74,7 @@ class AlgoliasearchZendeskHC {
   }
 
   _checkOptions(options) {
-    const stringOptions = ['applicationId', 'apiKey', 'subdomain', 'indexPrefix'];
+    const stringOptions = ['applicationId', 'apiKey', 'subdomain'];
     const valid = all(stringOptions, (k) => isString(options[k]));
 
     if (!valid) throw new Error(usage);
