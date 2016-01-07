@@ -32,6 +32,7 @@ class AlgoliasearchZendeskHC {
     if (isUndefined(options.autocomplete.enabled)) {
       options.autocomplete.enabled = true;
     }
+
     options.instantsearch = options.instantsearch || {};
     if (isUndefined(options.instantsearch.enabled)) {
       options.instantsearch.enabled = true;

@@ -43,14 +43,7 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
     autocomplete: {
       enabled: true,            // is the autocomplete feature enabled?
       inputSelector: '#query',  // the DOM selector to select the search box
-      sections: {
-        enabled: true,          // does the autocomplete menu embed a 'sections' section
-        hits: 3                 // the number of suggestions to display
-      },
-      articles: {
-        enabled: true,          // does the autocomplete menu embed a 'articles' section
-        hits: 3                 // the number of suggestions to display
-      }
+      hits: 5                   // the number of suggestions to display
     },
     instantsearch: {
       enabled: true,

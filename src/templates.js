@@ -16,25 +16,55 @@ export default {
 
     // Autocompletion template for an article
     article: Hogan.compile(
-      `<div class="hit-article" style="border-bottom-color: {{colors.secondary}}">
-        <div class="title overflow-block-container">
-          <span class="overflow-block">
-            {{{ _highlightResult.title.value }}}
-          </span>
+      `<div
+        class="
+          aa-article-hit
+          {{# isCategoryHeader }}aa-article-hit__category-first{{/ isCategoryHeader }}
+          {{# isSectionHeader }}aa-article-hit__section-first{{/ isSectionHeader }}
+        "
+      >
+      <div class="aa-article-hit--category">
+        {{ category.title }}
+      </div>
+      <div class="aa-article-hit--line">
+        <div class="aa-article-hit--section">
+          <div class="aa-article-hit--section--inside">{{ section.title }}</div>
         </div>
-        <div class="body">{{{ _snippetResult.body_safe.value }}} [...]</div>
+        <div class="aa-article-hit--content">
+          <div class="aa-article-hit--title">
+            {{{ _highlightResult.title.value }}}
+          </div>
+          {{# _snippetResult.body_safe.value }}
+            <div class="aa-article-hit--body">{{{ _snippetResult.body_safe.value }}} [...]</div>
+          {{/ _snippetResult.body_safe.value }}
+        </div>
       </div>`),
 
     // Powered By
-    footer: Hogan.compile(`<div class="ais-search-box--powered-by" style="border-top-color: {{colors.secondary}}">
+    footer: Hogan.compile(`<div class="aa-powered-by" style="border-top-color: {{colors.secondary}}">
       {{ translations.search_by }}
       <a
         href="https://www.algolia.com/?utm_source=zendesk_hc&utm_medium=link&utm_campaign=autocomplete"
-        class="ais-search-box--powered-by-link"
+        class="aa-powered-by-link"
       >
         Algolia
       </a>
-    </div>`)
+    </div>`),
+
+    // CSS to add to handle the colors
+    css: Hogan.compile(`
+      .aa-article-hit--highlight {
+        color: {{ colors.primary }};
+      }
+
+      .aa-article-hit--category {
+        background-color: {{ colors.primary }};
+      }
+
+      .aa-article-hit--section, .aa-article-hit--content {
+        border-color: {{ colors.secondary }};
+      }
+    `)
   },
 
   instantsearch: {
