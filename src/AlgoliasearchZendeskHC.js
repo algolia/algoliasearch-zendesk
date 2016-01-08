@@ -3,8 +3,7 @@ import $ from './jQuery.js';
 import all from 'lodash/collection/all';
 
 import isString from 'lodash/lang/isString';
-import isUndefined from 'lodash/lang/isUndefined';
-import isPlainObject from 'lodash/lang/isPlainObject';
+import defaultsDeep from 'lodash/object/defaultsDeep';
 
 import loadTranslations from './translations.js';
 import autocomplete from './autocomplete.js';
@@ -20,52 +19,37 @@ algoliasearchZendeskHC({
   [ instantsearch ]
 })
 `;
+
+const defaultOptions = {
+  autocomplete: {
+    enabled: true,
+    inputSelector: '#query',
+    hitsPerPage: 5
+  },
+  baseUrl: '/hc/',
+  colors: {
+    primary: '#D4D4D4',
+    secondary: '#D4D4D4'
+  },
+  indexPrefix: 'zendesk_',
+  instantsearch: {
+    enabled: true,
+    tagsLimit: 15
+  },
+  poweredBy: true,
+  translations: {}
+};
 class AlgoliasearchZendeskHC {
   constructor(options) {
     this._checkOptions(options);
-
-    if (isUndefined(options.indexPrefix)) {
-      options.indexPrefix = 'zendesk_';
-    }
-
-    options.autocomplete = options.autocomplete || {};
-    if (isUndefined(options.autocomplete.enabled)) {
-      options.autocomplete.enabled = true;
-    }
-
-    options.instantsearch = options.instantsearch || {};
-    if (isUndefined(options.instantsearch.enabled)) {
-      options.instantsearch.enabled = true;
-    }
-
-    if (isUndefined(options.instantsearch.tagsLimit)) {
-      options.instantsearch.tagsLimit = 15;
-    }
-
-    if (isUndefined(options.baseUrl)) {
-      options.baseUrl = '/hc/';
-    }
-
-    if (!isPlainObject(options.translations)) {
-      options.translations = {};
-    }
-
-    options.colors = options.colors || {};
-    options.colors.primary = options.colors.primary || '#D4D4D4';
-    options.colors.secondary = options.colors.secondary || '#D4D4D4';
-
-    if (isUndefined(options.poweredBy)) {
-      options.poweredBy = true;
-    }
+    options = defaultsDeep({}, options, defaultOptions);
 
     // once the DOM is initialized
     $(document).ready(() => {
       loadTranslations(options);
 
       // autocompletion menu
-      if (options.autocomplete.enabled) {
-        this.autocomplete = autocomplete(options);
-      }
+      this.autocomplete = autocomplete(options);
 
       // instant search result page
       if (options.instantsearch.enabled) {
@@ -74,10 +58,9 @@ class AlgoliasearchZendeskHC {
     });
   }
 
-  _checkOptions(options) {
-    const stringOptions = ['applicationId', 'apiKey', 'subdomain'];
-    const valid = all(stringOptions, (k) => isString(options[k]));
-
+  _checkOptions({applicationId, apiKey, subdomain}) {
+    const valuesToCheck = [applicationId, apiKey, subdomain];
+    const valid = all(valuesToCheck, (v) => isString(v));
     if (!valid) throw new Error(usage);
   }
 }

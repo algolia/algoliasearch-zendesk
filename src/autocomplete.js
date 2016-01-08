@@ -9,18 +9,28 @@ import 'es6-collections';
 import templates from './templates.js';
 import addCSS from './addCSS.js';
 
-export default (options) => {
-  const {
-    enabled = true,
-    inputSelector = '#query',
-    hitsPerPage = 5
-  } = options.autocomplete;
+export default ({
+  applicationId,
+  apiKey,
+  autocomplete: {
+    enabled,
+    inputSelector,
+    hitsPerPage
+  },
+  baseUrl,
+  colors,
+  indexPrefix,
+  poweredBy,
+  subdomain,
+  translations
+}) => {
+  if (!enabled) return null;
 
   // initialize API client
-  let client = algoliasearch(options.applicationId, options.apiKey);
-  let articles = client.initIndex(`${options.indexPrefix}${options.subdomain}_articles`);
+  let client = algoliasearch(applicationId, apiKey);
+  let articles = client.initIndex(`${indexPrefix}${subdomain}_articles`);
 
-  addCSS(templates.autocomplete.css.render({colors: options.colors}));
+  addCSS(templates.autocomplete.css.render({colors}));
 
   let sources = [];
   if (enabled) {
@@ -65,32 +75,25 @@ export default (options) => {
       },
       name: 'articles',
       templates: {
-        suggestion: (hit) => {
-          hit.colors = options.colors;
-          return templates.autocomplete.article.render(hit);
-        }
+        suggestion: (hit) => templates.autocomplete.article.render(hit)
       }
     });
   }
 
   let autocompleteTemplates = {};
-  if (options.poweredBy === true) {
-    autocompleteTemplates.footer = templates.autocomplete.footer.render(options);
+  if (poweredBy === true) {
+    autocompleteTemplates.footer = templates.autocomplete.footer.render({colors, translations});
   }
 
   // autocomplete.js initialization
-  $(inputSelector)
-    .attr('placeholder', options.translations.placeholder_autocomplete)
+  return $(inputSelector)
+    .attr('placeholder', translations.placeholder_autocomplete)
     .autocomplete({
       hint: false,
       debug: process.env.NODE_ENV === 'development',
       templates: autocompleteTemplates
     }, sources)
     .on('autocomplete:selected', (event, suggestion, dataset) => {
-      if (dataset === 'articles') {
-        location.href = `${options.baseUrl}${I18n.locale}/${dataset}/${suggestion.id}`;
-      } else if (dataset === 'other') {
-        location.href = `${options.baseUrl}${I18n.locale}/search?query=${suggestion.query}`;
-      }
+      location.href = `${baseUrl}${I18n.locale}/${dataset}/${suggestion.id}`;
     });
 };
