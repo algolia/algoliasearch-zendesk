@@ -6,7 +6,7 @@ module.exports = function () {
   var fs = require('fs');
 
   var readHeader = new Promise(function (resolve, reject) {
-    fs.readFile('./docs/headers/documentation.yml', function (err, data) {
+    fs.readFile('../docs/headers/documentation.yml', function (err, data) {
       if (err) return reject(err);
       resolve(data.toString());
     });
@@ -29,7 +29,7 @@ module.exports = function () {
   });
 
   Promise.all([readHeader, readReadme]).then(function (data) {
-    fs.writeFile('docs/documentation.md', data.join('\n'), function (err) {
+    fs.writeFile('../docs/documentation.md', data.join('\n'), function (err) {
       if (err) throw err;
       done();
     });
