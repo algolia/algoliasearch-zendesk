@@ -151,7 +151,17 @@ module.exports = function (grunt) {
       options: {
         option: false
       }
+    },
+
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['test/**/*.js']
+      }
     }
+
   });
 
   // aliases
@@ -172,6 +182,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('lint', 'eslint');
 
+  grunt.registerTask('test', 'mochaTest');
+
   // load tasks
   // ----------
 
@@ -189,4 +201,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-webpack');
+  grunt.loadNpmTasks('grunt-mocha-test');
 };
