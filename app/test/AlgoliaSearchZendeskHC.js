@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
-var expect = require('expect');
+import expect from'expect';
 
-it('should pass', function () {
+it('should pass', () => {
   expect(true).toBe(true);
 });

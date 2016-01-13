@@ -82,13 +82,7 @@ module.exports = function (grunt) {
         },
         module: {
           loaders: [{
-            test: /\.js$/, exclude: /node_modules/, loader: 'babel',
-            query: {
-              // If the build takes two much time, we can try this
-              // cacheDirectory: true,
-              presets: ['es2015'],
-              plugins: ['transform-node-env-inline']
-            }
+            test: /\.js$/, exclude: /node_modules/, loader: 'babel'
           }]
         },
         plugins: [
@@ -156,7 +150,9 @@ module.exports = function (grunt) {
     mochaTest: {
       test: {
         options: {
-          reporter: 'spec'
+          reporter: 'spec',
+          clearRequireCache: true,
+          require: ['babel-core/register']
         },
         src: ['test/**/*.js']
       }
