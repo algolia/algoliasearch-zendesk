@@ -21,8 +21,19 @@ header.site-header {
       li {
         padding-bottom: 1em; } }
     .navbar-brand {
+      font-size: 1em;
       color: white;
       z-index: 1; }
+    .navbar-brand--logo {
+      display: inline-block;
+      height: 1.5em;
+    }
+    .navbar-brand--subtitle {
+      display: inline-block;
+      margin-left: 10px; }
+    .navbar--github-link {
+      padding-top: 12px;
+    }
     .navbar-header {
       position: relative;
       z-index: 2; }
