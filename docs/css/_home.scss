@@ -62,13 +62,14 @@ h2 {
   max-width: 95%;
 }
 
-.headline:after {
-  display: block;
-  content: ' ';
-  height: 10px;
+.headline {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.headline-content {
+  display: inline-block;
   border-bottom: 2px solid $zendesk-green;
-  margin: 0 auto 1em auto;
-  width: 30px;
 }
 
 .features {
