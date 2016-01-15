@@ -9,9 +9,44 @@ h2 {
 }
 
 .jumbotron {
-  background: #eee5d9 url(../img/zendesk-logo.png) scroll 100% 40px no-repeat;
-  color: #363636;
+  background-color: $brand-primary;
+  background: -moz-radial-gradient(center, ellipse cover, rgba(120,163,0,1) 0%, rgba(87,127,0,1) 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(120,163,0,1)), color-stop(100%, rgba(87,127,0,1)));
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(120,163,0,1) 0%, rgba(87,127,0,1) 100%);
+  background: -o-radial-gradient(center, ellipse cover, rgba(120,163,0,1) 0%, rgba(87,127,0,1) 100%);
+  background: -ms-radial-gradient(center, ellipse cover, rgba(120,163,0,1) 0%, rgba(87,127,0,1) 100%);
+  background: radial-gradient(ellipse at center, rgba(120,163,0,1) 0%, rgba(87,127,0,1) 80%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#78a300', endColorstr='#577f00', GradientType=1 );
+
+  color: $light-text-color;
+  -webkit-font-smoothing: antialiased;
 }
+
+@media (min-width: $screen-sm-min) {
+  .jumbotron h1 {
+    display: inline-block;
+  }
+
+  .jumbotron--hero-title {
+    display: inline-block;
+    width: auto;
+  }
+
+  .jumbotron--algolia-logo {
+    margin-right: 13px;
+  }
+  
+  .jumbotron--zendesk-logo {
+    margin-left: 4px;
+  }
+}
+
+.jumbotron--zendesk-logo img {
+  position: relative;
+  top: -0.26em;
+  max-width: 95%;
+}
+
 
 .headline:after {
   display: block;

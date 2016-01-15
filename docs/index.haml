@@ -8,7 +8,7 @@ layout: default
       %form{method: 'get', action: 'https://www.algolia.com/zendesk/auth'}
         .modal-header
           %button.close{type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
-          %h4#join-label.modal-title Join the beta
+          %h4#join-label.modal-title Join the beta!
         .modal-body
           :markdown
             You'll first need to be logged in on your
@@ -24,13 +24,21 @@ layout: default
           %button.btn.btn-primary{type: 'submit'} Submit
 
 .main-content
-  .jumbotron
+  .jumbotron.text-center
     .container
-      %h1 {{ site.title }}
+      .row
+        .col-sm-12
+          %h1.row
+            .col-xs-12.jumbotron--hero-title.jumbotron--algolia-logo
+              %img{ src: '{{site.baseurl}}/img/algolia-logo-white.svg', alt: 'Algolia', width: 190 }
+            .col-xs-12.jumbotron--hero-title
+              %small for
+            .col-xs-12.jumbotron--hero-title.jumbotron--zendesk-logo
+              %img{ src: '{{site.baseurl}}/img/zendesk-logo.svg', alt: 'Zendesk', width: 340 }
 
       .row
-        .col-sm-8
-          %p Empower your Zendesk Help Center with Algolia Search and provide your users an awesome search experience.
+        .col-sm-12
+          %p Empowr your Zendesk Help Center with Algolia Search and provide your users an awesome search experience.
 
       .spacer50
       %p.text-center
