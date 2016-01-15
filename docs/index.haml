@@ -2,27 +2,6 @@
 layout: default
 ---
 
-#join.modal.fade{tabindex: '-1', role: 'dialog', 'aria-labelledby' => 'join-label'}
-  .modal-dialog
-    .modal-content
-      %form{method: 'get', action: 'https://www.algolia.com/zendesk/auth'}
-        .modal-header
-          %button.close{type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
-          %h4#join-label.modal-title Join the beta!
-        .modal-body
-          :markdown
-            You'll first need to be logged in on your
-            [Algolia account](https://www.algolia.com/dashboard)
-            in order to use this integration.  
-            [Click here to create one](https://www.algolia.com/users/sign_up)
-          %hr
-          .form-group
-            %label{for: 'join-subdomain'} Zendesk subdomain
-            %input#join-subdomain.form-control{type: 'text', name: 'subdomain', placeholder: 'your-zendesk-instance(.zendesk.com)'}
-        .modal-footer
-          %button.btn.btn-default{type: 'button', 'data-dismiss' => 'modal'} Close
-          %button.btn.btn-primary{type: 'submit'} Submit
-
 .main-content
   .jumbotron.text-center
     .container
@@ -44,9 +23,14 @@ layout: default
             your users with an awesome search experience
 
       .spacer50
-      %p.text-center
-        %a.btn.btn-primary.btn-lg{'data-toggle' => 'modal', 'data-target' => '#join'}
-          Join the beta
+      %form.join.col-md-8.col-md-offset-2{method: 'get', action: 'https://www.algolia.com/zendesk/auth'}
+        .form-group{style: 'text-align: left;'}
+          %label{for: 'join-subdomain', style: 'padding-left: 5px;'} Your Zendesk subdomain sds
+          .row
+            .col-lg-9.col-md-8.col-sm-7
+              %input#join-subdomain.form-control.input-lg{type: 'text', name: 'subdomain', placeholder: 'your-company.zendesk.com'}
+            .col-lg-3.col-md-4.col-sm-5
+              %button.btn.btn-primary.btn-lg{type: 'submit'} Join the beta!
 
   .container
 
@@ -97,3 +81,13 @@ layout: default
         .col-sm-4
           .showcase.fixme{href: '#'} You?
           %p Join us!
+
+    .spacer100
+    %form.join.col-md-8.col-md-offset-2{method: 'get', action: 'https://www.algolia.com/zendesk/auth'}
+      .form-group{style: 'text-align: left;'}
+        %label{for: 'join-subdomain', style: 'padding-left: 5px;'} Your Zendesk subdomain sds
+        .row
+          .col-lg-9.col-md-8.col-sm-7
+            %input#join-subdomain.form-control.input-lg{type: 'text', name: 'subdomain', placeholder: 'your-company.zendesk.com'}
+          .col-lg-3.col-md-4.col-sm-5
+            %button.btn.btn-primary.btn-lg{type: 'submit'} Join the beta!

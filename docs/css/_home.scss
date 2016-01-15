@@ -8,6 +8,21 @@ h2 {
   text-align: center;
 }
 
+.join {
+  p {
+    line-height: 32px;
+    font-weight: 400;
+  }
+
+  button {
+    width: 100%;
+    background-color: rgb(162, 220, 0);
+  }
+  button:hover {
+    background-color: rgb(140, 190, 0);
+  }
+}
+
 .jumbotron {
   background-color: $brand-primary;
   background: -moz-radial-gradient(center, ellipse cover, rgba(120,163,0,1) 0%, rgba(87,127,0,1) 100%);
@@ -20,11 +35,6 @@ h2 {
 
   color: $light-text-color;
   -webkit-font-smoothing: antialiased;
-
-  p {
-    line-height: 32px;
-    font-weight: 400;
-  }
 }
 
 @media (min-width: $screen-sm-min) {
@@ -40,7 +50,7 @@ h2 {
   .jumbotron--algolia-logo {
     margin-right: 13px;
   }
-  
+
   .jumbotron--zendesk-logo {
     margin-left: 4px;
   }
@@ -51,7 +61,6 @@ h2 {
   top: -0.26em;
   max-width: 95%;
 }
-
 
 .headline:after {
   display: block;
