@@ -20,6 +20,11 @@ h2 {
 
   color: $light-text-color;
   -webkit-font-smoothing: antialiased;
+
+  p {
+    line-height: 32px;
+    font-weight: 400;
+  }
 }
 
 @media (min-width: $screen-sm-min) {
