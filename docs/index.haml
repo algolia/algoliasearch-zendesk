@@ -98,6 +98,22 @@ layout: default
   .home-section.home-section__join
     %h2.headline Be ready in minutes!
     .container
+      .row
+        .col-sm-4
+          %p
+            %span.big-number 1
+            Enter your Zendesk subdomain below and click &laquo; Join the beta! &raquo;. You'll be sent to your Algolia account
+        .col-sm-4
+          %p
+            %span.big-number 2
+            Authorize our application in your Zendesk account and we'll start indexing right away!
+        .col-sm-4
+          %p
+            %span.big-number 3
+            Copy the code from <a href="./documentation/">our docs</a> inside your Help Center theme to bring our <b>instant search experience</b> to your users.
+
+      .spacer50
+
       %form.join.col-md-8.col-md-offset-2{method: 'get', action: 'https://www.algolia.com/zendesk/auth'}
         .form-group{style: 'text-align: left;'}
           %label{for: 'join-subdomain', style: 'padding-left: 5px;'} Your Zendesk subdomain

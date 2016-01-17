@@ -128,3 +128,20 @@ h2 {
     }
   }
 }
+
+.home-section__join {
+  p {
+    line-height: 1.4em;
+    padding: 0 2em;
+  }
+
+  .big-number {
+    font-size: 2.8em;
+    line-height: 1em;
+    margin-right: .2em;
+    font-weight: bolder;
+    color: $zendesk-green;
+    float: left;
+    display: inline-block;
+  }
+}
