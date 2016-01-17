@@ -32,20 +32,19 @@ layout: default
             .col-lg-3.col-md-4.col-sm-5
               %button.btn.btn-primary.btn-lg{type: 'submit'} Join the beta!
 
-  .container
+  .home-section.home-section__instant-answers
+    %h1.headline
+      .headline-content Instant answers
+    .text-center
+      :markdown
+        Nothing is more important for your users than to find answers to their problems.  
+        Algolia turns your Zendesk Help Center into an **instant knowledge base**,  
+        returning relevant answers from the first keystroke.
 
-    .home-section.home-section__instant-answers
-      %h1.headline
-        .headline-content Instant answers
-      .text-center
-        :markdown
-          Nothing is more important for your users than to find answers to their problems.  
-          Algolia turns your Zendesk Help Center into an **instant knowledge base**,  
-          returning relevant answers from the first keystroke.
-
-    .home-section.home-section__features
-      %h1.headline
-        .headline-content Features
+  .home-section.home-section__features
+    %h1.headline
+      .headline-content Features
+    .container
       .row
         .col-sm-4.col-sm-offset-3
           %h3 Auto-suggestions menu
@@ -75,9 +74,10 @@ layout: default
           %h3 Customizable
           %p Our code is open-source and hosted on GitHub, feel free to customize it.
 
-    .home-section.home-section__showcase
-      %h1.headline
-        .headline-content Showcase
+  .home-section.home-section__showcases
+    %h1.headline
+      .headline-content Showcase
+    .container
       .row
         .col-sm-4
           %a.showcase{href: 'https://support.aodocs.com/hc/en-us'}
@@ -91,9 +91,10 @@ layout: default
           .showcase.fixme{href: '#'} You?
           %p Join us!
 
-    .home-section.home-section__join
-      %h1.headline
-        .headline-content Be ready in minutes!
+  .home-section.home-section__join
+    %h1.headline
+      .headline-content Be ready in minutes!
+    .container
       %form.join.col-md-8.col-md-offset-2{method: 'get', action: 'https://www.algolia.com/zendesk/auth'}
         .form-group{style: 'text-align: left;'}
           %label{for: 'join-subdomain', style: 'padding-left: 5px;'} Your Zendesk subdomain

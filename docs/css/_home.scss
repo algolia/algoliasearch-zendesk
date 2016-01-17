@@ -33,6 +33,7 @@ h2 {
   background: radial-gradient(ellipse at center, rgba(120,163,0,1) 0%, rgba(87,127,0,1) 80%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#78a300', endColorstr='#577f00', GradientType=1 );
 
+  margin-bottom: 0;
   color: $light-text-color;
   -webkit-font-smoothing: antialiased;
 }
@@ -76,6 +77,10 @@ h2 {
   padding: 50px 0;
 }
 
+.home-section__instant-answers {
+  background-color: #FAFAFA;
+}
+
 .home-section__features {
   .row {
     margin-bottom: 1em;
@@ -100,6 +105,7 @@ h2 {
 }
 
 .home-section__showcases {
+  background-color: #FAFBFD;
   text-align: center;
 
   .showcase {
