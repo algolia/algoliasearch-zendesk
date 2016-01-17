@@ -109,10 +109,7 @@ h2 {
 
   .showcase {
     display: block;
-    border: 1px solid #ccc;
-    -webkit-box-shadow: 6px 6px 6px -6px black;
-       -moz-box-shadow: 6px 6px 6px -6px black;
-            box-shadow: 6px 6px 6px -6px black;
+    border: 1px solid $zendesk-green;
     height: 200px;
     overflow: hidden;
 
@@ -123,7 +120,8 @@ h2 {
     &.fixme {
       width: 100%;
       height: 200px;
-      background: #efefef;
+      color: $zendesk-green;
+
       line-height: 200px;
       font-size: 2em;
     }
