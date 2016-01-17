@@ -4,10 +4,6 @@ h2 {
   letter-spacing: 1px;
   margin-bottom: 1em; }
 
-.headline {
-  text-align: center;
-}
-
 .join {
   p {
     line-height: 32px;
@@ -66,11 +62,14 @@ h2 {
 .headline {
   text-align: center;
   margin-bottom: 40px;
-}
 
-.headline-content {
-  display: inline-block;
-  border-bottom: 2px solid $zendesk-green;
+  &:after {
+    display: block;
+    content: '';
+    border-bottom: 2px solid $zendesk-green;
+    margin: 0.4em auto 1em auto;
+    width: 30px;
+  }
 }
 
 .home-section {
