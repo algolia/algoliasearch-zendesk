@@ -56,9 +56,9 @@
   text-overflow: ellipsis;
   vertical-align: top;
 
-  width: 175px; // Hardcoded
-  max-width: 175px; // Hardcoded
-  min-width: 175px; // Hardcoded
+  width: 175px; /* Hardcoded */
+  max-width: 175px; /* Hardcoded */
+  min-width: 175px; /* Hardcoded */
 }
 
 .aa-article-hit__section-first .aa-article-hit--section {
