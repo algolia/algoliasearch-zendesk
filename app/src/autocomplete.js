@@ -37,8 +37,8 @@ export default ({
     sources.push({
       source: (query, callback) => {
         articles.search({
-          query: query,
-          hitsPerPage: hitsPerPage,
+          query,
+          hitsPerPage,
           facetFilters: `["locale.locale:${I18n.locale}"]`,
           highlightPreTag: '<span class="aa-article-hit--highlight">',
           highlightPostTag: '</span>'

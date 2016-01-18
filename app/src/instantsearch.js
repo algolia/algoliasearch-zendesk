@@ -1,7 +1,7 @@
 /* global I18n, moment */
 
 import $ from 'jquery';
-import instantsearch from 'instantsearch.js/dist/instantsearch.js';
+import instantsearch from 'instantsearch.js';
 import templates from './templates.js';
 
 export default (options) => {
@@ -60,7 +60,7 @@ export default (options) => {
     indexName: options.indexPrefix + options.subdomain + '_articles',
     urlSync: {},
     searchParameters: {
-      query: query,
+      query,
       attributesToSnippet: ['body_safe:60']
     }
   });
