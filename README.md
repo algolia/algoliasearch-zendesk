@@ -1,4 +1,7 @@
-# <span style="display: inline-block; width: 100%; text-align: center;"><img src="./img/algolia-for-zendesk.png?raw=true" alt="Algolia for Zendesk" /></span>
+# Algolia for Zendesk
+<p style="text-align: center;">
+  <img src="./img/algolia-for-zendesk.png?raw=true" alt="Algolia for Zendesk" />
+</p>
 
 This repository holds the code of Algolia's Zendesk integration.  
 This integration makes it trivial to replace the default search of your Zendesk Help Center by Algolia.
