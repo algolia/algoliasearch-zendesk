@@ -1,5 +1,5 @@
 # Algolia for Zendesk
-<p style="text-align: center;">
+<p align="center">
   <img src="./img/algolia-for-zendesk.png?raw=true" alt="Algolia for Zendesk" />
 </p>
 
