@@ -1,0 +1,14 @@
+# ![Algolia for Zendesk](./img/algolia-for-zendesk.png?raw=true)
+
+This repository holds the code of Algolia's Zendesk integration.  
+This integration makes it trivial to replace the default search of your Zendesk Help Center by Algolia.
+[Algolia](https://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
+
+We'll crawl your Zendesk API to extract your Help Center content and provide you a small code snippet to power your search with Algolia.
+
+## Indexing
+Find the code of the crawler and its documentation in the [crawler/](./crawler/) folder.
+
+## Front-end
+Follow the documentation [on the website](https://community.algolia.com/zendesk/).  
+If you want to contribute or browse the code, follow [this link to the app/](./app/) folder.
