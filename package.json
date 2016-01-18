@@ -1,0 +1,12 @@
+{
+  "name": "algoliasearch.zendesk-hc.tools",
+  "private": true,
+  "devDependencies": {
+    "gh-pages": "^0.8.0"
+  },
+  "scripts": {
+    "release": "./scripts/release.sh",
+    "release:app": "./scripts/release-app.sh",
+    "release:docs": "./scripts/release-docs.sh"
+  }
+}
