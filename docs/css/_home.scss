@@ -32,6 +32,10 @@ h2 {
   margin-bottom: 0;
   color: $light-text-color;
   -webkit-font-smoothing: antialiased;
+
+  p {
+    line-height: 32px;
+  }
 }
 
 @media (min-width: $screen-sm-min) {
@@ -133,6 +137,7 @@ h2 {
   p {
     line-height: 1.4em;
     padding: 0 2em;
+    font-family: Raleway, sans-serif;
   }
 
   .big-number {
@@ -143,6 +148,7 @@ h2 {
     color: $zendesk-green;
     float: left;
     display: inline-block;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   button {
