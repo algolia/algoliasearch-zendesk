@@ -1,4 +1,3 @@
-import babelRegister from 'babel-core/register';
 import gulp from 'gulp';
 import mergeStream from 'merge-stream';
 
@@ -15,7 +14,7 @@ export default function (cb) {
   ).pipe(istanbul.hookRequire())
     .on('finish', function () {
       gulp.src(['test/**/*.js'])
-       .pipe(mocha({compilers: {js: babelRegister}}))
+       .pipe(mocha())
        .pipe(istanbul.writeReports()) // Creating the reports after tests ran
 //       .pipe(istanbul.enforceThresholds({thresholds: {global: 90}})) // Enforce a coverage of at least 90%
        .on('end', cb);
