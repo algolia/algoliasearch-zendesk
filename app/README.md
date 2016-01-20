@@ -74,10 +74,6 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
 </script>
 ```
 
-## Demo
-
-
-
 ## License
 
 This library is [MIT licensed](https://github.com/algolia/algoliasearch-zendesk/blob/master/LICENSE).
