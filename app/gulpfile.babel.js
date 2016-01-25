@@ -12,7 +12,7 @@ import test from './gulp/test.js';
 if (process.env.NODE_ENV !== 'production') process.env.NODE_ENV = 'development';
 
 gulp.task('build:css', buildCSS);
-gulp.task('build:css:watcher', function () { return gulp.watch('css/**/*.css', ['build:css']); });
+gulp.task('build:css:watcher', function () { return gulp.watch('css/**/*.scss', ['build:css']); });
 gulp.task('build:css:watch', ['build:css', 'build:css:watcher']);
 
 gulp.task('build:docs', buildDocs);
