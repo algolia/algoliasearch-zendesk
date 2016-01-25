@@ -82,6 +82,25 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
 </script>
 ```
 
+## Development
+
+The `package.json` holds multiple scripts:
+- `build:css`: Compiles the CSS files to `dist/algoliasearch.zendesk-hc.css`
+- `build:docs`: Extracts the documentation from this `README.md` to [`../docs/documentation.md`](../docs/documentation.md)
+- `build:js`: Compiles the JS files to `dist/algoliasearch.zendesk-hc.js` and `dist-es5-module/*.js`
+- `build`: Launches all 3 previous builds
+- `clean`: Removes `dist/` and `dist-es5-module`
+- `dev`: Launches `build` and `server`, and watches the files to rebuild them if needed
+- `lint`: Lints the JS files
+- `server`: Runs a simple HTTP server pointing to `dist/`
+- `test:coverage`: Runs `test` with coverage enabled
+- `test`: Runs the test suite
+
+`build:js`, `build:css`, `build` and `dev` can be passed a `NODE_ENV` environment variable.  
+If set to production, it also creates minified files and map files.
+
+`server` accepts a `PORT` environment variable to change on which port it will run.
+
 ## Contributing
 
 We're considering any contribution and PR, please go ahead!
