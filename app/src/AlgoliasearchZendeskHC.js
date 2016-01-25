@@ -1,9 +1,8 @@
 import $ from './jQuery.js';
 
-import all from 'lodash/collection/all';
-
-import isString from 'lodash/lang/isString';
-import defaultsDeep from 'lodash/object/defaultsDeep';
+import defaultsDeep from 'lodash/defaultsDeep';
+import every from 'lodash/every';
+import isString from 'lodash/isString';
 
 import loadTranslations from './translations.js';
 import autocomplete from './autocomplete.js';
@@ -60,7 +59,7 @@ class AlgoliasearchZendeskHC {
 
   _checkOptions({applicationId, apiKey, subdomain}) {
     const valuesToCheck = [applicationId, apiKey, subdomain];
-    const valid = all(valuesToCheck, (v) => isString(v));
+    const valid = every(valuesToCheck, (v) => isString(v));
     if (!valid) throw new Error(usage);
   }
 }

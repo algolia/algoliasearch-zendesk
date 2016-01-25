@@ -1,8 +1,8 @@
 /* global I18n */
 
-import isString from 'lodash/lang/isString';
-import isUndefined from 'lodash/lang/isUndefined';
-import isPlainObject from 'lodash/lang/isPlainObject';
+import isString from 'lodash/isString';
+import isUndefined from 'lodash/isUndefined';
+import isPlainObject from 'lodash/isPlainObject';
 
 function addTranslation(translations, key, fallback, I18nKey) {
   if (isString(translations[key])) {
