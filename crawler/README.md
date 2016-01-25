@@ -1,27 +1,41 @@
-# Usage
+# Indexing crawler
 
-First, make sure you've correctly run
+[![GitHub license](https://img.shields.io/github/license/algolia/algoliasearch-zendesk.svg)](../LICENSE)
+
+This folder is meant to be built into a docker container which will be run as an Algolia connector.
+
+## Usage
+
+To run it without docker, first, make sure you've correctly run
 
 ```sh
 bundle install
 ```
 
-Then to run the crawler
+Then, to run the crawler:
 
 ```sh
 APPLICATION_ID='xxx' \
 API_KEY='xxx' \
 INDEX_PREFIX='zendesk_' \
-CONFIG='{ "app_name": "your-zendesk-subdomain", "oauth_token": "xxx" }' \
+CONFIG='{ "app_name": "your-zendesk-subdomain", "email": "xxx@xxx.xx", "api_token": "xxx" }'
 bundle exec ./run
 ```
 
-The OAuth token required here uses `hc:read` permissions.
+You can generate an API token to your Zendesk instance in the *Agent Section* > *Admin/Settings* > *API*.
 
-You can also use the indexer with an email/API key pair of credentials instead of an OAuth token.  
-Just replace the `CONFIG` line with
+Otherwise (and this is what we use when plugging the connector to Algolia), you can use an OAuth token whiche has the `hc:read` scope.  
+If you have one, just replace the `CONFIG` line with
 
 ```sh
-CONFIG='{ "app_name": "your-zendesk-subdomain", "email": "xxx@xxx.xx", "api_token": "xxx" }'
+CONFIG='{ "app_name": "your-zendesk-subdomain", "oauth_token": "xxx" }' \
 ```
+
+## Contributing
+
+We're considering any contribution and PR, please go ahead!
+
+## License
+
+This project is under the [MIT License](../LICENSE).
 
