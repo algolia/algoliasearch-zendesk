@@ -1,6 +1,12 @@
 {
   "name": "algoliasearch.zendesk-hc.tools",
+  "description": "Algolia Search for Zendesk's Help Center. This private project is used for the tools and scripts at the root of the repository.",
   "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/algolia/algoliasearch-zendesk.git"
+  },
   "devDependencies": {
     "conventional-changelog": "^0.5.3",
     "gh-pages": "^0.8.0"
