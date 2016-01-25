@@ -2,9 +2,11 @@
   "name": "algoliasearch.zendesk-hc.tools",
   "private": true,
   "devDependencies": {
+    "conventional-changelog": "^0.5.3",
     "gh-pages": "^0.8.0"
   },
   "scripts": {
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0",
     "release": "./scripts/release.sh",
     "release:app": "./scripts/release-app.sh",
     "release:docs": "./scripts/release-docs.sh"
