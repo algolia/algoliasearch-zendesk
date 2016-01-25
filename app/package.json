@@ -65,5 +65,18 @@
     "dist/",
     "dist-es5-module/"
   ],
-  "main": "dist-es5-module/index.js"
+  "main": "dist-es5-module/index.js",
+  "scripts": {
+    "build:css": "gulp build:css",
+    "build:docs": "gulp build:docs",
+    "build:js": "gulp build:js",
+    "build": "gulp build",
+    "clean": "gulp clean",
+    "dev": "gulp dev",
+    "lint": "gulp lint",
+    "start": "npm run dev",
+    "server": "gulp server",
+    "test:coverage": "gulp test:coverage",
+    "test": "gulp test"
+  }
 }
