@@ -39,7 +39,7 @@ const defaultOptions = {
   translations: {}
 };
 class AlgoliasearchZendeskHC {
-  constructor(options) {
+  constructor(options = {}) {
     this._checkOptions(options);
     options = defaultsDeep({}, options, defaultOptions);
 
