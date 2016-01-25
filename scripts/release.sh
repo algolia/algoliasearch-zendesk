@@ -14,13 +14,14 @@ read -p "New version number (current is ${current}): " version
 export ALGOLIASEARCH_ZENDESK_VERSION=$version
 
 # Ask for confirmation
-read -p "[All] We'll \`git push\` with \"v$ALGOLIASEARCH_ZENDESK_VERSION\". Continue (yn)? " -n 1 -r
+read -p "[All] We'll run all release scripts, then \`git push\` with \"v$ALGOLIASEARCH_ZENDESK_VERSION\". Continue (yn)? " -n 1 -r
 echo
 [[ $REPLY =~ ^[Yy]$ ]] || exit -1
 
 # Run the other release scripts
 npm run release:app
 npm run release:docs
+npm run release:crawler
 
 # Tag and Push
 # No git-tag-version also disables the commit (See https://github.com/npm/npm/issues/7186)

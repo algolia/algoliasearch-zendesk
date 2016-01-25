@@ -15,6 +15,7 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0",
     "release": "./scripts/release.sh",
     "release:app": "./scripts/release-app.sh",
+    "release:crawler": "./scripts/release-crawler.sh",
     "release:docs": "./scripts/release-docs.sh"
   }
 }
