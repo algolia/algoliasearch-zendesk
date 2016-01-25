@@ -26,10 +26,11 @@ gulp.task('build', ['build:js', 'build:css', 'build:docs']);
 
 gulp.task('clean', function () { return del(['./dist/', './dist-es5-module/']); });
 
+gulp.task('dev', ['build:js:watch', 'build:css:watch', 'build:docs:watch', 'server']);
+
 gulp.task('lint', lint);
+
+gulp.task('server', function () { return connect.server({root: 'dist/', port: process.env.PORT || 3000}); });
 
 gulp.task('test:coverage', test);
 gulp.task('test', ['lint', 'test:coverage']);
-
-gulp.task('server', function () { return connect.server({root: 'dist/', port: process.env.PORT || 3000}); });
-gulp.task('dev', ['build:js:watch', 'build:css:watch', 'build:docs:watch', 'server']);
