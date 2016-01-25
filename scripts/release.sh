@@ -22,14 +22,20 @@ echo
 npm run release:app
 npm run release:docs
 
-# Generate the ChangeLog
-npm run changelog
-
 # Tag and Push
 # No git-tag-version also disables the commit (See https://github.com/npm/npm/issues/7186)
-npm version --no-git-tag-version
-git add package.json app/package.json CHANGELOG.md
+npm version --no-git-tag-version $ALGOLIASEARCH_ZENDESK_VERSION
+
+# Commit and tag
+git add package.json app/package.json
 git commit -m "chore(release): $ALGOLIASEARCH_ZENDESK_VERSION"
 git tag -a "v$ALGOLIASEARCH_ZENDESK_VERSION" -m "$ALGOLIASEARCH_ZENDESK_VERSION"
+
+# Generate the ChangeLog
+npm run changelog
+git add CHANGELOG.md
+git commit --amend -m "chore(release): $ALGOLIASEARCH_ZENDESK_VERSION"
+
+# Push
 git push
 git push --tags
