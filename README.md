@@ -25,3 +25,7 @@ The `package.json` in this repository holds 3 scripts:
 # ChangeLog
 
 See the [./CHANGELOG.md](CHANGELOG.md) file.
+
+# License
+
+This project is under the [MIT License](./LICENSE).
