@@ -4,9 +4,10 @@ import gulp from 'gulp';
 import cssnano from 'gulp-cssnano';
 import gutil from 'gulp-util';
 import rename from 'gulp-rename';
+import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 
-const entryPoint = 'css/style.css';
+const entryPoint = 'css/index.scss';
 
 const exportedFileBasename = 'algoliasearch.zendesk-hc';
 
@@ -17,7 +18,8 @@ function build(prod) {
   if (prod) {
     res = res.pipe(sourcemaps.init());
   }
-  res = res.pipe(rename(`${exportedFileBasename}.css`))
+  res = res.pipe(sass().on('error', sass.logError))
+    .pipe(rename(`${exportedFileBasename}.css`))
     .pipe(gulp.dest('./dist'));
   if (prod) {
     res = res.pipe(cssnano())
