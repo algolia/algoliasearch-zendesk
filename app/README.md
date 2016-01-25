@@ -1,3 +1,5 @@
+# JavaScript library: `algoliasearchZendeskHC`
+
 [![npm](https://img.shields.io/npm/v/algoliasearch.zendesk-hc.svg)](https://www.npmjs.com/package/algoliasearch.zendesk-hc)
 
 [![Dependency Status](https://david-dm.org/algolia/algoliasearch-zendesk.svg?path=app)](https://david-dm.org/algolia/algoliasearch-zendesk?path=app)
@@ -6,7 +8,7 @@
 
 [![GitHub license](https://img.shields.io/github/license/algolia/algoliasearch-zendesk.svg)](../LICENSE)
 
-This JavaScript library allows you to replace the default search of your Zendesk Help Center by Algolia. [Algolia](https://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
+This library allows you to replace the default search of your Zendesk Help Center by Algolia. [Algolia](https://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
 
 To browse through the crawler, visit the [crawler/](../crawler/) folder.
 
