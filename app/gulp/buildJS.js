@@ -7,8 +7,10 @@ import envify from 'envify';
 import uglify from 'gulp-uglify';
 import watchify from 'watchify';
 
+import babel from 'gulp-babel';
 import buffer from 'vinyl-buffer';
 import gutil from 'gulp-util';
+import mergeStream from 'merge-stream';
 import rename from 'gulp-rename';
 import source from 'vinyl-source-stream';
 import sourcemaps from 'gulp-sourcemaps';
@@ -55,19 +57,23 @@ function bundler({watch, prod} = {}) {
 }
 
 function bundle({b, prod}) {
-  let res = b.bundle().on('error', mapError)
+  let dist = b.bundle().on('error', mapError)
     .pipe(source(`${exportedFileBasename}.js`))
     .pipe(gulp.dest('./dist'));
+  let distES5 = gulp.src(['./index.js', './src/**/*.js'], {base: '.'});
   if (prod) {
-    res = res
+    dist = dist
       .pipe(buffer())
       .pipe(sourcemaps.init({loadMaps: true}))
       .pipe(uglify({banner}))
       .pipe(rename(`${exportedFileBasename}.min.js`))
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest('./dist'));
+    distES5 = distES5
+      .pipe(babel())
+      .pipe(gulp.dest('./dist-es5-module'));
   }
-  return res;
+  return mergeStream(dist, distES5);
 }
 
 function timeBuild(...args) {

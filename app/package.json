@@ -60,7 +60,8 @@
   },
   "version": "1.4.0",
   "files": [
-    "dist/"
+    "dist/",
+    "dist-es5-module/"
   ],
-  "main": "dist/index.js"
+  "main": "dist-es5-module/index.js"
 }
