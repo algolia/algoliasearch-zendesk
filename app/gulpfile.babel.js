@@ -1,3 +1,4 @@
+import del from 'del';
 import gulp from 'gulp';
 
 import connect from 'gulp-connect';
@@ -22,6 +23,8 @@ gulp.task('build:js', buildJS);
 gulp.task('build:js:watch', function () { return buildJS.call(this, {watch: true}); });
 
 gulp.task('build', ['build:js', 'build:css', 'build:docs']);
+
+gulp.task('clean', function () { return del(['./dist/', './dist-es5-module/']); });
 
 gulp.task('lint', lint);
 
