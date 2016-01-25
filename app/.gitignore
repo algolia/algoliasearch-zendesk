@@ -1,4 +1,5 @@
 /coverage/
 /dist/
+/dist-es5-module/
 /node_modules/
 npm-debug*.log
