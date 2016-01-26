@@ -19,6 +19,7 @@ export default (options) => {
         <div id="algolia-labels"></div>
       </div>
       <div id="algolia-hits"></div>
+      <div class="clearfix"></div>
       <div id="algolia-pagination"></div>
     </div>`);
 
@@ -133,6 +134,7 @@ export default (options) => {
     instantsearch.widgets.hits({
       container: '#algolia-hits',
       templates: {
+        empty: templates.instantsearch.noResults,
         item: (hit) => {
           return templates.instantsearch.hit.render(hit);
         }

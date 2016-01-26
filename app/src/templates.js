@@ -70,7 +70,7 @@ export default {
   instantsearch: {
     // Instant search result template
     hit: Hogan.compile(
-      `<div class="search-result" style="border-color: {{colors.tertiary}}">
+      `<div class="search-result">
         <a class="search-result-link" href="{{baseUrl}}{{ locale.locale }}/articles/{{ id }}">
           {{{ _highlightResult.title.value }}}
         </a>
@@ -81,6 +81,11 @@ export default {
         <div class="search-result-body">
           {{{ _snippetResult.body_safe.value }}} [...]
         </div>
-      </div>`)
+      </div>`),
+    noResults: (
+      `<div id="no-results-message">
+        <p>We didn't find any results for the search <em>"{{ query }}"</em>.</p>
+      </div>`
+    )
   }
 };
