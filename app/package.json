@@ -56,6 +56,7 @@
     "jsdom": "^7.2.2",
     "jsdom-global": "^1.6.1",
     "merge-stream": "^1.0.0",
+    "mochawesome": "^1.2.2",
     "to-factory": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
