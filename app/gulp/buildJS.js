@@ -21,9 +21,9 @@ const exportedFileBasename = 'algoliasearch.zendesk-hc';
 const exportedMethod = 'algoliasearchZendeskHC';
 
 const banner = `/*!
-* Algolia Search For Zendesk\s Help Center <%= version %>
+* Algolia Search For Zendesk\s Help Center ${pjson.version}
 * https://github.com/algolia/algoliasearch-zendesk
-* Copyright <%= grunt.template.today("yyyy") %> Algolia, Inc. and other contributors; Licensed MIT
+* Copyright ${(new Date()).getFullYear()} Algolia, Inc. and other contributors; Licensed MIT
 */
 `;
 
