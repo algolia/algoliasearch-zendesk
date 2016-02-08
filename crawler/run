@@ -1,9 +1,11 @@
 #! /usr/bin/env ruby
 
-require_relative './crawler.rb'
+require './crawler.rb'
 
 crawler = Crawler.new
-crawler.crawl Zendesk::Section
-crawler.crawl Zendesk::Article
+crawler.crawl :sections
+crawler.crawl :articles
 
-crawler.index Zendesk::Article
+crawler.index :articles, localized: true, with_slave: true
+crawler.index :articles, localized: true, publicly: true
+crawler.index :sections, localized: true, publicly: true

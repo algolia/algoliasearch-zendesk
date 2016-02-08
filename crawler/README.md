@@ -1,27 +1,17 @@
 # Usage
 
-First, make sure you've correctly run
+Initialize docker
 
-```sh
-bundle install
-```
+    docker build -t zendesk-hc-connector .
 
-Then to run the crawler
+Then either run the instance with a Zendesk API key:
 
-```sh
-APPLICATION_ID='xxx' \
-API_KEY='xxx' \
-INDEX_PREFIX='zendesk_' \
-CONFIG='{ "app_name": "your-zendesk-subdomain", "oauth_token": "xxx" }' \
-bundle exec ./run
-```
+    docker run -e CONFIG='{
+      "app_name": "my-zendesk-subdomain",
+      "email": "**************",
+      "api_token": "********************"
+    }' zendesk-hc-connector
 
-The OAuth token required here uses `hc:read` permissions.
+Or an OAuth token:
 
-You can also use the indexer with an email/API key pair of credentials instead of an OAuth token.  
-Just replace the `CONFIG` line with
-
-```sh
-CONFIG='{ "app_name": "your-zendesk-subdomain", "email": "xxx@xxx.xx", "api_token": "xxx" }'
-```
-
+// TODO
