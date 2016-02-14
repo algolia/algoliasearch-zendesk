@@ -41,7 +41,8 @@ export default ({
           hitsPerPage,
           facetFilters: `["locale.locale:${I18n.locale}"]`,
           highlightPreTag: '<span class="aa-article-hit--highlight">',
-          highlightPostTag: '</span>'
+          highlightPostTag: '</span>',
+          snippetEllipsisText: '...'
         }).then((content) => {
           let hits = content.hits;
 

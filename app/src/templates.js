@@ -35,7 +35,7 @@ export default {
             {{{ _highlightResult.title.value }}}
           </div>
           {{# _snippetResult.body_safe.value }}
-            <div class="aa-article-hit--body">{{{ _snippetResult.body_safe.value }}} [...]</div>
+            <div class="aa-article-hit--body">{{{ _snippetResult.body_safe.value }}}</div>
           {{/ _snippetResult.body_safe.value }}
         </div>
       </div>`),
