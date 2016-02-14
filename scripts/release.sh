@@ -36,6 +36,7 @@ git tag -a "v$ALGOLIASEARCH_ZENDESK_VERSION" -m "$ALGOLIASEARCH_ZENDESK_VERSION"
 npm run changelog
 git add CHANGELOG.md
 git commit --amend -m "chore(release): $ALGOLIASEARCH_ZENDESK_VERSION"
+git tag -a "v$ALGOLIASEARCH_ZENDESK_VERSION" -m "$ALGOLIASEARCH_ZENDESK_VERSION" -f
 
 # Push
 git push
