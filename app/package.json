@@ -1,5 +1,6 @@
 {
   "name": "algoliasearch.zendesk-hc",
+  "version": "1.4.0",
   "description": "Algolia Search for Zendesk's Help Center",
   "author": "Algolia <support@algolia.com>",
   "keywords": [
@@ -15,6 +16,11 @@
     "type": "git",
     "url": "https://github.com/algolia/algoliasearch-zendesk.git"
   },
+  "files": [
+    "dist/",
+    "dist-es5-module/"
+  ],
+  "main": "dist-es5-module/index.js",
   "dependencies": {
     "algoliasearch": "^3.9.2",
     "autocomplete.js": "^0.16.2",
@@ -67,12 +73,6 @@
     "watchify": "^3.7.0",
     "yiewd": "^0.6.0"
   },
-  "version": "1.4.0",
-  "files": [
-    "dist/",
-    "dist-es5-module/"
-  ],
-  "main": "dist-es5-module/index.js",
   "scripts": {
     "build:css": "gulp build:css",
     "build:docs": "gulp build:docs",
