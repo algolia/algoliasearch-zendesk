@@ -55,9 +55,9 @@ function bundler({watch, prod} = {}) {
     res = watchify(res, {poll: true});
   }
   res = res
-    .external('jquery')
     .transform(babelify)
-    .transform(envify);
+    .transform(envify)
+    .transform('browserify-shim');
   if (prod) res = res.transform(uglifyify);
   return res;
 }
