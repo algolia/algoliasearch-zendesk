@@ -1,6 +1,7 @@
 {
   "name": "algoliasearch.zendesk-hc",
   "description": "Algolia Search for Zendesk's Help Center",
+  "author": "Algolia <support@algolia.com>",
   "keywords": [
     "algolia",
     "search",
