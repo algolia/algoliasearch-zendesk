@@ -10,7 +10,7 @@ export default (options) => {
   let $container = $(options.instantsearch.selector);
   $container.html(`
     <div>
-      <input type="text" id="algolia-query" autofocus="autofocus" />
+      <input type="text" id="algolia-query"/>
       <div id="algolia-stats"></div>
       <div id="algolia-facets">
         <div id="algolia-categories"></div>
