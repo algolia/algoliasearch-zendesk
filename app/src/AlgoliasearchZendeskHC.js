@@ -2,9 +2,6 @@ import $ from './jQuery.js';
 
 import fargs from 'fargs';
 
-import defaultsDeep from 'lodash/defaultsDeep';
-import every from 'lodash/every';
-import isString from 'lodash/isString';
 
 import loadTranslations from './translations.js';
 import autocomplete from './autocomplete.js';
