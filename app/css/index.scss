@@ -67,10 +67,8 @@
   background: #F1F3F5;
   color: #555;
   display: table-cell;
-  overflow: hidden;
   padding: 5px 7px 5px 5px;
   text-align: right;
-  text-overflow: ellipsis;
   vertical-align: top;
 
   min-width: 100px; /* Hardcoded */
@@ -88,6 +86,8 @@
 
 .aa-article-hit--section--inside {
   display: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .aa-article-hit__section-first .aa-article-hit--section--inside {
