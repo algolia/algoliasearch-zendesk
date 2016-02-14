@@ -8,5 +8,5 @@ export default (css) => {
   } else {
     styleTag.appendChild(document.createTextNode(css));
   }
-  head.appendChild(styleTag);
+  return head.appendChild(styleTag);
 };

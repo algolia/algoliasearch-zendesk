@@ -5,11 +5,9 @@ import instantsearch from 'instantsearch.js';
 import templates from './templates.js';
 
 export default (options) => {
-  let $searchResults = $('.search-results');
-  if ($searchResults.length === 0) {
-    return;
-  }
-  let $container = $searchResults.find('.search-results-column');
+  if (!options.instantsearch.enabled) return;
+
+  let $container = $(options.instantsearch.selector);
   $container.html(`
     <div>
       <input type="text" id="algolia-query" autofocus="autofocus" />
@@ -46,14 +44,17 @@ export default (options) => {
     });
   }
 
-  let $q = $(options.autocomplete.inputSelector || '#query');
-  const query = $q.val();
-  if ($q.autocomplete) {
-    $q.autocomplete('val', '');
-  } else {
-    $q.val('');
+  let $input = $(options.autocomplete.inputSelector);
+  const query = $input.val();
+
+  // Hide autocomplete block
+  let $elt = $input.closest('form');
+  let $tmp = $elt.parent();
+  while ($tmp.children.length === 1) {
+    $elt = $tmp;
+    $tmp = $elt.parent();
   }
-  $q.attr('autofocus', null);
+  $elt.hide();
 
   let search = instantsearch({
     appId: options.applicationId,
