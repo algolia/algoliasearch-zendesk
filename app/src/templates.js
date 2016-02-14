@@ -79,7 +79,7 @@ export default {
           <time data-datetime="relative" datetime="{{ created_at_iso }}"></time>
         </div>
         <div class="search-result-body">
-          {{{ _snippetResult.body_safe.value }}} [...]
+          {{{ _snippetResult.body_safe.value }}}
         </div>
       </div>`),
     noResults: (

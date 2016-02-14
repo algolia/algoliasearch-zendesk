@@ -61,8 +61,9 @@ export default (options) => {
     indexName: options.indexPrefix + options.subdomain + '_articles',
     urlSync: {},
     searchParameters: {
+      attributesToSnippet: ['body_safe:60'],
       query,
-      attributesToSnippet: ['body_safe:60']
+      snippetEllipsisText: '...'
     }
   });
 
