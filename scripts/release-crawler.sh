@@ -7,7 +7,7 @@ CONNECTOR_NAME="algolia/zendesk-hc-connector"
 
 # Ask for new version number if not in env
 if [[ $ALGOLIASEARCH_ZENDESK_VERSION == "" ]]; then
-  current=`git describe --abbrev=0 --tags`
+  current=`json -f package.json version`
   read -p "New version number (current is ${current}): " version
   export ALGOLIASEARCH_ZENDESK_VERSION=$version
 fi

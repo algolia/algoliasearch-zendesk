@@ -9,7 +9,7 @@ if [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]]; then
   exit
 fi
 
-current=`git describe --abbrev=0 --tags`
+current=`json -f package.json version`
 read -p "New version number (current is ${current}): " version
 export ALGOLIASEARCH_ZENDESK_VERSION=$version
 
