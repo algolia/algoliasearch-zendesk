@@ -26,6 +26,18 @@ export default ({
 }) => {
   if (!enabled) return null;
 
+  let $input = $(inputSelector);
+
+  const inputWidth = $input.outerWidth();
+
+  let sizeModifier = null;
+  if (inputWidth < 400) sizeModifier = 'xs';
+  else if (inputWidth < 600) sizeModifier = 'sm';
+
+  const nbSnippetWords = sizeModifier === 'xs'
+          ? 0
+          : 10 + Math.floor((inputWidth - 400) / 30);
+
   // initialize API client
   let client = algoliasearch(applicationId, apiKey);
   let articles = client.initIndex(`${indexPrefix}${subdomain}_articles`);
@@ -42,6 +54,7 @@ export default ({
           facetFilters: `["locale.locale:${I18n.locale}"]`,
           highlightPreTag: '<span class="aa-article-hit--highlight">',
           highlightPostTag: '</span>',
+          attributesToSnippet: [`body_safe:${nbSnippetWords}`],
           snippetEllipsisText: '...'
         }).then((content) => {
           let hits = content.hits;
@@ -50,6 +63,8 @@ export default ({
           hits.map((hit) => {
             const category = hit.category.title;
             const section = hit.section.title;
+
+            hit.sizeModifier = sizeModifier;
 
             if (!groupedHits.has(category)) {
               hit.isCategoryHeader = true;
@@ -87,7 +102,7 @@ export default ({
   }
 
   // autocomplete.js initialization
-  return $(inputSelector)
+  return $input
     .attr('placeholder', translations.placeholder_autocomplete)
     .autocomplete({
       hint: false,

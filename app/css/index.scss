@@ -72,8 +72,16 @@
   vertical-align: top;
 
   min-width: 100px; /* Hardcoded */
-  max-width: 175px; /* Hardcoded */
-  width: 30%;
+  max-width: 0px;
+  width: 20%; /* Hardcoded */
+}
+
+.aa-article-hit__xs .aa-article-hit--section {
+  display: none;
+}
+
+.aa-article-hit__sm .aa-article-hit--section {
+  width: 30%; /* Hardcoded */
 }
 
 .aa-article-hit__section-first .aa-article-hit--section {
@@ -98,6 +106,10 @@
   display: table-cell;
   padding: 5px 10px;
   border-top: 1px solid #fff;
+}
+
+.aa-article-hit__xs .aa-article-hit--body {
+  display: none;
 }
 
 .aa-article-hit__category-first.aa-article-hit__section-first .aa-article-hit--content {

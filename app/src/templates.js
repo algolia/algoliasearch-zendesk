@@ -21,6 +21,7 @@ export default {
           aa-article-hit
           {{# isCategoryHeader }}aa-article-hit__category-first{{/ isCategoryHeader }}
           {{# isSectionHeader }}aa-article-hit__section-first{{/ isSectionHeader }}
+          {{# sizeModifier }}aa-article-hit__{{ sizeModifier }}{{/ sizeModifier}}
         "
       >
       <div class="aa-article-hit--category">
