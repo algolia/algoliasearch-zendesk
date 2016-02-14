@@ -34,7 +34,7 @@ done
 # Build image, tag it and push
 cd crawler/
 docker build -t $CONNECTOR_NAME .
-img=docker images -q ${CONNECTOR_NAME}:latest
+img=`docker images -q ${CONNECTOR_NAME}:latest`
 docker tag $img ${CONNECTOR_NAME}:v$major_tag
 docker tag $img ${CONNECTOR_NAME}:v$minor_tag
 docker tag $img ${CONNECTOR_NAME}:v$patch_tag
