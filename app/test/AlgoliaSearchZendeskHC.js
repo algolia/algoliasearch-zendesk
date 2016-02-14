@@ -1,13 +1,12 @@
 /* eslint-env mocha */
 
 import jsdom from 'jsdom-global';
-
 import expect from 'expect';
 
 describe('AlgoliasearchZendeskHC', () => {
   let AlgoliasearchZendeskHC;
 
-  before(function () {
+  beforeEach(function () {
     this.jsdom = jsdom();
     AlgoliasearchZendeskHC = require('../src/AlgoliasearchZendeskHC.js').default;
   });
@@ -20,7 +19,7 @@ describe('AlgoliasearchZendeskHC', () => {
     expect(() => (new AlgoliasearchZendeskHC())).toThrow(/Usage/);
   });
 
-  after(function () {
+  afterEach(function () {
     this.jsdom();
   });
 });
