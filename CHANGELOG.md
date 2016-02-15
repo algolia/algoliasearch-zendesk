@@ -1,3 +1,27 @@
+<a name="1.6.2"></a>
+## [1.6.2](https://github.com/algolia/algoliasearch-zendesk/compare/v1.6.2...v1.6.2) (2016-02-15)
+
+
+
+
+<a name="1.6.2"></a>
+## [1.6.2](https://github.com/algolia/algoliasearch-zendesk/compare/v1.5.0...v1.6.2) (2016-02-15)
+
+
+### Bug Fixes
+
+* **autocomplete:** move text-ellipsis ([23c657f](https://github.com/algolia/algoliasearch-zendesk/commit/23c657f))
+* **instantsearch:** remove autofocus on input ([02609ab](https://github.com/algolia/algoliasearch-zendesk/commit/02609ab))
+
+### Features
+
+* **autocomplete:** adjust behavior with width ([821901c](https://github.com/algolia/algoliasearch-zendesk/commit/821901c))
+* **autocomplete:** Better width on small inputs ([e2a273c](https://github.com/algolia/algoliasearch-zendesk/commit/e2a273c))
+* **instantsearch:** better hiding ([c668c28](https://github.com/algolia/algoliasearch-zendesk/commit/c668c28))
+* **instantsearch:** handle autocomplete's hiding ([3adb617](https://github.com/algolia/algoliasearch-zendesk/commit/3adb617))
+
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/algolia/algoliasearch-zendesk/compare/v1.4.0...v1.5.0) (2016-02-14)
 
