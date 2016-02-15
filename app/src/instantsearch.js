@@ -56,6 +56,9 @@ export default (options) => {
   }
   $elt.hide();
 
+  let $paginationContainer = $(options.instantsearch.paginationSelector);
+  $paginationContainer.hide();
+
   let search = instantsearch({
     appId: options.applicationId,
     apiKey: options.apiKey,

@@ -27,6 +27,7 @@ const optionsStructure = {required: true, type: 'Object', children: {
   indexPrefix: {type: 'string', value: 'zendesk_'},
   instantsearch: {type: 'Object', value: {}, children: {
     enabled: {type: 'boolean', value: true},
+    paginationSelector: {type: 'string', value: '.pagination'},
     selector: {type: 'string', value: '.search-results'},
     tagsLimit: {type: 'number', value: 15}
   }},
@@ -44,6 +45,7 @@ class AlgoliasearchZendeskHC {
     const genericHiding = addCSS(`
       ${options.autocomplete.inputSelector} { display: none; }
       ${options.instantsearch.selector} { display: none; }
+      ${options.instantsearch.paginationSelector} { display: none; }
     `);
 
     // once the DOM is initialized
