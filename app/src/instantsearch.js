@@ -44,11 +44,11 @@ export default (options) => {
     });
   }
 
-  let $input = $(options.autocomplete.inputSelector);
-  const query = $input.val();
+  let $autocompleteInput = $(options.autocomplete.inputSelector);
+  const query = $autocompleteInput.val();
 
   // Hide autocomplete block
-  let $elt = $input.closest('form');
+  let $elt = $autocompleteInput.closest('form');
   let $tmp = $elt.parent();
   while ($tmp.children.length === 1) {
     $elt = $tmp;
@@ -74,6 +74,7 @@ export default (options) => {
   search.addWidget({
     getConfiguration: () => ({facets: ['locale.locale']}),
     init: ({helper}) => {
+      // Filter by language
       helper.toggleRefine('locale.locale', I18n.locale);
     }
   });
