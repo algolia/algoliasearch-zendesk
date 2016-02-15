@@ -50,7 +50,7 @@ function mapError(err) {
 }
 
 function bundler({watch, prod} = {}) {
-  let res = browserify(entryPoint, {standalone: exportedMethod, debug: !prod});
+  let res = browserify(entryPoint, {standalone: exportedMethod, debug: true});
   if (watch) {
     res = watchify(res, {poll: true});
   }
