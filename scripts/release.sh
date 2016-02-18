@@ -28,7 +28,7 @@ npm run release:crawler
 npm version --no-git-tag-version $ALGOLIASEARCH_ZENDESK_VERSION
 
 # Commit and tag
-git add package.json app/package.json
+git add package.json app/package.json docs/documentation.md
 git commit -m "chore(release): $ALGOLIASEARCH_ZENDESK_VERSION"
 git tag -a "v$ALGOLIASEARCH_ZENDESK_VERSION" -m "$ALGOLIASEARCH_ZENDESK_VERSION"
 
