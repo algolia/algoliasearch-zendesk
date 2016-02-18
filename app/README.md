@@ -28,8 +28,10 @@ To be able to setup your new search on your Zendesk Help Center you'll need to h
 
 Once your data has been extracted to Algolia, you need to update your Help Center theme in order to replace the search feature by Algolia.
 
- * Click "Customize the design"
- * Select the "Document Head" template and add the following lines:
+* Click "Customize the design"
+* In the "Theme" section, click on "Edit theme"
+* In the top left corner dropdown, Select the "Document Head" template
+* Add the following lines at the end of the template:
 
 ```html
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/1/algoliasearch.zendesk-hc.min.css">
