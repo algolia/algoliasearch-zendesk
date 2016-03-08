@@ -22,7 +22,9 @@
   ],
   "main": "dist-es5-module/index.js",
   "browserify-shim": {
-    "jquery": "$"
+    "jquery": "global:$",
+    "moment": "global:moment",
+    "I18n": "global:I18n"
   },
   "dependencies": {
     "algoliasearch": "^3.9.2",
@@ -30,9 +32,6 @@
     "hogan.js": "^3.0.2",
     "instantsearch.js": "^1.1.0",
     "lodash": "^4.3.0"
-  },
-  "peerDependencies": {
-    "jquery": ">= 1.7"
   },
   "devDependencies": {
     "babel-core": "^6.3.13",
