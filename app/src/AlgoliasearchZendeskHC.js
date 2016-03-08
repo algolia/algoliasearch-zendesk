@@ -11,6 +11,9 @@ import removeCSS from './removeCSS.js';
 function hitsPerPageValidator(val) {
   return (val >= 1 && val <= 20) || 'should be between 1 and 20';
 }
+function instantsearchPage() {
+  return window.location.pathname.match(/\/search$/) !== null;
+}
 const optionsStructure = {required: true, type: 'Object', children: {
   applicationId: {type: 'string', required: true},
   apiKey: {type: 'string', required: true},
@@ -31,6 +34,7 @@ const optionsStructure = {required: true, type: 'Object', children: {
     selector: {type: 'string', value: '.search-results'},
     tagsLimit: {type: 'number', value: 15}
   }},
+  instantsearchPage: {type: 'function', value: instantsearchPage},
   poweredBy: {type: 'boolean', value: true},
   subdomain: {type: 'string', required: true},
   translations: {type: 'Object', value: {}}
@@ -42,27 +46,15 @@ class AlgoliasearchZendeskHC {
       .arg('options', optionsStructure)
       .values(arguments)[0];
 
-    const genericHiding = addCSS(`
-      ${options.autocomplete.inputSelector} { display: none; }
-      ${options.instantsearch.selector} { display: none; }
-      ${options.instantsearch.paginationSelector} { display: none; }
-    `);
+    this.search = (options.instantsearchPage()
+      ? instantsearch
+      : autocomplete
+    )(options);
 
     // once the DOM is initialized
     $(document).ready(() => {
       loadTranslations(options);
-
-      const instantsearchPage = $(options.instantsearch.selector).length !== 0;
-
-      if (instantsearchPage) {
-        // instant search result page
-        this.instantsearch = instantsearch(options);
-      } else {
-        // autocompletion menu
-        this.autocomplete = autocomplete(options);
-      }
-
-      removeCSS(genericHiding);
+      this.search.render(options);
     });
   }
 }

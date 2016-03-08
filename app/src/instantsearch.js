@@ -1,32 +1,165 @@
-/* global I18n, moment */
-
 import $ from 'jquery';
 import instantsearch from 'instantsearch.js';
 import templates from './templates.js';
 
-export default (options) => {
-  if (!options.instantsearch.enabled) return;
+import addCSS from './addCSS.js';
+import removeCSS from './removeCSS.js';
 
-  let $container = $(options.instantsearch.selector);
-  $container.html(`
-    <div>
-      <input type="text" id="algolia-query"/>
-      <div id="algolia-stats"></div>
-      <div id="algolia-facets">
-        <div id="algolia-categories"></div>
-        <div id="algolia-labels"></div>
-      </div>
-      <div id="algolia-hits"></div>
-      <div class="clearfix"></div>
-      <div id="algolia-pagination"></div>
-    </div>`);
+class InstantSearch {
+  constructor({
+    applicationId,
+    apiKey,
+    autocomplete: {
+      inputSelector: autocompleteSelector
+    },
+    indexPrefix,
+    instantsearch: {
+      enabled,
+      paginationSelector,
+      selector,
+    },
+    subdomain
+  }){
+    if (!enabled) return;
 
-  function displayTimes() {
-    // Extracted from formatDateTime.js
-    // Maybe we could call it directly, but I don't know
-    // backbone.js at all
+    this._temporaryHiding({
+      autocompleteSelector,
+      instantsearchSelector: selector,
+      paginationSelector
+    });
+
+    this.instantsearch = instantsearch({
+      appId: applicationId,
+      apiKey: apiKey,
+      indexName: `${indexPrefix}${subdomain}_articles`,
+      urlSync: {},
+      searchParameters: {
+        attributesToSnippet: ['body_safe:60'],
+        snippetEllipsisText: '...'
+      }
+    });
+  }
+
+  render({
+    autocomplete: {
+      inputSelector: autocompleteSelector
+    },
+    baseUrl,
+    colors,
+    instantsearch: {
+      enabled,
+      selector,
+      paginationSelector,
+      tagsLimit
+    },
+    poweredBy,
+    translations
+  }) {
+    if (!enabled) return;
+    let I18n = require('I18n');
+
+    this.$autocompleteInput = $(autocompleteSelector);
+    this._hideAutocomplete();
+
+    this.$oldPagination = $(paginationSelector);
+    this.$oldPagination.hide();
+
+    this.$container = $(selector);
+    this.$container.html(templates.instantsearch.layout);
+
+    this.instantsearch.addWidget({
+      getConfiguration: () => ({facets: ['locale.locale']}),
+      init: ({helper}) => {
+        // Use the autocomplete input to get the query value
+        helper.setQuery(this.$autocompleteInput.val() || '');
+
+        // Filter by language
+        helper.toggleRefine('locale.locale', I18n.locale);
+      }
+    });
+
+    this.instantsearch.addWidget(
+      instantsearch.widgets.searchBox({
+        container: '#algolia-query',
+        placeholder: translations.placeholder_instantsearch,
+        autofocus: true,
+        poweredBy: poweredBy
+      })
+    );
+
+    this.instantsearch.addWidget(
+      instantsearch.widgets.stats({
+        container: '#algolia-stats',
+        templates: {
+          body: templates.instantsearch.stats
+        },
+        transformData: (data) => ({
+          ...data,
+          translations
+        })
+      })
+    );
+
+    this.instantsearch.addWidget(
+      instantsearch.widgets.pagination({
+        container: '#algolia-pagination',
+        cssClasses: {
+          root: 'pagination'
+        }
+      })
+    );
+
+    this.instantsearch.addWidget(
+      instantsearch.widgets.hierarchicalMenu({
+        container: '#algolia-categories',
+        attributes: ['category.title', 'section.full_path'],
+        separator: ' > ',
+        templates: {
+          header: translations.categories
+        }
+      })
+    );
+
+    this.instantsearch.addWidget(
+      instantsearch.widgets.refinementList({
+        container: '#algolia-labels',
+        attributeName: 'label_names',
+        operator: 'and',
+        templates: {
+          header: translations.tags
+        },
+        limit: tagsLimit
+      })
+    );
+
+    this.instantsearch.addWidget(
+      instantsearch.widgets.hits({
+        container: '#algolia-hits',
+        templates: {
+          empty: templates.instantsearch.noResults,
+          item: templates.instantsearch.hit
+        },
+        transformData: (hit) => ({
+          ...hit,
+          baseUrl,
+          colors
+        })
+      })
+    );
+
+    this.instantsearch.on('render', () => {
+      this._displayTimes();
+    });
+
+    this.instantsearch.start();
+    this._temporaryHidingCancel();
+  }
+
+  // Protected
+
+  _displayTimes() {
     const timezoneOffset = moment().zone();
-    moment().lang(I18n.locale, I18n.datetime_translations);
+    require('moment')().lang(I18n.locale, I18n.datetime_translations);
     $('time').each(() => {
       let $this = $(this);
       const datetime = $this.attr('datetime');
@@ -44,119 +177,32 @@ export default (options) => {
     });
   }
 
-  let $autocompleteInput = $(options.autocomplete.inputSelector);
-  const query = $autocompleteInput.val();
-
-  // Hide autocomplete block
-  let $elt = $autocompleteInput.closest('form');
-  let $tmp = $elt.parent();
-  while ($tmp.children.length === 1) {
-    $elt = $tmp;
-    $tmp = $elt.parent();
+  _hideAutocomplete() {
+    let $elt = this.$autocompleteInput.closest('form');
+    let $tmp = $elt.parent();
+    while ($tmp.children.length === 1) {
+      $elt = $tmp;
+      $tmp = $elt.parent();
+    }
+    $elt.hide();
   }
-  $elt.hide();
 
-  let $paginationContainer = $(options.instantsearch.paginationSelector);
-  $paginationContainer.hide();
-
-  let search = instantsearch({
-    appId: options.applicationId,
-    apiKey: options.apiKey,
-    indexName: options.indexPrefix + options.subdomain + '_articles',
-    urlSync: {},
-    searchParameters: {
-      attributesToSnippet: ['body_safe:60'],
-      query,
-      snippetEllipsisText: '...'
-    }
-  });
-
-  search.addWidget({
-    getConfiguration: () => ({facets: ['locale.locale']}),
-    init: ({helper}) => {
-      // Filter by language
-      helper.toggleRefine('locale.locale', I18n.locale);
-    }
-  });
-
-  search.addWidget(
-    instantsearch.widgets.searchBox({
-      container: '#algolia-query',
-      placeholder: options.translations.placeholder_instantsearch,
-      autofocus: true,
-      poweredBy: options.poweredBy
-    })
-  );
-
-  search.addWidget(
-    instantsearch.widgets.stats({
-      container: '#algolia-stats',
-      templates: {
-        body: `
-          {{#hasNoResults}}${options.translations.no_result}{{/hasNoResults}}
-          {{#hasOneResult}}1 ${options.translations.result.toLowerCase()}{{/hasOneResult}}
-          {{#hasManyResults}}
-            {{#helpers.formatNumber}}{{nbHits}}{{/helpers.formatNumber}}
-            ${options.translations.results.toLowerCase()}
-          {{/hasManyResults}}
-          <span class="{{cssClasses.time}}">${options.translations.found_in.toLowerCase()} {{processingTimeMS}}ms</span>`
+  _temporaryHiding({
+    autocompleteSelector,
+    instantsearchSelector,
+    paginationSelector
+  }) {
+    this._temporaryHidingCSS = addCSS(`
+      ${autocompleteSelector}, ${instantsearchSelector}, ${paginationSelector} {
+        display: none !important;
+        visibility: hidden !important;
       }
-    })
-  );
+    `);
+  }
 
-  search.addWidget(
-    instantsearch.widgets.pagination({
-      container: '#algolia-pagination',
-      cssClasses: {
-        root: 'pagination'
-      }
-    })
-  );
-
-  search.addWidget(
-    instantsearch.widgets.hierarchicalMenu({
-      container: '#algolia-categories',
-      attributes: ['category.title', 'section.full_path'],
-      separator: ' > ',
-      templates: {
-        header: options.translations.categories
-      }
-    })
-  );
-
-  search.addWidget(
-    instantsearch.widgets.refinementList({
-      container: '#algolia-labels',
-      attributeName: 'label_names',
-      operator: 'and',
-      templates: {
-        header: options.translations.tags
-      },
-      limit: options.instantsearch.tagsLimit
-    })
-  );
-
-  search.addWidget(
-    instantsearch.widgets.hits({
-      container: '#algolia-hits',
-      templates: {
-        empty: templates.instantsearch.noResults,
-        item: (hit) => {
-          return templates.instantsearch.hit.render(hit);
-        }
-      },
-      transformData: (hit) => {
-        hit.colors = options.colors;
-        hit.baseUrl = options.baseUrl;
-        return hit;
-      }
-    })
-  );
-
-  search.on('render', () => {
-    displayTimes();
-  });
-
-  search.start();
-  $('.search-results-column').css('display', 'block').css('visibility', 'visible');
-};
+  _temporaryHidingCancel() {
+    removeCSS(this._temporaryHidingCSS);
+    delete this._temporaryHidingCSS;
+  }
+}
+export default (...args) => new InstantSearch(...args);

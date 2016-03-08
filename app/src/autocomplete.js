@@ -1,5 +1,3 @@
-/* global I18n */
-
 import $ from './jQuery.js';
 import 'autocomplete.js/index_jquery.js';
 
@@ -8,108 +6,174 @@ import 'es6-collections';
 
 import templates from './templates.js';
 import addCSS from './addCSS.js';
+import removeCSS from './removeCSS.js';
 
-export default ({
-  applicationId,
-  apiKey,
-  autocomplete: {
-    enabled,
-    inputSelector,
-    hitsPerPage
-  },
-  baseUrl,
-  colors,
-  indexPrefix,
-  poweredBy,
-  subdomain,
-  translations
-}) => {
-  if (!enabled) return null;
+const XS_WIDTH = 400;
+const SM_WIDTH = 600;
 
-  let $input = $(inputSelector);
+class Autocomplete {
+  constructor({
+    applicationId,
+    apiKey,
+    autocomplete: {
+      enabled,
+      inputSelector
+    },
+    indexPrefix,
+    subdomain
+  }) {
+    if (!enabled) return;
 
-  const inputWidth = $input.outerWidth();
+    this._temporaryHiding(inputSelector);
 
-  let sizeModifier = null;
-  if (inputWidth < 400) sizeModifier = 'xs';
-  else if (inputWidth < 600) sizeModifier = 'sm';
+    this.client = algoliasearch(applicationId, apiKey);
+    this.index = this.client.initIndex(`${indexPrefix}${subdomain}_articles`);
+  }
 
-  const nbSnippetWords = sizeModifier === 'xs'
-          ? 0
-          : 10 + Math.floor((inputWidth - 400) / 30);
+  render({
+    autocomplete: {
+      enabled,
+      hitsPerPage,
+      inputSelector
+    },
+    baseUrl,
+    colors,
+    poweredBy,
+    translations
+  }) {
+    if (!enabled) return null;
 
-  // initialize API client
-  let client = algoliasearch(applicationId, apiKey);
-  let articles = client.initIndex(`${indexPrefix}${subdomain}_articles`);
+    this.$input = $(inputSelector);
 
-  addCSS(templates.autocomplete.css.render({colors}));
+    this.locale = require('I18n').locale;
 
-  let sources = [];
-  if (enabled) {
-    sources.push({
-      source: (query, callback) => {
-        articles.search({
-          query,
-          hitsPerPage,
-          facetFilters: `["locale.locale:${I18n.locale}"]`,
-          highlightPreTag: '<span class="aa-article-hit--highlight">',
-          highlightPostTag: '</span>',
-          attributesToSnippet: [`body_safe:${nbSnippetWords}`],
-          snippetEllipsisText: '...'
-        }).then((content) => {
-          let hits = content.hits;
+    // Add a mock autocomplete to check the width the
+    // menu would have
+    this.$input
+      .wrap('<div class="algolia-autocomplete"></div>')
+      .after('<div class="aa-dropdown-menu"></div>');
 
-          let groupedHits = new Map();
-          hits.map((hit) => {
-            const category = hit.category.title;
-            const section = hit.section.title;
+    const dropdownMenuWidth = $('.aa-dropdown-menu').outerWidth();
 
-            hit.sizeModifier = sizeModifier;
+    let $wrapper = $('.algolia-autocomplete');
+    this.$input.insertAfter($wrapper);
+    $wrapper.remove();
 
-            if (!groupedHits.has(category)) {
-              hit.isCategoryHeader = true;
-              groupedHits.set(category, new Map());
-            }
-            if (!groupedHits.get(category).has(section)) {
-              hit.isSectionHeader = true;
-              groupedHits.get(category).set(section, []);
-            }
-            groupedHits.get(category).get(section).push(hit);
-          });
+    const sizeModifier = this._sizeModifier(dropdownMenuWidth);
+    const nbSnippetWords = this._nbSnippetWords(dropdownMenuWidth);
+    const params = {
+      hitsPerPage,
+      facetFilters: `["locale.locale:${this.locale}"]`,
+      highlightPreTag: '<span class="aa-article-hit--highlight">',
+      highlightPostTag: '</span>',
+      attributesToSnippet: [`body_safe:${nbSnippetWords}`],
+      snippetEllipsisText: '...'
+    };
 
-          let flattenedHits = [];
-          groupedHits.forEach((sectionsValues) => {
-            sectionsValues.forEach((sectionHits) => {
-              sectionHits.forEach((sectionHit) => {
-                flattenedHits.push(sectionHit);
-              });
-            });
-          });
+    addCSS(templates.autocomplete.css.render({colors}));
 
-          callback(flattenedHits);
-        });
-      },
-      name: 'articles',
-      templates: {
-        suggestion: (hit) => templates.autocomplete.article.render(hit)
+    this.$input
+      .attr('placeholder', translations.placeholder_autocomplete)
+      .autocomplete({
+        hint: false,
+        debug: process.env.NODE_ENV === 'development',
+        templates: this._templates({colors, poweredBy, translations})
+      }, [{
+        source: this._source(params),
+        name: 'articles',
+        templates: {
+          suggestion: this._renderSuggestion(sizeModifier)
+        }
+      }])
+      .on('autocomplete:selected', this._onSelected(baseUrl));
+
+    this._temporaryHidingCancel();
+  }
+
+  // Protected
+
+  _sizeModifier(inputWidth) {
+    if (inputWidth < XS_WIDTH) return 'xs';
+    if (inputWidth < SM_WIDTH) return 'sm';
+    return null;
+  }
+
+  _nbSnippetWords(inputWidth) {
+    if (inputWidth < XS_WIDTH) return 0;
+    if (inputWidth < SM_WIDTH) return 10 + Math.floor(inputWidth / 40);
+    return 10 + Math.floor(inputWidth / 30);
+  }
+
+  _source(params) {
+    return (query, callback) => {
+      this.index.search({...params, query})
+        .then((content) => { callback(this._reorderedHits(content.hits)); });
+    };
+  }
+
+  _reorderedHits(hits) {
+    let groupedHits = new Map();
+    hits.forEach((hit) => {
+      const category = hit.category.title;
+      const section = hit.section.title;
+
+      if (!groupedHits.has(category)) {
+        hit.isCategoryHeader = true;
+        groupedHits.set(category, new Map());
       }
+      if (!groupedHits.get(category).has(section)) {
+        hit.isSectionHeader = true;
+        groupedHits.get(category).set(section, []);
+      }
+      groupedHits.get(category).get(section).push(hit);
     });
+
+    let flattenedHits = [];
+    groupedHits.forEach((sectionsValues) => {
+      sectionsValues.forEach((sectionHits) => {
+        sectionHits.forEach((sectionHit) => {
+          flattenedHits.push(sectionHit);
+        });
+      });
+    });
+
+    return flattenedHits;
   }
 
-  let autocompleteTemplates = {};
-  if (poweredBy === true) {
-    autocompleteTemplates.footer = templates.autocomplete.footer.render({colors, translations});
+  _templates({colors, poweredBy, translations}) {
+    let res = {};
+    if (poweredBy === true) {
+      res.footer = templates.autocomplete.footer.render({colors, translations});
+    }
+    return res;
   }
 
-  // autocomplete.js initialization
-  return $input
-    .attr('placeholder', translations.placeholder_autocomplete)
-    .autocomplete({
-      hint: false,
-      debug: process.env.NODE_ENV === 'development',
-      templates: autocompleteTemplates
-    }, sources)
-    .on('autocomplete:selected', (event, suggestion, dataset) => {
-      location.href = `${baseUrl}${I18n.locale}/${dataset}/${suggestion.id}`;
-    });
-};
+  _renderSuggestion(sizeModifier) {
+    return (hit) => {
+      hit.sizeModifier = sizeModifier;
+      return templates.autocomplete.article.render(hit);
+
+    };
+  }
+
+  _onSelected(baseUrl) {
+    return (event, suggestion, dataset) => {
+      location.href = `${baseUrl}${this.locale}/${dataset}/${suggestion.id}`;
+    };
+  }
+
+  _temporaryHiding(selector) {
+    this._temporaryHidingCSS = addCSS(`
+      ${selector} {
+        visibility: hidden !important;
+        height: 1px !important;
+      }
+    `);
+  }
+
+  _temporaryHidingCancel() {
+    removeCSS(this._temporaryHidingCSS);
+    delete this._temporaryHidingCSS;
+  }
+}
+export default (...args) => new Autocomplete(...args);
