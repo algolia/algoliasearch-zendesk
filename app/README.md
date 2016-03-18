@@ -28,10 +28,16 @@ To be able to setup your new search on your Zendesk Help Center you'll need to h
 
 Once your data has been extracted to Algolia, you need to update your Help Center theme in order to replace the search feature by Algolia.
 
-* Click "Customize the design"
-* In the "Theme" section, click on "Edit theme"
-* In the top left corner dropdown, Select the "Document Head" template
-* Add the following lines at the end of the template:
+1. Copy the code displayed on the connector page in your Algolia account
+2. Go to your Zendesk Help Center
+3. Click "Customize the design"
+4. In the "Theme" section, click on "Edit theme"
+5. In the top left corner dropdown, Select the "Document Head" template
+6. Paste the lines you copied before at the end of the template
+
+### Available options
+
+Here is a full breakdown of the available options for the JavaScript library:
 
 ```html
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/1/algoliasearch.zendesk-hc.min.css">
@@ -45,9 +51,9 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
     //
     // Optional configuration:
     //
-    indexPrefix: 'zendesk_',    // or you custom <INDEX_PREFIX>
+    indexPrefix: 'zendesk_',    // or your custom <INDEX_PREFIX>
     baseUrl: '/hc/',            // the base URL of your Help Center
-    poweredBy: true,            // show the poweredBy link (requirement of Algolia's free plan)
+    poweredBy: true,            // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
     colors: {
       primary: '#D4D4D4',       // the primary color
       secondary: '#D4D4D4'      // the secondary color
@@ -71,19 +77,101 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
       article: 'Article',
       articles: 'Articles',
       categories: 'Categories',
-      sections: 'Sections',
-      tags: 'Tags',
-      search_by: 'Search by',
+      found_in: 'Found in',
       no_result: 'No result',
+      placeholder_autocomplete: 'Search in sections and articles',
+      placeholder_instantsearch: 'Search in articles',
       result: 'Result',
       results: 'Results',
-      found_in: 'Found in',
       search_by: 'Search by',
-      placeholder_autocomplete: 'Search in sections and articles',
-      placeholder_instantsearch: 'Search in articles'
+      sections: 'Sections',
+      tags: 'Tags'
     }
   });
 </script>
+```
+
+### Handling Zendesk community search
+
+We do not index community forums at the moment. If you're using them, you'll probably want to disable `instantsearch` by setting `enabled: false`.
+
+### Supporting multiple languages
+
+Out of the box, the library limits the results to the currently selected language.
+However, some constant strings like the ones used in the sentence "12 results found in 1ms" need to be translated in your language. In order to do so, you need to use the `translations` parameter described in the documentation above.
+
+If you're using only one language in your Help Center, just pass the strings of this specific language. For example, for French, you might want to pass:
+
+```js
+translations: {
+  article: 'Article',
+  articles: 'Articles',
+  categories: 'Catégories',
+  found_in: 'Trouvés en',
+  no_result: 'Aucun résultat',
+  placeholder_autocomplete: 'Rechercher dans les articles et sections',
+  placeholder_instantsearch: 'Rechercher dans les articles',
+  result: 'Résultat',
+  results: 'Résultats',
+  search_by: 'Recherche par',
+  sections: 'Sections',
+  tags: 'Tags'
+}
+```
+
+If you want to support multiple languages though, you'll need to pass for each key an object using *locales* as key. The locale is `en-us` in `yoursupport.zendesk.com/hc/en-us`. For example, for English and French, you might want to pass:
+
+```js
+translations: {
+  article: {
+    'en-us': 'Article',
+    'fr': 'Article'
+  },
+  articles: {
+    'en-us': 'Articles',
+    'fr': 'Articles'
+  },
+  categories: {
+    'en-us': 'Categories',
+    'fr': 'Catégories'
+  },
+  found_in: {
+    'en-us': 'Found in',
+    'fr': 'Trouvés en'
+  },
+  no_result: {
+    'en-us': 'No result',
+    'fr': 'Aucun résultat'
+  },
+  placeholder_autocomplete: {
+    'en-us': 'Search in articles and sections',
+    'fr': 'Rechercher dans les articles et sections'
+  },
+  placeholder_instantsearch: {
+    'en-us': 'Search in articles',
+    'fr': 'Rechercher dans les articles'
+  },
+  result: {
+    'en-us': 'Result',
+    'fr': 'Résultat'
+  },
+  results: {
+    'en-us': 'Results',
+    'fr': 'Résultats'
+  },
+  search_by: {
+    'en-us': 'Search by',
+    'fr': 'Recherche par'
+  },
+  sections: {
+    'en-us': 'Sections',
+    'fr': 'Sections'
+  },
+  tags: {
+    'en-us': 'Tags',
+    'fr': 'Tags'
+  }
+}
 ```
 
 ## Development
