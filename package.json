@@ -19,6 +19,7 @@
     "release": "./scripts/release.sh",
     "release:app": "./scripts/release-app.sh",
     "release:crawler": "./scripts/release-crawler.sh",
-    "release:docs": "./scripts/release-docs.sh"
+    "release:docs": "./scripts/release-docs.sh",
+    "release:git": "./scripts/release-git.sh"
   }
 }
