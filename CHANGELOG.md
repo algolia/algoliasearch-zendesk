@@ -1,6 +1,16 @@
-<a name="1.7.0"></a>
-# [1.7.0](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.0...v1.7.0) (2016-03-18)
+<a name="1.7.1"></a>
+## [1.7.1](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.1...v1.7.1) (2016-03-21)
 
+
+
+
+<a name="1.7.1"></a>
+## [1.7.1](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.0...v1.7.1) (2016-03-21)
+
+
+### Features
+
+* **url-mapping:** use query in url ([1b9cacb](https://github.com/algolia/algoliasearch-zendesk/commit/1b9cacb))
 
 
 
