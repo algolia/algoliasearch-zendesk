@@ -1,6 +1,16 @@
-<a name="1.7.1"></a>
-## [1.7.1](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.1...v1.7.1) (2016-03-21)
+<a name="1.7.2"></a>
+## [1.7.2](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.2...v1.7.2) (2016-03-21)
 
+
+
+
+<a name="1.7.2"></a>
+## [1.7.2](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.1...v1.7.2) (2016-03-21)
+
+
+### Bug Fixes
+
+* **query:** stop looking for query in autocomplete ([bda9649](https://github.com/algolia/algoliasearch-zendesk/commit/bda9649))
 
 
 
