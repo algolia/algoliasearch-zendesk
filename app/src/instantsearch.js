@@ -74,9 +74,6 @@ class InstantSearch {
     this.instantsearch.addWidget({
       getConfiguration: () => ({facets: ['locale.locale']}),
       init: ({helper}) => {
-        // Use the autocomplete input to get the query value
-        helper.setQuery(this.$autocompleteInput.val() || '');
-
         // Filter by language
         helper.toggleRefine('locale.locale', I18n.locale);
       }
