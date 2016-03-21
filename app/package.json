@@ -30,7 +30,7 @@
     "algoliasearch": "^3.9.2",
     "autocomplete.js": "^0.16.2",
     "hogan.js": "^3.0.2",
-    "instantsearch.js": "^1.1.0",
+    "instantsearch.js": "^1.4.0",
     "lodash": "^4.3.0"
   },
   "devDependencies": {

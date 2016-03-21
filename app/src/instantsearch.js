@@ -32,7 +32,11 @@ class InstantSearch {
       appId: applicationId,
       apiKey: apiKey,
       indexName: `${indexPrefix}${subdomain}_articles`,
-      urlSync: {},
+      urlSync: {
+        mapping: {
+          q: 'query'
+        }
+      },
       searchParameters: {
         attributesToSnippet: ['body_safe:60'],
         snippetEllipsisText: '...'
