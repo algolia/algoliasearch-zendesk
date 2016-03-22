@@ -1,6 +1,16 @@
-<a name="1.7.2"></a>
-## [1.7.2](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.2...v1.7.2) (2016-03-21)
+<a name="1.7.3"></a>
+## [1.7.3](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.3...v1.7.3) (2016-03-22)
 
+
+
+
+<a name="1.7.3"></a>
+## [1.7.3](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.2...v1.7.3) (2016-03-22)
+
+
+### Bug Fixes
+
+* **indexing:** let's be synchronous ([d0f6fae](https://github.com/algolia/algoliasearch-zendesk/commit/d0f6fae))
 
 
 
