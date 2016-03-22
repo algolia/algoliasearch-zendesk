@@ -32,8 +32,7 @@ module Zendesk
       to_index = items.map(&:to_index).flatten
       idx = Algolia::Index.new("#{index_name}.tmp")
       idx.set_settings index_settings
-      to_index.each_slice(1000).each { |sub| idx.save_objects sub }
-      sleep 1
+      to_index.each_slice(1000).each { |sub| idx.save_objects! sub }
       Algolia.move_index "#{index_name}.tmp", index_name
       puts "Indexed #{to_index.count} #{plural}"
     end
