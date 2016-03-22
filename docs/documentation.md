@@ -21,10 +21,12 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
 
 1. Copy the code displayed on the connector page in your Algolia account
 2. Go to your Zendesk Help Center
-3. Click "Customize the design"
+3. Click "General" > "Customize the design" in the top bar
 4. In the "Theme" section, click on "Edit theme"
-5. In the top left corner dropdown, Select the "Document Head" template
+5. In the top left corner dropdown, select the "Document Head" template
 6. Paste the lines you copied before at the end of the template
+7. Save and check if everything works
+8. If it does, you can now click "Publish Theme"
 
 ### Available options
 
