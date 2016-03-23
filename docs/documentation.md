@@ -88,6 +88,32 @@ Here is a full breakdown of the available options for the JavaScript library:
 
 We do not index community forums at the moment. If you're using them, you'll probably want to disable `instantsearch` by setting `enabled: false`.
 
+### Customizing the CSS
+
+If you want to change the CSS styling of the search we provide, there's absolutely no issue.
+To do this:
+
+- You should have a look at the [scss file](https://github.com/algolia/algoliasearch-zendesk/blob/master/app/css/index.scss) to see all the rules we're using
+- Add a `<style>` tag after the `<link>` tag you've already added in your *Document Head* template
+  We ask you to do this because the CSS code in the customization panel is included __before__ the *Document Head* template
+- Fix the versions of the JavaScript and CSS files by replacing the `/1/` in the URLs by `/1.X/` or `/1.X.Y/`. (Current version: [![tag](https://img.shields.io/github/tag/algolia/algoliasearch-zendesk.svg)](https://github.com/algolia/algoliasearch-zendesk/releases))
+  Indeed, we might do some small CSS changes between minor versions.
+
+In the end, you should have something along these lines in your *Document Head* template:
+
+```html
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/CURRENT_VERSION/algoliasearch.zendesk-hc.min.css">
+<style>
+  .aa-dropdown-menu {
+    background-color: #ccc;
+  }
+</style>
+<script type="text/javascript" src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/CURRENT_VERSION/algoliasearch.zendesk-hc.min.js"></script>
+<script type="text/javascript">
+  algoliasearchZendeskHC(/* ... */);
+</script>
+```
+
 ### Supporting multiple languages
 
 Out of the box, the library limits the results to the currently selected language.
