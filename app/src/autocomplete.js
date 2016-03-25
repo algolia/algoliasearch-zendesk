@@ -111,8 +111,8 @@ class Autocomplete {
 
   _nbSnippetWords(inputWidth) {
     if (inputWidth < XS_WIDTH) return 0;
-    if (inputWidth < SM_WIDTH) return 10 + Math.floor(inputWidth / 40);
-    return 10 + Math.floor(inputWidth / 30);
+    if (inputWidth < SM_WIDTH) return 5 + Math.floor(inputWidth / 30);
+    return Math.floor(inputWidth / 15);
   }
 
   _source(params) {

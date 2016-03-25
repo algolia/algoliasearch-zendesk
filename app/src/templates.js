@@ -25,15 +25,19 @@ export default {
         "
       >
       <div class="aa-article-hit--category">
-        {{ category.title }}
+        <span class="aa-article-hit--category--content">
+          {{ category.title }}
+        </span>
       </div>
       <div class="aa-article-hit--line">
         <div class="aa-article-hit--section">
-          <div class="aa-article-hit--section--inside">{{ section.title }}</div>
+          {{ section.title }}
         </div>
         <div class="aa-article-hit--content">
-          <div class="aa-article-hit--title">
-            {{{ _highlightResult.title.value }}}
+          <div class="aa-article-hit--headline">
+            <span class="aa-article-hit--title">
+              {{{ _highlightResult.title.value }}}
+            </span>
           </div>
           {{# _snippetResult.body_safe.value }}
             <div class="aa-article-hit--body">{{{ _snippetResult.body_safe.value }}}</div>
@@ -58,8 +62,12 @@ export default {
         color: {{ colors.primary }};
       }
 
-      .aa-article-hit--category {
+      .aa-article-hit--highlight::before {
         background-color: {{ colors.primary }};
+      }
+
+      .aa-article-hit--category {
+        color: {{ colors.primary }};
       }
 
       .aa-article-hit--section, .aa-article-hit--content {
