@@ -2,11 +2,9 @@ import $ from './jQuery.js';
 
 import fargs from 'fargs';
 
-import addCSS from './addCSS.js';
 import autocomplete from './autocomplete.js';
 import loadTranslations from './translations.js';
 import instantsearch from './instantsearch.js';
-import removeCSS from './removeCSS.js';
 
 function hitsPerPageValidator(val) {
   return (val >= 1 && val <= 20) || 'should be between 1 and 20';
