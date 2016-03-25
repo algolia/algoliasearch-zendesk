@@ -48,10 +48,12 @@ class Autocomplete {
     this.locale = require('./I18n.js').locale;
 
     addCSS(templates.autocomplete.css.render({colors}));
+    this.autocompletes = [];
 
-    this.$inputs.forEach(($input) => {
+    for (let i = 0; i < this.$inputs.length; ++i) {
       // Add a mock autocomplete to check the width the
       // menu would have
+      const $input = this.$inputs[i];
       const $wrapper = document.createElement('div');
       $wrapper.class = 'algolia-autocomplete';
 
@@ -81,7 +83,7 @@ class Autocomplete {
       };
 
       $input.setAttribute('placeholder', translations.placeholder_autocomplete);
-      autocomplete($input, {
+      let aa = autocomplete($input, {
         hint: false,
         debug: process.env.NODE_ENV === 'development',
         templates: this._templates({colors, poweredBy, translations})
@@ -91,9 +93,10 @@ class Autocomplete {
         templates: {
           suggestion: this._renderSuggestion(sizeModifier)
         }
-      }])
-      .on('autocomplete:selected', this._onSelected(baseUrl));
-    });
+      }]);
+      aa.on('autocomplete:selected', this._onSelected(baseUrl));
+      this.autocompletes.push(aa);
+    }
 
     this._temporaryHidingCancel();
   }

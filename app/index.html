@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Zendesk test</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./dist/algoliasearch.zendesk-hc.css" />
+    <style>
+      input {
+        padding: 10px;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      input[name=master] {
+        width: 90%;
+        margin: auto;
+        display: block;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <input type="text" name="master" class="form-control" placeholder="Search here to trigger all of them" />
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-sm-2">
+        <input type="text" name="autocomplete1" class="form-control" readonly />
+      </div>
+      <div class="col-sm-4">
+        <input type="text" name="autocomplete2" class="form-control" readonly />
+      </div>
+      <div class="col-sm-6">
+        <input type="text" name="autocomplete3" class="form-control" readonly />
+      </div>
+    </div>
+
+    <script type="text/javascript" charset="utf-8" src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment-with-locales.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="./dist/algoliasearch.zendesk-hc.js"></script>
+    <script>
+      window.I18n = { locale: 'en-gb', translations: {} };
+      var search = algoliasearchZendeskHC({
+        applicationId: 'latency',
+        apiKey: '88209bb425570ef10733c0ba3157bac3',
+        subdomain: 'algolia-test',
+        colors: {
+          primary: '#158EC2',
+          secondary: '#ABADAD'
+        },
+        autocomplete: {
+          inputSelector: 'input[name^=autocomplete]'
+        },
+        instantsearch: {
+          enabled: false
+        }
+      });
+
+      var $master = document.querySelector('input[name=master]');
+      console.log($master);
+      $master.addEventListener('input', function () {
+        search.search.autocompletes.forEach(function (autocomplete) {
+          autocomplete.autocomplete.setVal($master.value);
+          autocomplete.autocomplete.open();
+        });
+      });
+    </script>
+  </body>
+</html>
