@@ -22,7 +22,6 @@
   ],
   "main": "dist-es5-module/index.js",
   "browserify-shim": {
-    "jquery": "global:$",
     "moment": "global:moment",
     "I18n": "global:I18n"
   },
@@ -67,7 +66,6 @@
     "gulp-util": "^3.0.7",
     "instantsearch.js": "^1.2.2",
     "isparta": "^4.0.0",
-    "jquery": "^2.2.0",
     "jsdom": "^7.2.2",
     "jsdom-global": "^1.6.1",
     "merge-stream": "^1.0.0",

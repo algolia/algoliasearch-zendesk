@@ -30,7 +30,7 @@ gulp.task('dev', ['build:js:watch', 'build:css:watch', 'build:docs:watch', 'serv
 
 gulp.task('lint', lint);
 
-gulp.task('server', () => connect.server({root: 'dist/', port: process.env.PORT || 3000}));
+gulp.task('server', () => connect.server({root: './', port: process.env.PORT || 3000}));
 
 gulp.task('test:run', test);
 gulp.task('test:watcher', () => gulp.watch(['index.js', 'src/**', 'test/**'], ['test:run']));

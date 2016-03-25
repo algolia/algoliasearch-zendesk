@@ -1,5 +1,4 @@
-import $ from './jQuery.js';
-import 'autocomplete.js/index_jquery.js';
+import autocomplete from 'autocomplete.js';
 
 import algoliasearch from 'algoliasearch';
 import 'es6-collections';
@@ -43,38 +42,46 @@ class Autocomplete {
   }) {
     if (!enabled) return null;
 
-    this.$input = $(inputSelector);
+    this.$inputs = document.querySelectorAll(inputSelector);
+    console.log(this.$inputs);
 
-    this.locale = require('I18n').locale;
-
-    // Add a mock autocomplete to check the width the
-    // menu would have
-    this.$input
-      .wrap('<div class="algolia-autocomplete"></div>')
-      .after('<div class="aa-dropdown-menu"></div>');
-
-    const dropdownMenuWidth = $('.aa-dropdown-menu').outerWidth();
-
-    let $wrapper = $('.algolia-autocomplete');
-    this.$input.insertAfter($wrapper);
-    $wrapper.remove();
-
-    const sizeModifier = this._sizeModifier(dropdownMenuWidth);
-    const nbSnippetWords = this._nbSnippetWords(dropdownMenuWidth);
-    const params = {
-      hitsPerPage,
-      facetFilters: `["locale.locale:${this.locale}"]`,
-      highlightPreTag: '<span class="aa-article-hit--highlight">',
-      highlightPostTag: '</span>',
-      attributesToSnippet: [`body_safe:${nbSnippetWords}`],
-      snippetEllipsisText: '...'
-    };
+    this.locale = require('./I18n.js').locale;
 
     addCSS(templates.autocomplete.css.render({colors}));
 
-    this.$input
-      .attr('placeholder', translations.placeholder_autocomplete)
-      .autocomplete({
+    this.$inputs.forEach(($input) => {
+      // Add a mock autocomplete to check the width the
+      // menu would have
+      const $wrapper = document.createElement('div');
+      $wrapper.class = 'algolia-autocomplete';
+
+      const $dropdown = document.createElement('div');
+      $dropdown.class = 'aa-dropdown-menu';
+      $wrapper.appendChild($dropdown);
+
+      $input.parentNode.insertBefore($wrapper, $input);
+
+      // Get the width of the dropdown
+      const dropdownMenuWidth = $input.offsetWidth;
+      console.log(dropdownMenuWidth);
+
+      // Remove the wrapper
+      $wrapper.parentNode.insertBefore($input, $wrapper.nextSibling);
+      $wrapper.parentNode.removeChild($wrapper);
+
+      const sizeModifier = this._sizeModifier(dropdownMenuWidth);
+      const nbSnippetWords = this._nbSnippetWords(dropdownMenuWidth);
+      const params = {
+        hitsPerPage,
+        facetFilters: `["locale.locale:${this.locale}"]`,
+        highlightPreTag: '<span class="aa-article-hit--highlight">',
+        highlightPostTag: '</span>',
+        attributesToSnippet: [`body_safe:${nbSnippetWords}`],
+        snippetEllipsisText: '...'
+      };
+
+      $input.setAttribute('placeholder', translations.placeholder_autocomplete);
+      autocomplete($input, {
         hint: false,
         debug: process.env.NODE_ENV === 'development',
         templates: this._templates({colors, poweredBy, translations})
@@ -86,6 +93,7 @@ class Autocomplete {
         }
       }])
       .on('autocomplete:selected', this._onSelected(baseUrl));
+    });
 
     this._temporaryHidingCancel();
   }

@@ -1,5 +1,3 @@
-import $ from './jQuery.js';
-
 import fargs from 'fargs';
 
 import autocomplete from './autocomplete.js';
@@ -50,7 +48,7 @@ class AlgoliasearchZendeskHC {
     )(options);
 
     // once the DOM is initialized
-    $(document).ready(() => {
+    document.addEventListener('DOMContentLoaded', () => {
       loadTranslations(options);
       this.search.render(options);
     });

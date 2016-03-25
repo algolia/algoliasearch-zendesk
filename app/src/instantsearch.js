@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import instantsearch from 'instantsearch.js';
 import templates from './templates.js';
 
@@ -62,14 +61,14 @@ class InstantSearch {
     if (!enabled) return;
     let I18n = require('I18n');
 
-    this.$autocompleteInput = $(autocompleteSelector);
+    this.$autocompleteInputs = document.querySelectorAll(autocompleteSelector);
     this._hideAutocomplete();
 
-    this.$oldPagination = $(paginationSelector);
-    this.$oldPagination.hide();
+    this.$oldPagination = document.querySelector(paginationSelector);
+    this.$oldPagination.style.display = 'none';
 
-    this.$container = $(selector);
-    this.$container.html(templates.instantsearch.layout);
+    this.$container = document.querySelector(selector);
+    this.$container.innerHTML = templates.instantsearch.layout;
 
     this.instantsearch.addWidget({
       getConfiguration: () => ({facets: ['locale.locale']}),
@@ -159,33 +158,50 @@ class InstantSearch {
   // Protected
 
   _displayTimes() {
+    let I18n = require('./I18n.js');
+    let moment = require('moment');
     const timezoneOffset = moment().zone();
-    require('moment')().lang(I18n.locale, I18n.datetime_translations);
-    $('time').each(() => {
-      let $this = $(this);
-      const datetime = $this.attr('datetime');
+    moment().lang(I18n.locale, I18n.datetime_translations);
+    let times = document.querySelectorAll('time');
+    for (let i = 0; i < times.length; ++i) {
+      let $time = times[i];
+      const datetime = $time.getAttribute('datetime');
       const formattedDatetime = moment(datetime).utc().zone(timezoneOffset);
       const isoTitle = formattedDatetime.format('YYYY-MM-DD HH:mm');
 
-      $this.attr('title', isoTitle);
+      $time.setAttribute('title', isoTitle);
 
       // Render time[data-datetime='relative'] as 'time ago'
-      if ($this.data('datetime') === 'relative') {
-        $this.text(formattedDatetime.fromNow());
-      } else if ($this.data('datetime') === 'calendar') {
-        $this.text(formattedDatetime.calendar());
+      if ($time.getAttribute('data-datetime') === 'relative') {
+        $time.textContent = formattedDatetime.fromNow();
+      } else if ($time.getAttribute('data-datetime') === 'calendar') {
+        $time.textContent = formattedDatetime.calendar();
       }
-    });
+    }
   }
 
   _hideAutocomplete() {
-    let $elt = this.$autocompleteInput.closest('form');
-    let $tmp = $elt.parent();
-    while ($tmp.children.length === 1) {
-      $elt = $tmp;
-      $tmp = $elt.parent();
-    }
-    $elt.hide();
+    this.$autocompleteInputs.forEach(($input) => {
+      let $elt = $input;
+      let $parent = $elt.parentNode;
+      // Find closest form
+      while ($elt !== null && $elt.nodeName.toLowerCase() !== 'form') {
+        $elt = $parent;
+        $parent = $elt.parentNode;
+      }
+      // If no form found reset
+      if ($elt === null) {
+        $elt = $input;
+        $parent = $elt.parentNode;
+      }
+      console.log('Form ', $elt);
+      // Get the closest parent to have more than one child
+      while ($elt !== null && $parent.children.length === 1) {
+        $elt = $parent;
+        $parent = $elt.parentNode;
+      }
+      $elt.style.display = 'none';
+    });
   }
 
   _temporaryHiding({
