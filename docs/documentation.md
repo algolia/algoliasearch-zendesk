@@ -7,7 +7,7 @@ permalink: /documentation/
 
 To be able to setup your new search on your Zendesk Help Center you'll need to have an Algolia account with a configured Zendesk Help Center crawler.
 
-### Synchronize Algolia with your Help Center data
+## Synchronize Algolia with your Help Center data
 
 1. [Login](https://www.algolia.com/users/sign_in) or [sign-up](https://www.algolia.com/users/sign_up) on Algolia
 2. Visit our [Zendesk community page](https://community.algolia.com/zendesk/) and click `Join the beta`
@@ -15,7 +15,7 @@ To be able to setup your new search on your Zendesk Help Center you'll need to h
 4. When Zendesk asks you to approve Algolia in your Zendesk instance, click `Allow`
 5. That's it! Algolia now automatically handles the indexing of your Help Center
 
-### Updating your Help Center theme
+## Updating your Help Center theme
 
 Once your data has been extracted to Algolia, you need to update your Help Center theme in order to replace the search feature by Algolia.
 
@@ -28,7 +28,7 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
 7. Save and check if everything works
 8. If it does, you can now click "Publish Theme"
 
-### Available options
+## Available options
 
 Here is a full breakdown of the available options for the JavaScript library:
 
@@ -84,11 +84,11 @@ Here is a full breakdown of the available options for the JavaScript library:
 </script>
 ```
 
-### Handling Zendesk community search
+## Handling Zendesk community search
 
 We do not index community forums at the moment. If you're using them, you'll probably want to disable `instantsearch` by setting `enabled: false`.
 
-### Customizing the CSS
+## Customizing the CSS
 
 If you want to change the CSS styling of the search we provide, there's absolutely no issue.
 To do this:
@@ -114,7 +114,7 @@ In the end, you should have something along these lines in your *Document Head* 
 </script>
 ```
 
-### Supporting multiple languages
+## Supporting multiple languages
 
 Out of the box, the library limits the results to the currently selected language.
 However, some constant strings like the ones used in the sentence "12 results found in 1ms" need to be translated in your language. In order to do so, you need to use the `translations` parameter described in the documentation above.
