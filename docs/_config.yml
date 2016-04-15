@@ -23,11 +23,13 @@ kramdown:
   entity_output:  as_char
   toc_levels:     1..6
   smart_quotes:   lsquo,rsquo,ldquo,rdquo
-  enable_coderay: true
-
-  coderay_wrap: div
-  coderay_line_numbers: nil
-  coderay_css: style
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
 
 exclude:
   - headers
