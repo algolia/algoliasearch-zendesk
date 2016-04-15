@@ -1,21 +1,29 @@
-.highlight {
-  background-color: lighten(#eee5d9, 8%);
-  padding: 20px;
+.page-documentation {
+
+  p, li {
+    line-height: 1.75em;
+  }
+
+  h2 {
+    margin-top: 2em;
+    margin-bottom: .5em;
+    font-weight: bold;
+    text-align: center;
+
+    &:after {
+      display: block;
+      content: '';
+      border-bottom: 2px solid $zendesk-green;
+      margin: 0.4em auto 1em auto;
+      width: 30px;
+    }
+  }
+
 }
 
-p, ul {
-  line-height: 1.625em;
-}
-
-h3 {
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
-.CodeRay .code pre * {
-  background: transparent !important;
-}
-
-code {
-  color: #5e3800;
+.alert-info {
+  a, strong {
+    color: lighten($zendesk-green, 0%);
+    font-weight: bold;
+  }
 }

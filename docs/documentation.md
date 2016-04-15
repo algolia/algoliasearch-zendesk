@@ -1,34 +1,35 @@
 ---
 layout: page
 title: Documentation
+class: documentation
 permalink: /documentation/
 ---
 
 
-To be able to setup your new search on your Zendesk Help Center you'll need to have an Algolia account with a configured Zendesk Help Center crawler.
+**Note:** You need to have an Algolia account. Please [login](https://www.algolia.com/users/sign_in) or [sign-up](https://www.algolia.com/users/sign_up) first.
+{: .alert.alert-info}
 
-### Synchronize Algolia with your Help Center data
+## Synchronize Algolia with your Help Center
 
-1. [Login](https://www.algolia.com/users/sign_in) or [sign-up](https://www.algolia.com/users/sign_up) on Algolia
-2. Visit our [Zendesk community page](https://community.algolia.com/zendesk/) and click `Join the beta`
-3. Enter your zendesk subdomain (`your_subdomain` in `your_subdomain.zendesk.com`)
-4. When Zendesk asks you to approve Algolia in your Zendesk instance, click `Allow`
-5. That's it! Algolia now automatically handles the indexing of your Help Center
+1. Visit the [Algolia for Zendesk](https://community.algolia.com/zendesk/) home page
+1. Enter your zendesk subdomain (`your_subdomain` in `your_subdomain.zendesk.com`) and click `Join the Beta`
+1. When Zendesk asks you to approve Algolia in your Zendesk instance, click `Allow`
+1. Starting from that point, the content of your Help Center will be synchronized with Algolia's indices.
 
-### Updating your Help Center theme
+## Updating your Help Center theme
 
 Once your data has been extracted to Algolia, you need to update your Help Center theme in order to replace the search feature by Algolia.
 
-1. Copy the code displayed on the connector page in your Algolia account
+1. Copy the code displayed on the **Zendesk Connector** page in your Algolia account
 2. Go to your Zendesk Help Center
-3. Click "General" > "Customize the design" in the top bar
-4. In the "Theme" section, click on "Edit theme"
-5. In the top left corner dropdown, select the "Document Head" template
-6. Paste the lines you copied before at the end of the template
-7. Save and check if everything works
-8. If it does, you can now click "Publish Theme"
+3. Click **General > Customize the design** in the top bar
+4. In the **Theme** section, click on "Edit theme"
+5. In the top left corner dropdown, select the **Document Head** template
+6. Copy/Paste the lines you copied before at the end of the template
+7. Save and ensure everything is working
+8. Click **Publish Theme**
 
-### Available options
+## Available options
 
 Here is a full breakdown of the available options for the JavaScript library:
 
@@ -84,22 +85,16 @@ Here is a full breakdown of the available options for the JavaScript library:
 </script>
 ```
 
-### Handling Zendesk community search
+## Customizing the CSS
 
-We do not index community forums at the moment. If you're using them, you'll probably want to disable `instantsearch` by setting `enabled: false`.
+If you want to customize the look & feel of the search, you can follow the following steps:
 
-### Customizing the CSS
+- Ensure you read the [SCSS source file](https://github.com/algolia/algoliasearch-zendesk/blob/master/app/css/index.scss) to see all the rules we're using
+- Add a `<style>` tag after the `<link>` tag you've already added in your **Document Head** template
+  We ask you to do this because the CSS code in the customization panel is included __before__ the **Document Head** template
 
-If you want to change the CSS styling of the search we provide, there's absolutely no issue.
-To do this:
 
-- You should have a look at the [scss file](https://github.com/algolia/algoliasearch-zendesk/blob/master/app/css/index.scss) to see all the rules we're using
-- Add a `<style>` tag after the `<link>` tag you've already added in your *Document Head* template
-  We ask you to do this because the CSS code in the customization panel is included __before__ the *Document Head* template
-- Fix the versions of the JavaScript and CSS files by replacing the `/1/` in the URLs by `/1.X/` or `/1.X.Y/`. (Current version: [![tag](https://img.shields.io/github/tag/algolia/algoliasearch-zendesk.svg)](https://github.com/algolia/algoliasearch-zendesk/releases))
-  Indeed, we might do some small CSS changes between minor versions.
-
-In the end, you should have something along these lines in your *Document Head* template:
+**Example:**
 
 ```html
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/CURRENT_VERSION/algoliasearch.zendesk-hc.min.css">
@@ -114,7 +109,7 @@ In the end, you should have something along these lines in your *Document Head* 
 </script>
 ```
 
-### Supporting multiple languages
+## Supporting multiple languages
 
 Out of the box, the library limits the results to the currently selected language.
 However, some constant strings like the ones used in the sentence "12 results found in 1ms" need to be translated in your language. In order to do so, you need to use the `translations` parameter described in the documentation above.
@@ -192,3 +187,7 @@ translations: {
   }
 }
 ```
+
+## Zendesk Community search
+
+We do not index community forums for now. If you're using them, you'll probably want to disable `instantsearch` by setting `enabled: false` and just provide the auto-complete feature on your home page.

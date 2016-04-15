@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About Algolia
+class: about
 permalink: /about/
 ---
 

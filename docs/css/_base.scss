@@ -4,9 +4,7 @@ $line-height-computed: 20px;
 
 $headings-font-family: "Raleway";
 $headings-font-weight: 300;
-
 $brand-primary: #74A300;
-$code-color: #a3b6cb;
 
 $light-text-color: white;
 $text-color: rgba(black, 0.75);
@@ -24,3 +22,7 @@ $navbar-height: 50px;
 
 
 $zendesk-green: #74A633;
+$alert-info-bg: lighten($zendesk-green, 50%);
+$alert-info-text: $zendesk-green;
+$alert-info-border: lighten($zendesk-green, 10%);
+

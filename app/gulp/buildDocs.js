@@ -17,7 +17,7 @@ export default function () {
       for (let i = 0; i < arr.length; ++i) {
         const line = arr[i];
         if (keeping && line.match(/^##[^#]/)) break;
-        if (keeping) keep.push(line);
+        if (keeping) keep.push(line.replace(/^##/, '#'));
         if (!keeping && line.match(/^## Documentation$/)) keeping = true;
       }
       resolve(keep.join('\n'));
