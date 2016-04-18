@@ -36,7 +36,7 @@ class Autocomplete {
       inputSelector
     },
     baseUrl,
-    colors,
+    color,
     poweredBy,
     translations
   }) {
@@ -46,7 +46,7 @@ class Autocomplete {
 
     this.locale = require('./I18n.js').locale;
 
-    addCSS(templates.autocomplete.css.render({colors}));
+    addCSS(templates.autocomplete.css.render({color}));
     this.autocompletes = [];
 
     for (let i = 0; i < this.$inputs.length; ++i) {
@@ -84,7 +84,7 @@ class Autocomplete {
       let aa = autocomplete($input, {
         hint: false,
         debug: process.env.NODE_ENV === 'development',
-        templates: this._templates({colors, poweredBy, translations})
+        templates: this._templates({poweredBy, translations})
       }, [{
         source: this._source(params),
         name: 'articles',
@@ -149,10 +149,10 @@ class Autocomplete {
     return flattenedHits;
   }
 
-  _templates({colors, poweredBy, translations}) {
+  _templates({poweredBy, translations}) {
     let res = {};
     if (poweredBy === true) {
-      res.footer = templates.autocomplete.footer.render({colors, translations});
+      res.header = templates.autocomplete.poweredBy.render({translations});
     }
     return res;
   }

@@ -19,10 +19,7 @@ const optionsStructure = {required: true, type: 'Object', children: {
     hitsPerPage: {type: 'number', value: 5, validators: [hitsPerPageValidator]}
   }},
   baseUrl: {type: 'string', value: '/hc/'},
-  colors: {type: 'Object', value: {}, children: {
-    primary: {type: 'string', value: '#D4D4D4'},
-    secondary: {type: 'string', value: '#D4D4D4'}
-  }},
+  color: {type: 'string', value: '#158EC2'},
   indexPrefix: {type: 'string', value: 'zendesk_'},
   instantsearch: {type: 'Object', value: {}, children: {
     enabled: {type: 'boolean', value: true},

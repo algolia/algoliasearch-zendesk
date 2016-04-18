@@ -2,18 +2,6 @@ import Hogan from 'hogan.js';
 
 export default {
   autocomplete: {
-    // Autocompletion template for a section
-    section: Hogan.compile(
-      `<div class="hit-section" style="border-bottom-color: {{colors.secondary}}">
-        <div class="title overflow-block-container">
-          <span class="overflow-block">
-            {{{ _highlightResult.category.title.value }}} > {{{ _highlightResult.title.value }}}
-          </span>
-          <small class="overflow-block text-muted">({{ nb_articles_text }})</small>
-        </div>
-        <div class="body">{{{ _highlightResult.body.value }}}</div>
-      </div>`),
-
     // Autocompletion template for an article
     article: Hogan.compile(
       `<div
@@ -46,7 +34,7 @@ export default {
       </div>`),
 
     // Powered By
-    footer: Hogan.compile(`<div class="aa-powered-by" style="border-top-color: {{colors.secondary}}">
+    poweredBy: Hogan.compile(`<div class="aa-powered-by">
       {{ translations.search_by }}
       <a
         href="https://www.algolia.com/?utm_source=zendesk_hc&utm_medium=link&utm_campaign=autocomplete"
@@ -56,22 +44,18 @@ export default {
       </a>
     </div>`),
 
-    // CSS to add to handle the colors
+    // CSS to add to handle the color
     css: Hogan.compile(`
       .aa-article-hit--highlight {
-        color: {{ colors.primary }};
+        color: {{ color }};
       }
 
       .aa-article-hit--highlight::before {
-        background-color: {{ colors.primary }};
+        background-color: {{ color }};
       }
 
       .aa-article-hit--category {
-        color: {{ colors.primary }};
-      }
-
-      .aa-article-hit--section, .aa-article-hit--content {
-        border-color: {{ colors.secondary }};
+        color: {{ color }};
       }
     `)
   },
@@ -93,10 +77,10 @@ export default {
     // Instant search result template
     hit: (`
 <div class="search-result">
-  <a class="search-result-link" href="{{baseUrl}}{{ locale.locale }}/articles/{{ id }}">
+  <a class="search-result-link" href="{{ baseUrl }}{{ locale.locale }}/articles/{{ id }}">
     {{{ _highlightResult.title.value }}}
   </a>
-  {{#vote_sum}}<span class="search-result-votes">{{ vote_sum }}</span>{{/vote_sum}}
+  {{# vote_sum }}<span class="search-result-votes">{{ vote_sum }}</span>{{/ vote_sum }}
   <div class="search-result-meta">
     <time data-datetime="relative" datetime="{{ created_at_iso }}"></time>
   </div>
