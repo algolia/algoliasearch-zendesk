@@ -65,9 +65,14 @@ class InstantSearch {
     this._hideAutocomplete();
 
     this.$oldPagination = document.querySelector(paginationSelector);
-    this.$oldPagination.style.display = 'none';
+    if (this.$oldPagination !== null) {
+      this.$oldPagination.style.display = 'none';
+    }
 
     this.$container = document.querySelector(selector);
+    if (this.$container === null) {
+      throw new Error(`[Algolia] Cannot find a container with the "${selector}" selector.`);
+    }
     this.$container.innerHTML = templates.instantsearch.layout;
 
     this.instantsearch.addWidget({
@@ -181,7 +186,8 @@ class InstantSearch {
   }
 
   _hideAutocomplete() {
-    this.$autocompleteInputs.forEach(($input) => {
+    for (let i = 0, len = this.$autocompleteInputs.length; i < len; ++i) {
+      const $input = this.$autocompleteInputs[i];
       let $elt = $input;
       let $parent = $elt.parentNode;
       // Find closest form
@@ -200,7 +206,7 @@ class InstantSearch {
         $parent = $elt.parentNode;
       }
       $elt.style.display = 'none';
-    });
+    };
   }
 
   _temporaryHiding({
