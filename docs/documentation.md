@@ -34,8 +34,8 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
 Here is a full breakdown of the available options for the JavaScript library:
 
 ```html
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/1/algoliasearch.zendesk-hc.min.css">
-<script type="text/javascript" src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/1/algoliasearch.zendesk-hc.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.css">
+<script type="text/javascript" src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.js"></script>
 <script type="text/javascript">
   algoliasearchZendeskHC({
     applicationId: '<YOUR APPLICATION_ID>',
