@@ -43,7 +43,6 @@ class Autocomplete {
     if (!enabled) return null;
 
     this.$inputs = document.querySelectorAll(inputSelector);
-    console.log(this.$inputs);
 
     this.locale = require('./I18n.js').locale;
 
@@ -65,7 +64,6 @@ class Autocomplete {
 
       // Get the width of the dropdown
       const dropdownMenuWidth = $input.offsetWidth;
-      console.log(dropdownMenuWidth);
 
       // Remove the wrapper
       $wrapper.parentNode.insertBefore($input, $wrapper.nextSibling);
@@ -163,7 +161,6 @@ class Autocomplete {
     return (hit) => {
       hit.sizeModifier = sizeModifier;
       return templates.autocomplete.article.render(hit);
-
     };
   }
 

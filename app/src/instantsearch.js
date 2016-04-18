@@ -15,10 +15,10 @@ class InstantSearch {
     instantsearch: {
       enabled,
       paginationSelector,
-      selector,
+      selector
     },
     subdomain
-  }){
+  }) {
     if (!enabled) return;
 
     this._temporaryHiding({
@@ -29,7 +29,7 @@ class InstantSearch {
 
     this.instantsearch = instantsearch({
       appId: applicationId,
-      apiKey: apiKey,
+      apiKey,
       indexName: `${indexPrefix}${subdomain}_articles`,
       urlSync: {
         mapping: {
@@ -83,7 +83,7 @@ class InstantSearch {
         container: '#algolia-query',
         placeholder: translations.placeholder_instantsearch,
         autofocus: true,
-        poweredBy: poweredBy
+        poweredBy
       })
     );
 
@@ -194,7 +194,6 @@ class InstantSearch {
         $elt = $input;
         $parent = $elt.parentNode;
       }
-      console.log('Form ', $elt);
       // Get the closest parent to have more than one child
       while ($elt !== null && $parent.children.length === 1) {
         $elt = $parent;
