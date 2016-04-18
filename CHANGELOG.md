@@ -1,6 +1,31 @@
-<a name="1.7.3"></a>
-## [1.7.3](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.3...v1.7.3) (2016-03-22)
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.0.0...v2.0.0) (2016-04-18)
 
+
+
+
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.3...v2.0.0) (2016-04-18)
+
+
+### Bug Fixes
+
+* **instantsearch:** handle querySelectors correctly ([50a07e4](https://github.com/algolia/algoliasearch-zendesk/commit/50a07e4))
+
+### Features
+
+* **color:** only use one color now ([39545b5](https://github.com/algolia/algoliasearch-zendesk/commit/39545b5))
+* **design:** re-design of the autocomplete ([466e88a](https://github.com/algolia/algoliasearch-zendesk/commit/466e88a))
+* **jquery:** remove the dependency ([876f2f3](https://github.com/algolia/algoliasearch-zendesk/commit/876f2f3))
+
+
+### BREAKING CHANGES
+
+* color: S
+Cannot use the colors parameter anymore, color is the new one.
+* design: S
+
+Markup will change a bit for this.
 
 
 
