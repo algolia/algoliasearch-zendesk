@@ -24,6 +24,7 @@ const optionsStructure = {required: true, type: 'Object', children: {
   instantsearch: {type: 'Object', value: {}, children: {
     enabled: {type: 'boolean', value: true},
     paginationSelector: {type: 'string', value: '.pagination'},
+    reuseAutocomplete: {type: 'boolean', value: false},
     selector: {type: 'string', value: '.search-results'},
     tagsLimit: {type: 'number', value: 15}
   }},

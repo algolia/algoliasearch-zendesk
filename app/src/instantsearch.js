@@ -53,6 +53,7 @@ class InstantSearch {
       enabled,
       selector,
       paginationSelector,
+      reuseAutocomplete,
       tagsLimit
     },
     poweredBy,
@@ -60,9 +61,16 @@ class InstantSearch {
   }) {
     if (!enabled) return;
     let I18n = require('I18n');
+    let searchBoxSelector;
 
-    this.$autocompleteInputs = document.querySelectorAll(autocompleteSelector);
-    this._hideAutocomplete();
+    if (reuseAutocomplete) {
+      addCSS('#algolia-query { display: none }');
+      searchBoxSelector = autocompleteSelector;
+    } else {
+      this.$autocompleteInputs = document.querySelectorAll(autocompleteSelector);
+      this._hideAutocomplete();
+      searchBoxSelector = '#algolia-query';
+    }
 
     this.$oldPagination = document.querySelector(paginationSelector);
     if (this.$oldPagination !== null) {
@@ -85,10 +93,13 @@ class InstantSearch {
 
     this.instantsearch.addWidget(
       instantsearch.widgets.searchBox({
-        container: '#algolia-query',
+        container: searchBoxSelector,
         placeholder: translations.placeholder_instantsearch,
         autofocus: true,
-        poweredBy
+        poweredBy,
+        cssClasses: {
+          root: reuseAutocomplete ? '' : 'ais-with-style'
+        }
       })
     );
 

@@ -145,7 +145,7 @@
 /*! instantsearch.js 1.1.0 | © Algolia Inc. and other contributors; Licensed MIT | github.com/algolia/instantsearch.js */
 /***************************/
 
-.ais-search-box {
+.ais-with-style.ais-search-box {
   margin-left: 30%;
   position: relative;
   &:before {
@@ -163,13 +163,13 @@
     outline: none;
     padding-left: 32px;
   }
-  .ais-search-box--powered-by {
-    font-size: .8em;
-    text-align: right;
-    margin-top: 3px;
-  }
 }
 
+.ais-search-box--powered-by {
+  font-size: .8em;
+  text-align: right;
+  margin-top: 3px;
+}
 
 #algolia-hits {
   float: left;
