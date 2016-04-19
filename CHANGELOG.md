@@ -1,6 +1,16 @@
-<a name="2.0.2"></a>
-## [2.0.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.0.2...v2.0.2) (2016-04-19)
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.1.0...v2.1.0) (2016-04-19)
 
+
+
+
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.0.2...v2.1.0) (2016-04-19)
+
+
+### Features
+
+* **instantsearch:** new reuseAutocomplete option ([83321b6](https://github.com/algolia/algoliasearch-zendesk/commit/83321b6))
 
 
 
