@@ -63,16 +63,20 @@
 }
 
 .aa-article-hit--category {
-  height: 24px;
+  height: 18px;
   font-size: 18px;
   border-bottom: 1px solid #e6e6e6;
-  height: 18px;
   margin-bottom: 5px;
 }
 
 .aa-article-hit--category--content {
   background-color: #fff;
   padding-right: 16px;
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 .aa-article-hit .aa-article-hit--category {
@@ -91,6 +95,11 @@
 .aa-article-hit--section {
   font-weight: bold;
   display: none;
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 .aa-article-hit__section-first .aa-article-hit--section {
@@ -123,6 +132,7 @@
 
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
   cursor: pointer;
+  padding-top: 5px;
 }
 
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor .aa-article-hit--content {
