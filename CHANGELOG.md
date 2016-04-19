@@ -1,6 +1,16 @@
-<a name="2.0.0"></a>
-# [2.0.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.0.0...v2.0.0) (2016-04-18)
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.0.1...v2.0.1) (2016-04-19)
 
+
+
+
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.0.0...v2.0.1) (2016-04-19)
+
+
+### Bug Fixes
+
+* **crawler:** remove body and truncate body_safe ([838d0f3](https://github.com/algolia/algoliasearch-zendesk/commit/838d0f3))
 
 
 
