@@ -43,9 +43,24 @@
   background-color: #fff;
   box-shadow: 0 1px 0 0 #ccc, 0 2px 3px 0 #e6e6e6;
   font-size: 14px;
-  padding: 16px;
+  padding: 20px 16px 16px 16px;
 }
 
+.aa-suggestion {
+  cursor: pointer;
+  padding-top: 5px;
+}
+
+.aa-powered-by {
+  position: absolute;
+  right: 16px;
+  top: 14px;
+  text-align: right;
+  font-size: .8em;
+  color: #999;
+}
+
+/** category **/
 .aa-article-hit--category {
   height: 18px;
   font-size: 18px;
@@ -73,6 +88,12 @@
   display: block;
 }
 
+.aa-article-hit__xs .aa-article-hit--category,
+.aa-article-hit__sm .aa-article-hit--category {
+  margin-bottom: 8px;
+}
+
+/** line **/
 .aa-article-hit--line {
   width: 100%;
   margin-bottom: 8px;
@@ -80,6 +101,16 @@
   line-height: 1.35em;
 }
 
+.aa-article-hit__section-first .aa-article-hit--line {
+  margin-top: 12px;
+}
+
+.aa-article-hit__xs .aa-article-hit--line,
+.aa-article-hit__sm .aa-article-hit--line {
+  margin: 0;
+}
+
+/** section **/
 .aa-article-hit--section {
   display: none;
   width: 20%;
@@ -92,20 +123,54 @@
   letter-spacing: .2px;
 }
 
+.aa-article-hit__section-first .aa-article-hit--section {
+  display: block;
+}
+
+.aa-article-hit__xs .aa-article-hit--section,
+.aa-article-hit__sm .aa-article-hit--section {
+  width: 100%;
+  text-align: left;
+  margin-top: 8px;
+}
+
+.aa-article-hit__sm .aa-article-hit--section {
+  font-size: 1.2em;
+}
+
+/** content **/
 .aa-article-hit--content {
   width: 80%;
   float: right;
   border-left: 1px solid #ddd;
   padding: 4px 10% 4px 8px;
 }
-.aa-article-hit__section-first .aa-article-hit--line{
-  margin-top: 12px;
+
+.aa-suggestion.aa-cursor .aa-article-hit--content {
+  background-color: #f8f8f8;
 }
 
-.aa-article-hit__section-first .aa-article-hit--section {
-  display: block;
-
+.aa-article-hit__category-first.aa-article-hit__section-first .aa-article-hit--content {
+  border-top: none;
 }
+
+.aa-article-hit__xs .aa-article-hit--content,
+.aa-article-hit__sm .aa-article-hit--content {
+  width: 100%;
+}
+
+.aa-article-hit__xs .aa-article-hit--content {
+  padding: 0 8px;
+  border-left: none;
+}
+
+.aa-article-hit__sm .aa-article-hit--content {
+  padding: 4px 8px;
+  margin: 4px 0;
+  border: none;
+}
+
+/** title **/
 
 .aa-article-hit--title {
   font-size: 1.1em;
@@ -115,21 +180,40 @@
     position: relative;
     z-index: 1;
     color: #DB3972;
-  }
 
-  .aa-article-hit--highlight::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: .05;
-    z-index: -1;
-    background-color: #DB3972;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: .05;
+      z-index: -1;
+      background-color: #DB3972;
+    }
   }
 }
 
+.aa-article-hit__xs .aa-article-hit--title,
+.aa-article-hit__sm .aa-article-hit--title {
+  font-size: 1em;
+  line-height: 1.25em;
+  display: block;
+}
+
+.aa-article-hit__xs .aa-article-hit--title {
+  font-weight: normal;
+  padding: 8px 0;
+  border-top: solid 1px #eee;
+}
+
+.aa-article-hit__xs.aa-article-hit__section-first .aa-article-hit--title {
+  border: none;
+}
+
+
+/** body **/
 .aa-article-hit--body {
   font-size: 13px;
   color: #797979;
@@ -142,98 +226,14 @@
   }
 }
 
-//XS
-.aa-article-hit__xs{
-  .aa-article-hit--category {
-    margin-bottom: 8px;
-  }
-  .aa-article-hit--body {
-    display: none;
-  }
-  .aa-article-hit--section {
-    width: 100%;
-    text-align: left;
-    margin-top: 8px;
-  }
-  .aa-article-hit--content {
-    width: 100%;
-    padding: 0 8px;
-    border-left: none;
-  }
-  .aa-article-hit--title {
-    font-size: .9em;
-    font-weight: bold;
-    line-height: 1.25em;
-    padding: 8px 0;
-    display: block;
-    border-top: solid 1px #eee;
-  }
-  .aa-article-hit--line {
-    margin: 0;
-  }
-  &.aa-article-hit__section-first{
-    .aa-article-hit--title {
-      border: none;
-    }
-  }
+.aa-article-hit__xs .aa-article-hit--body {
+  display: none;
 }
 
-//XS
-.aa-article-hit__sm{
-  .aa-article-hit--category {
-    margin-bottom: 8px;
-  }
-  .aa-article-hit--section {
-    width: 100%;
-    text-align: left;
-    font-size: 1.2em;
-    margin-top: 8px;
-  }
-  .aa-article-hit--content {
-    width: 100%;
-    padding: 4px 8px;
-    margin: 4px 0;
-    border: none;
-  }
-  .aa-article-hit--title {
-    font-size: 1em;
-    font-weight: bold;
-    line-height: 1.25em;
-    display: block;
-  }
-  .aa-article-hit--body {
+.aa-article-hit__sm .aa-article-hit--body {
     font-size: .9em;
     line-height: 1.25em;
-  }
-  .aa-article-hit--line {
-    margin: 0;
-  }
-
 }
-
-.aa-article-hit__category-first.aa-article-hit__section-first .aa-article-hit--content {
-  border-top: none;
-}
-
-.aa-powered-by {
-  position: absolute;
-  right: 16px;
-  top: 12px;
-  text-align: right;
-  font-size: .8em;
-  color: #999;
-}
-
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-  cursor: pointer;
-  padding-top: 5px;
-}
-
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor .aa-article-hit--content {
-  background-color: #f8f8f8;
-}
-
-
 
 /***************************/
 /*! instantsearch.js 1.1.0 | © Algolia Inc. and other contributors; Licensed MIT | github.com/algolia/instantsearch.js */
