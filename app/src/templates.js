@@ -50,17 +50,35 @@ export default {
         color: {{ color }};
       }
 
-      .aa-article-hit--highlight::before {
-        background-color: {{ color }};
+      .aa-article-hit--section {
+        color: {{ color }};
       }
 
-      .aa-article-hit--category {
-        color: {{ color }};
+      .aa-article-hit--title .aa-article-hit--highlight {
+        color: {{ highlightColor }};
+      }
+
+      .aa-article-hit--title .aa-article-hit--highlight::before {
+        background-color: {{ highlightColor }};
       }
     `)
   },
 
   instantsearch: {
+    css: Hogan.compile(`
+      .search-result-link, .ais-hierarchical-menu--link {
+        color: {{ color }};
+      }
+
+      .search-result-link .ais-highlight {
+        color: {{ highlightColor }};
+      }
+
+      .search-result-link .ais-highlight::before {
+        background-color: {{ highlightColor }};
+      }
+   `),
+
     layout: (`
 <div>
   <input type="text" id="algolia-query"/>
@@ -74,6 +92,7 @@ export default {
   <div id="algolia-pagination"></div>
 </div>
     `),
+
     // Instant search result template
     hit: (`
 <div class="search-result">
@@ -89,11 +108,13 @@ export default {
   </div>
 </div>
     `),
+
     noResults: (`
 <div id="no-results-message">
   <p>We didn't find any results for the search <em>"{{ query }}"</em>.</p>
 </div>
     `),
+
     stats: (`
 {{# hasNoResults }}{{ translations.no_result }}{{/ hasNoResults }}
 {{# hasOneResult }}1 {{ translations.result }}{{/ hasOneResult }}

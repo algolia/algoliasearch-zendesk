@@ -38,6 +38,8 @@ class InstantSearch {
       },
       searchParameters: {
         attributesToSnippet: ['body_safe:60'],
+        highlightPreTag: '<span class="ais-highlight">',
+        highlightPostTag: '</span>',
         snippetEllipsisText: '...'
       }
     });
@@ -48,7 +50,8 @@ class InstantSearch {
       inputSelector: autocompleteSelector
     },
     baseUrl,
-    colors,
+    color,
+    highlightColor,
     instantsearch: {
       enabled,
       selector,
@@ -62,6 +65,8 @@ class InstantSearch {
     if (!enabled) return;
     let I18n = require('I18n');
     let searchBoxSelector;
+
+    addCSS(templates.instantsearch.css.render({color, highlightColor}));
 
     if (reuseAutocomplete) {
       addCSS('#algolia-query { display: none }');
@@ -157,8 +162,7 @@ class InstantSearch {
         },
         transformData: (hit) => ({
           ...hit,
-          baseUrl,
-          colors
+          baseUrl
         })
       })
     );

@@ -20,6 +20,7 @@ const optionsStructure = {required: true, type: 'Object', children: {
   }},
   baseUrl: {type: 'string', value: '/hc/'},
   color: {type: 'string', value: '#158EC2'},
+  highlightColor: {type: 'string'},
   indexPrefix: {type: 'string', value: 'zendesk_'},
   instantsearch: {type: 'Object', value: {}, children: {
     enabled: {type: 'boolean', value: true},
@@ -39,6 +40,8 @@ class AlgoliasearchZendeskHC {
     let options = fargs().check('algoliasearchZendeskHC')
       .arg('options', optionsStructure)
       .values(arguments)[0];
+
+    options.highlightColor = options.highlightColor || options.color;
 
     this.search = (options.instantsearchPage()
       ? instantsearch

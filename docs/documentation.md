@@ -48,10 +48,8 @@ Here is a full breakdown of the available options for the JavaScript library:
     indexPrefix: 'zendesk_',    // or your custom <INDEX_PREFIX>
     baseUrl: '/hc/',            // the base URL of your Help Center
     poweredBy: true,            // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
-    colors: {
-      primary: '#D4D4D4',       // the primary color
-      secondary: '#D4D4D4'      // the secondary color
-    },
+    color: '#D4D4D4',           // main color (used for links)
+    highlightColor: '#D4D4D4',  // highlight color to emphasize matching text
     autocomplete: {
       enabled: true,            // is the autocomplete feature enabled?
       inputSelector: '#query',  // the DOM selector to select the search box

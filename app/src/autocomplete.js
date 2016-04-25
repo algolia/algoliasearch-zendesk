@@ -37,6 +37,7 @@ class Autocomplete {
     },
     baseUrl,
     color,
+    highlightColor,
     poweredBy,
     translations
   }) {
@@ -46,7 +47,7 @@ class Autocomplete {
 
     this.locale = require('./I18n.js').locale;
 
-    addCSS(templates.autocomplete.css.render({color}));
+    addCSS(templates.autocomplete.css.render({color, highlightColor}));
     this.autocompletes = [];
 
     for (let i = 0; i < this.$inputs.length; ++i) {
