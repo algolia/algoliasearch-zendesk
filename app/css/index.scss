@@ -186,7 +186,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      opacity: .05;
+      opacity: .1;
       z-index: -1;
     }
   }
@@ -259,6 +259,7 @@
   font-size: .8em;
   text-align: right;
   margin-top: 3px;
+  height: 0;
 }
 
 #algolia-hits {
@@ -283,6 +284,11 @@
   }
   .search-result-body {
     margin-top: 5px;
+    opacity: .7;
+
+    .ais-highlight {
+      font-weight: bold;
+    }
   }
 
   .search-result-link {
@@ -302,7 +308,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      opacity: .05;
+      opacity: .1;
       z-index: -1;
     }
   }

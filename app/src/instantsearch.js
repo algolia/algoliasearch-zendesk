@@ -37,7 +37,7 @@ class InstantSearch {
         }
       },
       searchParameters: {
-        attributesToSnippet: ['body_safe:60'],
+        attributesToSnippet: ['body_safe:40'],
         highlightPreTag: '<span class="ais-highlight">',
         highlightPostTag: '</span>',
         snippetEllipsisText: '...'
