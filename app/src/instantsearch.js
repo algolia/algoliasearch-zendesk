@@ -60,6 +60,7 @@ class InstantSearch {
       tagsLimit
     },
     poweredBy,
+    responsive,
     translations
   }) {
     if (!enabled) return;
@@ -86,7 +87,9 @@ class InstantSearch {
     if (this.$container === null) {
       throw new Error(`[Algolia] Cannot find a container with the "${selector}" selector.`);
     }
-    this.$container.innerHTML = templates.instantsearch.layout;
+    this.$container.innerHTML = templates.instantsearch.layout.render({translations});
+
+    this._handleResponsiveness({color, responsive, translations})
 
     this.instantsearch.addWidget({
       getConfiguration: () => ({facets: ['locale.locale']}),
@@ -222,6 +225,23 @@ class InstantSearch {
       }
       $elt.style.display = 'none';
     };
+  }
+
+  _handleResponsiveness({responsive}) {
+    if (!responsive) return;
+    const $mainStyle = addCSS(templates.instantsearch.responsiveCSS);
+
+    // Responsive filters
+    var $responsiveCSSFacets = null;
+    document.getElementById('algolia-facets-open').addEventListener('click', function () {
+      if ($responsiveCSSFacets === null) {
+        $responsiveCSSFacets = addCSS(templates.instantsearch.responsiveCSSFacets, $mainStyle);
+      }
+    });
+    document.getElementById('algolia-facets-close').addEventListener('click', function () {
+      removeCSS($responsiveCSSFacets);
+      $responsiveCSSFacets = null;
+    });
   }
 
   _temporaryHiding({

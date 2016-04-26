@@ -265,7 +265,6 @@
 #algolia-hits {
   float: left;
   width: 70%;
-  min-height: 400px;
   .search-result {
     border-top: 1px solid #efefef;
     margin-top: 10px;
@@ -314,7 +313,7 @@
   }
 }
 
-.ais-stats {
+#algolia-stats {
   margin-left: 30%;
   margin-top: 15px;
   text-transform: uppercase;
@@ -330,7 +329,8 @@
   width: 25%;
   margin-right: 5%;
   min-height: 1px;
-  > div {
+
+  .algolia-facet-block {
     border: 1px solid #efefef;
   }
 
@@ -431,4 +431,14 @@
     font-weight: bold;
     background: #efefef;
   }
+}
+
+/** Responsiveness **/
+
+#algolia-facets-open {
+  display: none;
+}
+
+#algolia-facets-close {
+  display: none;
 }

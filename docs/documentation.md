@@ -50,6 +50,7 @@ Here is a full breakdown of the available options for the JavaScript library:
     poweredBy: true,            // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
     color: '#D4D4D4',           // main color (used for links)
     highlightColor: '#D4D4D4',  // highlight color to emphasize matching text
+    responsive: false,          // responsive instantsearch page
     autocomplete: {
       enabled: true,            // is the autocomplete feature enabled?
       inputSelector: '#query',  // the DOM selector to select the search box
@@ -69,6 +70,7 @@ Here is a full breakdown of the available options for the JavaScript library:
       article: 'Article',
       articles: 'Articles',
       categories: 'Categories',
+      filter: 'Filter results',
       found_in: 'Found in',
       no_result: 'No result',
       placeholder_autocomplete: 'Search in sections and articles',
@@ -146,6 +148,10 @@ translations: {
   categories: {
     'en-us': 'Categories',
     'fr': 'Catégories'
+  },
+  filter: {
+    'en-us': 'Filter results',
+    'fr': 'Filtrer les résultats'
   },
   found_in: {
     'en-us': 'Found in',

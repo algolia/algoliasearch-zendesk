@@ -66,24 +66,98 @@ export default {
 
   instantsearch: {
     css: Hogan.compile(`
-      .search-result-link, .ais-hierarchical-menu--link {
-        color: {{ color }};
-      }
+.search-result-link, .ais-hierarchical-menu--link {
+  color: {{ color }};
+}
 
-      .search-result-link .ais-highlight {
-        color: {{ highlightColor }};
-      }
+.search-result-link .ais-highlight {
+  color: {{ highlightColor }};
+}
 
-      .search-result-link .ais-highlight::before {
-        background-color: {{ highlightColor }};
-      }
+.search-result-link .ais-highlight::before {
+  background-color: {{ highlightColor }};
+}
+
+#algolia-facets-open {
+  color: {{ color }};
+}
    `),
 
-    layout: (`
+    responsiveCSS: (`
+@media (max-width: 768px) {
+  #algolia-facets-open {
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    float: right;
+    padding: 0 9px;
+  }
+
+  #algolia-facets {
+    display: none;
+  }
+
+  #algolia-stats {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  #algolia-hits {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+    `),
+
+    responsiveCSSFacets: (`
+@media (max-width: 768px) {
+  body {
+    position: fixed;
+    overflow: hidden;
+  }
+
+  #algolia-facets {
+    padding: 20px 0;
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: block;
+  }
+
+  #algolia-facets-close {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.5em;
+    padding: 20px 20px;
+    cursor: pointer;
+  }
+}
+    `),
+
+    layout: Hogan.compile(`
 <div>
   <input type="text" id="algolia-query"/>
-  <div id="algolia-stats"></div>
+  <div id="algolia-stats-line">
+    <div id="algolia-facets-open">
+      {{ translations.filter }}
+    </div>
+    <div id="algolia-stats"></div>
+  </div>
   <div id="algolia-facets">
+    <div id="algolia-facets-close">
+      <div id="algolia-facets-close-button">
+        ✖
+      </div>
+    </div>
     <div id="algolia-categories"></div>
     <div id="algolia-labels"></div>
   </div>

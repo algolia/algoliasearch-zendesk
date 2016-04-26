@@ -28,6 +28,7 @@ export function loadTranslations(options) {
   addTranslation(I18n, ts, 'articles', 'Articles', 'txt.help_center.javascripts.arrange_content.articles');
   addTranslation(I18n, ts, 'categories', 'Categories', 'txt.help_center.javascripts.arrange_content.categories');
   addTranslation(I18n, ts, 'sections', 'Sections', 'txt.help_center.javascripts.arrange_content.sections');
+  addTranslation(I18n, ts, 'filter', 'Filter results');
   addTranslation(I18n, ts, 'tags', 'Tags');
   addTranslation(I18n, ts, 'search_by', 'Search by');
   addTranslation(I18n, ts, 'no_result', 'No result');
