@@ -31,7 +31,8 @@ export default {
             <div class="aa-article-hit--body">{{{ _snippetResult.body_safe.value }}}</div>
           {{/ _snippetResult.body_safe.value }}
         </div>
-      </div>`),
+      </div>
+      <div class="clearfix"></div>`),
 
     // Powered By
     poweredBy: Hogan.compile(`<div class="aa-powered-by">
