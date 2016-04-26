@@ -21,13 +21,13 @@ permalink: /documentation/
 Once your data has been extracted to Algolia, you need to update your Help Center theme in order to replace the search feature by Algolia.
 
 1. Copy the code displayed on the **Zendesk Connector** page in your Algolia account
-2. Go to your Zendesk Help Center
+2. Head to your Zendesk Help Center
 3. Click **General > Customize the design** in the top bar
-4. In the **Theme** section, click on "Edit theme"
+4. In the **Theme** section, click on **Edit theme**
 5. In the top left corner dropdown, select the **Document Head** template
-6. Copy/Paste the lines you copied before at the end of the template
-7. Save and ensure everything is working
-8. Click **Publish Theme**
+6. Paste at the end of the template the code you've just copied
+7. Click **Save** and ensure everything is working using the preview on the right (if you have some small CSS issues, [read this part](#customizing-the-css))
+8. Click **Publish Changes**
 
 ## Available options
 
@@ -87,12 +87,15 @@ Here is a full breakdown of the available options for the JavaScript library:
 
 ## Customizing the CSS
 
-If you want to customize the look & feel of the search, you can follow the following steps:
+It is definitely possible that, when you install the application, it doesn't exactly display as you expect.  
+No worries, these are usually just a few conflicting rules between your design and our integration.
+
+You might also just want to change the look & feel of the search.
+
+Either way, just follow the following steps:
 
 - Ensure you read the [SCSS source file](https://github.com/algolia/algoliasearch-zendesk/blob/master/app/css/index.scss) to see all the rules we're using
-- Add a `<style>` tag after the `<link>` tag you've already added in your **Document Head** template
-  We ask you to do this because the CSS code in the customization panel is included __before__ the **Document Head** template
-
+- Add a `<style>` tag after the `<link>` tag you've already added in your **Document Head** template and add your custom CSS here
 
 **Example:**
 
@@ -108,6 +111,9 @@ If you want to customize the look & feel of the search, you can follow the follo
   algoliasearchZendeskHC(/* ... */);
 </script>
 ```
+
+**Note:** You might have some trouble trying to customize the autocomplete menu because it automatically closes when you try to Inspect it.
+Just set `debug: true` to avoid this behaviour.
 
 ## Supporting multiple languages
 
