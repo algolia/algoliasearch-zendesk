@@ -89,7 +89,7 @@ class InstantSearch {
     }
     this.$container.innerHTML = templates.instantsearch.layout.render({translations});
 
-    this._handleResponsiveness({color, responsive, translations})
+    this._handleResponsiveness({color, responsive, translations});
 
     this.instantsearch.addWidget({
       getConfiguration: () => ({facets: ['locale.locale']}),
@@ -224,7 +224,7 @@ class InstantSearch {
         $parent = $elt.parentNode;
       }
       $elt.style.display = 'none';
-    };
+    }
   }
 
   _handleResponsiveness({responsive}) {
@@ -232,7 +232,7 @@ class InstantSearch {
     const $mainStyle = addCSS(templates.instantsearch.responsiveCSS);
 
     // Responsive filters
-    var $responsiveCSSFacets = null;
+    let $responsiveCSSFacets = null;
     document.getElementById('algolia-facets-open').addEventListener('click', function () {
       if ($responsiveCSSFacets === null) {
         $responsiveCSSFacets = addCSS(templates.instantsearch.responsiveCSSFacets, $mainStyle);
