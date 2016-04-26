@@ -31,7 +31,7 @@ const optionsStructure = {required: true, type: 'Object', children: {
   }},
   instantsearchPage: {type: 'function', value: instantsearchPage},
   poweredBy: {type: 'boolean', value: true},
-  responsive: {type: 'boolean', value: false},
+  responsive: {type: 'boolean', value: true},
   subdomain: {type: 'string', required: true},
   translations: {type: 'Object', value: {}}
 }};
