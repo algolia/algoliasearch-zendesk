@@ -1,6 +1,21 @@
-<a name="2.2.0"></a>
-# [2.2.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.2.0...v2.2.0) (2016-04-26)
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.0...v2.3.0) (2016-04-26)
 
+
+
+
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.2.0...v2.3.0) (2016-04-26)
+
+
+### Bug Fixes
+
+* **autocomplete:** add clearfix after suggestion ([2eded23](https://github.com/algolia/algoliasearch-zendesk/commit/2eded23))
+
+### Features
+
+* **app:** debug parameter ([d42fdb6](https://github.com/algolia/algoliasearch-zendesk/commit/d42fdb6))
+* **autocomplete:** restore adaptative snippeting ([486cdfe](https://github.com/algolia/algoliasearch-zendesk/commit/486cdfe))
 
 
 
