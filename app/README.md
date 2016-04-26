@@ -130,7 +130,7 @@ However, some constant strings like the ones used in the sentence "12 results fo
 
 If you're using only one language in your Help Center, just pass the strings of this specific language. For example, for French, you might want to pass:
 
-```js
+```coffee
 translations: {
   article: 'Article',
   articles: 'Articles',
@@ -149,7 +149,7 @@ translations: {
 
 If you want to support multiple languages though, you'll need to pass for each key an object using *locales* as key. The locale is `en-us` in `yoursupport.zendesk.com/hc/en-us`. For example, for English and French, you might want to pass:
 
-```js
+```coffee
 translations: {
   article: {
     'en-us': 'Article',
