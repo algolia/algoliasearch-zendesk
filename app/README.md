@@ -56,6 +56,7 @@ Here is a full breakdown of the available options for the JavaScript library:
     indexPrefix: 'zendesk_',    // or your custom <INDEX_PREFIX>
     baseUrl: '/hc/',            // the base URL of your Help Center
     poweredBy: true,            // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
+    debug: false,               // debug mode prevents the autocomplete to close when trying to inspect it
     color: '#D4D4D4',           // main color (used for links)
     highlightColor: '#D4D4D4',  // highlight color to emphasize matching text
     responsive: true,           // responsive instantsearch page

@@ -20,6 +20,7 @@ const optionsStructure = {required: true, type: 'Object', children: {
   }},
   baseUrl: {type: 'string', value: '/hc/'},
   color: {type: 'string', value: '#158EC2'},
+  debug: {type: 'boolean', value: false},
   highlightColor: {type: 'string'},
   indexPrefix: {type: 'string', value: 'zendesk_'},
   instantsearch: {type: 'Object', value: {}, children: {

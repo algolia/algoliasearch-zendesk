@@ -37,6 +37,7 @@ class Autocomplete {
     },
     baseUrl,
     color,
+    debug,
     highlightColor,
     poweredBy,
     translations
@@ -84,7 +85,7 @@ class Autocomplete {
       $input.setAttribute('placeholder', translations.placeholder_autocomplete);
       let aa = autocomplete($input, {
         hint: false,
-        debug: process.env.NODE_ENV === 'development',
+        debug: process.env.NODE_ENV === 'development' || debug,
         templates: this._templates({poweredBy, translations})
       }, [{
         source: this._source(params),
