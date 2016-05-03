@@ -168,15 +168,28 @@ export default {
 </div>
     `),
 
+    hierarchicalItem: (`
+<a class="{{cssClasses.link}}" href="{{url}}" title="{{name}}">
+  {{name}}
+  <span class="{{cssClasses.count}}">
+    {{#helpers.formatNumber}}
+      {{count}}
+    {{/helpers.formatNumber}}
+  </span>
+</a>
+    `),
+
     // Instant search result template
     hit: (`
 <div class="search-result">
-  <a class="search-result-link" href="{{ baseUrl }}{{ locale.locale }}/articles/{{ id }}">
-    {{{ _highlightResult.title.value }}}
-  </a>
-  {{# vote_sum }}<span class="search-result-votes">{{ vote_sum }}</span>{{/ vote_sum }}
   <div class="search-result-meta">
     <time data-datetime="relative" datetime="{{ created_at_iso }}"></time>
+  </div>
+  <div class="search-result-link-wrapper">
+    <a class="search-result-link" href="{{ baseUrl }}{{ locale.locale }}/articles/{{ id }}">
+      {{{ _highlightResult.title.value }}}
+    </a>
+    {{# vote_sum }}<span class="search-result-votes">{{ vote_sum }}</span>{{/ vote_sum }}
   </div>
   <div class="search-result-body">
     {{{ _snippetResult.body_safe.value }}}

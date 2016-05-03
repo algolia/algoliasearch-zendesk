@@ -275,11 +275,9 @@
     }
   }
   .search-result-meta {
-    padding: 0px !important;
+    padding: 0 10px;
+    float: right;
     font-size: 0.8em;
-    position: absolute;
-    top: 4px;
-    right: 10px;
   }
   .search-result-body {
     margin-top: 5px;
@@ -290,9 +288,12 @@
     }
   }
 
+  .search-result-link-wrapper {
+    margin-right: 75px;
+  }
+
   .search-result-link {
     display: inline-block;
-    padding-right: 75px;
     cursor: pointer;
   }
 

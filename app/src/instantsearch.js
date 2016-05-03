@@ -139,7 +139,8 @@ class InstantSearch {
         attributes: ['category.title', 'section.full_path'],
         separator: ' > ',
         templates: {
-          header: translations.categories
+          header: translations.categories,
+          item: templates.instantsearch.hierarchicalItem
         }
       })
     );
