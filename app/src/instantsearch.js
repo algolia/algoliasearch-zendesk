@@ -164,10 +164,16 @@ class InstantSearch {
           empty: templates.instantsearch.noResults,
           item: templates.instantsearch.hit
         },
-        transformData: (hit) => ({
-          ...hit,
-          baseUrl
-        })
+        transformData: {
+          empty: data => ({
+            ...data,
+            translations
+          }),
+          item: hit => ({
+            ...hit,
+            baseUrl
+          })
+        }
       })
     );
 

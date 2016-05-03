@@ -199,7 +199,7 @@ export default {
 
     noResults: (`
 <div id="no-results-message">
-  <p>We didn't find any results for the search <em>"{{ query }}"</em>.</p>
+  <p>{{ translations.no_result }}: <em>"{{ query }}"</em>.</p>
 </div>
     `),
 
