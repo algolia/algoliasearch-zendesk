@@ -24,14 +24,8 @@ class: home
             your users with an awesome search experience
 
       .spacer50
-      %form.join.col-md-8.col-md-offset-2{method: 'get', action: 'https://www.algolia.com/zendesk/auth'}
-        .form-group{style: 'text-align: left;'}
-          %label{for: 'join-subdomain', style: 'padding-left: 5px;'} Your Zendesk subdomain
-          .row
-            .col-lg-9.col-md-8.col-sm-7
-              %input#join-subdomain.form-control.input-lg{type: 'text', name: 'subdomain', placeholder: 'your-company.zendesk.com'}
-            .col-lg-3.col-md-4.col-sm-5
-              %button.btn.btn-primary.btn-lg{type: 'submit'} Join the beta!
+      .join
+        %a.btn.btn-primary.btn-lg{href: 'https://'} Get started
 
   .home-section.home-section__instant-answers
     %h2.headline Instant answers
@@ -115,11 +109,5 @@ class: home
 
       .spacer50
 
-      %form.join.col-md-8.col-md-offset-2{method: 'get', action: 'https://www.algolia.com/zendesk/auth'}
-        .form-group{style: 'text-align: left;'}
-          %label{for: 'join-subdomain', style: 'padding-left: 5px;'} Your Zendesk subdomain
-          .row
-            .col-lg-9.col-md-8.col-sm-7
-              %input#join-subdomain.form-control.input-lg{type: 'text', name: 'subdomain', placeholder: 'your-company.zendesk.com'}
-            .col-lg-3.col-md-4.col-sm-5
-              %button.btn.btn-primary.btn-lg{type: 'submit'} Join the beta!
+      .join
+        %a.btn.btn-primary.btn-lg Get started

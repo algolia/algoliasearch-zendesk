@@ -5,17 +5,14 @@ h2 {
   margin-bottom: 1em; }
 
 .join {
-  p {
-    line-height: 32px;
-    font-weight: 400;
-  }
+  text-align: center;
 
-  button {
-    width: 100%;
+  a {
     background-color: rgb(162, 220, 0);
-  }
-  button:hover {
-    background-color: rgb(140, 190, 0);
+
+    &:hover {
+      background-color: rgb(140, 190, 0);
+    }
   }
 }
 
@@ -151,7 +148,7 @@ h2 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
-  button {
+  a.btn {
     background-color: #78A300;
   }
 }
