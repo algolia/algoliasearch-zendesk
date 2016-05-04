@@ -6,28 +6,29 @@ permalink: /documentation/
 ---
 
 
-**Note:** You need to have an Algolia account. Please [login](https://www.algolia.com/users/sign_in) or [sign-up](https://www.algolia.com/users/sign_up) first.
-{: .alert.alert-info}
-
 ## Synchronize Algolia with your Help Center
 
-1. Visit the [Algolia for Zendesk](https://community.algolia.com/zendesk/) home page
-1. Enter your zendesk subdomain (`your_subdomain` in `your_subdomain.zendesk.com`) and click `Join the Beta`
-1. When Zendesk asks you to approve Algolia in your Zendesk instance, click `Allow`
-1. Starting from that point, the content of your Help Center will be synchronized with Algolia's indices.
+![onboarding](../img/connection.png)
+{: .text-center}
+
+1. Create an [Algolia account](https://www.algolia.com/users/sign_up).
+1. Follow the [Get Started](https://www.algolia.com/zendesk) guide to connect your Zendesk Help Center with your Agolia account.
 
 ## Updating your Help Center theme
 
 Once your data has been extracted to Algolia, you need to update your Help Center theme in order to replace the search feature by Algolia.
 
-1. Copy the code displayed on the **Zendesk Connector** page in your Algolia account
 2. Head to your Zendesk Help Center
 3. Click **General > Customize the design** in the top bar
 4. In the **Theme** section, click on **Edit theme**
 5. In the top left corner dropdown, select the **Document Head** template
-6. Paste at the end of the template the code you've just copied
+6. Paste at the end of the template the code we provide you while connecting your Zendesk Help Center with Algolia.
 7. Click **Save** and ensure everything is working using the preview on the right (if you have some small CSS issues, [read this part](#customizing-the-css))
 8. Click **Publish Changes**
+
+
+![onboarding](http://res.cloudinary.com/hilnmyskv/image/upload/w_800/v1462197616/zendesk-tutorial_h59sep.gif)
+{: .text-center}
 
 ## Available options
 
