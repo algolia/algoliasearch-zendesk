@@ -1,6 +1,16 @@
-<a name="2.3.0"></a>
-# [2.3.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.0...v2.3.0) (2016-04-26)
+<a name="2.3.1"></a>
+## [2.3.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.1...v2.3.1) (2016-05-04)
 
+
+
+
+<a name="2.3.1"></a>
+## [2.3.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.0...v2.3.1) (2016-05-04)
+
+
+### Bug Fixes
+
+* **instantsearch:** actually use the no_result translation ([691d160](https://github.com/algolia/algoliasearch-zendesk/commit/691d160))
 
 
 
