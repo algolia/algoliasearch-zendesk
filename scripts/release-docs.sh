@@ -17,7 +17,7 @@ echo
 
 # Build docs from app's README
 cd app
-gulp build:docs
+npm run build:docs
 cd ..
 
 # Build _site in docs/
