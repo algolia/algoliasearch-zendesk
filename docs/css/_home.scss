@@ -27,11 +27,23 @@ h2 {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#78a300', endColorstr='#577f00', GradientType=1 );
 
   margin-bottom: 0;
+  padding-bottom: 0;
   color: $light-text-color;
   -webkit-font-smoothing: antialiased;
 
   p {
     line-height: 32px;
+    margin: 0;
+  }
+
+  .join {
+    margin: 40px auto;
+  }
+
+  .demo-gif {
+    max-width: 700px;
+    display: block;
+    margin: 0 auto 5px auto;
   }
 }
 
