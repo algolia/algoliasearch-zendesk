@@ -27,8 +27,12 @@ class Crawler
   alias_method :set, :get
 
   def crawl type
+    count = ZendeskAPI::CLIENT.send(type.plural).count
+    i = 0
     ZendeskAPI::CLIENT.send(type.plural).all do |obj|
       set type, obj
+      puts "#{type.plural.capitalize}: #{i += 1}/#{count}"
+      STDOUT.flush
     end
   end
 

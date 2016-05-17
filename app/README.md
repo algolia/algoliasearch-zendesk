@@ -26,16 +26,21 @@ To browse through the crawler, visit the [crawler/](../crawler/) folder.
 
 Once your data has been extracted to Algolia, you need to update your Help Center theme in order to replace the search feature by Algolia.
 
-2. Head to your Zendesk Help Center
-3. Click **General > Customize the design** in the top bar
-4. In the **Theme** section, click on **Edit theme**
-5. In the top left corner dropdown, select the **Document Head** template
-6. Paste at the end of the template the code we provide you while connecting your Zendesk Help Center with Algolia.
-7. Click **Save** and ensure everything is working using the preview on the right (if you have some small CSS issues, [read this part](#customizing-the-css))
-8. Click **Publish Changes**
+* Open the **Document Head** template in the **Theme Editor**:
+   1. Head to your Zendesk Help Center
+   1. Click **General > Customize the design** in the top bar
+   1. In the **Theme** section, click on **Edit theme**
+   1. In the top left corner dropdown, select the **Document Head** template
 
+![onboarding](https://res.cloudinary.com/hilnmyskv/image/upload/w_800/v1462530610/zendesk-tutorial-v2_lww7ls.gif)
+{: .text-center}
 
-![onboarding](http://res.cloudinary.com/hilnmyskv/image/upload/w_800/v1462197616/zendesk-tutorial_h59sep.gif)
+* Copy the **JavaScript** snippet & **Publish** changes:
+  1. Paste the code we provide you while connecting your Zendesk Help Center with Algolia at the end of the template.
+  1. Click **Save** and ensure everything is working using the preview on the right (if you have some small CSS issues, [read this part](#customizing-the-css))
+  1. Click **Publish Changes**
+
+![onboarding](https://res.cloudinary.com/hilnmyskv/image/upload/w_800/v1462207923/zendesk-preview_idcs7k.gif)
 {: .text-center}
 
 ### Available options

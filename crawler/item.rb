@@ -41,11 +41,6 @@ module Zendesk
       @crawler = crawler
       @zendesk_obj = fetch(obj)
       @data = build
-      if @zendesk_obj.nil?
-        puts "Not-existing object #{self.class.plural}:#{obj}"
-      else
-        puts "New #{self.class.plural}:#{@zendesk_obj.id}"
-      end
     end
 
     def build
