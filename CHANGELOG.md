@@ -1,6 +1,16 @@
-<a name="2.3.1"></a>
-## [2.3.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.1...v2.3.1) (2016-05-04)
+<a name="2.3.2"></a>
+## [2.3.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.2...v2.3.2) (2016-05-17)
 
+
+
+
+<a name="2.3.2"></a>
+## [2.3.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.1...v2.3.2) (2016-05-17)
+
+
+### Bug Fixes
+
+* **crawler:** flush the logging output ([2d9c1d7](https://github.com/algolia/algoliasearch-zendesk/commit/2d9c1d7))
 
 
 
