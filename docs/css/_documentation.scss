@@ -1,11 +1,34 @@
-.anchor {
-  display: none;
+
+.page-documentation {
+  p, li {
+    line-height: 1.75em;
+  }
+
+  h2 {
+    margin-top: 2em;
+    margin-bottom: .5em;
+    font-weight: bold;
+    text-align: center;
+
+    .anchor {
+      display: none;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &:hover .anchor {
+      display: inline;
+    }
+
+    &:after {
+      display: block;
+      content: '';
+      border-bottom: 2px solid $zendesk-green;
+      margin: 0.4em auto 1em auto;
+      width: 30px;
+    }
+  }
 }
 
-.anchor:hover {
-  text-decoration: none;
-}
-
-h2:hover .anchor {
-  display: inline;
-}
