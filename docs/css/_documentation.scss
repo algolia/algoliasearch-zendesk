@@ -1,0 +1,11 @@
+.anchor {
+  display: none;
+}
+
+.anchor:hover {
+  text-decoration: none;
+}
+
+h2:hover .anchor {
+  display: inline;
+}
