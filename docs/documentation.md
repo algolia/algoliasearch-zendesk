@@ -8,32 +8,35 @@ permalink: /documentation/
 
 ## Synchronize Algolia with your Help Center
 
-![onboarding](../img/connection.png)
-{: .text-center}
+<div align="center">
+  <img src="../img/connection.png" alt="Data connection visualization" />
+</div>
 
 1. Create an [Algolia account](https://www.algolia.com/users/sign_up).
-1. Follow the [Get Started](https://www.algolia.com/zendesk) guide to connect your Zendesk Help Center with your Agolia account.
+1. Follow the <a href="https://www.algolia.com/zendesk" rel="nofollow">Get Started</a> guide to connect your Zendesk Help Center with your Agolia account.
 
 ## Updating your Help Center theme
 
 Once your data has been extracted to Algolia, you need to update your Help Center theme in order to replace the search feature by Algolia.
 
 * Open the **Document Head** template in the **Theme Editor**:
-   1. Head to your Zendesk Help Center
-   1. Click **General > Customize the design** in the top bar
-   1. In the **Theme** section, click on **Edit theme**
-   1. In the top left corner dropdown, select the **Document Head** template
+  1. Head to your Zendesk Help Center
+  1. Click **General > Customize the design** in the top bar
+  1. In the **Theme** section, click on **Edit theme**
+  1. In the top left corner dropdown, select the **Document Head** template
 
-![onboarding](https://res.cloudinary.com/hilnmyskv/image/upload/w_800/v1462530610/zendesk-tutorial-v2_lww7ls.gif)
-{: .text-center}
+<div align="center">
+  <img src="https://res.cloudinary.com/hilnmyskv/image/upload/w_800/v1462530610/zendesk-tutorial-v2_lww7ls.gif" alt="Document Head opening GIF" />
+</div>
 
 * Copy the **JavaScript** snippet & **Publish** changes:
   1. Paste the code we provide you while connecting your Zendesk Help Center with Algolia at the end of the template.
   1. Click **Save** and ensure everything is working using the preview on the right (if you have some small CSS issues, [read this part](#customizing-the-css))
   1. Click **Publish Changes**
 
-![onboarding](https://res.cloudinary.com/hilnmyskv/image/upload/w_800/v1462207923/zendesk-preview_idcs7k.gif)
-{: .text-center}
+<div align="center">
+  <img src="https://res.cloudinary.com/hilnmyskv/image/upload/w_800/v1462207923/zendesk-preview_idcs7k.gif" alt="Document Head editing GIF" />
+</div>
 
 ## Available options
 
