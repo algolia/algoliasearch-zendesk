@@ -98,8 +98,7 @@ class Crawler
     index = Algolia::Index.new(index_name)
     tmp = Algolia::Index.new "#{index_name}.tmp"
     tmp.set_settings params
-    tmp.add_objects objects
-    sleep 1
+    tmp.add_objects! objects
     Algolia.move_index "#{index_name}.tmp", index_name
     if with_slave
       slave_name = "#{index_name}_updated_at_desc"
