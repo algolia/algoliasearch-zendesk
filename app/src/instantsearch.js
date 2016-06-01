@@ -102,7 +102,7 @@ class InstantSearch {
     this.instantsearch.addWidget(
       instantsearch.widgets.searchBox({
         container: searchBoxSelector,
-        placeholder: translations.placeholder_instantsearch,
+        placeholder: translations.placeholder,
         autofocus: true,
         poweredBy,
         cssClasses: {
@@ -115,7 +115,7 @@ class InstantSearch {
       instantsearch.widgets.stats({
         container: '#algolia-stats',
         templates: {
-          body: templates.instantsearch.stats
+          body: ({nbHits, processingTimeMS}) => translations.stats(nbHits, processingTimeMS)
         },
         transformData: (data) => ({
           ...data,
@@ -161,13 +161,12 @@ class InstantSearch {
       instantsearch.widgets.hits({
         container: '#algolia-hits',
         templates: {
-          empty: templates.instantsearch.noResults,
+          empty: templates.instantsearch.noResult,
           item: templates.instantsearch.hit
         },
         transformData: {
           empty: data => ({
-            ...data,
-            translations
+            content: translations.no_result(data.query)
           }),
           item: hit => ({
             ...hit,

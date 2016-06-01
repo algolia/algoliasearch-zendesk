@@ -2,72 +2,79 @@ import Hogan from 'hogan.js';
 
 export default {
   autocomplete: {
+    // Algolia logo
+    algolia: (
+`<a
+  href="https://www.algolia.com/?utm_source=zendesk_hc&utm_medium=link&utm_campaign=autocomplete"
+  class="aa-powered-by-link"
+>
+  Algolia
+</a>`
+    ),
+
     // Autocompletion template for an article
     article: Hogan.compile(
-      `<div
-        class="
-          aa-article-hit
-          {{# isCategoryHeader }}aa-article-hit__category-first{{/ isCategoryHeader }}
-          {{# isSectionHeader }}aa-article-hit__section-first{{/ isSectionHeader }}
-          {{# sizeModifier }}aa-article-hit__{{ sizeModifier }}{{/ sizeModifier}}
-        "
-      >
-      <div class="aa-article-hit--category">
-        <span class="aa-article-hit--category--content">
-          {{ category.title }}
-        </span>
-      </div>
-      <div class="aa-article-hit--line">
-        <div class="aa-article-hit--section">
-          {{ section.title }}
-        </div>
-        <div class="aa-article-hit--content">
-          <div class="aa-article-hit--headline">
-            <span class="aa-article-hit--title">
-              {{{ _highlightResult.title.value }}}
-            </span>
-          </div>
-          {{# _snippetResult.body_safe.value }}
-            <div class="aa-article-hit--body">{{{ _snippetResult.body_safe.value }}}</div>
-          {{/ _snippetResult.body_safe.value }}
-        </div>
-      </div>
-      <div class="clearfix"></div>`),
+`<div
+  class="
+    aa-article-hit
+    {{# isCategoryHeader }}aa-article-hit__category-first{{/ isCategoryHeader }}
+    {{# isSectionHeader }}aa-article-hit__section-first{{/ isSectionHeader }}
+    {{# sizeModifier }}aa-article-hit__{{ sizeModifier }}{{/ sizeModifier}}
+  "
+>
+<div class="aa-article-hit--category">
+  <span class="aa-article-hit--category--content">
+    {{ category.title }}
+  </span>
+</div>
+<div class="aa-article-hit--line">
+  <div class="aa-article-hit--section">
+    {{ section.title }}
+  </div>
+  <div class="aa-article-hit--content">
+    <div class="aa-article-hit--headline">
+      <span class="aa-article-hit--title">
+        {{{ _highlightResult.title.value }}}
+      </span>
+    </div>
+    {{# _snippetResult.body_safe.value }}
+      <div class="aa-article-hit--body">{{{ _snippetResult.body_safe.value }}}</div>
+    {{/ _snippetResult.body_safe.value }}
+  </div>
+</div>
+<div class="clearfix"></div>`
+    ),
 
     // Powered By
-    poweredBy: Hogan.compile(`<div class="aa-powered-by">
-      {{ translations.search_by }}
-      <a
-        href="https://www.algolia.com/?utm_source=zendesk_hc&utm_medium=link&utm_campaign=autocomplete"
-        class="aa-powered-by-link"
-      >
-        Algolia
-      </a>
-    </div>`),
+    poweredBy: Hogan.compile(
+`<div class="aa-powered-by">
+  {{{ content }}}
+</div>`
+    ),
 
     // CSS to add to handle the color
-    css: Hogan.compile(`
-      .aa-article-hit--highlight {
-        color: {{ color }};
-      }
+    css: Hogan.compile(
+`.aa-article-hit--highlight {
+  color: {{ color }};
+}
 
-      .aa-article-hit--section {
-        color: {{ color }};
-      }
+.aa-article-hit--section {
+  color: {{ color }};
+}
 
-      .aa-article-hit--title .aa-article-hit--highlight {
-        color: {{ highlightColor }};
-      }
+.aa-article-hit--title .aa-article-hit--highlight {
+  color: {{ highlightColor }};
+}
 
-      .aa-article-hit--title .aa-article-hit--highlight::before {
-        background-color: {{ highlightColor }};
-      }
-    `)
+.aa-article-hit--title .aa-article-hit--highlight::before {
+  background-color: {{ highlightColor }};
+}`
+    )
   },
 
   instantsearch: {
-    css: Hogan.compile(`
-.search-result-link, .ais-hierarchical-menu--link {
+    css: Hogan.compile(
+`.search-result-link, .ais-hierarchical-menu--link {
   color: {{ color }};
 }
 
@@ -81,11 +88,11 @@ export default {
 
 #algolia-facets-open {
   color: {{ color }};
-}
-   `),
+}`
+   ),
 
-    responsiveCSS: (`
-@media (max-width: 768px) {
+    responsiveCSS: (
+`@media (max-width: 768px) {
   #algolia-facets-open {
     display: block;
     text-align: center;
@@ -107,11 +114,11 @@ export default {
     margin-left: 0;
     width: 100%;
   }
-}
-    `),
+}`
+    ),
 
-    responsiveCSSFacets: (`
-@media (max-width: 768px) {
+    responsiveCSSFacets: (
+`@media (max-width: 768px) {
   body {
     position: fixed;
     overflow: hidden;
@@ -141,11 +148,11 @@ export default {
     padding: 20px 20px;
     cursor: pointer;
   }
-}
-    `),
+}`
+    ),
 
-    layout: Hogan.compile(`
-<div>
+    layout: Hogan.compile(
+`<div>
   <input type="text" id="algolia-query"/>
   <div id="algolia-stats-line">
     <div id="algolia-facets-open">
@@ -165,23 +172,23 @@ export default {
   <div id="algolia-hits"></div>
   <div class="clearfix"></div>
   <div id="algolia-pagination"></div>
-</div>
-    `),
+</div>`
+    ),
 
-    hierarchicalItem: (`
-<a class="{{cssClasses.link}}" href="{{url}}" title="{{name}}">
+    hierarchicalItem: (
+`<a class="{{cssClasses.link}}" href="{{url}}" title="{{name}}">
   {{name}}
   <span class="{{cssClasses.count}}">
     {{#helpers.formatNumber}}
       {{count}}
     {{/helpers.formatNumber}}
   </span>
-</a>
-    `),
+</a>`
+    ),
 
     // Instant search result template
-    hit: (`
-<div class="search-result">
+    hit: (
+`<div class="search-result">
   <div class="search-result-meta">
     <time data-datetime="relative" datetime="{{ created_at_iso }}"></time>
   </div>
@@ -194,23 +201,13 @@ export default {
   <div class="search-result-body">
     {{{ _snippetResult.body_safe.value }}}
   </div>
-</div>
-    `),
+</div>`
+  ),
 
-    noResults: (`
-<div id="no-results-message">
-  <p>{{ translations.no_result }}: <em>"{{ query }}"</em>.</p>
-</div>
-    `),
-
-    stats: (`
-{{# hasNoResults }}{{ translations.no_result }}{{/ hasNoResults }}
-{{# hasOneResult }}1 {{ translations.result }}{{/ hasOneResult }}
-{{# hasManyResults }}
-  {{# helpers.formatNumber }}{{ nbHits }}{{/ helpers.formatNumber }}
-  {{ translations.results }}
-{{/ hasManyResults }}
-<span class="{{ cssClasses.time }}">{{ translations.found_in }} {{ processingTimeMS }}ms</span>
-    `)
+    noResult: (
+`<div id="no-results-message">
+  <p>{{{ content }}}</p>
+</div>`
+    )
   }
 };

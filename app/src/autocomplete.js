@@ -82,7 +82,7 @@ class Autocomplete {
         snippetEllipsisText: '...'
       };
 
-      $input.setAttribute('placeholder', translations.placeholder_autocomplete);
+      $input.setAttribute('placeholder', translations.placeholder);
       let aa = autocomplete($input, {
         hint: false,
         debug: process.env.NODE_ENV === 'development' || debug,
@@ -154,7 +154,9 @@ class Autocomplete {
   _templates({poweredBy, translations}) {
     let res = {};
     if (poweredBy === true) {
-      res.header = templates.autocomplete.poweredBy.render({translations});
+      res.header = templates.autocomplete.poweredBy.render({
+        content: translations.search_by(templates.autocomplete.algolia)
+      });
     }
     return res;
   }
