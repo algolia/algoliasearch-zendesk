@@ -74,7 +74,7 @@ export default {
 
   instantsearch: {
     css: Hogan.compile(
-`.search-result-link, .ais-hierarchical-menu--link {
+`.search-result-link, .ais-hierarchical-menu--link, .ais-link {
   color: {{ color }};
 }
 
@@ -204,9 +204,10 @@ export default {
 </div>`
   ),
 
-    noResult: (
+    noResult: ({query, translations}) => (
 `<div id="no-results-message">
-  <p>{{{ content }}}</p>
+  <p>${translations.no_result(query)}</p>
+  <p>${translations.no_result_actions()}</p>
 </div>`
     )
   }

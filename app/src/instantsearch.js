@@ -166,7 +166,8 @@ class InstantSearch {
         },
         transformData: {
           empty: data => ({
-            content: translations.no_result(data.query)
+            ...data,
+            translations
           }),
           item: hit => ({
             ...hit,
@@ -176,8 +177,13 @@ class InstantSearch {
       })
     );
 
+    var firstRender = true;
     this.instantsearch.on('render', () => {
       this._displayTimes();
+      if (firstRender) {
+        firstRender = false;
+        this._bindNoResultActions();
+      }
     });
 
     this.instantsearch.start();
@@ -231,6 +237,25 @@ class InstantSearch {
       }
       $elt.style.display = 'none';
     }
+  }
+
+  _bindNoResultActions(helper) {
+    this.$container.addEventListener('click', (e) => {
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.classList === undefined) continue;
+        if (target.classList.contains('ais-change-query')) {
+          this.instantsearch.helper.setQuery('').search();
+        }
+      }
+    }, false);
+    this.$container.addEventListener('click', (e) => {
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.classList === undefined) continue;
+        if (target.classList.contains('ais-clear-filters')) {
+          this.instantsearch.helper.clearRefinements().search();
+        }
+      }
+    }, false);
   }
 
   _handleResponsiveness({responsive}) {
