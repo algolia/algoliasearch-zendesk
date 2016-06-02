@@ -181,7 +181,7 @@ function setLang(userTranslations, langKey) {
       itemUserTranslation['default'];
 
     if (['change_query', 'clear_filters'].indexOf(key) !== -1) {
-      trad = `<span class="ais-${key.replace(/_/g, '-')}">${trad}</span>`;
+      trad = `<span class="ais-link ais-${key.replace(/_/g, '-')}">${trad}</span>`;
     }
     if (['nb_results', 'quoted'].indexOf(key) !== -1) {
       trad = function (trad) {
