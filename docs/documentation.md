@@ -97,7 +97,7 @@ Here is a full breakdown of the available options for the JavaScript library:
 
 ## Customizing the CSS
 
-It is definitely possible that, when you install the application, it doesn't exactly display as you expect.  
+It is definitely possible that, when you install the application, it doesn't exactly display as you expect.
 No worries, these are usually just a few conflicting rules between your design and our integration.
 
 You might also just want to change the look & feel of the search.
