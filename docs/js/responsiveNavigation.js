@@ -15,12 +15,12 @@ function responsiveNavigation() {
     var option = document.createElement('option');
     option.text = links[i].title;
     option.value = links[i].href;
-    option.selected = true;
+    option.selected = links[i].getAttribute('data-current') === 'true';
     navigationAsSelect.appendChild(option);
   }
 
   navigation.appendChild(navigationAsSelect);
-  navigation.addEventListener('change', function () {
+  navigation.addEventListener('change', function (e) {
     return window.location = e.target.value;
   });
 }
