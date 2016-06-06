@@ -83,6 +83,11 @@ h3 {
 
 .home-section__instant-answers {
   background-color: #F4F7EE;
+
+  // To allow firefox to render he
+  // image shadow
+  z-index: -1;
+  position: relative;
 }
 
 .home-section__features {
