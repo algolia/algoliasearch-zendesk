@@ -33,7 +33,7 @@
     "lodash": "^4.3.0"
   },
   "devDependencies": {
-    "babel-core": "^6.3.13",
+    "babel-core": "^6.9.0",
     "babel-eslint": "^4.1.6",
     "babel-loader": "^6.2.0",
     "babel-plugin-transform-object-rest-spread": "^6.6.4",

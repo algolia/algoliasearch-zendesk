@@ -27,8 +27,12 @@
     <script src="//cdn.jsdelivr.net/jquery/2/jquery.min.js"></script>
     <script src="{{ "/js/bootstrap.min.js" | prepend: site.baseurl }}"></script>
     <script src="{{ "/js/anchors.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/js/responsiveNavigation.js" | prepend: site.baseurl }}"></script>
     <script src="//cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+{% if page.class == 'home' %}
+    <script src="{{ "/js/gifs.js" | prepend: site.baseurl }}"></script>
+{% endif %}
 
 {% if site.env == 'development' %}
     <script>
