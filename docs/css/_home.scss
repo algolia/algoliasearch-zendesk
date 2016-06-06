@@ -131,35 +131,47 @@ h3 {
     margin-bottom: 16px;
   }
 
+  .stretchy-ratio {
+    width: 100%;
+    padding-bottom: 56.25%;
+    position: relative;
+  }
+
   .showcase {
     display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     border: 1px solid $zendesk-green;
-    height: 200px;
     overflow: hidden;
-    position: relative;
-
 
     img {
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
+      width: 100%;
+
+      &.animated-image {
+        height: 0;
+      }
     }
 
     &.fixme {
-      width: 100%;
-      height: 200px;
       color: $zendesk-green;
       background-color: white;
 
-      line-height: 200px;
       font-size: 2em;
+
+      &:before {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
     }
 
     &:not(.fixme):after {
       content: '';
       display: block;
-      width: 200px;
-      height: 200px;
       background: url(../img/mask.png)no-repeat center center / cover;
       position: absolute;
       top: 0;
