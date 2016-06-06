@@ -43,7 +43,6 @@
     padding-bottom: 0.5em;
     font-weight: bold;
 
-
     .anchor {
       display: none;
 
@@ -54,6 +53,13 @@
 
     &:hover .anchor {
       display: inline;
+    }
+
+    &:before {
+      content: "";
+      display: block;
+      height: 70px;
+      margin: -70px 0 0;
     }
   }
 

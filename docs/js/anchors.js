@@ -6,5 +6,5 @@ for (var i = 0; i < titles.length; ++i) {
   anchor.href = '#' + elt.id;
   anchor.className = 'anchor';
   anchor.innerText = ' # ';
-  elt.insertBefore(anchor, elt.firstChild);
+  elt.appendChild(anchor);
 }
