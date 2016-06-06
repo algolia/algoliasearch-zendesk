@@ -2,7 +2,7 @@
 // Ref: http://shebang.brandonmintern.com/foolproof-html-escaping-in-javascript/
 
 export default function escapeHTML(str) {
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-};
+  const div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
