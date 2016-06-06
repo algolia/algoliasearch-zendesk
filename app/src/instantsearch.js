@@ -177,7 +177,7 @@ class InstantSearch {
       })
     );
 
-    var firstRender = true;
+    let firstRender = true;
     this.instantsearch.on('render', () => {
       this._displayTimes();
       if (firstRender) {
@@ -239,9 +239,9 @@ class InstantSearch {
     }
   }
 
-  _bindNoResultActions(helper) {
+  _bindNoResultActions() {
     this.$container.addEventListener('click', (e) => {
-      for (var target = e.target; target && target != this; target = target.parentNode) {
+      for (let target = e.target; target && target !== this; target = target.parentNode) {
         if (target.classList === undefined) continue;
         if (target.classList.contains('ais-change-query')) {
           this.instantsearch.helper.setQuery('').search();
@@ -249,7 +249,7 @@ class InstantSearch {
       }
     }, false);
     this.$container.addEventListener('click', (e) => {
-      for (var target = e.target; target && target != this; target = target.parentNode) {
+      for (let target = e.target; target && target !== this; target = target.parentNode) {
         if (target.classList === undefined) continue;
         if (target.classList.contains('ais-clear-filters')) {
           this.instantsearch.helper.clearRefinements().search();
