@@ -1,6 +1,16 @@
-<a name="2.3.3"></a>
-## [2.3.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.3...v2.3.3) (2016-05-18)
+<a name="2.3.4"></a>
+## [2.3.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.4...v2.3.4) (2016-06-06)
 
+
+
+
+<a name="2.3.4"></a>
+## [2.3.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.3...v2.3.4) (2016-06-06)
+
+
+### Features
+
+* **website:** New design (#45) ([10bddd8](https://github.com/algolia/algoliasearch-zendesk/commit/10bddd8))
 
 
 
