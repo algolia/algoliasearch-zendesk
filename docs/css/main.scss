@@ -3,14 +3,16 @@
 # only Main files contain this front matter, not partials.
 ---
 
-@import "base";
-@import "bootstrap";
-@import "mixin";
-@import "syntax-highlighting";
-@import "helper";
+@import "base",
+        "bootstrap",
+        "mixin",
+        "syntax-highlighting",
+        "helper",
+        "containers",
+        "header",
+        "home",
+        "documentation",
+        "page",
+        "buttons",
+        "footer";
 
-@import "header";
-@import "home";
-@import "documentation";
-@import "page";
-@import "footer";

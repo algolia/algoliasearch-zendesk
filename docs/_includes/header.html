@@ -1,40 +1,28 @@
-<header class="site-header">
-  <nav class="navbar navbar-default  navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="logo-community" href="https://community.algolia.com/">
-          <img src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-community-inline-dark.svg" width="150" alt="Algolia Community" />
-        </a>
-        <a class="project-title" href="{{ site.baseurl }}/">
-          Zendesk
-        </a>
-      </div>
-      <div id="instant-search-nav" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li style="display: none">
-            <form class="form search-form" action="#">
-            {% if page.title == 'Documentation' %}
-              <input class="form-control search-active" placeholder="Search in the documentation" type="text" id="doc-search" />
-            {% else %}
-              <input class="form-control" placeholder="Search in the documentation" type="text" id="doc-search" />
-            {% endif %}
-              <div class="search-icon"><i class="fa fa-search"></i></div>
-            </form>
-          </li>
-          {% assign url = page.url %}
-          {% for link in site.navigation %}
-            <li {% if url == link.url %}class="active"{% endif %}>
-              <a href="{{ site.baseurl }}{{ link.url }}" title="{{ link.title }}">{{ link.text }}</a>
-            </li>
-          {% endfor %}
-            <li>
-              <a href="https://github.com/algolia/algoliasearch-zendesk" title="See more, open issues and get answers in our Github repository">
-                <i class="fa fa-github hidden-xs"></i>
-                <span class="visible-xs">View project on github</span>
-              </a>
-            </li>
-        </ul>
-      </div>
+<div class="ac-nav">
+  <div class="ac-nav-container">
+    <div class="ac-nav-brand">
+      <a class="ac-logo" href="https://community.algolia.com/" title="Algolia Community">
+        <img alt="Algolia Community" class="ac-logo__lg" src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-community-inline-dark.svg" width="150">
+        <img alt="Algolia Community" class="ac-logo__sm" src="https://res.cloudinary.com/hilnmyskv/image/upload/v1461180081/logo-community-sm.svg">
+      </a>
+      <span class="ac-nav-brand-breadcrumb"></span>
+      <a class="ac-nav-brand-title" href="{{ site.baseurl }}/" title="Home">Zendesk</a>
     </div>
-  </nav>
-</header>
+    <div class="ac-nav-menu">
+
+      <ul class="ac-nav-menu-list">
+        {% assign url = page.url %}
+        {% for link in site.navigation %}
+          <li class="ac-nav-menu-list-item {% if url == link.url %}active{% endif %}">
+            <a href="{{ site.baseurl }}{{ link.url }}" data-path="{{ site.baseurl }}{{ link.url }}" title="{{ link.text }}">{{ link.text }}</a>
+          </li>
+        {% endfor %}
+        <li class="ac-nav-menu-list-icon">
+          <a class="ac-icon" href="https://github.com/algolia/algoliasearch-zendesk" title="Github repository">
+            <span class="ac-icon ac-icon-github"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

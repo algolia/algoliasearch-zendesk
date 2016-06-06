@@ -1,28 +1,62 @@
-$font-family-sans-serif: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// Breakpoints
+$bp-huge: 2000px;
+$bp-big: 1440px;
+$bp-medium: 960px;
+$bp-small: 768px;
+
+
+// Fonts
+$font-name: "Open Sans";
+$font-fallback: Helvetica Neue, helvetica;
+$font-settings:  $font-name, $font-fallback;
+
+//
+$font-family-sans-serif: $font-settings;
 $font-size-base: 16px;
 $line-height-computed: 20px;
 
 $headings-font-family: "Raleway";
 $headings-font-weight: 300;
-$brand-primary: #74A300;
+//
 
+// Dimensions
+$max-container-width: 940px;
+$margin: 16px;
+$navigation-height: 50px;
+
+
+// Colors
+$denim-blue: #3a5395;
+$darkish-pink: #e7486b;
+$red-pink: #fb366e;
+$charcoal-grey: #4a4a4c;
+$charcoal-grey-75: rgba(74, 74, 76, 0.75);
+$greyish-brown: #4a4a4a;
+$greyish: #a4a4a4;
+$pale-grey: #f2f4f6;
+$blue-grey: #9ba7bf;
+$light-blue-grey: #becce0;
+$powder-blue: #c2d5ff;
+$grey-blue: #7183a7;
+$silver: #d4d9de;
+$steel: #788795;
+$brand-primary: #1D96C7;
+$black: #0a1724;
+$steel: #788795;
+$black: #0a1724;
+$white-75: rgba(white, 0.75);
+$brand-primary: #74A300;
 $light-text-color: white;
 $text-color: rgba(black, 0.75);
-
 $anchor-offset: 100px;
 $community-color: #674492;
 $success-color: #58d158;
 $gray-light: #f3f3f3;
 $dark-blue: #0d1d30;
 $light-blue: lighten($dark-blue, 70%);
-
 $secondary-color: green;
-
-$navbar-height: 50px;
-
-
-$zendesk-green: #74A633;
+$zendesk-green: #78A300;
 $alert-info-bg: lighten($zendesk-green, 50%);
 $alert-info-text: $zendesk-green;
 $alert-info-border: lighten($zendesk-green, 10%);
-

@@ -1,0 +1,49 @@
+.btn {
+  background: $darkish-pink;
+  color: #fff;
+  border: 1px solid $red-pink;
+  height: 40px;
+  max-width: 140px;
+  line-height: 40px;
+  padding: 0 1em;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  transition: background 0.1s ease;
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: $red-pink;
+    color: #fff
+  }
+
+  &.btn-cta {
+    max-width: 230px;
+    margin: 32px auto;
+  }
+
+  &.btn-grey {
+    background: $silver;
+    border-color: $light-blue-grey;
+    border-width: 2px;
+    color: $grey-blue;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  &.btn-black {
+    background: #232e3a;
+    border-color: #1f3b5d;
+  }
+
+  &.btn-green {
+    background: $zendesk-green;
+    border-color: darken($zendesk-green, 5%);
+  }
+}
