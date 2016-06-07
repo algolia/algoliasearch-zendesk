@@ -165,8 +165,9 @@
     display: none;
     visibility: hidden;
     position: absolute;
-    top: 16px;
+    top: 12px;
     right: 8px;
+    color: #000;
 
     &:not(.device) {
       background: linear-gradient(#efefef, #ccc);
