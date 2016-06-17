@@ -7,6 +7,8 @@ import templates from './templates.js';
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
 
+import getOptionalWords from './stopwords.js';
+
 const XS_WIDTH = 400;
 const SM_WIDTH = 600;
 
@@ -117,7 +119,7 @@ class Autocomplete {
 
   _source(params) {
     return (query, callback) => {
-      this.index.search({...params, query})
+      this.index.search({...params, query, optionalWords: getOptionalWords(query, this.locale)})
         .then((content) => { callback(this._reorderedHits(content.hits)); });
     };
   }

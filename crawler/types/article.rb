@@ -5,7 +5,6 @@ module Zendesk
     INDEX_SETTINGS = {
       attributesToIndex: %w(title section.title category.title label_names unordered(body_safe)),
       attributesForFaceting: %w(label_names locale.name locale.locale category.title section.title section.full_path),
-      removeWordsIfNoResults: 'allOptional',
       customRanking: %w(asc(outdated) desc(promoted) desc(vote_sum) asc(position) desc(updated_at)),
       attributesToHighlight: %w(title section.title category.title label_names),
       attributesToSnippet: %w(body_safe:30)
