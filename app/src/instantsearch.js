@@ -4,6 +4,8 @@ import templates from './templates.js';
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
 
+import getOptionalWords from './stopwords.js';
+
 class InstantSearch {
   constructor({
     applicationId,
@@ -41,6 +43,14 @@ class InstantSearch {
         highlightPreTag: '<span class="ais-highlight">',
         highlightPostTag: '</span>',
         snippetEllipsisText: '...'
+      },
+      searchFunction: helper => {
+        const query = helper.state.query;
+        const locale = require('./I18n.js').locale;
+        const optionalWords = getOptionalWords(query, locale);
+        helper
+          .setQueryParameter('optionalWords', optionalWords)
+          .search();
       }
     });
   }

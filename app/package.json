@@ -30,7 +30,9 @@
     "autocomplete.js": "^0.16.2",
     "hogan.js": "^3.0.2",
     "instantsearch.js": "^1.4.0",
-    "lodash": "^4.3.0"
+    "lodash": "^4.3.0",
+    "stopwords": "https://github.com/6/stopwords/tarball/ccec79a4ba22d65eb095bc277d79a7ad8096552c",
+    "vietnamese-stopwords": "0.0.2"
   },
   "devDependencies": {
     "babel-core": "^6.9.0",
@@ -70,6 +72,7 @@
     "jsdom-global": "^1.6.1",
     "merge-stream": "^1.0.0",
     "mochawesome": "^1.2.2",
+    "stringify": "^5.1.0",
     "to-factory": "^1.0.0",
     "uglifyify": "^3.0.1",
     "vinyl-buffer": "^1.0.0",
