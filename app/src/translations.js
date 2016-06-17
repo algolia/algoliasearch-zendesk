@@ -237,10 +237,17 @@ const TRANSLATIONS = {
       return `${this.format_number(nb)} rezultat${nb > 1 ? 'e' : ''}`;
     },
     ru: function (nb) {
-      return nb > 1 ? `Найдено результатов: ${this.format_number(nb)}` : 'Найден 1 результат';
+      let suffix = '';
+      if (nb % 10 === 1 && nb % 100 !== 11) suffix = '';
+      else if (nb % 10 >= 2 && nb % 10 <= 4 && (nb % 100 < 10 || nb % 100 >= 20)) suffix = 'а';
+      else suffix = 'ов';
+      return `${this.format_number(nb)} результат${suffix}`;
     },
     sk: function (nb) {
-      return `${this.format_number(nb)} výsled${nb > 1 ? 'ok' : 'kov'}`;
+      let suffix = 'ok';
+      if (nb > 1) suffix = 'ky';
+      if (nb > 4) suffix = 'kov';
+      return `${this.format_number(nb)} výsled${suffix}`;
     },
     sv: function (nb) {
       return `${this.format_number(nb)} träff${nb > 1 ? 'ar' : ''}`;
@@ -252,7 +259,11 @@ const TRANSLATIONS = {
       return `${this.format_number(nb)} sonuç`;
     },
     uk: function (nb) {
-      return `${this.format_number(nb)} результат${nb > 1 ? 'ів' : ''}`;
+      let suffix = '';
+      if (nb % 10 === 1 && nb % 100 !== 11) suffix = '';
+      else if (nb % 10 >= 2 && nb % 10 <= 4 && (nb % 100 < 10 || nb % 100 >= 20)) suffix = 'и';
+      else suffix = '';
+      return `${this.format_number(nb)} результат${suffix}`;
     },
     vi: function (nb) {
       return `${this.format_number(nb)} kết quả được tìm`;
@@ -550,10 +561,13 @@ const TRANSLATIONS = {
       return `${this.nb_results(nbHits)} găsit${nbHits > 1 ? 'e' : ''} în ${processing} ms`;
     },
     ru: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} за ${processing} мс`;
+      return `${this.nb_results(nbHits)} знайдено за ${processing} мс`;
     },
     sk: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} nájdený${nbHits > 1 ? 'ch' : ''} za ${processing} ms`;
+      let suffix = 'ý';
+      if (nbHits > 1) suffix = 'é';
+      if (nbHits > 4) suffix = 'ých';
+      return `${this.nb_results(nbHits)} nájdený${suffix} za ${processing} ms`;
     },
     sv: function (nbHits, processing) {
       return `${this.nb_results(nbHits)} ${nbHits > 1 ? 'hittades' : ''} på ${processing} ms`;
