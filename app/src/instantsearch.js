@@ -64,7 +64,7 @@ class InstantSearch {
     translations
   }) {
     if (!enabled) return;
-    let I18n = require('I18n');
+    let I18n = require('./I18n.js');
     let searchBoxSelector;
 
     addCSS(templates.instantsearch.css.render({color, highlightColor}));
