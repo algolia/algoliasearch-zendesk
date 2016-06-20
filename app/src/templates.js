@@ -3,9 +3,9 @@ import Hogan from 'hogan.js';
 export default {
   autocomplete: {
     // Algolia logo
-    algolia: (
+    algolia: subdomain => (
 `<a
-  href="https://www.algolia.com/?utm_source=zendesk_hc&utm_medium=link&utm_campaign=autocomplete"
+  href="https://www.algolia.com/?utm_source=zendesk&utm_medium=link&utm_campaign=autocomplete-${subdomain}"
   class="aa-powered-by-link"
 >
   Algolia
@@ -213,7 +213,7 @@ export default {
 
     poweredBy: ({subdomain, translations}) => (
 `<div class="{{ cssClasses.root }}">
-  ${translations.search_by_algolia(`<a class="{{ cssClasses.link }}" href="https://www.algolia.com/?utm_source=zendesk&utm_medium=link&utm_campaign=${subdomain}" target="_blank">Algolia</a>`)}
+  ${translations.search_by_algolia(`<a class="{{ cssClasses.link }}" href="https://www.algolia.com/?utm_source=zendesk&utm_medium=link&utm_campaign=instantsearch-${subdomain}" target="_blank">Algolia</a>`)}
 </div>`
     )
   }

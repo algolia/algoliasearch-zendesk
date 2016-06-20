@@ -42,6 +42,7 @@ class Autocomplete {
     debug,
     highlightColor,
     poweredBy,
+    subdomain,
     translations
   }) {
     if (!enabled) return null;
@@ -88,7 +89,7 @@ class Autocomplete {
       let aa = autocomplete($input, {
         hint: false,
         debug: process.env.NODE_ENV === 'development' || debug,
-        templates: this._templates({poweredBy, translations})
+        templates: this._templates({poweredBy, subdomain, translations})
       }, [{
         source: this._source(params),
         name: 'articles',
@@ -153,11 +154,11 @@ class Autocomplete {
     return flattenedHits;
   }
 
-  _templates({poweredBy, translations}) {
+  _templates({poweredBy, subdomain, translations}) {
     let res = {};
     if (poweredBy === true) {
       res.header = templates.autocomplete.poweredBy.render({
-        content: translations.search_by_algolia(templates.autocomplete.algolia)
+        content: translations.search_by_algolia(templates.autocomplete.algolia(subdomain))
       });
     }
     return res;
