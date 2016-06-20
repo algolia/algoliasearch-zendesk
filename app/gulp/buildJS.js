@@ -4,6 +4,7 @@ import gulp from 'gulp';
 import babelify from 'babelify';
 import browserify from 'browserify';
 import envify from 'envify';
+import stringify from 'stringify';
 import uglifyify from 'uglifyify';
 import watchify from 'watchify';
 
@@ -55,6 +56,9 @@ function bundler({watch, prod} = {}) {
     res = watchify(res, {poll: true});
   }
   res = res
+    .transform({global: true}, stringify, {
+      appliesTo: {includeExtensions: ['.txt']}
+    })
     .transform(babelify)
     .transform(envify)
     .transform({global: true}, 'browserify-shim');

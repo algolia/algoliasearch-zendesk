@@ -7,6 +7,8 @@ import templates from './templates.js';
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
 
+import getOptionalWords from './stopwords.js';
+
 const XS_WIDTH = 400;
 const SM_WIDTH = 600;
 
@@ -82,7 +84,7 @@ class Autocomplete {
         snippetEllipsisText: '...'
       };
 
-      $input.setAttribute('placeholder', translations.placeholder_autocomplete);
+      $input.setAttribute('placeholder', translations.placeholder);
       let aa = autocomplete($input, {
         hint: false,
         debug: process.env.NODE_ENV === 'development' || debug,
@@ -117,7 +119,7 @@ class Autocomplete {
 
   _source(params) {
     return (query, callback) => {
-      this.index.search({...params, query})
+      this.index.search({...params, query, optionalWords: getOptionalWords(query, this.locale)})
         .then((content) => { callback(this._reorderedHits(content.hits)); });
     };
   }
@@ -154,7 +156,9 @@ class Autocomplete {
   _templates({poweredBy, translations}) {
     let res = {};
     if (poweredBy === true) {
-      res.header = templates.autocomplete.poweredBy.render({translations});
+      res.header = templates.autocomplete.poweredBy.render({
+        content: translations.search_by(templates.autocomplete.algolia)
+      });
     }
     return res;
   }
