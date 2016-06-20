@@ -1,6 +1,21 @@
-<a name="2.4.1"></a>
-## [2.4.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.1...v2.4.1) (2016-06-20)
+<a name="2.4.2"></a>
+## [2.4.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.2...v2.4.2) (2016-06-20)
 
+
+
+
+<a name="2.4.2"></a>
+## [2.4.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.1...v2.4.2) (2016-06-20)
+
+
+### Bug Fixes
+
+* **instantsearch:** call setQueryParameter on the actual helper ([71bb222](https://github.com/algolia/algoliasearch-zendesk/commit/71bb222))
+* **translations:** do not reuse string keys as functions ([06ddcf1](https://github.com/algolia/algoliasearch-zendesk/commit/06ddcf1))
+
+### Features
+
+* **translations:** add search_by_algolia for instantsearch ([9b2ab69](https://github.com/algolia/algoliasearch-zendesk/commit/9b2ab69))
 
 
 
