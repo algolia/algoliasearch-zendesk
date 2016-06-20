@@ -1,24 +1,6 @@
-<a name="2.4.0"></a>
-# [2.4.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.0...v2.4.0) (2016-06-17)
+<a name="2.3.4"></a>
+## [2.3.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.4...v2.3.4) (2016-06-06)
 
-
-
-
-<a name="2.4.0"></a>
-# [2.4.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.4...v2.4.0) (2016-06-17)
-
-
-### Bug Fixes
-
-* **instantsearch:** wrong I18n require ([d99901c](https://github.com/algolia/algoliasearch-zendesk/commit/d99901c))
-* **translations:** multiple plural forms update ([0f0e35d](https://github.com/algolia/algoliasearch-zendesk/commit/0f0e35d))
-
-### Features
-
-* **instantsearch:** add no result actions ([08184ce](https://github.com/algolia/algoliasearch-zendesk/commit/08184ce))
-* **library:** add translations for ~30 languages ([bd96717](https://github.com/algolia/algoliasearch-zendesk/commit/bd96717))
-* **relevance:** use optionalWords with stopwords ([e23ee06](https://github.com/algolia/algoliasearch-zendesk/commit/e23ee06))
-* **translations:** add translations framework ([d8c767e](https://github.com/algolia/algoliasearch-zendesk/commit/d8c767e))
 
 
 

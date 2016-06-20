@@ -4,8 +4,6 @@ import templates from './templates.js';
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
 
-import getOptionalWords from './stopwords.js';
-
 class InstantSearch {
   constructor({
     applicationId,
@@ -43,14 +41,6 @@ class InstantSearch {
         highlightPreTag: '<span class="ais-highlight">',
         highlightPostTag: '</span>',
         snippetEllipsisText: '...'
-      },
-      searchFunction: helper => {
-        const query = helper.state.query;
-        const locale = require('./I18n.js').locale;
-        const optionalWords = getOptionalWords(query, locale);
-        helper
-          .setQueryParameter('optionalWords', optionalWords)
-          .search();
       }
     });
   }
@@ -74,7 +64,7 @@ class InstantSearch {
     translations
   }) {
     if (!enabled) return;
-    let I18n = require('./I18n.js');
+    let I18n = require('I18n');
     let searchBoxSelector;
 
     addCSS(templates.instantsearch.css.render({color, highlightColor}));
@@ -112,7 +102,7 @@ class InstantSearch {
     this.instantsearch.addWidget(
       instantsearch.widgets.searchBox({
         container: searchBoxSelector,
-        placeholder: translations.placeholder,
+        placeholder: translations.placeholder_instantsearch,
         autofocus: true,
         poweredBy,
         cssClasses: {
@@ -125,7 +115,7 @@ class InstantSearch {
       instantsearch.widgets.stats({
         container: '#algolia-stats',
         templates: {
-          body: ({nbHits, processingTimeMS}) => translations.stats(nbHits, processingTimeMS)
+          body: templates.instantsearch.stats
         },
         transformData: (data) => ({
           ...data,
@@ -171,7 +161,7 @@ class InstantSearch {
       instantsearch.widgets.hits({
         container: '#algolia-hits',
         templates: {
-          empty: templates.instantsearch.noResult,
+          empty: templates.instantsearch.noResults,
           item: templates.instantsearch.hit
         },
         transformData: {
@@ -187,13 +177,8 @@ class InstantSearch {
       })
     );
 
-    let firstRender = true;
     this.instantsearch.on('render', () => {
       this._displayTimes();
-      if (firstRender) {
-        firstRender = false;
-        this._bindNoResultActions();
-      }
     });
 
     this.instantsearch.start();
@@ -247,25 +232,6 @@ class InstantSearch {
       }
       $elt.style.display = 'none';
     }
-  }
-
-  _bindNoResultActions() {
-    this.$container.addEventListener('click', (e) => {
-      for (let target = e.target; target && target !== this; target = target.parentNode) {
-        if (target.classList === undefined) continue;
-        if (target.classList.contains('ais-change-query')) {
-          this.instantsearch.helper.setQuery('').search();
-        }
-      }
-    }, false);
-    this.$container.addEventListener('click', (e) => {
-      for (let target = e.target; target && target !== this; target = target.parentNode) {
-        if (target.classList === undefined) continue;
-        if (target.classList.contains('ais-clear-filters')) {
-          this.instantsearch.helper.clearRefinements().search();
-        }
-      }
-    }, false);
   }
 
   _handleResponsiveness({responsive}) {
