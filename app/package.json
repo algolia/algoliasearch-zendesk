@@ -29,7 +29,7 @@
     "algoliasearch": "^3.9.2",
     "autocomplete.js": "^0.16.2",
     "hogan.js": "^3.0.2",
-    "instantsearch.js": "^1.4.0",
+    "instantsearch.js": "^1.6.0",
     "lodash": "^4.3.0",
     "stopwords": "https://github.com/6/stopwords/tarball/ccec79a4ba22d65eb095bc277d79a7ad8096552c",
     "vietnamese-stopwords": "0.0.2"

@@ -70,6 +70,7 @@ class InstantSearch {
     },
     poweredBy,
     responsive,
+    subdomain,
     translations
   }) {
     if (!enabled) return;
@@ -107,6 +108,12 @@ class InstantSearch {
         helper.toggleRefine('locale.locale', I18n.locale);
       }
     });
+
+    if (poweredBy === true) {
+      poweredBy = {
+        template: templates.instantsearch.poweredBy({subdomain, translations})
+      };
+    }
 
     this.instantsearch.addWidget(
       instantsearch.widgets.searchBox({

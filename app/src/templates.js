@@ -209,6 +209,12 @@ export default {
   <p>${translations.no_result_for(query)}</p>
   <p>${translations.no_result_actions()}</p>
 </div>`
+    ),
+
+    poweredBy: ({subdomain, translations}) => (
+`<div class="{{ cssClasses.root }}">
+  ${translations.search_by_algolia(`<a class="{{ cssClasses.link }}" href="https://www.algolia.com/?utm_source=zendesk&utm_medium=link&utm_campaign=${subdomain}" target="_blank">Algolia</a>`)}
+</div>`
     )
   }
 };
