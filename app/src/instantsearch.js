@@ -48,9 +48,8 @@ class InstantSearch {
         const query = helper.state.query;
         const locale = require('./I18n.js').locale;
         const optionalWords = getOptionalWords(query, locale);
-        helper
-          .setQueryParameter('optionalWords', optionalWords)
-          .search();
+        this.instantsearch.helper.setQueryParameter('optionalWords', optionalWords)
+        helper.search();
       }
     });
   }
