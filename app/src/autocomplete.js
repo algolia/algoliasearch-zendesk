@@ -157,7 +157,7 @@ class Autocomplete {
     let res = {};
     if (poweredBy === true) {
       res.header = templates.autocomplete.poweredBy.render({
-        content: translations.search_by(templates.autocomplete.algolia)
+        content: translations.search_by_algolia(templates.autocomplete.algolia)
       });
     }
     return res;

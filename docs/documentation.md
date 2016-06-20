@@ -212,7 +212,7 @@ translations: {
       return this.format_number(nb) + ' result' + (nb > 1 ? 's' : '');
     }
   },
-  no_result: {
+  no_result_for: {
     'en-us': function (query) {
       return 'No result found for ' + this.quoted(query);
     }
@@ -233,7 +233,7 @@ translations: {
       return this.nb_results(nbHits) + ' found in ' + processing + ' ms';
     }
   },
-  search_by: {
+  search_by_algolia: {
     'en-us': function (algolia) { return 'Search by ' + algolia; }
   },
   tags: {

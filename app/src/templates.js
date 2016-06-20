@@ -206,7 +206,7 @@ export default {
 
     noResult: ({query, translations}) => (
 `<div id="no-results-message">
-  <p>${translations.no_result(query)}</p>
+  <p>${translations.no_result_for(query)}</p>
   <p>${translations.no_result_actions()}</p>
 </div>`
     )

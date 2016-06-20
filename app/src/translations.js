@@ -275,7 +275,7 @@ const TRANSLATIONS = {
       return `${this.format_number(nb)} 項結果`;
     }
   },
-  no_result: {
+  no_result_for: {
     ar: function (query) {
       return `لم يتم العثور على نتائج لصالح ${this.quoted(query)}`;
     },
@@ -591,7 +591,7 @@ const TRANSLATIONS = {
       return `${processing} 毫秒內搜尋到 ${this.nb_results(nbHits)}`;
     }
   },
-  search_by: {
+  search_by_algolia: {
     ar: algolia => `البحث بواسطة ${algolia}`,
     bg: algolia => `Търсене по ${algolia}`,
     cs: algolia => `Vyhledávat s využitím služby ${algolia}`,
