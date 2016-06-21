@@ -1,6 +1,16 @@
-<a name="2.4.2"></a>
-## [2.4.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.2...v2.4.2) (2016-06-20)
+<a name="2.4.3"></a>
+## [2.4.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.3...v2.4.3) (2016-06-21)
 
+
+
+
+<a name="2.4.3"></a>
+## [2.4.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.2...v2.4.3) (2016-06-21)
+
+
+### Bug Fixes
+
+* **utm:** consistent utms ([3d94c85](https://github.com/algolia/algoliasearch-zendesk/commit/3d94c85))
 
 
 
