@@ -1,3 +1,8 @@
+// Small hack to remove verticalAlign on the input
+import css from 'autocomplete.js/src/autocomplete/css.js'
+delete css.input.verticalAlign;
+delete css.inputWithNoHint.verticalAlign;
+
 import autocomplete from 'autocomplete.js';
 
 import algoliasearch from 'algoliasearch';
