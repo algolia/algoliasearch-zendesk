@@ -32,6 +32,7 @@
     "instantsearch.js": "^1.6.0",
     "lodash": "^4.3.0",
     "stopwords": "https://github.com/6/stopwords/tarball/ccec79a4ba22d65eb095bc277d79a7ad8096552c",
+    "unorm": "^1.4.1",
     "vietnamese-stopwords": "0.0.2"
   },
   "devDependencies": {

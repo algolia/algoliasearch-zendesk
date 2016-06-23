@@ -1,3 +1,5 @@
+import unorm from 'unorm';
+
 import regexpEscape from './regexpEscape.js';
 
 /* Languages stopwords */
@@ -84,13 +86,13 @@ let CURRENT_STOPWORDS = null;
 export default function getStopWords(query, lang) {
   if (CURRENT_STOPWORDS === null) {
     CURRENT_STOPWORDS = (STOPWORDS[lang] || [])
-      .map(word => word.normalize('NFC'))
+      .map(word => unorm.nfc(word))
       .map(word => [
         word,
         new RegExp(`(^|\\s)${regexpEscape(word)}(\\s|$)`, 'i')
       ]);
   }
-  query = query.normalize('NFC');
+  query = unorm.nfc(query);
   return CURRENT_STOPWORDS
     .filter(([, reg]) => reg.test(query))
     .map(([word]) => word);
