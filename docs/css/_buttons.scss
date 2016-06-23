@@ -25,8 +25,10 @@
   }
 
   &.btn-cta {
+    display: inline-block;
     max-width: 230px;
-    margin: 32px auto;
+    padding: 0 4em;
+    margin: 32px 8px;
   }
 
   &.btn-grey {
@@ -40,6 +42,11 @@
   &.btn-black {
     background: #232e3a;
     border-color: #1f3b5d;
+  }
+
+  &.btn-transparent {
+    background: transparent;
+    border-color: #fff;
   }
 
   &.btn-green {

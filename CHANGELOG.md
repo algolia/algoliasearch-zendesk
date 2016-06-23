@@ -1,6 +1,71 @@
-<a name="2.3.4"></a>
-## [2.3.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.4...v2.3.4) (2016-06-06)
+<a name="2.4.5"></a>
+## [2.4.5](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.5...v2.4.5) (2016-06-23)
 
+
+
+
+<a name="2.4.5"></a>
+## [2.4.5](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.4...v2.4.5) (2016-06-23)
+
+
+### Bug Fixes
+
+* **normalize:** String.normalize is ES6, use shim ([64f9d75](https://github.com/algolia/algoliasearch-zendesk/commit/64f9d75))
+
+
+
+<a name="2.4.4"></a>
+## [2.4.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.3...v2.4.4) (2016-06-22)
+
+
+
+
+<a name="2.4.3"></a>
+## [2.4.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.2...v2.4.3) (2016-06-21)
+
+
+### Bug Fixes
+
+* **utm:** consistent utms ([3d94c85](https://github.com/algolia/algoliasearch-zendesk/commit/3d94c85))
+
+
+
+<a name="2.4.2"></a>
+## [2.4.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.1...v2.4.2) (2016-06-20)
+
+
+### Bug Fixes
+
+* **instantsearch:** call setQueryParameter on the actual helper ([71bb222](https://github.com/algolia/algoliasearch-zendesk/commit/71bb222))
+* **translations:** do not reuse string keys as functions ([06ddcf1](https://github.com/algolia/algoliasearch-zendesk/commit/06ddcf1))
+
+### Features
+
+* **translations:** add search_by_algolia for instantsearch ([9b2ab69](https://github.com/algolia/algoliasearch-zendesk/commit/9b2ab69))
+
+
+
+<a name="2.4.1"></a>
+## [2.4.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.0...v2.4.1) (2016-06-20)
+
+
+
+
+<a name="2.4.0"></a>
+# [2.4.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.3.4...v2.4.0) (2016-06-17)
+
+
+### Bug Fixes
+
+* **instantsearch:** wrong I18n require ([d99901c](https://github.com/algolia/algoliasearch-zendesk/commit/d99901c))
+* **translations:** multiple plural forms update ([0f0e35d](https://github.com/algolia/algoliasearch-zendesk/commit/0f0e35d))
+
+### Features
+
+* **instantsearch:** add no result actions ([08184ce](https://github.com/algolia/algoliasearch-zendesk/commit/08184ce))
+* **library:** add translations for ~30 languages ([bd96717](https://github.com/algolia/algoliasearch-zendesk/commit/bd96717))
+* **relevance:** use optionalWords with stopwords ([e23ee06](https://github.com/algolia/algoliasearch-zendesk/commit/e23ee06))
+* **translations:** add translations framework ([d8c767e](https://github.com/algolia/algoliasearch-zendesk/commit/d8c767e))
 
 
 

@@ -1,3 +1,8 @@
+// Small hack to remove verticalAlign on the input
+import css from 'autocomplete.js/src/autocomplete/css.js'
+delete css.input.verticalAlign;
+delete css.inputWithNoHint.verticalAlign;
+
 import autocomplete from 'autocomplete.js';
 
 import algoliasearch from 'algoliasearch';
@@ -6,6 +11,8 @@ import 'es6-collections';
 import templates from './templates.js';
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
+
+import getOptionalWords from './stopwords.js';
 
 const XS_WIDTH = 400;
 const SM_WIDTH = 600;
@@ -40,6 +47,7 @@ class Autocomplete {
     debug,
     highlightColor,
     poweredBy,
+    subdomain,
     translations
   }) {
     if (!enabled) return null;
@@ -82,11 +90,11 @@ class Autocomplete {
         snippetEllipsisText: '...'
       };
 
-      $input.setAttribute('placeholder', translations.placeholder_autocomplete);
+      $input.setAttribute('placeholder', translations.placeholder);
       let aa = autocomplete($input, {
         hint: false,
         debug: process.env.NODE_ENV === 'development' || debug,
-        templates: this._templates({poweredBy, translations})
+        templates: this._templates({poweredBy, subdomain, translations})
       }, [{
         source: this._source(params),
         name: 'articles',
@@ -117,7 +125,7 @@ class Autocomplete {
 
   _source(params) {
     return (query, callback) => {
-      this.index.search({...params, query})
+      this.index.search({...params, query, optionalWords: getOptionalWords(query, this.locale)})
         .then((content) => { callback(this._reorderedHits(content.hits)); });
     };
   }
@@ -151,10 +159,12 @@ class Autocomplete {
     return flattenedHits;
   }
 
-  _templates({poweredBy, translations}) {
+  _templates({poweredBy, subdomain, translations}) {
     let res = {};
     if (poweredBy === true) {
-      res.header = templates.autocomplete.poweredBy.render({translations});
+      res.header = templates.autocomplete.poweredBy.render({
+        content: translations.search_by_algolia(templates.autocomplete.algolia(subdomain))
+      });
     }
     return res;
   }

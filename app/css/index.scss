@@ -22,6 +22,7 @@
 
 .algolia-autocomplete {
   width: 100%;
+  line-height: normal;
 }
 
 .aa-input {
@@ -407,6 +408,10 @@
       display: none;
     }
   }
+}
+
+.ais-link {
+  cursor: pointer;
 }
 
 .ais-hits__empty {

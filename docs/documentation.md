@@ -70,27 +70,7 @@ Here is a full breakdown of the available options for the JavaScript library:
       enabled: true,
       tagsLimit: 15             // Maximum number of tags to display
     },
-    translations: {             // These accept strings or objects associating locale with value
-                                // e.g. {
-                                //   found_in: {
-                                //     'en-us': 'Found in',
-                                //     'fr': 'En'
-                                //   }
-                                // }
-      article: 'Article',
-      articles: 'Articles',
-      categories: 'Categories',
-      filter: 'Filter results',
-      found_in: 'Found in',
-      no_result: 'No result',
-      placeholder_autocomplete: 'Search in sections and articles',
-      placeholder_instantsearch: 'Search in articles',
-      result: 'Result',
-      results: 'Results',
-      search_by: 'Search by',
-      sections: 'Sections',
-      tags: 'Tags'
-    }
+    translations: {}            // Translation strings
   });
 </script>
 ```
@@ -127,83 +107,137 @@ Just set `debug: true` to avoid this behaviour.
 
 ## Supporting multiple languages
 
-Out of the box, the library limits the results to the currently selected language.
-However, some constant strings like the ones used in the sentence "12 results found in 1ms" need to be translated in your language. In order to do so, you need to use the `translations` parameter described in the documentation above.
+### Description
 
-If you're using only one language in your Help Center, just pass the strings of this specific language. For example, for French, you might want to pass:
+This library supports out of the box Help Centers with multiple languages.
+
+1. The results sent to the user are always limited to the ones in the currently selected locale.
+
+2. Some constant strings like the ones used in the sentence "12 results found in 1ms" need to be translated.
+   The library already supports these locales:
+
+   - __ar__: العربية / Arabic
+   - __ar-eg__: العربية (مصر) / Arabic (Egypt)
+   - __bg__: Български / Bulgarian
+   - __cs__: Čeština / Czech
+   - __da__: Dansk / Danish
+   - __de__: Deutsch / German
+   - __de-at__: Deutsch (Österreich) / German (Austria)
+   - __de-ch__: Deutsch (Schweiz) / German (Switzerland)
+   - __el__: Ελληνικά / Greek
+   - __en-au__: English (Australia)
+   - __en-ca__: English (Canada)
+   - __en-gb__: English (Great Britain)
+   - __en-ie__: English (Ireland)
+   - __en-us__: English (United States)
+   - __es__: Español / Spanish
+   - __es-es__: Español (España) / Spanish (Spain)
+   - __es-419__: Español (Latinoamérica) / Spanish (Latin America)
+   - __fi__: Suomi / Finnish
+   - __fr__: Français / French
+   - __fr-be__: Français (Belgique) / French (Belgium)
+   - __fr-ca__: Français (Canada) / French (Canada)
+   - __fr-ch__: Français (Suisse) / French (Switzerland)
+   - __fr-fr__: Français (France) / French (France)
+   - __hu__: Magyar / Hungarian
+   - __id__: Bahasa Indonesia / Indonesian
+   - __it__: Italiano / Italian
+   - __ja__: 日本語 / Japanese
+   - __ko__: 한국어 / Korean
+   - __nl__: Nederlands / Dutch
+   - __nl-be__: Nederlands (België) / Dutch (Belgium)
+   - __no__: Norsk / Norwegian
+   - __pl__: Polski / Polish
+   - __pt__: Português / Portuguese
+   - __pt-br__: Português do Brasil / Brazilian Portuguese
+   - __ro__: Română / Romanian
+   - __ru__: Русский / Russian
+   - __sk__: Slovenčina / Slovak
+   - __sv__: Svenska / Swedish
+   - __th__: ไทย / Thai
+   - __tr__: Türkçe / Turkish
+   - __uk__: Українська / Ukrainian
+   - __vi__: Tiếng Việt / Vietnamese
+   - __zh-cn__: 简体中文 / Simplified Chinese
+   - __zh-tw__: 繁體中文 / Traditional Chinese
+
+   If you want to support another locale, please help us by [opening an issue on GitHub][locale_issue].
+
+<!--
+  In browser console edition of this link:
+
+  var body = encodeURIComponent("\u003C!\u2212\u2212\n  To improve the extension, we need your help!\n  We only need to know how to write a few sentences in the language you want us to add.\n  Can you help us translate them? :)\n\u2212\u2212\u003E\n\nTranslations:\n\n```txt\nSearch in our articles: \nSearch by Algolia: \nNo result found for \"xxx\": \n\"change your query\" or \"clear your filters\": \n1 result found in XXXms: \n2,000 results found in XXXms: \nCategories: \nTags (in the \"Labels\" meaning): \nFilter results: \n```\n\nIs there more than 1 plural form? [Yes/No]\nHow do you write big numbers? [20,000]");
+  var title = encodeURIComponent("Missing locale: [en-us]")
+  "https://github.com/algolia/algoliasearch-zendesk/issues/new?title=" + title + "&body=" + body
+-->
+
+  [locale_issue]: https://github.com/algolia/algoliasearch-zendesk/issues/new?title=Missing%20locale%3A%20%5Ben-us%5D&body=%3C!%E2%88%92%E2%88%92%0A%20%20To%20improve%20the%20extension%2C%20we%20need%20your%20help!%0A%20%20We%20only%20need%20to%20know%20how%20to%20write%20a%20few%20sentences%20in%20the%20language%20you%20want%20us%20to%20add.%0A%20%20Can%20you%20help%20us%20translate%20them%3F%20%3A)%0A%E2%88%92%E2%88%92%3E%0A%0ATranslations%3A%0A%0A%60%60%60txt%0ASearch%20in%20our%20articles%3A%20%0ASearch%20by%20Algolia%3A%20%0ANo%20result%20found%20for%20%22xxx%22%3A%20%0A%22change%20your%20query%22%20or%20%22clear%20your%20filters%22%3A%20%0A1%20result%20found%20in%20XXXms%3A%20%0A2%2C000%20results%20found%20in%20XXXms%3A%20%0ACategories%3A%20%0ATags%20(in%20the%20%22Labels%22%20meaning)%3A%20%0AFilter%20results%3A%20%0A%60%60%60%0A%0AIs%20there%20more%20than%201%20plural%20form%3F%20%5BYes%2FNo%5D%0AHow%20do%20you%20write%20big%20numbers%3F%20%5B20%2C000%5D
+
+
+### Modifying translations
+
+If some translations don't fit what you want, you can change them using this syntax:
 
 ```coffee
 translations: {
-  article: 'Article',
-  articles: 'Articles',
-  categories: 'Catégories',
-  found_in: 'Trouvés en',
-  no_result: 'Aucun résultat',
-  placeholder_autocomplete: 'Rechercher dans les articles et sections',
-  placeholder_instantsearch: 'Rechercher dans les articles',
-  result: 'Résultat',
-  results: 'Résultats',
-  search_by: 'Recherche par',
-  sections: 'Sections',
-  tags: 'Tags'
+  placeholder: {
+    de: 'In unseren Help Center suchen',
+    'en-us': 'Search in our Help Center',
+    fr: 'Recherchez dans notre Help Center'
+  }
 }
 ```
 
-If you want to support multiple languages though, you'll need to pass for each key an object using *locales* as key. The locale is `en-us` in `yoursupport.zendesk.com/hc/en-us`. For example, for English and French, you might want to pass:
+For reference, here is the list of all the translations for the `en-us` locale:
 
 ```coffee
 translations: {
-  article: {
-    'en-us': 'Article',
-    'fr': 'Article'
-  },
-  articles: {
-    'en-us': 'Articles',
-    'fr': 'Articles'
-  },
   categories: {
-    'en-us': 'Categories',
-    'fr': 'Catégories'
+    'en-us': 'Categories'
+  },
+  change_query: {
+    'en-us': 'Change your query'
+  },
+  clear_filters: {
+    'en-us': 'clear your filters'
+  },
+  format_number: {
+    'en-us': function (n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
   },
   filter: {
-    'en-us': 'Filter results',
-    'fr': 'Filtrer les résultats'
+    'en-us': 'Filter results'
   },
-  found_in: {
-    'en-us': 'Found in',
-    'fr': 'Trouvés en'
+  nb_results: {
+    'en-us': function (nb) {
+      return this.format_number(nb) + ' result' + (nb > 1 ? 's' : '');
+    }
   },
-  no_result: {
-    'en-us': 'No result',
-    'fr': 'Aucun résultat'
+  no_result_for: {
+    'en-us': function (query) {
+      return 'No result found for ' + this.quoted(query);
+    }
   },
-  placeholder_autocomplete: {
-    'en-us': 'Search in articles and sections',
-    'fr': 'Rechercher dans les articles et sections'
+  no_result_actions: {
+    'en-us': function () {
+      return this.change_query + ' or ' + this.clear_filters;
+    }
   },
-  placeholder_instantsearch: {
-    'en-us': 'Search in articles',
-    'fr': 'Rechercher dans les articles'
+  placeholder: {
+    'en-us': 'Search in our articles'
   },
-  result: {
-    'en-us': 'Result',
-    'fr': 'Résultat'
+  quoted: {
+    'en-us': function (text) { return '"' + escapeHTML(text) + '"'; }
   },
-  results: {
-    'en-us': 'Results',
-    'fr': 'Résultats'
+  stats: {
+    'en-us': function (nbHits, processing) {
+      return this.nb_results(nbHits) + ' found in ' + processing + ' ms';
+    }
   },
-  search_by: {
-    'en-us': 'Search by',
-    'fr': 'Recherche par'
-  },
-  sections: {
-    'en-us': 'Sections',
-    'fr': 'Sections'
+  search_by_algolia: {
+    'en-us': function (algolia) { return 'Search by ' + algolia; }
   },
   tags: {
-    'en-us': 'Tags',
-    'fr': 'Tags'
+    'en-us': 'Tags'
   }
 }
 ```
