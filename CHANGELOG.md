@@ -1,6 +1,16 @@
-<a name="2.4.4"></a>
-## [2.4.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.4...v2.4.4) (2016-06-22)
+<a name="2.4.5"></a>
+## [2.4.5](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.5...v2.4.5) (2016-06-23)
 
+
+
+
+<a name="2.4.5"></a>
+## [2.4.5](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.4...v2.4.5) (2016-06-23)
+
+
+### Bug Fixes
+
+* **normalize:** String.normalize is ES6, use shim ([64f9d75](https://github.com/algolia/algoliasearch-zendesk/commit/64f9d75))
 
 
 
