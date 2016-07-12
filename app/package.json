@@ -33,7 +33,8 @@
     "lodash": "^4.3.0",
     "stopwords": "https://github.com/6/stopwords/tarball/ccec79a4ba22d65eb095bc277d79a7ad8096552c",
     "unorm": "^1.4.1",
-    "vietnamese-stopwords": "0.0.2"
+    "vietnamese-stopwords": "0.0.2",
+    "webdriverio": "^4.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.9.0",
@@ -90,7 +91,7 @@
     "lint": "gulp lint",
     "start": "npm run dev",
     "server": "gulp server",
-    "test:coverage": "gulp test:coverage",
+    "test:coverage": "node test/integration.js && gulp test:coverage",
     "test": "gulp test"
   }
 }
