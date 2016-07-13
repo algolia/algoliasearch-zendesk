@@ -28,15 +28,31 @@ class Crawler
 
   def crawl type
     count = ZendeskAPI::CLIENT.send(type.plural).count
-    i = 0
+    i = 1
     ZendeskAPI::CLIENT.send(type.plural).all do |obj|
-      set type, obj
-      puts "#{type.plural.capitalize}: #{i += 1}/#{count}"
+      set(type, obj)
+      puts "#{type.plural.capitalize}: #{i}/#{count}"
       STDOUT.flush
+      i += 1
     end
   end
 
-  def index type
-    type.index(@data[type.plural].values)
+  def crawl_and_index type
+    count = ZendeskAPI::CLIENT.send(type.plural).count
+    i = 1
+    last = []
+    type.start_indexing
+    ZendeskAPI::CLIENT.send(type.plural).all do |obj|
+      last << set(type, obj)
+      if i % 100 == 0
+        type.index(last)
+        last = []
+      end
+      puts "#{type.plural.capitalize}: #{i}/#{count}"
+      STDOUT.flush
+      i += 1
+    end
+    type.index last
+    type.finish_indexing
   end
 end
