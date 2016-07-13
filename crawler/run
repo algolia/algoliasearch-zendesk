@@ -2,8 +2,4 @@
 
 require_relative './crawler.rb'
 
-crawler = Crawler.new
-crawler.crawl Zendesk::Section
-crawler.crawl Zendesk::Article
-
-crawler.index Zendesk::Article
+Crawler.new.crawl_and_index Zendesk::Article
