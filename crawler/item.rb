@@ -26,7 +26,8 @@ module Zendesk
       end
 
       def index_settings
-        DEFAULT_INDEX_SETTINGS.merge(self::INDEX_SETTINGS)
+        return DEFAULT_INDEX_SETTINGS.merge(self::INDEX_SETTINGS) if first_indexing?
+        old_settings
       end
 
       def start_indexing
@@ -49,23 +50,20 @@ module Zendesk
       private
 
       def target_index
-        return @target_index unless @target_index.nil?
-        Algolia::Index.new(index_name).get_settings
-      rescue => e
-        return @target_index = Algolia::Index.new(index_name) if e.code == 404
-        raise
-      else
-        @target_index = Algolia::Index.new("#{index_name}.tmp")
+        Algolia::Index.new("#{index_name}#{'.tmp' unless first_indexing?}")
       end
 
       def first_indexing?
         return @first_indexing unless @first_indexing.nil?
-        Algolia::Index.new(index_name).get_settings
+        @first_indexing = old_settings == false
+      end
+
+      def old_settings
+        return @old_settings unless @old_settings.nil?
+        @old_settings = Algolia::Index.new(index_name).get_settings
       rescue => e
-        return @first_indexing = true if e.code == 404 && e.message =~ 'Index does not exist'
+        return @old_settings = false if e.code == 404 && e.message =~ /Index does not exist/
         raise
-      else
-        return false
       end
     end
 
