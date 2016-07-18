@@ -1,6 +1,16 @@
-<a name="2.4.5"></a>
-## [2.4.5](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.5...v2.4.5) (2016-06-23)
+<a name="2.5.0"></a>
+# [2.5.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.5.0...v2.5.0) (2016-07-18)
 
+
+
+
+<a name="2.5.0"></a>
+# [2.5.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.5...v2.5.0) (2016-07-18)
+
+
+### Features
+
+* **crawler:** index while crawling (#56) ([6015d40](https://github.com/algolia/algoliasearch-zendesk/commit/6015d40))
 
 
 
