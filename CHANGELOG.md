@@ -1,6 +1,16 @@
-<a name="2.5.0"></a>
-# [2.5.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.5.0...v2.5.0) (2016-07-18)
+<a name="2.6.0"></a>
+# [2.6.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.0...v2.6.0) (2016-07-18)
 
+
+
+
+<a name="2.6.0"></a>
+# [2.6.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.5.0...v2.6.0) (2016-07-18)
+
+
+### Features
+
+* **crawler:** only set default settings the first time ([ff439cc](https://github.com/algolia/algoliasearch-zendesk/commit/ff439cc))
 
 
 
