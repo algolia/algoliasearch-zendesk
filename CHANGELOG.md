@@ -1,6 +1,16 @@
-<a name="2.6.0"></a>
-# [2.6.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.0...v2.6.0) (2016-07-18)
+<a name="2.6.1"></a>
+## [2.6.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.1...v2.6.1) (2016-07-25)
 
+
+
+
+<a name="2.6.1"></a>
+## [2.6.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.0...v2.6.1) (2016-07-25)
+
+
+### Bug Fixes
+
+* **translations:** correct english placeholder ([19962ed](https://github.com/algolia/algoliasearch-zendesk/commit/19962ed)), closes [#57](https://github.com/algolia/algoliasearch-zendesk/issues/57)
 
 
 
