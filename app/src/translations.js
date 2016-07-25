@@ -463,7 +463,7 @@ const TRANSLATIONS = {
     da: 'Søg i vores artikler',
     de: 'In unseren Artikeln suchen',
     el: 'Κάντε αναζήτηση στα άρθρα μας',
-    en: 'Search in our articles',
+    en: 'Search our articles',
     es: 'Buscar en nuestros artículos',
     fi: 'Etsi artikkeleista',
     fr: 'Recherchez dans nos articles',
