@@ -53,6 +53,8 @@ class Autocomplete {
     if (!enabled) return null;
 
     this.$inputs = document.querySelectorAll(inputSelector);
+    this.$inputs = Array.prototype.slice.call(this.$inputs, 0); // Transform to array
+    this._disableZendeskAutocomplete();
 
     this.locale = require('./I18n.js').locale;
 
@@ -194,6 +196,18 @@ class Autocomplete {
   _temporaryHidingCancel() {
     removeCSS(this._temporaryHidingCSS);
     delete this._temporaryHidingCSS;
+  }
+
+  _disableZendeskAutocomplete() {
+    if (document.querySelector('[data-search][data-instant=true]')) {
+      console.log('[Algolia][Warning] You should remove `instant=true` from your templates to save resources');
+      for (var i = 0; i < this.$inputs.length; ++i) {
+        var $input = this.$inputs[i];
+        var $new = $input.cloneNode();
+        $input.parentNode.replaceChild($new, $input);
+        this.$inputs[i] = $new;
+      }
+    }
   }
 }
 export default (...args) => new Autocomplete(...args);
