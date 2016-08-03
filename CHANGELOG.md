@@ -1,6 +1,16 @@
-<a name="2.6.2"></a>
-## [2.6.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.2...v2.6.2) (2016-07-28)
+<a name="2.6.3"></a>
+## [2.6.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.3...v2.6.3) (2016-08-03)
 
+
+
+
+<a name="2.6.3"></a>
+## [2.6.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.2...v2.6.3) (2016-08-03)
+
+
+### Bug Fixes
+
+* **autocomplete:** warning + disable Zendesk's autocomplete if present ([eb4fe66](https://github.com/algolia/algoliasearch-zendesk/commit/eb4fe66))
 
 
 
