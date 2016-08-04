@@ -252,7 +252,14 @@ translations: {
 
 ### Zendesk Community search
 
-We do not index community forums for now. If you're using them, you'll probably want to disable `instantsearch` by setting `enabled: false` and just provide the auto-complete feature on your home page.
+We do not index community forums for now. If you're using them, you'll probably want to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
+
+### Indexing private articles
+
+Since we're providing a front-end search, and we can't securely know which access a user has in Zendesk's templates, we have to limit our indexing to public articles only.  
+A public article is not a draft and its access policy is `everybody`.  
+If you're in such a scenario, we recommend you to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
+
 
 ## Development
 
