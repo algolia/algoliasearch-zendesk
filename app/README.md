@@ -62,23 +62,26 @@ Here is a full breakdown of the available options for the JavaScript library:
     //
     // Optional configuration:
     //
-    indexPrefix: 'zendesk_',    // or your custom <INDEX_PREFIX>
-    baseUrl: '/hc/',            // the base URL of your Help Center
-    poweredBy: true,            // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
-    debug: false,               // debug mode prevents the autocomplete to close when trying to inspect it
-    color: '#D4D4D4',           // main color (used for links)
-    highlightColor: '#D4D4D4',  // highlight color to emphasize matching text
-    responsive: true,           // responsive instantsearch page
+    indexPrefix: 'zendesk_',              // or your custom <INDEX_PREFIX>
+    baseUrl: '/hc/',                      // the base URL of your Help Center
+    poweredBy: true,                      // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
+    debug: false,                         // debug mode prevents the autocomplete to close when trying to inspect it
+    color: '#D4D4D4',                     // main color (used for links)
+    highlightColor: '#D4D4D4',            // highlight color to emphasize matching text
+    responsive: true,                     // responsive instantsearch page
     autocomplete: {
-      enabled: true,            // is the autocomplete feature enabled?
-      inputSelector: '#query',  // the DOM selector to select the search box
-      hits: 5                   // the number of suggestions to display
+      enabled: true,                      // is the autocomplete feature enabled?
+      inputSelector: '#query',            // the DOM selector to select the search box
+      hits: 5                             // the number of suggestions to display
     },
     instantsearch: {
-      enabled: true,
-      tagsLimit: 15             // Maximum number of tags to display
+      enabled: true,                      // is the instantsearch feature enabled?
+      paginationSelector: '.pagination',  // the DOM selector for the current pagination (to hide it)
+      reuseAutocomplete: false,           // do not add a search input for the instant-search page
+      selector: '.search-results',        // the DOM selector for the results container
+      tagsLimit: 15                       // maximum number of tags to display
     },
-    translations: {}            // Translation strings
+    translations: {}                      // translation strings
   });
 </script>
 ```
