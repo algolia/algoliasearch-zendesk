@@ -85,11 +85,11 @@ module Zendesk
       @data.nil ? [] : [@data]
     end
 
-    protected
-
     def exists?
       !@data.nil?
     end
+
+    protected
 
     def fetch obj
       return obj unless obj.is_a? Integer

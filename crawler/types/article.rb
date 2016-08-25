@@ -19,12 +19,15 @@ module Zendesk
       @crawler.get Section, @zendesk_obj.section_id
     end
 
-    protected
-
     def ignore? t
-      ap = @zendesk_obj.section.access_policy['access_policy']['viewable_by']
-      super(t) || @zendesk_obj.draft || t.draft || ap != 'everybody'
+      super(t) ||
+        @zendesk_obj.draft ||
+        t.draft ||
+        !section.exists?(t.locale) ||
+        section.ignore?(t)
     end
+
+    protected
 
     def selected
       keys = %i(promoted position vote_sum comments_disabled label_names)

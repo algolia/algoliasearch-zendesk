@@ -12,11 +12,17 @@ module Zendesk
       @crawler.get Category, @zendesk_obj.category_id
     end
 
+    def ignore? t
+      super(t) ||
+        !category.exists?(t.locale) ||
+        category.ignore?(t) ||
+        access_policy != 'everybody'
+    end
+
     protected
 
-    def ignore? t
-      ap = @zendesk_obj.access_policy['access_policy']['viewable_by']
-      super(t) || ap != 'everybody'
+    def access_policy
+      @zendesk_obj.access_policy['access_policy']['viewable_by']
     end
 
     def translation t
