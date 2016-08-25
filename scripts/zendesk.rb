@@ -5,7 +5,7 @@ require 'logger'
 require 'zendesk_api'
 require 'pry'
 
-CONFIG = YAML.load_file 'config.yml'
+CONFIG = YAML.load_file '../config.yml'
 
 module ZendeskAPI
   class Article < Resource; end
@@ -68,7 +68,7 @@ module ZendeskAPI
 end
 
 zendesk = ZendeskAPI::Client.new do |config|
-  config.url = CONFIG['zendesk']['url']
+  config.url = "https://#{CONFIG['zendesk']['subdomain']}.zendesk.com/api/v2"
   if CONFIG['zendesk']['oauth_token'].nil?
     config.username = CONFIG['zendesk']['email']
     config.token = CONFIG['zendesk']['api_key']
@@ -80,3 +80,5 @@ end
 zendesk.tickets.include(:comments)
 
 binding.pry
+
+puts
