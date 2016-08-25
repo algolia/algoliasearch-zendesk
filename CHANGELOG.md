@@ -1,6 +1,16 @@
-<a name="2.6.3"></a>
-## [2.6.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.3...v2.6.3) (2016-08-03)
+<a name="2.6.4"></a>
+## [2.6.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.4...v2.6.4) (2016-08-25)
 
+
+
+
+<a name="2.6.4"></a>
+## [2.6.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.3...v2.6.4) (2016-08-25)
+
+
+### Bug Fixes
+
+* **crawler:** do not index article with ignored section ([0a01ff3](https://github.com/algolia/algoliasearch-zendesk/commit/0a01ff3))
 
 
 
