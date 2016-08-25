@@ -105,7 +105,7 @@ class InstantSearch {
       getConfiguration: () => ({facets: ['locale.locale']}),
       init: ({helper}) => {
         // Filter by language
-        helper.toggleRefine('locale.locale', I18n.locale);
+        helper.addFacetRefinement('locale.locale', I18n.locale);
       }
     });
 
