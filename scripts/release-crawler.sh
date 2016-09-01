@@ -33,6 +33,7 @@ done
 
 # Build image, tag it and push
 cd crawler/
+echo $ALGOLIASEARCH_ZENDESK_VERSION > VERSION
 docker build -t $CONNECTOR_NAME .
 img=`docker images -q ${CONNECTOR_NAME}:latest`
 docker tag $img ${CONNECTOR_NAME}:v$major_tag
