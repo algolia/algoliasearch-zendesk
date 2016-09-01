@@ -61,7 +61,8 @@ function bundler({watch, prod} = {}) {
     })
     .transform(babelify)
     .transform(envify)
-    .transform({global: true}, 'browserify-shim');
+    .transform({global: true}, 'browserify-shim')
+    .transform('browserify-versionify');
   if (prod) res = res.transform(uglifyify);
   return res;
 }

@@ -48,10 +48,12 @@ class InstantSearch {
         const query = helper.state.query;
         const locale = require('./I18n.js').locale;
         const optionalWords = getOptionalWords(query, locale);
-        this.instantsearch.helper.setQueryParameter('optionalWords', optionalWords)
+        this.instantsearch.helper.setQueryParameter('optionalWords', optionalWords);
         helper.search();
       }
     });
+
+    this.instantsearch.client.addAlgoliaAgent('Zendesk Integration (__VERSION__)');
   }
 
   render({
