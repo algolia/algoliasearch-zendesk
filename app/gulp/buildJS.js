@@ -10,6 +10,7 @@ import watchify from 'watchify';
 
 import babel from 'gulp-babel';
 import buffer from 'vinyl-buffer';
+import header from 'gulp-header';
 import gutil from 'gulp-util';
 import mergeStream from 'merge-stream';
 import rename from 'gulp-rename';
@@ -70,12 +71,14 @@ function bundler({watch, prod} = {}) {
 function bundle({b, prod}) {
   let dist = b.bundle().on('error', mapError)
     .pipe(source(`${exportedFileBasename}.js`))
+    .pipe(header(banner))
     .pipe(gulp.dest('./dist'));
   if (!prod) return dist;
   dist = dist
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(uglify({banner}))
+    .pipe(uglify())
+    .pipe(header(banner))
     .pipe(rename(`${exportedFileBasename}.min.js`))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./dist'));
