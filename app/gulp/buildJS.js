@@ -26,7 +26,7 @@ const exportedFileBasename = 'algoliasearch.zendesk-hc';
 const exportedMethod = 'algoliasearchZendeskHC';
 
 const banner = `/*!
-* ${pjson.description}
+* ${pjson.description} v${pjson.version}
 * ${pjson.homepage}
 * Copyright ${(new Date()).getFullYear()} ${pjson.author}; Licensed ${pjson.license}
 */
