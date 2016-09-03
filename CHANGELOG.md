@@ -1,6 +1,17 @@
-<a name="2.6.5"></a>
-## [2.6.5](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.5...v2.6.5) (2016-08-25)
+<a name="2.6.6"></a>
+## [2.6.6](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.6...v2.6.6) (2016-09-03)
 
+
+
+
+<a name="2.6.6"></a>
+## [2.6.6](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.5...v2.6.6) (2016-09-03)
+
+
+### Features
+
+* **crawler:** update to new user-agent format ([9508d8d](https://github.com/algolia/algoliasearch-zendesk/commit/9508d8d))
+* **instantsearch:** use the new algolia agent ([80a3866](https://github.com/algolia/algoliasearch-zendesk/commit/80a3866))
 
 
 
