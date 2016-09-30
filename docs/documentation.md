@@ -71,8 +71,8 @@ Here is a full breakdown of the available options for the JavaScript library:
     baseUrl: '/hc/',                      // the base URL of your Help Center
     poweredBy: true,                      // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
     debug: false,                         // debug mode prevents the autocomplete to close when trying to inspect it
-    color: '#D4D4D4',                     // main color (used for links)
-    highlightColor: '#D4D4D4',            // highlight color to emphasize matching text
+    color: '#158EC2',                     // main color (used for links)
+    highlightColor: '#158EC2',            // highlight color to emphasize matching text
     responsive: true,                     // responsive instantsearch page
     autocomplete: {
       enabled: true,                      // is the autocomplete feature enabled?
@@ -86,6 +86,7 @@ Here is a full breakdown of the available options for the JavaScript library:
       selector: '.search-results',        // the DOM selector for the results container
       tagsLimit: 15                       // maximum number of tags to display
     },
+    instantsearchPage,                    // function to check if we're on the search page
     translations: {}                      // translation strings
   });
 </script>
