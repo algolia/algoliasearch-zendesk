@@ -50,6 +50,8 @@ class AlgoliasearchZendeskHC {
       : autocomplete
     )(options);
 
+    AlgoliasearchZendeskHC.instances.push(this.search);
+
     // once the DOM is initialized
     document.addEventListener('DOMContentLoaded', () => {
       loadTranslations(options);
@@ -57,5 +59,7 @@ class AlgoliasearchZendeskHC {
     });
   }
 }
+
+AlgoliasearchZendeskHC.instances = [];
 
 export default AlgoliasearchZendeskHC;
