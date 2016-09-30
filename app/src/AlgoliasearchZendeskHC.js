@@ -58,6 +58,11 @@ class AlgoliasearchZendeskHC {
       this.search.render(options);
     });
   }
+
+  enableDebugMode() {
+    if (!this.search.enableDebugMode) return;
+    this.search.enableDebugMode();
+  }
 }
 
 AlgoliasearchZendeskHC.instances = [];

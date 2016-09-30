@@ -112,6 +112,12 @@ class Autocomplete {
     this._temporaryHidingCancel();
   }
 
+  enableDebugMode() {
+    this.autocompletes.forEach(function (aa) {
+      aa.autocomplete.typeahead.debug = true;
+    });
+  }
+
   // Protected
 
   _sizeModifier(inputWidth) {
