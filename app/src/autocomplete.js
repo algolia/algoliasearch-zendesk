@@ -46,6 +46,7 @@ class Autocomplete {
     baseUrl,
     color,
     debug,
+    locale,
     highlightColor,
     poweredBy,
     subdomain,
@@ -56,8 +57,6 @@ class Autocomplete {
     this.$inputs = document.querySelectorAll(inputSelector);
     this.$inputs = Array.prototype.slice.call(this.$inputs, 0); // Transform to array
     this._disableZendeskAutocomplete();
-
-    this.locale = require('./I18n.js').locale;
 
     addCSS(templates.autocomplete.css.render({color, highlightColor}));
     this.autocompletes = [];
@@ -86,7 +85,7 @@ class Autocomplete {
       const nbSnippetWords = this._nbSnippetWords(dropdownMenuWidth);
       const params = {
         hitsPerPage,
-        facetFilters: `["locale.locale:${this.locale}"]`,
+        facetFilters: `["locale.locale:${locale}"]`,
         highlightPreTag: '<span class="aa-article-hit--highlight">',
         highlightPostTag: '</span>',
         attributesToSnippet: [`body_safe:${nbSnippetWords}`],
@@ -99,13 +98,13 @@ class Autocomplete {
         debug: process.env.NODE_ENV === 'development' || debug,
         templates: this._templates({poweredBy, subdomain, translations})
       }, [{
-        source: this._source(params),
+        source: this._source(params, locale),
         name: 'articles',
         templates: {
           suggestion: this._renderSuggestion(sizeModifier)
         }
       }]);
-      aa.on('autocomplete:selected', this._onSelected(baseUrl));
+      aa.on('autocomplete:selected', this._onSelected(baseUrl, locale));
       this.autocompletes.push(aa);
     }
 
@@ -132,9 +131,9 @@ class Autocomplete {
     return Math.floor(inputWidth / 35);
   }
 
-  _source(params) {
+  _source(params, locale) {
     return (query, callback) => {
-      this.index.search({...params, query, optionalWords: getOptionalWords(query, this.locale)})
+      this.index.search({...params, query, optionalWords: getOptionalWords(query, locale)})
         .then((content) => { callback(this._reorderedHits(content.hits)); });
     };
   }
@@ -185,9 +184,9 @@ class Autocomplete {
     };
   }
 
-  _onSelected(baseUrl) {
+  _onSelected(baseUrl, locale) {
     return (event, suggestion, dataset) => {
-      location.href = `${baseUrl}${this.locale}/${dataset}/${suggestion.id}`;
+      location.href = `${baseUrl}${locale}/${dataset}/${suggestion.id}`;
     };
   }
 

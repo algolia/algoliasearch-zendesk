@@ -21,6 +21,7 @@ const optionsStructure = {required: true, type: 'Object', children: {
   baseUrl: {type: 'string', value: '/hc/'},
   color: {type: 'string', value: '#158EC2'},
   debug: {type: 'boolean', value: false},
+  locale: {type: 'string'},
   highlightColor: {type: 'string'},
   indexPrefix: {type: 'string', value: 'zendesk_'},
   instantsearch: {type: 'Object', value: {}, children: {
@@ -54,6 +55,7 @@ class AlgoliasearchZendeskHC {
 
     // once the DOM is initialized
     document.addEventListener('DOMContentLoaded', () => {
+      options.locale = options.locale || require('./I18n.js').locale;
       loadTranslations(options);
       this.search.render(options);
     });

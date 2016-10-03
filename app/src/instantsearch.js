@@ -23,6 +23,8 @@ class InstantSearch {
   }) {
     if (!enabled) return;
 
+    this.locale = null;
+
     this._temporaryHiding({
       autocompleteSelector,
       instantsearchSelector: selector,
@@ -46,8 +48,7 @@ class InstantSearch {
       },
       searchFunction: helper => {
         const query = helper.state.query;
-        const locale = require('./I18n.js').locale;
-        const optionalWords = getOptionalWords(query, locale);
+        const optionalWords = getOptionalWords(query, this.locale);
         this.instantsearch.helper.setQueryParameter('optionalWords', optionalWords);
         helper.search();
       }
@@ -70,13 +71,16 @@ class InstantSearch {
       reuseAutocomplete,
       tagsLimit
     },
+    locale,
     poweredBy,
     responsive,
     subdomain,
     translations
   }) {
     if (!enabled) return;
-    let I18n = require('./I18n.js');
+
+    this.locale = locale;
+
     let searchBoxSelector;
 
     addCSS(templates.instantsearch.css.render({color, highlightColor}));
@@ -107,7 +111,7 @@ class InstantSearch {
       getConfiguration: () => ({facets: ['locale.locale']}),
       init: ({helper}) => {
         // Filter by language
-        helper.addFacetRefinement('locale.locale', I18n.locale);
+        helper.addFacetRefinement('locale.locale', this.locale);
       }
     });
 
@@ -214,7 +218,7 @@ class InstantSearch {
     let I18n = require('./I18n.js');
     let moment = require('moment');
     const timezoneOffset = moment().zone();
-    moment().lang(I18n.locale, I18n.datetime_translations);
+    moment().lang(this.locale, I18n.datetime_translations);
     let times = document.querySelectorAll('time');
     for (let i = 0; i < times.length; ++i) {
       let $time = times[i];
