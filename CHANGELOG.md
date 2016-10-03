@@ -1,6 +1,21 @@
-<a name="2.6.6"></a>
-## [2.6.6](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.6...v2.6.6) (2016-09-03)
+<a name="2.6.7"></a>
+## [2.6.7](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.7...v2.6.7) (2016-10-03)
 
+
+
+
+<a name="2.6.7"></a>
+## [2.6.7](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.6...v2.6.7) (2016-10-03)
+
+
+### Bug Fixes
+
+* **crawler:** ignore if @zendesk_obj.nil? ([3c7fef4](https://github.com/algolia/algoliasearch-zendesk/commit/3c7fef4))
+
+### Features
+
+* **app:** exposes the `instances` class variable ([deba6e1](https://github.com/algolia/algoliasearch-zendesk/commit/deba6e1))
+* **autocomplete:** enableDebugMode method ([e7944cd](https://github.com/algolia/algoliasearch-zendesk/commit/e7944cd))
 
 
 
