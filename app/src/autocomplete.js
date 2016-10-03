@@ -1,5 +1,5 @@
 // Small hack to remove verticalAlign on the input
-import css from 'autocomplete.js/src/autocomplete/css.js'
+import css from 'autocomplete.js/src/autocomplete/css.js';
 delete css.input.verticalAlign;
 delete css.inputWithNoHint.verticalAlign;
 
@@ -207,10 +207,12 @@ class Autocomplete {
 
   _disableZendeskAutocomplete() {
     if (document.querySelector('[data-search][data-instant=true]')) {
-      console.log('[Algolia][Warning] You should remove `instant=true` from your templates to save resources');
-      for (var i = 0; i < this.$inputs.length; ++i) {
-        var $input = this.$inputs[i];
-        var $new = $input.cloneNode();
+      console.log('[Algolia][Warning] ' +
+        'You should remove `instant=true` from your templates to save resources'
+      );
+      for (let i = 0; i < this.$inputs.length; ++i) {
+        const $input = this.$inputs[i];
+        const $new = $input.cloneNode();
         $input.parentNode.replaceChild($new, $input);
         this.$inputs[i] = $new;
       }
