@@ -29,7 +29,7 @@ module Zendesk
     end
 
     def ignore? _t
-      false
+      super()
     end
 
     protected

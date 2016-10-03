@@ -89,6 +89,10 @@ module Zendesk
       !@data.nil?
     end
 
+    def ignore?
+      @zendesk_obj.nil?
+    end
+
     protected
 
     def fetch obj
