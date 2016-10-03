@@ -1,6 +1,16 @@
-<a name="2.6.7"></a>
-## [2.6.7](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.7...v2.6.7) (2016-10-03)
+<a name="2.7.0"></a>
+# [2.7.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.7.0...v2.7.0) (2016-10-03)
 
+
+
+
+<a name="2.7.0"></a>
+# [2.7.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.7...v2.7.0) (2016-10-03)
+
+
+### Features
+
+* **app:** add the possibility to force locale ([62cb624](https://github.com/algolia/algoliasearch-zendesk/commit/62cb624))
 
 
 
