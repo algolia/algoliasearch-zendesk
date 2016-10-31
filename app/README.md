@@ -267,6 +267,26 @@ translations: {
 }
 ```
 
+### Localized tags
+
+You can index localized tags based on locales prefix (e.g. `en-us` or `en`).
+If we detect a locale, we'll only index localized tags for this translation.  
+For instance, an article with those tags:
+
+```coffee
+[
+  'Wow',
+  'en:Awesome',
+  'en-gb:Good',
+  'fr:Incroyable'
+]
+```
+
+For `fr` and `fr-*` locales, we'll index `{ "label_names": ["Incroyable"] }`.  
+For `en-au`, `en-ca` and `en-us` locales, we'll index `{ "label_names": ["Awesome"] }`.  
+For the `en-gb` locale, we'll index `{ "label_names": ["Good"] }`.  
+For all the other locales, we'll index `{ "label_names": ["Wow"] }`.
+
 ### Zendesk Community search
 
 We do not index community forums for now. If you're using them, you'll probably want to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
