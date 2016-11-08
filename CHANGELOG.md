@@ -1,6 +1,16 @@
-<a name="2.8.0"></a>
-# [2.8.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.0...v2.8.0) (2016-10-31)
+<a name="2.8.1"></a>
+## [2.8.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.1...v2.8.1) (2016-11-08)
 
+
+
+
+<a name="2.8.1"></a>
+## [2.8.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.0...v2.8.1) (2016-11-08)
+
+
+### Bug Fixes
+
+* **crawler:** fix tags inconsistency in Zendesk data ([1bf699c](https://github.com/algolia/algoliasearch-zendesk/commit/1bf699c))
 
 
 
