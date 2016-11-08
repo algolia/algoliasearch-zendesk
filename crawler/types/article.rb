@@ -35,7 +35,7 @@ module Zendesk
     end
 
     def tags locale
-      labels = @zendesk_obj.label_names
+      labels = @zendesk_obj.label_names || []
       res = labels.grep(/^#{locale}:/).map { |l| l.gsub(/^#{locale}:/, '') }
       return res unless res.empty?
       res = labels.grep(/^#{locale[0...2]}:/).map { |l| l.gsub(/^#{locale[0...2]}:/, '') }
