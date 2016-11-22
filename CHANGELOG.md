@@ -1,6 +1,16 @@
-<a name="2.8.2"></a>
-## [2.8.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.2...v2.8.2) (2016-11-22)
+<a name="2.8.3"></a>
+## [2.8.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.3...v2.8.3) (2016-11-22)
 
+
+
+
+<a name="2.8.3"></a>
+## [2.8.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.2...v2.8.3) (2016-11-22)
+
+
+### Bug Fixes
+
+* **translations:** also use user provided associated lang key ([df3b687](https://github.com/algolia/algoliasearch-zendesk/commit/df3b687))
 
 
 
