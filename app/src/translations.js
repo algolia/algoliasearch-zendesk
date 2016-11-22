@@ -663,6 +663,7 @@ function setLang(userTranslations, langKey) {
 
     let trad = itemUserTranslation[langKey] ||
       itemTranslation[langKey] ||
+      itemUserTranslation[associatedLangKey] ||
       itemTranslation[associatedLangKey] ||
       itemUserTranslation.en || // Fallback on english
       itemTranslation.en;
