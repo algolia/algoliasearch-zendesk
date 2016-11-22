@@ -1,5 +1,11 @@
-<a name="2.8.1"></a>
-## [2.8.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.1...v2.8.1) (2016-11-08)
+<a name="2.8.2"></a>
+## [2.8.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.2...v2.8.2) (2016-11-22)
+
+
+
+
+<a name="2.8.2"></a>
+## [2.8.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.1...v2.8.2) (2016-11-22)
 
 
 
