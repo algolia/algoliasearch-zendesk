@@ -5,6 +5,14 @@ set -e
 
 CONNECTOR_NAME="algolia/zendesk-hc-connector"
 
+# Check if docker is running
+if ! docker images >/dev/null 2>&1; then
+  echo "Docker is not running. You should start it before continuing."
+  read -p "Continue (yn)? " -n 1 -r
+  echo
+  [[ $REPLY =~ ^[Yy]$ ]] || exit -1
+fi
+
 # Ask for new version number if not in env
 if [[ $ALGOLIASEARCH_ZENDESK_VERSION == "" ]]; then
   current=`json -f package.json version`
