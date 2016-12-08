@@ -12,7 +12,9 @@
   "devDependencies": {
     "conventional-changelog": "^0.5.3",
     "gh-pages": "^0.8.0",
-    "json": "^9.0.3"
+    "gulp-header": "^1.8.8",
+    "json": "^9.0.3",
+    "stringify": "^5.1.0"
   },
   "scripts": {
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0",
