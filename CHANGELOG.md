@@ -1,6 +1,16 @@
-<a name="2.8.4"></a>
-## [2.8.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.4...v2.8.4) (2016-11-22)
+<a name="2.8.5"></a>
+## [2.8.5](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.5...v2.8.5) (2016-12-19)
 
+
+
+
+<a name="2.8.5"></a>
+## [2.8.5](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.4...v2.8.5) (2016-12-19)
+
+
+### Bug Fixes
+
+* **autocomplete:** also on /search when instantsearch.enabled == false ([5902e7f](https://github.com/algolia/algoliasearch-zendesk/commit/5902e7f))
 
 
 
