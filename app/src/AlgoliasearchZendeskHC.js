@@ -46,7 +46,7 @@ class AlgoliasearchZendeskHC {
 
     options.highlightColor = options.highlightColor || options.color;
 
-    this.search = (options.instantsearchPage()
+    this.search = (options.instantsearch.enabled && options.instantsearchPage()
       ? instantsearch
       : autocomplete
     )(options);
