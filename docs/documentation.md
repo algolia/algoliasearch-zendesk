@@ -87,6 +87,10 @@ Here is a full breakdown of the available options for the JavaScript library:
       tagsLimit: 15                       // maximum number of tags to display
     },
     instantsearchPage,                    // function to check if we're on the search page
+    templates: {                          // template objects (see the templates section)
+      autocomplete: {},
+      instantsearch: {}
+    },
     translations: {}                      // translation strings
   });
 </script>
@@ -289,3 +293,18 @@ Since we're providing a front-end search, and we can't securely know which acces
 A public article is not a draft and its access policy is `everybody`.  
 If you're in such a scenario, we recommend you to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
 
+## Modifying templates
+
+__WARNING__: We don't provide any guarantee that we won't change the templates between versions.
+If you chose to modify a template, you'll need to lock your version to MAJOR.MINOR.PATCH instead of just MAJOR in
+
+```html
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.css">
+<script type="text/javascript" src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.js"></script>
+```
+
+The latest version is [![version](https://img.shields.io/npm/v/algoliasearch.zendesk-hc.png)](https://www.npmjs.com/package/algoliasearch.zendesk-hc).
+
+With your version locked in place, you can now look at [`templates.js`](https://github.com/algolia/algoliasearch-zendesk/blob/master/app/src/templates.js) to know which keys you can override.
+The code here is ES6, you'll need to rewrite your custom template using Vanilla JavaScript instead.
+Also, some templates are using a `compile` function in this file. This function is internally calling the [`Hogan.js` template engine](http://mustache.github.io/mustache.5.html) with square brackets instead of braces (because Zendesk templates already use braces). This function is available using `algoliasearchZendeskHC.compile`.
