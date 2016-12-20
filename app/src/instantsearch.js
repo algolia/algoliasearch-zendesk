@@ -46,11 +46,14 @@ class InstantSearch {
         highlightPostTag: '</span>',
         snippetEllipsisText: '...'
       },
-      searchFunction: helper => {
-        const query = helper.state.query;
+      searchFunction: ({search}) => {
+        let helper = this.instantsearch.helper;
+        const query = helper.getQuery();
         const optionalWords = getOptionalWords(query, this.locale);
-        this.instantsearch.helper.setQueryParameter('optionalWords', optionalWords);
-        helper.search();
+        const page = helper.getPage();
+        helper.setQueryParameter('optionalWords', optionalWords);
+        helper.setPage(page);
+        search();
       }
     });
 
@@ -111,7 +114,9 @@ class InstantSearch {
       getConfiguration: () => ({facets: ['locale.locale']}),
       init: ({helper}) => {
         // Filter by language
+        const page = helper.getPage();
         helper.addFacetRefinement('locale.locale', this.locale);
+        helper.setPage(page);
       }
     });
 
