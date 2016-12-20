@@ -1,5 +1,4 @@
 import instantsearch from 'instantsearch.js';
-import templates from './templates.js';
 
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
@@ -78,6 +77,7 @@ class InstantSearch {
     poweredBy,
     responsive,
     subdomain,
+    templates,
     translations
   }) {
     if (!enabled) return;
@@ -86,7 +86,7 @@ class InstantSearch {
 
     let searchBoxSelector;
 
-    addCSS(templates.instantsearch.css.render({color, highlightColor}));
+    addCSS(templates.instantsearch.css({color, highlightColor}));
 
     if (reuseAutocomplete) {
       addCSS('#algolia-query { display: none }');
@@ -106,9 +106,9 @@ class InstantSearch {
     if (this.$container === null) {
       throw new Error(`[Algolia] Cannot find a container with the "${selector}" selector.`);
     }
-    this.$container.innerHTML = templates.instantsearch.layout.render({translations});
+    this.$container.innerHTML = templates.instantsearch.layout({translations});
 
-    this._handleResponsiveness({color, responsive, translations});
+    this._handleResponsiveness({responsive, templates});
 
     this.instantsearch.addWidget({
       getConfiguration: () => ({facets: ['locale.locale']}),
@@ -285,7 +285,7 @@ class InstantSearch {
     }, false);
   }
 
-  _handleResponsiveness({responsive}) {
+  _handleResponsiveness({templates, responsive}) {
     if (!responsive) return;
     const $mainStyle = addCSS(templates.instantsearch.responsiveCSS);
 

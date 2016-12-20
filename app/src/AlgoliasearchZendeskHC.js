@@ -1,7 +1,9 @@
 import fargs from 'fargs';
 
 import autocomplete from './autocomplete.js';
+import compile from './compile.js';
 import loadTranslations from './translations.js';
+import loadTemplates from './templates.js';
 import instantsearch from './instantsearch.js';
 
 function hitsPerPageValidator(val) {
@@ -35,6 +37,10 @@ const optionsStructure = {required: true, type: 'Object', children: {
   poweredBy: {type: 'boolean', value: true},
   responsive: {type: 'boolean', value: true},
   subdomain: {type: 'string', required: true},
+  templates: {type: 'Object', value: {}, children: {
+    autocomplete: {type: 'Object', value: {}},
+    instantsearch: {type: 'Object', value: {}}
+  }},
   translations: {type: 'Object', value: {}}
 }};
 
@@ -57,6 +63,7 @@ class AlgoliasearchZendeskHC {
     document.addEventListener('DOMContentLoaded', () => {
       options.locale = options.locale || require('./I18n.js').locale;
       loadTranslations(options);
+      loadTemplates(options);
       this.search.render(options);
     });
   }
@@ -68,5 +75,6 @@ class AlgoliasearchZendeskHC {
 }
 
 AlgoliasearchZendeskHC.instances = [];
+AlgoliasearchZendeskHC.compile = compile;
 
 export default AlgoliasearchZendeskHC;
