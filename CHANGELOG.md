@@ -1,6 +1,16 @@
-<a name="2.8.6"></a>
-## [2.8.6](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.6...v2.8.6) (2016-12-20)
+<a name="2.9.0"></a>
+# [2.9.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.9.0...v2.9.0) (2016-12-20)
 
+
+
+
+<a name="2.9.0"></a>
+# [2.9.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.6...v2.9.0) (2016-12-20)
+
+
+### Features
+
+* **templates:** expose the templates option ([6077c72](https://github.com/algolia/algoliasearch-zendesk/commit/6077c72))
 
 
 
