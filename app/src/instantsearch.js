@@ -47,7 +47,7 @@ class InstantSearch {
       },
       searchFunction: ({search}) => {
         let helper = this.instantsearch.helper;
-        const query = helper.getQuery();
+        const query = helper.state.query;
         const optionalWords = getOptionalWords(query, this.locale);
         const page = helper.getPage();
         helper.setQueryParameter('optionalWords', optionalWords);
