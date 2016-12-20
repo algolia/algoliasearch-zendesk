@@ -1,6 +1,16 @@
-<a name="2.9.0"></a>
-# [2.9.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.9.0...v2.9.0) (2016-12-20)
+<a name="2.9.1"></a>
+## [2.9.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.9.1...v2.9.1) (2016-12-20)
 
+
+
+
+<a name="2.9.1"></a>
+## [2.9.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.9.0...v2.9.1) (2016-12-20)
+
+
+### Bug Fixes
+
+* **instantsearch):** restore optional words behaviour ([5ff7dfd](https://github.com/algolia/algoliasearch-zendesk/commit/5ff7dfd))
 
 
 
