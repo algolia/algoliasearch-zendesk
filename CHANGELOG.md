@@ -1,6 +1,16 @@
-<a name="2.8.5"></a>
-## [2.8.5](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.5...v2.8.5) (2016-12-19)
+<a name="2.8.6"></a>
+## [2.8.6](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.6...v2.8.6) (2016-12-20)
 
+
+
+
+<a name="2.8.6"></a>
+## [2.8.6](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.5...v2.8.6) (2016-12-20)
+
+
+### Bug Fixes
+
+* **instantsearch:** pagination issue ([0ba3e0b](https://github.com/algolia/algoliasearch-zendesk/commit/0ba3e0b))
 
 
 
