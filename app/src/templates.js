@@ -101,6 +101,10 @@ const defaultTemplates = {
     padding: 0 9px;
   }
 
+  .ais-with-style.ais-search-box {
+    margin-left: 0;
+  }
+
   #algolia-facets {
     display: none;
   }
