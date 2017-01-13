@@ -9,7 +9,7 @@ permalink: /documentation/
 ## Synchronize Algolia with your Help Center
 
 <div align="center">
-  <img src="https://community.algolia.com/zendesk/img/connection.png" alt="Data connection visualization" />
+  <img src="/zendesk/img/connection.png" alt="Data connection visualization" />
 </div>
 
 1. Create an [Algolia account](https://www.algolia.com/users/sign_up).
@@ -87,6 +87,10 @@ Here is a full breakdown of the available options for the JavaScript library:
       tagsLimit: 15                       // maximum number of tags to display
     },
     instantsearchPage,                    // function to check if we're on the search page
+    templates: {                          // template objects (see the templates section)
+      autocomplete: {},
+      instantsearch: {}
+    },
     translations: {}                      // translation strings
   });
 </script>
@@ -94,7 +98,7 @@ Here is a full breakdown of the available options for the JavaScript library:
 
 ## Customizing the CSS
 
-It is definitely possible that, when you install the application, it doesn't exactly display as you expect.  
+It is definitely possible that, when you install the application, it doesn't exactly display as you expect.
 No worries, these are usually just a few conflicting rules between your design and our integration.
 
 You might also just want to change the look & feel of the search.
@@ -262,7 +266,7 @@ translations: {
 ## Localized tags
 
 You can index localized tags based on locales prefix (e.g. `en-us` or `en`).
-If we detect a locale, we'll only index localized tags for this translation.  
+If we detect a locale, we'll only index localized tags for this translation.
 For instance, an article with those tags:
 
 ```coffee
@@ -274,9 +278,9 @@ For instance, an article with those tags:
 ]
 ```
 
-For `fr` and `fr-*` locales, we'll index `{ "label_names": ["Incroyable"] }`.  
-For `en-au`, `en-ca` and `en-us` locales, we'll index `{ "label_names": ["Awesome"] }`.  
-For the `en-gb` locale, we'll index `{ "label_names": ["Good"] }`.  
+For `fr` and `fr-*` locales, we'll index `{ "label_names": ["Incroyable"] }`.
+For `en-au`, `en-ca` and `en-us` locales, we'll index `{ "label_names": ["Awesome"] }`.
+For the `en-gb` locale, we'll index `{ "label_names": ["Good"] }`.
 For all the other locales, we'll index `{ "label_names": ["Wow"] }`.
 
 ## Zendesk Community search
@@ -285,7 +289,22 @@ We do not index community forums for now. If you're using them, you'll probably 
 
 ## Indexing private articles
 
-Since we're providing a front-end search, and we can't securely know which access a user has in Zendesk's templates, we have to limit our indexing to public articles only.  
-A public article is not a draft and its access policy is `everybody`.  
+Since we're providing a front-end search, and we can't securely know which access a user has in Zendesk's templates, we have to limit our indexing to public articles only.
+A public article is not a draft and its access policy is `everybody`.
 If you're in such a scenario, we recommend you to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
 
+## Modifying templates
+
+__WARNING__: We don't provide any guarantee that we won't change the templates between versions.
+If you chose to modify a template, you'll need to lock your version to MAJOR.MINOR.PATCH instead of just MAJOR in
+
+```html
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.css">
+<script type="text/javascript" src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.js"></script>
+```
+
+The latest version is [![version](https://img.shields.io/npm/v/algoliasearch.zendesk-hc.png)](https://www.npmjs.com/package/algoliasearch.zendesk-hc).
+
+With your version locked in place, you can now look at [`templates.js`](https://github.com/algolia/algoliasearch-zendesk/blob/master/app/src/templates.js) to know which keys you can override.
+The code here is ES6, you'll need to rewrite your custom template using Vanilla JavaScript instead.
+Also, some templates are using a `compile` function in this file. This function is internally calling the [`Hogan.js` template engine](http://mustache.github.io/mustache.5.html) with square brackets instead of braces (because Zendesk templates already use braces). This function is available using `algoliasearchZendeskHC.compile`.

@@ -1,5 +1,67 @@
-<a name="2.8.1"></a>
-## [2.8.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.1...v2.8.1) (2016-11-08)
+<a name="2.9.1"></a>
+## [2.9.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.9.1...v2.9.1) (2016-12-20)
+
+
+
+
+<a name="2.9.1"></a>
+## [2.9.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.9.0...v2.9.1) (2016-12-20)
+
+
+### Bug Fixes
+
+* **instantsearch):** restore optional words behaviour ([5ff7dfd](https://github.com/algolia/algoliasearch-zendesk/commit/5ff7dfd))
+
+
+
+<a name="2.9.0"></a>
+# [2.9.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.6...v2.9.0) (2016-12-20)
+
+
+### Features
+
+* **templates:** expose the templates option ([6077c72](https://github.com/algolia/algoliasearch-zendesk/commit/6077c72))
+
+
+
+<a name="2.8.6"></a>
+## [2.8.6](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.5...v2.8.6) (2016-12-20)
+
+
+### Bug Fixes
+
+* **instantsearch:** pagination issue ([0ba3e0b](https://github.com/algolia/algoliasearch-zendesk/commit/0ba3e0b))
+
+
+
+<a name="2.8.5"></a>
+## [2.8.5](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.4...v2.8.5) (2016-12-19)
+
+
+### Bug Fixes
+
+* **autocomplete:** also on /search when instantsearch.enabled == false ([5902e7f](https://github.com/algolia/algoliasearch-zendesk/commit/5902e7f))
+
+
+
+<a name="2.8.4"></a>
+## [2.8.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.3...v2.8.4) (2016-11-22)
+
+
+
+
+<a name="2.8.3"></a>
+## [2.8.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.2...v2.8.3) (2016-11-22)
+
+
+### Bug Fixes
+
+* **translations:** also use user provided associated lang key ([df3b687](https://github.com/algolia/algoliasearch-zendesk/commit/df3b687))
+
+
+
+<a name="2.8.2"></a>
+## [2.8.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.1...v2.8.2) (2016-11-22)
 
 
 

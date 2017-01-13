@@ -8,7 +8,6 @@ import autocomplete from 'autocomplete.js';
 import algoliasearch from 'algoliasearch';
 import 'es6-collections';
 
-import templates from './templates.js';
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
 
@@ -50,6 +49,7 @@ class Autocomplete {
     highlightColor,
     poweredBy,
     subdomain,
+    templates,
     translations
   }) {
     if (!enabled) return null;
@@ -58,7 +58,7 @@ class Autocomplete {
     this.$inputs = Array.prototype.slice.call(this.$inputs, 0); // Transform to array
     this._disableZendeskAutocomplete();
 
-    addCSS(templates.autocomplete.css.render({color, highlightColor}));
+    addCSS(templates.autocomplete.css({color, highlightColor}));
     this.autocompletes = [];
 
     for (let i = 0; i < this.$inputs.length; ++i) {
@@ -96,12 +96,12 @@ class Autocomplete {
       let aa = autocomplete($input, {
         hint: false,
         debug: process.env.NODE_ENV === 'development' || debug,
-        templates: this._templates({poweredBy, subdomain, translations})
+        templates: this._templates({poweredBy, subdomain, templates, translations})
       }, [{
         source: this._source(params, locale),
         name: 'articles',
         templates: {
-          suggestion: this._renderSuggestion(sizeModifier)
+          suggestion: this._renderSuggestion(templates, sizeModifier)
         }
       }]);
       aa.on('autocomplete:selected', this._onSelected(baseUrl, locale));
@@ -167,20 +167,20 @@ class Autocomplete {
     return flattenedHits;
   }
 
-  _templates({poweredBy, subdomain, translations}) {
+  _templates({poweredBy, subdomain, templates, translations}) {
     let res = {};
     if (poweredBy === true) {
-      res.header = templates.autocomplete.poweredBy.render({
+      res.header = templates.autocomplete.poweredBy({
         content: translations.search_by_algolia(templates.autocomplete.algolia(subdomain))
       });
     }
     return res;
   }
 
-  _renderSuggestion(sizeModifier) {
+  _renderSuggestion(templates, sizeModifier) {
     return (hit) => {
       hit.sizeModifier = sizeModifier;
-      return templates.autocomplete.article.render(hit);
+      return templates.autocomplete.article(hit);
     };
   }
 
