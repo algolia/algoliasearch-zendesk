@@ -98,7 +98,7 @@ Here is a full breakdown of the available options for the JavaScript library:
 
 ## Customizing the CSS
 
-It is definitely possible that, when you install the application, it doesn't exactly display as you expect.
+It is definitely possible that, when you install the application, it doesn't exactly display as you expect.  
 No worries, these are usually just a few conflicting rules between your design and our integration.
 
 You might also just want to change the look & feel of the search.
@@ -266,7 +266,7 @@ translations: {
 ## Localized tags
 
 You can index localized tags based on locales prefix (e.g. `en-us` or `en`).
-If we detect a locale, we'll only index localized tags for this translation.
+If we detect a locale, we'll only index localized tags for this translation.  
 For instance, an article with those tags:
 
 ```coffee
@@ -278,9 +278,9 @@ For instance, an article with those tags:
 ]
 ```
 
-For `fr` and `fr-*` locales, we'll index `{ "label_names": ["Incroyable"] }`.
-For `en-au`, `en-ca` and `en-us` locales, we'll index `{ "label_names": ["Awesome"] }`.
-For the `en-gb` locale, we'll index `{ "label_names": ["Good"] }`.
+For `fr` and `fr-*` locales, we'll index `{ "label_names": ["Incroyable"] }`.  
+For `en-au`, `en-ca` and `en-us` locales, we'll index `{ "label_names": ["Awesome"] }`.  
+For the `en-gb` locale, we'll index `{ "label_names": ["Good"] }`.  
 For all the other locales, we'll index `{ "label_names": ["Wow"] }`.
 
 ## Zendesk Community search
@@ -289,8 +289,8 @@ We do not index community forums for now. If you're using them, you'll probably 
 
 ## Indexing private articles
 
-Since we're providing a front-end search, and we can't securely know which access a user has in Zendesk's templates, we have to limit our indexing to public articles only.
-A public article is not a draft and its access policy is `everybody`.
+Since we're providing a front-end search, and we can't securely know which access a user has in Zendesk's templates, we have to limit our indexing to public articles only.  
+A public article is not a draft and its access policy is `everybody`.  
 If you're in such a scenario, we recommend you to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
 
 ## Modifying templates
