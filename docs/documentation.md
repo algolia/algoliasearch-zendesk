@@ -9,7 +9,7 @@ permalink: /documentation/
 ## Synchronize Algolia with your Help Center
 
 <div align="center">
-  <img src="/zendesk/img/connection.png" alt="Data connection visualization" />
+  <img src="https://community.algolia.com/zendesk/img/connection.png" alt="Data connection visualization" />
 </div>
 
 1. Create an [Algolia account](https://www.algolia.com/users/sign_up).
