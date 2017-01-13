@@ -24,15 +24,15 @@ module Zendesk
       @data.values.compact
     end
 
-    protected
-
     def exists? locale
       super() && !@data[locale].nil?
     end
 
     def ignore? _t
-      false
+      super()
     end
+
+    protected
 
     def translation t
       {

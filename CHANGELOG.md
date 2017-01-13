@@ -1,6 +1,190 @@
-<a name="2.4.5"></a>
-## [2.4.5](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.5...v2.4.5) (2016-06-23)
+<a name="2.9.1"></a>
+## [2.9.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.9.1...v2.9.1) (2016-12-20)
 
+
+
+
+<a name="2.9.1"></a>
+## [2.9.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.9.0...v2.9.1) (2016-12-20)
+
+
+### Bug Fixes
+
+* **instantsearch):** restore optional words behaviour ([5ff7dfd](https://github.com/algolia/algoliasearch-zendesk/commit/5ff7dfd))
+
+
+
+<a name="2.9.0"></a>
+# [2.9.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.6...v2.9.0) (2016-12-20)
+
+
+### Features
+
+* **templates:** expose the templates option ([6077c72](https://github.com/algolia/algoliasearch-zendesk/commit/6077c72))
+
+
+
+<a name="2.8.6"></a>
+## [2.8.6](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.5...v2.8.6) (2016-12-20)
+
+
+### Bug Fixes
+
+* **instantsearch:** pagination issue ([0ba3e0b](https://github.com/algolia/algoliasearch-zendesk/commit/0ba3e0b))
+
+
+
+<a name="2.8.5"></a>
+## [2.8.5](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.4...v2.8.5) (2016-12-19)
+
+
+### Bug Fixes
+
+* **autocomplete:** also on /search when instantsearch.enabled == false ([5902e7f](https://github.com/algolia/algoliasearch-zendesk/commit/5902e7f))
+
+
+
+<a name="2.8.4"></a>
+## [2.8.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.3...v2.8.4) (2016-11-22)
+
+
+
+
+<a name="2.8.3"></a>
+## [2.8.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.2...v2.8.3) (2016-11-22)
+
+
+### Bug Fixes
+
+* **translations:** also use user provided associated lang key ([df3b687](https://github.com/algolia/algoliasearch-zendesk/commit/df3b687))
+
+
+
+<a name="2.8.2"></a>
+## [2.8.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.1...v2.8.2) (2016-11-22)
+
+
+
+
+<a name="2.8.1"></a>
+## [2.8.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.8.0...v2.8.1) (2016-11-08)
+
+
+### Bug Fixes
+
+* **crawler:** fix tags inconsistency in Zendesk data ([1bf699c](https://github.com/algolia/algoliasearch-zendesk/commit/1bf699c))
+
+
+
+<a name="2.8.0"></a>
+# [2.8.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.7.0...v2.8.0) (2016-10-31)
+
+
+### Features
+
+* **i18n:** extract language specific tags ([9ac5a1e](https://github.com/algolia/algoliasearch-zendesk/commit/9ac5a1e))
+
+
+
+<a name="2.7.0"></a>
+# [2.7.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.7...v2.7.0) (2016-10-03)
+
+
+### Features
+
+* **app:** add the possibility to force locale ([62cb624](https://github.com/algolia/algoliasearch-zendesk/commit/62cb624))
+
+
+
+<a name="2.6.7"></a>
+## [2.6.7](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.6...v2.6.7) (2016-10-03)
+
+
+### Bug Fixes
+
+* **crawler:** ignore if @zendesk_obj.nil? ([3c7fef4](https://github.com/algolia/algoliasearch-zendesk/commit/3c7fef4))
+
+### Features
+
+* **app:** exposes the `instances` class variable ([deba6e1](https://github.com/algolia/algoliasearch-zendesk/commit/deba6e1))
+* **autocomplete:** enableDebugMode method ([e7944cd](https://github.com/algolia/algoliasearch-zendesk/commit/e7944cd))
+
+
+
+<a name="2.6.6"></a>
+## [2.6.6](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.5...v2.6.6) (2016-09-03)
+
+
+### Features
+
+* **crawler:** update to new user-agent format ([9508d8d](https://github.com/algolia/algoliasearch-zendesk/commit/9508d8d))
+* **instantsearch:** use the new algolia agent ([80a3866](https://github.com/algolia/algoliasearch-zendesk/commit/80a3866))
+
+
+
+<a name="2.6.5"></a>
+## [2.6.5](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.4...v2.6.5) (2016-08-25)
+
+
+### Bug Fixes
+
+* **instantsearch:** add, instead of toggle, the locale ([5d4b46e](https://github.com/algolia/algoliasearch-zendesk/commit/5d4b46e))
+
+
+
+<a name="2.6.4"></a>
+## [2.6.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.3...v2.6.4) (2016-08-25)
+
+
+### Bug Fixes
+
+* **crawler:** do not index article with ignored section ([0a01ff3](https://github.com/algolia/algoliasearch-zendesk/commit/0a01ff3))
+
+
+
+<a name="2.6.3"></a>
+## [2.6.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.2...v2.6.3) (2016-08-03)
+
+
+### Bug Fixes
+
+* **autocomplete:** warning + disable Zendesk's autocomplete if present ([eb4fe66](https://github.com/algolia/algoliasearch-zendesk/commit/eb4fe66))
+
+
+
+<a name="2.6.2"></a>
+## [2.6.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.1...v2.6.2) (2016-07-28)
+
+
+
+
+<a name="2.6.1"></a>
+## [2.6.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.6.0...v2.6.1) (2016-07-25)
+
+
+### Bug Fixes
+
+* **translations:** correct english placeholder ([19962ed](https://github.com/algolia/algoliasearch-zendesk/commit/19962ed)), closes [#57](https://github.com/algolia/algoliasearch-zendesk/issues/57)
+
+
+
+<a name="2.6.0"></a>
+# [2.6.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.5.0...v2.6.0) (2016-07-18)
+
+
+### Features
+
+* **crawler:** only set default settings the first time ([ff439cc](https://github.com/algolia/algoliasearch-zendesk/commit/ff439cc))
+
+
+
+<a name="2.5.0"></a>
+# [2.5.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.4.5...v2.5.0) (2016-07-18)
+
+
+### Features
+
+* **crawler:** index while crawling (#56) ([6015d40](https://github.com/algolia/algoliasearch-zendesk/commit/6015d40))
 
 
 

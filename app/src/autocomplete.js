@@ -1,5 +1,5 @@
 // Small hack to remove verticalAlign on the input
-import css from 'autocomplete.js/src/autocomplete/css.js'
+import css from 'autocomplete.js/src/autocomplete/css.js';
 delete css.input.verticalAlign;
 delete css.inputWithNoHint.verticalAlign;
 
@@ -8,7 +8,6 @@ import autocomplete from 'autocomplete.js';
 import algoliasearch from 'algoliasearch';
 import 'es6-collections';
 
-import templates from './templates.js';
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
 
@@ -33,6 +32,7 @@ class Autocomplete {
     this._temporaryHiding(inputSelector);
 
     this.client = algoliasearch(applicationId, apiKey);
+    this.client.addAlgoliaAgent('Zendesk Integration (__VERSION__)');
     this.index = this.client.initIndex(`${indexPrefix}${subdomain}_articles`);
   }
 
@@ -45,18 +45,20 @@ class Autocomplete {
     baseUrl,
     color,
     debug,
+    locale,
     highlightColor,
     poweredBy,
     subdomain,
+    templates,
     translations
   }) {
     if (!enabled) return null;
 
     this.$inputs = document.querySelectorAll(inputSelector);
+    this.$inputs = Array.prototype.slice.call(this.$inputs, 0); // Transform to array
+    this._disableZendeskAutocomplete();
 
-    this.locale = require('./I18n.js').locale;
-
-    addCSS(templates.autocomplete.css.render({color, highlightColor}));
+    addCSS(templates.autocomplete.css({color, highlightColor}));
     this.autocompletes = [];
 
     for (let i = 0; i < this.$inputs.length; ++i) {
@@ -83,7 +85,7 @@ class Autocomplete {
       const nbSnippetWords = this._nbSnippetWords(dropdownMenuWidth);
       const params = {
         hitsPerPage,
-        facetFilters: `["locale.locale:${this.locale}"]`,
+        facetFilters: `["locale.locale:${locale}"]`,
         highlightPreTag: '<span class="aa-article-hit--highlight">',
         highlightPostTag: '</span>',
         attributesToSnippet: [`body_safe:${nbSnippetWords}`],
@@ -94,19 +96,25 @@ class Autocomplete {
       let aa = autocomplete($input, {
         hint: false,
         debug: process.env.NODE_ENV === 'development' || debug,
-        templates: this._templates({poweredBy, subdomain, translations})
+        templates: this._templates({poweredBy, subdomain, templates, translations})
       }, [{
-        source: this._source(params),
+        source: this._source(params, locale),
         name: 'articles',
         templates: {
-          suggestion: this._renderSuggestion(sizeModifier)
+          suggestion: this._renderSuggestion(templates, sizeModifier)
         }
       }]);
-      aa.on('autocomplete:selected', this._onSelected(baseUrl));
+      aa.on('autocomplete:selected', this._onSelected(baseUrl, locale));
       this.autocompletes.push(aa);
     }
 
     this._temporaryHidingCancel();
+  }
+
+  enableDebugMode() {
+    this.autocompletes.forEach(function (aa) {
+      aa.autocomplete.typeahead.debug = true;
+    });
   }
 
   // Protected
@@ -123,9 +131,9 @@ class Autocomplete {
     return Math.floor(inputWidth / 35);
   }
 
-  _source(params) {
+  _source(params, locale) {
     return (query, callback) => {
-      this.index.search({...params, query, optionalWords: getOptionalWords(query, this.locale)})
+      this.index.search({...params, query, optionalWords: getOptionalWords(query, locale)})
         .then((content) => { callback(this._reorderedHits(content.hits)); });
     };
   }
@@ -159,26 +167,26 @@ class Autocomplete {
     return flattenedHits;
   }
 
-  _templates({poweredBy, subdomain, translations}) {
+  _templates({poweredBy, subdomain, templates, translations}) {
     let res = {};
     if (poweredBy === true) {
-      res.header = templates.autocomplete.poweredBy.render({
+      res.header = templates.autocomplete.poweredBy({
         content: translations.search_by_algolia(templates.autocomplete.algolia(subdomain))
       });
     }
     return res;
   }
 
-  _renderSuggestion(sizeModifier) {
+  _renderSuggestion(templates, sizeModifier) {
     return (hit) => {
       hit.sizeModifier = sizeModifier;
-      return templates.autocomplete.article.render(hit);
+      return templates.autocomplete.article(hit);
     };
   }
 
-  _onSelected(baseUrl) {
+  _onSelected(baseUrl, locale) {
     return (event, suggestion, dataset) => {
-      location.href = `${baseUrl}${this.locale}/${dataset}/${suggestion.id}`;
+      location.href = `${baseUrl}${locale}/${dataset}/${suggestion.id}`;
     };
   }
 
@@ -194,6 +202,20 @@ class Autocomplete {
   _temporaryHidingCancel() {
     removeCSS(this._temporaryHidingCSS);
     delete this._temporaryHidingCSS;
+  }
+
+  _disableZendeskAutocomplete() {
+    if (document.querySelector('[data-search][data-instant=true]')) {
+      console.log('[Algolia][Warning] ' +
+        'You should remove `instant=true` from your templates to save resources'
+      );
+      for (let i = 0; i < this.$inputs.length; ++i) {
+        const $input = this.$inputs[i];
+        const $new = $input.cloneNode();
+        $input.parentNode.replaceChild($new, $input);
+        this.$inputs[i] = $new;
+      }
+    }
   }
 }
 export default (...args) => new Autocomplete(...args);

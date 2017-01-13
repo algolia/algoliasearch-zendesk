@@ -10,6 +10,7 @@ import watchify from 'watchify';
 
 import babel from 'gulp-babel';
 import buffer from 'vinyl-buffer';
+import header from 'gulp-header';
 import gutil from 'gulp-util';
 import mergeStream from 'merge-stream';
 import rename from 'gulp-rename';
@@ -25,7 +26,7 @@ const exportedFileBasename = 'algoliasearch.zendesk-hc';
 const exportedMethod = 'algoliasearchZendeskHC';
 
 const banner = `/*!
-* ${pjson.description}
+* ${pjson.description} v${pjson.version}
 * ${pjson.homepage}
 * Copyright ${(new Date()).getFullYear()} ${pjson.author}; Licensed ${pjson.license}
 */
@@ -61,7 +62,8 @@ function bundler({watch, prod} = {}) {
     })
     .transform(babelify)
     .transform(envify)
-    .transform({global: true}, 'browserify-shim');
+    .transform({global: true}, 'browserify-shim')
+    .transform('browserify-versionify');
   if (prod) res = res.transform(uglifyify);
   return res;
 }
@@ -69,12 +71,14 @@ function bundler({watch, prod} = {}) {
 function bundle({b, prod}) {
   let dist = b.bundle().on('error', mapError)
     .pipe(source(`${exportedFileBasename}.js`))
+    .pipe(header(banner))
     .pipe(gulp.dest('./dist'));
   if (!prod) return dist;
   dist = dist
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(uglify({banner}))
+    .pipe(uglify())
+    .pipe(header(banner))
     .pipe(rename(`${exportedFileBasename}.min.js`))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./dist'));

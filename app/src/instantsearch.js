@@ -1,5 +1,4 @@
 import instantsearch from 'instantsearch.js';
-import templates from './templates.js';
 
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
@@ -23,6 +22,8 @@ class InstantSearch {
   }) {
     if (!enabled) return;
 
+    this.locale = null;
+
     this._temporaryHiding({
       autocompleteSelector,
       instantsearchSelector: selector,
@@ -44,14 +45,18 @@ class InstantSearch {
         highlightPostTag: '</span>',
         snippetEllipsisText: '...'
       },
-      searchFunction: helper => {
+      searchFunction: ({search}) => {
+        let helper = this.instantsearch.helper;
         const query = helper.state.query;
-        const locale = require('./I18n.js').locale;
-        const optionalWords = getOptionalWords(query, locale);
-        this.instantsearch.helper.setQueryParameter('optionalWords', optionalWords)
-        helper.search();
+        const optionalWords = getOptionalWords(query, this.locale);
+        const page = helper.getPage();
+        helper.setQueryParameter('optionalWords', optionalWords);
+        helper.setPage(page);
+        search();
       }
     });
+
+    this.instantsearch.client.addAlgoliaAgent('Zendesk Integration (__VERSION__)');
   }
 
   render({
@@ -68,16 +73,20 @@ class InstantSearch {
       reuseAutocomplete,
       tagsLimit
     },
+    locale,
     poweredBy,
     responsive,
     subdomain,
+    templates,
     translations
   }) {
     if (!enabled) return;
-    let I18n = require('./I18n.js');
+
+    this.locale = locale;
+
     let searchBoxSelector;
 
-    addCSS(templates.instantsearch.css.render({color, highlightColor}));
+    addCSS(templates.instantsearch.css({color, highlightColor}));
 
     if (reuseAutocomplete) {
       addCSS('#algolia-query { display: none }');
@@ -97,15 +106,17 @@ class InstantSearch {
     if (this.$container === null) {
       throw new Error(`[Algolia] Cannot find a container with the "${selector}" selector.`);
     }
-    this.$container.innerHTML = templates.instantsearch.layout.render({translations});
+    this.$container.innerHTML = templates.instantsearch.layout({translations});
 
-    this._handleResponsiveness({color, responsive, translations});
+    this._handleResponsiveness({responsive, templates});
 
     this.instantsearch.addWidget({
       getConfiguration: () => ({facets: ['locale.locale']}),
       init: ({helper}) => {
         // Filter by language
-        helper.toggleRefine('locale.locale', I18n.locale);
+        const page = helper.getPage();
+        helper.addFacetRefinement('locale.locale', this.locale);
+        helper.setPage(page);
       }
     });
 
@@ -212,7 +223,7 @@ class InstantSearch {
     let I18n = require('./I18n.js');
     let moment = require('moment');
     const timezoneOffset = moment().zone();
-    moment().lang(I18n.locale, I18n.datetime_translations);
+    moment().lang(this.locale, I18n.datetime_translations);
     let times = document.querySelectorAll('time');
     for (let i = 0; i < times.length; ++i) {
       let $time = times[i];
@@ -274,7 +285,7 @@ class InstantSearch {
     }, false);
   }
 
-  _handleResponsiveness({responsive}) {
+  _handleResponsiveness({templates, responsive}) {
     if (!responsive) return;
     const $mainStyle = addCSS(templates.instantsearch.responsiveCSS);
 

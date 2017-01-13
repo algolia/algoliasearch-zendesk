@@ -1,7 +1,9 @@
 import fargs from 'fargs';
 
 import autocomplete from './autocomplete.js';
+import compile from './compile.js';
 import loadTranslations from './translations.js';
+import loadTemplates from './templates.js';
 import instantsearch from './instantsearch.js';
 
 function hitsPerPageValidator(val) {
@@ -21,6 +23,7 @@ const optionsStructure = {required: true, type: 'Object', children: {
   baseUrl: {type: 'string', value: '/hc/'},
   color: {type: 'string', value: '#158EC2'},
   debug: {type: 'boolean', value: false},
+  locale: {type: 'string'},
   highlightColor: {type: 'string'},
   indexPrefix: {type: 'string', value: 'zendesk_'},
   instantsearch: {type: 'Object', value: {}, children: {
@@ -34,6 +37,10 @@ const optionsStructure = {required: true, type: 'Object', children: {
   poweredBy: {type: 'boolean', value: true},
   responsive: {type: 'boolean', value: true},
   subdomain: {type: 'string', required: true},
+  templates: {type: 'Object', value: {}, children: {
+    autocomplete: {type: 'Object', value: {}},
+    instantsearch: {type: 'Object', value: {}}
+  }},
   translations: {type: 'Object', value: {}}
 }};
 
@@ -45,17 +52,29 @@ class AlgoliasearchZendeskHC {
 
     options.highlightColor = options.highlightColor || options.color;
 
-    this.search = (options.instantsearchPage()
+    this.search = (options.instantsearch.enabled && options.instantsearchPage()
       ? instantsearch
       : autocomplete
     )(options);
 
+    AlgoliasearchZendeskHC.instances.push(this.search);
+
     // once the DOM is initialized
     document.addEventListener('DOMContentLoaded', () => {
+      options.locale = options.locale || require('./I18n.js').locale;
       loadTranslations(options);
+      loadTemplates(options);
       this.search.render(options);
     });
   }
+
+  enableDebugMode() {
+    if (!this.search.enableDebugMode) return;
+    this.search.enableDebugMode();
+  }
 }
+
+AlgoliasearchZendeskHC.instances = [];
+AlgoliasearchZendeskHC.compile = compile;
 
 export default AlgoliasearchZendeskHC;

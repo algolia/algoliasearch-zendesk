@@ -12,29 +12,59 @@ module Zendesk
     attr_accessor :data
     attr_accessor :zendesk_obj
 
-    def self.singular
-      name.split('::').last.downcase
-    end
+    class << self
+      def singular
+        name.split('::').last.downcase
+      end
 
-    def self.plural
-      "#{singular}s".to_sym
-    end
+      def plural
+        "#{singular}s".to_sym
+      end
 
-    def self.index_name
-      "#{CONFIG['algolia_index_prefix']}#{CONFIG['app_name']}_#{plural}"
-    end
+      def index_name
+        "#{CONFIG['algolia_index_prefix']}#{CONFIG['app_name']}_#{plural}"
+      end
 
-    def self.index_settings
-      DEFAULT_INDEX_SETTINGS.merge(self::INDEX_SETTINGS)
-    end
+      def index_settings
+        return DEFAULT_INDEX_SETTINGS.merge(self::INDEX_SETTINGS) if first_indexing?
+        old_settings
+      end
 
-    def self.index items
-      to_index = items.map(&:to_index).flatten
-      idx = Algolia::Index.new("#{index_name}.tmp")
-      idx.set_settings index_settings
-      to_index.each_slice(1000).each { |sub| idx.save_objects! sub }
-      Algolia.move_index "#{index_name}.tmp", index_name
-      puts "Indexed #{to_index.count} #{plural}"
+      def start_indexing
+        target_index.set_settings index_settings
+      end
+
+      def index items
+        return if items.empty?
+        to_index = items.map(&:to_index).flatten
+        to_index.each_slice(1000).each { |sub| target_index.save_objects! sub }
+        puts "Indexed #{to_index.count} #{plural}"
+      end
+
+      def finish_indexing
+        from, to = target_index.name, index_name
+        return if from == to
+        Algolia.move_index from, to
+      end
+
+      private
+
+      def target_index
+        Algolia::Index.new("#{index_name}#{'.tmp' unless first_indexing?}")
+      end
+
+      def first_indexing?
+        return @first_indexing unless @first_indexing.nil?
+        @first_indexing = old_settings == false
+      end
+
+      def old_settings
+        return @old_settings unless @old_settings.nil?
+        @old_settings = Algolia::Index.new(index_name).get_settings
+      rescue => e
+        return @old_settings = false if e.code == 404 && e.message =~ /Index does not exist/
+        raise
+      end
     end
 
     def initialize crawler, obj # Or object id, see fetch
@@ -55,11 +85,15 @@ module Zendesk
       @data.nil ? [] : [@data]
     end
 
-    protected
-
     def exists?
       !@data.nil?
     end
+
+    def ignore?
+      @zendesk_obj.nil?
+    end
+
+    protected
 
     def fetch obj
       return obj unless obj.is_a? Integer

@@ -1,12 +1,12 @@
 # JavaScript library: `algoliasearchZendeskHC`
 
-[![npm](https://img.shields.io/npm/v/algoliasearch.zendesk-hc.svg)](https://www.npmjs.com/package/algoliasearch.zendesk-hc)
+[![npm](https://img.shields.io/npm/v/algoliasearch.zendesk-hc.png)](https://www.npmjs.com/package/algoliasearch.zendesk-hc)
 
-[![Dependency Status](https://david-dm.org/algolia/algoliasearch-zendesk.svg?path=app)](https://david-dm.org/algolia/algoliasearch-zendesk?path=app)
-[![devDependency Status](https://david-dm.org/algolia/algoliasearch-zendesk/dev-status.svg?path=app)](https://david-dm.org/algolia/algoliasearch-zendesk?path=app#info=devDependencies)
-[![peerDependency Status](https://david-dm.org/algolia/algoliasearch-zendesk/peer-status.svg?path=app)](https://david-dm.org/algolia/algoliasearch-zendesk?path=app#info=peerDependencies)
+[![Dependency Status](https://david-dm.org/algolia/algoliasearch-zendesk.png?path=app)](https://david-dm.org/algolia/algoliasearch-zendesk?path=app)
+[![devDependency Status](https://david-dm.org/algolia/algoliasearch-zendesk/dev-status.png?path=app)](https://david-dm.org/algolia/algoliasearch-zendesk?path=app#info=devDependencies)
+[![peerDependency Status](https://david-dm.org/algolia/algoliasearch-zendesk/peer-status.png?path=app)](https://david-dm.org/algolia/algoliasearch-zendesk?path=app#info=peerDependencies)
 
-[![GitHub license](https://img.shields.io/github/license/algolia/algoliasearch-zendesk.svg)](../LICENSE)
+[![GitHub license](https://img.shields.io/github/license/algolia/algoliasearch-zendesk.png)](../LICENSE)
 
 This JavaScript library allows you to replace the default search of your Zendesk Help Center by Algolia. [Algolia](https://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
 
@@ -22,6 +22,17 @@ To browse through the crawler, visit the [crawler/](../crawler/) folder.
 
 1. Create an [Algolia account](https://www.algolia.com/users/sign_up).
 1. Follow the <a href="https://www.algolia.com/zendesk" rel="nofollow">Get Started</a> guide to connect your Zendesk Help Center with your Agolia account.
+
+### Indexing
+
+When you install our Zendesk integration, it creates what we call a connector in your Algolia account.
+You can access it with the left sidebar in your dashboard or by following [this link](https://www.algolia.com/connectors).
+
+This connector will every day take your public Help Center articles and put them inside an Algolia index.
+In most cases, this should be enough to have an up-to-date search.
+
+However, if you'd rather have it updated right now, like when you add a lot of support articles, you can manually trigger a full reindex.
+On this page, just click the "Reindex" button in the top right corner. A few minutes later, your search index will be updated.
 
 ### Updating your Help Center theme
 
@@ -46,6 +57,8 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
   <img src="https://res.cloudinary.com/hilnmyskv/image/upload/w_800/v1462207923/zendesk-preview_idcs7k.gif" alt="Document Head editing GIF" />
 </div>
 
+&nbsp;
+
 ### Available options
 
 Here is a full breakdown of the available options for the JavaScript library:
@@ -62,23 +75,31 @@ Here is a full breakdown of the available options for the JavaScript library:
     //
     // Optional configuration:
     //
-    indexPrefix: 'zendesk_',    // or your custom <INDEX_PREFIX>
-    baseUrl: '/hc/',            // the base URL of your Help Center
-    poweredBy: true,            // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
-    debug: false,               // debug mode prevents the autocomplete to close when trying to inspect it
-    color: '#D4D4D4',           // main color (used for links)
-    highlightColor: '#D4D4D4',  // highlight color to emphasize matching text
-    responsive: true,           // responsive instantsearch page
+    indexPrefix: 'zendesk_',              // or your custom <INDEX_PREFIX>
+    baseUrl: '/hc/',                      // the base URL of your Help Center
+    poweredBy: true,                      // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
+    debug: false,                         // debug mode prevents the autocomplete to close when trying to inspect it
+    color: '#158EC2',                     // main color (used for links)
+    highlightColor: '#158EC2',            // highlight color to emphasize matching text
+    responsive: true,                     // responsive instantsearch page
     autocomplete: {
-      enabled: true,            // is the autocomplete feature enabled?
-      inputSelector: '#query',  // the DOM selector to select the search box
-      hits: 5                   // the number of suggestions to display
+      enabled: true,                      // is the autocomplete feature enabled?
+      inputSelector: '#query',            // the DOM selector to select the search box
+      hits: 5                             // the number of suggestions to display
     },
     instantsearch: {
-      enabled: true,
-      tagsLimit: 15             // Maximum number of tags to display
+      enabled: true,                      // is the instantsearch feature enabled?
+      paginationSelector: '.pagination',  // the DOM selector for the current pagination (to hide it)
+      reuseAutocomplete: false,           // do not add a search input for the instant-search page
+      selector: '.search-results',        // the DOM selector for the results container
+      tagsLimit: 15                       // maximum number of tags to display
     },
-    translations: {}            // Translation strings
+    instantsearchPage,                    // function to check if we're on the search page
+    templates: {                          // template objects (see the templates section)
+      autocomplete: {},
+      instantsearch: {}
+    },
+    translations: {}                      // translation strings
   });
 </script>
 ```
@@ -250,9 +271,51 @@ translations: {
 }
 ```
 
+### Localized tags
+
+You can index localized tags based on locales prefix (e.g. `en-us` or `en`).
+If we detect a locale, we'll only index localized tags for this translation.  
+For instance, an article with those tags:
+
+```coffee
+[
+  'Wow',
+  'en:Awesome',
+  'en-gb:Good',
+  'fr:Incroyable'
+]
+```
+
+For `fr` and `fr-*` locales, we'll index `{ "label_names": ["Incroyable"] }`.  
+For `en-au`, `en-ca` and `en-us` locales, we'll index `{ "label_names": ["Awesome"] }`.  
+For the `en-gb` locale, we'll index `{ "label_names": ["Good"] }`.  
+For all the other locales, we'll index `{ "label_names": ["Wow"] }`.
+
 ### Zendesk Community search
 
-We do not index community forums for now. If you're using them, you'll probably want to disable `instantsearch` by setting `enabled: false` and just provide the auto-complete feature on your home page.
+We do not index community forums for now. If you're using them, you'll probably want to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
+
+### Indexing private articles
+
+Since we're providing a front-end search, and we can't securely know which access a user has in Zendesk's templates, we have to limit our indexing to public articles only.  
+A public article is not a draft and its access policy is `everybody`.  
+If you're in such a scenario, we recommend you to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
+
+### Modifying templates
+
+__WARNING__: We don't provide any guarantee that we won't change the templates between versions.
+If you chose to modify a template, you'll need to lock your version to MAJOR.MINOR.PATCH instead of just MAJOR in
+
+```html
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.css">
+<script type="text/javascript" src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.js"></script>
+```
+
+The latest version is [![version](https://img.shields.io/npm/v/algoliasearch.zendesk-hc.png)](https://www.npmjs.com/package/algoliasearch.zendesk-hc).
+
+With your version locked in place, you can now look at [`templates.js`](https://github.com/algolia/algoliasearch-zendesk/blob/master/app/src/templates.js) to know which keys you can override.
+The code here is ES6, you'll need to rewrite your custom template using Vanilla JavaScript instead.
+Also, some templates are using a `compile` function in this file. This function is internally calling the [`Hogan.js` template engine](http://mustache.github.io/mustache.5.html) with square brackets instead of braces (because Zendesk templates already use braces). This function is available using `algoliasearchZendeskHC.compile`.
 
 ## Development
 
