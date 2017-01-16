@@ -1,6 +1,16 @@
-<a name="2.9.1"></a>
-## [2.9.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.9.1...v2.9.1) (2016-12-20)
+<a name="2.10.0"></a>
+# [2.10.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.10.0...v2.10.0) (2017-01-16)
 
+
+
+
+<a name="2.10.0"></a>
+# [2.10.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.9.1...v2.10.0) (2017-01-16)
+
+
+### Features
+
+* **logo:** use new Algolia logo ([cc7693e](https://github.com/algolia/algoliasearch-zendesk/commit/cc7693e))
 
 
 
