@@ -1,6 +1,16 @@
-<a name="2.10.0"></a>
-# [2.10.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.10.0...v2.10.0) (2017-01-16)
+<a name="2.11.0"></a>
+# [2.11.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.11.0...v2.11.0) (2017-02-01)
 
+
+
+
+<a name="2.11.0"></a>
+# [2.11.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.10.0...v2.11.0) (2017-02-01)
+
+
+### Features
+
+* **autocomplete:** appendTo body ([7866986](https://github.com/algolia/algoliasearch-zendesk/commit/7866986))
 
 
 
