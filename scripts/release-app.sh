@@ -19,7 +19,7 @@ echo
 cd app/
 # No git-tag-version also disables the commit (See https://github.com/npm/npm/issues/7186)
 npm version --no-git-tag-version $ALGOLIASEARCH_ZENDESK_VERSION
-gulp clean
-NODE_ENV=production gulp build
+npm run clean
+NODE_ENV=production npm run build
 npm publish
 cd ../
