@@ -36,8 +36,6 @@
 }
 
 .aa-dropdown-menu {
-  width: 100%;
-  min-width: 203px;
   margin-top: 9px;
   border: 1px solid #d9d9d9;
   border-radius: 3px;
@@ -46,6 +44,7 @@
   font-size: 14px;
   padding: 20px 16px 16px 16px;
   text-align: left;
+  position: relative;
 }
 
 .aa-suggestion {

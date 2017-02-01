@@ -96,7 +96,8 @@ class Autocomplete {
       let aa = autocomplete($input, {
         hint: false,
         debug: process.env.NODE_ENV === 'development' || debug,
-        templates: this._templates({poweredBy, subdomain, templates, translations})
+        templates: this._templates({poweredBy, subdomain, templates, translations}),
+        appendTo: 'body'
       }, [{
         source: this._source(params, locale),
         name: 'articles',
