@@ -1,6 +1,16 @@
-<a name="2.11.0"></a>
-# [2.11.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.11.0...v2.11.0) (2017-02-01)
+<a name="2.11.1"></a>
+## [2.11.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.11.1...v2.11.1) (2017-02-02)
 
+
+
+
+<a name="2.11.1"></a>
+## [2.11.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.11.0...v2.11.1) (2017-02-02)
+
+
+### Bug Fixes
+
+* **autocomplete:** higher z-index ([1b46d42](https://github.com/algolia/algoliasearch-zendesk/commit/1b46d42))
 
 
 
