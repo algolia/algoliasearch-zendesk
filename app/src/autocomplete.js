@@ -106,6 +106,9 @@ class Autocomplete {
         }
       }]);
       aa.on('autocomplete:selected', this._onSelected(baseUrl, locale));
+      aa.on('autocomplete:redrawn', function () {
+        $('.algolia-autocomplete').css('z-index', 10000);
+      });
       this.autocompletes.push(aa);
     }
 
