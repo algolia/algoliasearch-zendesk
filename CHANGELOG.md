@@ -1,6 +1,16 @@
-<a name="2.12.0"></a>
-# [2.12.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.12.0...v2.12.0) (2017-02-27)
+<a name="2.12.1"></a>
+## [2.12.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.12.1...v2.12.1) (2017-02-27)
 
+
+
+
+<a name="2.12.1"></a>
+## [2.12.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.12.0...v2.12.1) (2017-02-27)
+
+
+### Bug Fixes
+
+* **Zendesk:** buggy content type ([1c4c428](https://github.com/algolia/algoliasearch-zendesk/commit/1c4c428))
 
 
 
