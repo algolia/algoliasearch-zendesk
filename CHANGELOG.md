@@ -1,6 +1,16 @@
-<a name="1.7.3"></a>
-## [1.7.3](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.3...v1.7.3) (2016-03-22)
+<a name="1.7.4"></a>
+## [1.7.4](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.4...v1.7.4) (2017-02-27)
 
+
+
+
+<a name="1.7.4"></a>
+## [1.7.4](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.3...v1.7.4) (2017-02-27)
+
+
+### Bug Fixes
+
+* **zendesk:** content type fix ([0fc8856](https://github.com/algolia/algoliasearch-zendesk/commit/0fc8856))
 
 
 
