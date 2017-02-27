@@ -7,15 +7,15 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    algoliasearch (1.11.0)
-      httpclient (~> 2.8.2)
+    algoliasearch (1.12.6)
+      httpclient (~> 2.8.3)
       json (>= 1.5.1)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     hashie (3.4.6)
-    httpclient (2.8.2.4)
+    httpclient (2.8.3)
     inflection (1.0.0)
-    json (2.0.2)
+    json (2.0.3)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
@@ -38,4 +38,4 @@ DEPENDENCIES
   zendesk_api
 
 BUNDLED WITH
-   1.12.5
+   1.14.4
