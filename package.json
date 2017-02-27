@@ -15,6 +15,7 @@
     "json": "^9.0.3"
   },
   "scripts": {
+    "postinstall": "cd ./app && npm install",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0",
     "release": "./scripts/release.sh",
     "release:app": "./scripts/release-app.sh",
