@@ -38,5 +38,6 @@ img=`docker images -q ${CONNECTOR_NAME}:latest`
 docker tag $img ${CONNECTOR_NAME}:v$major_tag
 docker tag $img ${CONNECTOR_NAME}:v$minor_tag
 docker tag $img ${CONNECTOR_NAME}:v$patch_tag
+docker rmi ${CONNECTOR_NAME}:latest
 docker push $CONNECTOR_NAME
 cd ..
