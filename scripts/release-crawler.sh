@@ -21,9 +21,9 @@ if [[ $ALGOLIASEARCH_ZENDESK_VERSION == "" ]]; then
 fi
 
 version_regex="^\([0-9]*\)\.\([0-9]*\)\.\([0-9]*\)$"
-major_tag=`echo "$ALGOLIASEARCH_POPULAR_VERSION" | sed "s/${version_regex}/\1/"`
-minor_tag=`echo "$ALGOLIASEARCH_POPULAR_VERSION" | sed "s/${version_regex}/\1.\2/"`
-patch_tag=`echo "$ALGOLIASEARCH_POPULAR_VERSION" | sed "s/${version_regex}/\1.\2.\3/"`
+major_tag=`echo "$ALGOLIASEARCH_ZENDESK_VERSION" | sed "s/${version_regex}/\1/"`
+minor_tag=`echo "$ALGOLIASEARCH_ZENDESK_VERSION" | sed "s/${version_regex}/\1.\2/"`
+patch_tag=`echo "$ALGOLIASEARCH_ZENDESK_VERSION" | sed "s/${version_regex}/\1.\2.\3/"`
 
 # Ask for confirmation
 echo "[Crawler] We'll \`docker rm ${CONNECTOR_NAME}:*\`, then \`docker build\` and \`docker push\`"
