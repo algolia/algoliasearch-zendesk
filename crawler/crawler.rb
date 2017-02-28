@@ -66,8 +66,8 @@ class Crawler
         retries += 1
         sleep 10
         retry if retries < 7
-        raise
       end
+      raise
     end
     tmp
   end
