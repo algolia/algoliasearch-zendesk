@@ -1,6 +1,16 @@
-<a name="1.7.4"></a>
-## [1.7.4](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.4...v1.7.4) (2017-02-27)
+<a name="1.7.5"></a>
+## [1.7.5](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.5...v1.7.5) (2017-02-28)
 
+
+
+
+<a name="1.7.5"></a>
+## [1.7.5](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.4...v1.7.5) (2017-02-28)
+
+
+### Bug Fixes
+
+* **crawler:** use error-throwing methods ([2fbfb58](https://github.com/algolia/algoliasearch-zendesk/commit/2fbfb58))
 
 
 
