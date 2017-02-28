@@ -43,7 +43,10 @@ class Crawler
     @data[name] ||= {}
     @deleted[name] ||= []
     index_name = "#{CONFIG['algolia_index_prefix']}#{CONFIG['app_name']}_#{name}"
-    @zendesk.send(name).all! { |obj| objs << obj }
+    @zendesk.send(name).all! do |obj|
+      puts "Crawling #{name}: #{objs.size}"
+      objs << obj
+    end
     store_objects objs, name
   end
 
