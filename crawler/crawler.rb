@@ -22,7 +22,7 @@ class Crawler
     @mutex.synchronize do
       unless @locales
         @locales = {}
-        @zendesk.locales.all do |l|
+        @zendesk.locales.all! do |l|
           locale = l.locale.downcase
           @locales[locale] = { locale: locale, name: l.presentation_name }
         end
@@ -43,7 +43,7 @@ class Crawler
     @data[name] ||= {}
     @deleted[name] ||= []
     index_name = "#{CONFIG['algolia_index_prefix']}#{CONFIG['app_name']}_#{name}"
-    @zendesk.send(name).all { |obj| objs << obj }
+    @zendesk.send(name).all! { |obj| objs << obj }
     store_objects objs, name
   end
 
@@ -53,7 +53,7 @@ class Crawler
     retries = 0
     tmp = nil
     begin
-      tmp = collection.fetch
+      tmp = collection.fetch!
     rescue
       # If HTTP 429 Too Many Requesets, retry until it works.
       # The block should be of 1 minute
@@ -183,7 +183,7 @@ class Crawler
 
     unless cond
       begin
-        obj = get_class(name).new(self, @zendesk.send(name).find(id: id))
+        obj = get_class(name).new(self, @zendesk.send(name).find!(id: id))
         fail if obj.data.nil?
         @mutex.synchronize do
           @data[name][id] = obj
