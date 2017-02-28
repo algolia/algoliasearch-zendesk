@@ -1,6 +1,16 @@
-<a name="2.12.2"></a>
-## [2.12.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.12.2...v2.12.2) (2017-02-28)
+<a name="2.12.3"></a>
+## [2.12.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.12.3...v2.12.3) (2017-02-28)
 
+
+
+
+<a name="2.12.3"></a>
+## [2.12.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.12.2...v2.12.3) (2017-02-28)
+
+
+### Bug Fixes
+
+* **crawler:** forgot an API call ([fd68497](https://github.com/algolia/algoliasearch-zendesk/commit/fd68497))
 
 
 
