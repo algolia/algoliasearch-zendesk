@@ -1,6 +1,16 @@
-<a name="2.12.1"></a>
-## [2.12.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.12.1...v2.12.1) (2017-02-27)
+<a name="2.12.2"></a>
+## [2.12.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.12.2...v2.12.2) (2017-02-28)
 
+
+
+
+<a name="2.12.2"></a>
+## [2.12.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.12.1...v2.12.2) (2017-02-28)
+
+
+### Bug Fixes
+
+* **crawler:** use only methods that raise on error ([3335cb5](https://github.com/algolia/algoliasearch-zendesk/commit/3335cb5))
 
 
 
