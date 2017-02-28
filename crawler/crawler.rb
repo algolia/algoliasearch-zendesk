@@ -14,7 +14,7 @@ class Crawler
   end
 
   def locales
-    @locales ||= ZendeskAPI::CLIENT.hc_locales.map do |l|
+    @locales ||= ZendeskAPI::CLIENT.hc_locales.to_a!.map do |l|
       [l.id, LOCALES[l.id]]
     end.to_h
   end
@@ -27,7 +27,7 @@ class Crawler
   alias_method :set, :get
 
   def crawl type
-    ZendeskAPI::CLIENT.send(type.plural).all do |obj|
+    ZendeskAPI::CLIENT.send(type.plural).all! do |obj|
       set type, obj
     end
   end

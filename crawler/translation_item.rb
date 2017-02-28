@@ -6,7 +6,7 @@ module Zendesk
     def build
       @translations = {}
       return nil if @zendesk_obj.nil?
-      @zendesk_obj.send(:translations).map do |t|
+      @zendesk_obj.send(:translations).to_a!.map do |t|
         @translations[t.locale] = t
         next nil if @crawler.locales[t.locale].nil? || ignore?(t)
         [t.locale, translation(t)]
