@@ -1,26 +1,5 @@
 require 'zendesk_api'
 
-# Fix buggy content type of Zendesk
-# https://twitter.com/Jerskouille/status/836268529578086401
-module ZendeskAPI
-  # @private
-  module Middleware
-    # @private
-    module Response
-      class ParseJson < Faraday::Response::Middleware
-        def on_complete(env)
-          type = env[:response_headers][CONTENT_TYPE].to_s
-          type = type.split(';', 2).first if type.index(';')
-
-          unless env[:body].strip.empty?
-            env[:body] = JSON.parse(env[:body])
-          end
-        end
-      end
-    end
-  end
-end
-
 # Help Center support (https://github.com/zendesk/zendesk_api_client_rb/issues/175)
 module ZendeskAPI
   class Article < Resource; end

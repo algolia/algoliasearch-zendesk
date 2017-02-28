@@ -97,7 +97,7 @@ module Zendesk
 
     def fetch obj
       return obj unless obj.is_a? Integer
-      @zendesk_obj = ZendeskAPI::CLIENT.send(self.class.plural).find(id: obj)
+      @zendesk_obj = ZendeskAPI::CLIENT.send(self.class.plural).find!(id: obj)
     end
   end
 end

@@ -14,7 +14,7 @@ class Crawler
   end
 
   def locales
-    @locales ||= ZendeskAPI::CLIENT.hc_locales.map do |l|
+    @locales ||= ZendeskAPI::CLIENT.hc_locales.to_a!.map do |l|
       [l.id, LOCALES[l.id]]
     end.to_h
   end
@@ -27,9 +27,9 @@ class Crawler
   alias_method :set, :get
 
   def crawl type
-    count = ZendeskAPI::CLIENT.send(type.plural).count
+    count = ZendeskAPI::CLIENT.send(type.plural).count!
     i = 1
-    ZendeskAPI::CLIENT.send(type.plural).all do |obj|
+    ZendeskAPI::CLIENT.send(type.plural).all! do |obj|
       set(type, obj)
       puts "#{type.plural.capitalize}: #{i}/#{count}"
       STDOUT.flush
@@ -38,11 +38,11 @@ class Crawler
   end
 
   def crawl_and_index type
-    count = ZendeskAPI::CLIENT.send(type.plural).count
+    count = ZendeskAPI::CLIENT.send(type.plural).count!
     i = 1
     last = []
     type.start_indexing
-    ZendeskAPI::CLIENT.send(type.plural).all do |obj|
+    ZendeskAPI::CLIENT.send(type.plural).all! do |obj|
       last << set(type, obj)
       if i % 100 == 0
         type.index(last)
