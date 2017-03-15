@@ -386,11 +386,15 @@
     }
     .ais-refinement-list--item {
       display: inline-block;
+      max-width: 100%;
       label {
         display: inline-block;
-        background: #efefef;
         padding: 4px 8px;
         margin: 4px;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        background: #efefef;
         cursor: pointer;
       }
     }
