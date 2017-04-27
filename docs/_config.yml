@@ -33,6 +33,7 @@ kramdown:
 
 exclude:
   - headers
+  - README.md
 
 # Assets
 sass:
