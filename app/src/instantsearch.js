@@ -71,6 +71,7 @@ class InstantSearch {
       selector,
       paginationSelector,
       reuseAutocomplete,
+      hideAutocomplete,
       tagsLimit
     },
     locale,
@@ -93,7 +94,7 @@ class InstantSearch {
       searchBoxSelector = autocompleteSelector;
     } else {
       this.$autocompleteInputs = document.querySelectorAll(autocompleteSelector);
-      this._hideAutocomplete();
+      if (hideAutocomplete) this._hideAutocomplete();
       searchBoxSelector = '#algolia-query';
     }
 
