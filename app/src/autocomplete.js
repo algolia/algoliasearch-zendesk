@@ -119,7 +119,7 @@ class Autocomplete {
 
   enableDebugMode() {
     this.autocompletes.forEach(function (aa) {
-      aa.autocomplete.typeahead.debug = true;
+      aa.typeahead.debug = true;
     });
   }
 
