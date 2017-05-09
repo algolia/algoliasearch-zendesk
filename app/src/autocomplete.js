@@ -76,7 +76,7 @@ class Autocomplete {
       $input.parentNode.insertBefore($wrapper, $input);
 
       // Get the width of the dropdown
-      const dropdownMenuWidth = $input.offsetWidth;
+      const dropdownMenuWidth = $input.getBoundingClientRect().width;
 
       // Remove the wrapper
       $wrapper.parentNode.insertBefore($input, $wrapper.nextSibling);
