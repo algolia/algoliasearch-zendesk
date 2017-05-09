@@ -1,6 +1,17 @@
-<a name="2.14.0"></a>
-# [2.14.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.14.0...v2.14.0) (2017-05-09)
+<a name="2.14.1"></a>
+## [2.14.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.14.1...v2.14.1) (2017-05-09)
 
+
+
+
+<a name="2.14.1"></a>
+## [2.14.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.14.0...v2.14.1) (2017-05-09)
+
+
+### Bug Fixes
+
+* **autocomplete:** fix enableDebugMode ([728dd8a](https://github.com/algolia/algoliasearch-zendesk/commit/728dd8a))
+* **autocomplete:** use getBoundingClientRect instead of offsetWidth ([e840768](https://github.com/algolia/algoliasearch-zendesk/commit/e840768))
 
 
 
