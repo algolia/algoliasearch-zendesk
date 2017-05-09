@@ -336,9 +336,9 @@ atob@~1.1.0:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/atob/-/atob-1.1.3.tgz#95f13629b12c3a51a5d215abdce2aa9f32f80773"
 
-autocomplete.js@^0.24.2:
-  version "0.24.2"
-  resolved "https://registry.yarnpkg.com/autocomplete.js/-/autocomplete.js-0.24.2.tgz#e46aa8727d5e8db01373d459a839bf8a7fb2cc45"
+autocomplete.js@^0.28.1:
+  version "0.28.1"
+  resolved "https://registry.yarnpkg.com/autocomplete.js/-/autocomplete.js-0.28.1.tgz#da9a0ae5919061d6e3927f20994a94214844b84a"
   dependencies:
     immediate "^3.2.3"
 

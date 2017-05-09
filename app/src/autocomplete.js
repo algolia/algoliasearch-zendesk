@@ -4,6 +4,7 @@ delete css.input.verticalAlign;
 delete css.inputWithNoHint.verticalAlign;
 
 import autocomplete from 'autocomplete.js';
+import zepto from 'autocomplete.js/zepto.js';
 
 import algoliasearch from 'algoliasearch';
 import 'es6-collections';
@@ -107,8 +108,9 @@ class Autocomplete {
       }]);
       aa.on('autocomplete:selected', this._onSelected(baseUrl, locale));
       aa.on('autocomplete:redrawn', function () {
-        $('.algolia-autocomplete').css('z-index', 10000);
+        aa.autocomplete.getWrapper().style.zIndex = 10000;
       });
+      aa.typeahead = zepto($input).data('aaAutocomplete');
       this.autocompletes.push(aa);
     }
 
