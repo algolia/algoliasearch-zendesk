@@ -63,24 +63,10 @@ class Autocomplete {
     this.autocompletes = [];
 
     for (let i = 0; i < this.$inputs.length; ++i) {
-      // Add a mock autocomplete to check the width the
-      // menu would have
       const $input = this.$inputs[i];
-      const $wrapper = document.createElement('div');
-      $wrapper.class = 'algolia-autocomplete';
-
-      const $dropdown = document.createElement('div');
-      $dropdown.class = 'aa-dropdown-menu';
-      $wrapper.appendChild($dropdown);
-
-      $input.parentNode.insertBefore($wrapper, $input);
 
       // Get the width of the dropdown
       const dropdownMenuWidth = $input.getBoundingClientRect().width;
-
-      // Remove the wrapper
-      $wrapper.parentNode.insertBefore($input, $wrapper.nextSibling);
-      $wrapper.parentNode.removeChild($wrapper);
 
       const sizeModifier = this._sizeModifier(dropdownMenuWidth);
       const nbSnippetWords = this._nbSnippetWords(dropdownMenuWidth);
