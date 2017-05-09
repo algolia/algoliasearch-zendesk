@@ -1,6 +1,16 @@
-<a name="2.13.0"></a>
-# [2.13.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.13.0...v2.13.0) (2017-05-04)
+<a name="2.14.0"></a>
+# [2.14.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.14.0...v2.14.0) (2017-05-09)
 
+
+
+
+<a name="2.14.0"></a>
+# [2.14.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.13.0...v2.14.0) (2017-05-09)
+
+
+### Features
+
+* **autocomplete:** upgrade autocomplete.js ([86143e8](https://github.com/algolia/algoliasearch-zendesk/commit/86143e8))
 
 
 
