@@ -1,6 +1,16 @@
-<a name="2.14.1"></a>
-## [2.14.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.14.1...v2.14.1) (2017-05-09)
+<a name="2.14.2"></a>
+## [2.14.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.14.2...v2.14.2) (2017-05-09)
 
+
+
+
+<a name="2.14.2"></a>
+## [2.14.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.14.1...v2.14.2) (2017-05-09)
+
+
+### Bug Fixes
+
+* **autocomplete:** remove the wrapper adding and removal trick ([4f9b346](https://github.com/algolia/algoliasearch-zendesk/commit/4f9b346))
 
 
 
