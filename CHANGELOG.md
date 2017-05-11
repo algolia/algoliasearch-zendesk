@@ -1,6 +1,16 @@
-<a name="2.14.2"></a>
-## [2.14.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.14.2...v2.14.2) (2017-05-09)
+<a name="2.14.3"></a>
+## [2.14.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.14.3...v2.14.3) (2017-05-11)
 
+
+
+
+<a name="2.14.3"></a>
+## [2.14.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.14.2...v2.14.3) (2017-05-11)
+
+
+### Bug Fixes
+
+* **instantsearch:** do not hide autocomplete ([fe4a6fb](https://github.com/algolia/algoliasearch-zendesk/commit/fe4a6fb))
 
 
 
