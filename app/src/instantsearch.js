@@ -15,6 +15,7 @@ class InstantSearch {
     indexPrefix,
     instantsearch: {
       enabled,
+      hideAutocomplete,
       paginationSelector,
       selector
     },
@@ -25,6 +26,7 @@ class InstantSearch {
     this.locale = null;
 
     this._temporaryHiding({
+      hideAutocomplete,
       autocompleteSelector,
       instantsearchSelector: selector,
       paginationSelector
@@ -304,12 +306,15 @@ class InstantSearch {
   }
 
   _temporaryHiding({
+    hideAutocomplete,
     autocompleteSelector,
     instantsearchSelector,
     paginationSelector
   }) {
+    let selector = `${instantsearchSelector}, ${paginationSelector}`;
+    if (hideAutocomplete) selector += `, ${autocompleteSelector}`;
     this._temporaryHidingCSS = addCSS(`
-      ${autocompleteSelector}, ${instantsearchSelector}, ${paginationSelector} {
+      ${selector} {
         display: none !important;
         visibility: hidden !important;
       }
