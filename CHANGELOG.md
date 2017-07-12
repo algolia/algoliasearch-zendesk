@@ -1,6 +1,16 @@
-<a name="2.14.4"></a>
-## [2.14.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.14.4...v2.14.4) (2017-06-05)
+<a name="2.15.0"></a>
+# [2.15.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.15.0...v2.15.0) (2017-07-12)
 
+
+
+
+<a name="2.15.0"></a>
+# [2.15.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.14.4...v2.15.0) (2017-07-12)
+
+
+### Features
+
+* **AlgoliasearchZendeskHC:** allow to call the script after DOM ready ([2f5103d](https://github.com/algolia/algoliasearch-zendesk/commit/2f5103d))
 
 
 
