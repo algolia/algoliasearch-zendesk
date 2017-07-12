@@ -61,17 +61,23 @@ class AlgoliasearchZendeskHC {
     AlgoliasearchZendeskHC.instances.push(this.search);
 
     // once the DOM is initialized
-    document.addEventListener('DOMContentLoaded', () => {
-      options.locale = options.locale || require('./I18n.js').locale;
-      loadTranslations(options);
-      loadTemplates(options);
-      this.search.render(options);
-    });
+    if (document.readyState === 'complete') {
+      this.render(options);
+    } else {
+      document.addEventListener('DOMContentLoaded', this.render.bind(this, options));
+    }
   }
 
   enableDebugMode() {
     if (!this.search.enableDebugMode) return;
     this.search.enableDebugMode();
+  }
+
+  render(options) {
+    options.locale = options.locale || require('./I18n.js').locale;
+    loadTranslations(options);
+    loadTemplates(options);
+    this.search.render(options);
   }
 }
 
