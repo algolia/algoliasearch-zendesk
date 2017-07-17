@@ -294,14 +294,6 @@ Since we're providing a front-end search, and we can't securely know which acces
 A public article is not a draft and its access policy is `everybody`.  
 If you're in such a scenario, we recommend you to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
 
-## Permissions needed for this application
-
-You need to have a Help Center version which supports theme customization.
-
-You need to be able to access https://your_subdomain.zendesk.com/hc/admin/appearance#customization.
-
-- Your own Zendesk account needs to have [Help Center manager rights](https://support.zendesk.com/hc/en-us/articles/218113638-Understanding-Guide-roles-and-setting-permissions), which means either you're an Administrator of your Zendesk account, or your role has `Can manage Help Center` checked.
-
 ## Modifying templates
 
 __WARNING__: We don't provide any guarantee that we won't change the templates between versions.

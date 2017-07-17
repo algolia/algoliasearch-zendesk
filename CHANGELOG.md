@@ -1,6 +1,16 @@
-<a name="2.15.0"></a>
-# [2.15.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.15.0...v2.15.0) (2017-07-12)
+<a name="2.15.1"></a>
+## [2.15.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.15.1...v2.15.1) (2017-07-17)
 
+
+
+
+<a name="2.15.1"></a>
+## [2.15.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.15.0...v2.15.1) (2017-07-17)
+
+
+### Bug Fixes
+
+* **AlgoliasearchZendeskHC:** run directly on interactive readyState ([b7b5128](https://github.com/algolia/algoliasearch-zendesk/commit/b7b5128))
 
 
 
