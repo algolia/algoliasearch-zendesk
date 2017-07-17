@@ -61,7 +61,7 @@ class AlgoliasearchZendeskHC {
     AlgoliasearchZendeskHC.instances.push(this.search);
 
     // once the DOM is initialized
-    if (document.readyState === 'complete') {
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
       this.render(options);
     } else {
       document.addEventListener('DOMContentLoaded', this.render.bind(this, options));
