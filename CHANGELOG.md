@@ -1,6 +1,16 @@
-<a name="2.15.1"></a>
-## [2.15.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.15.1...v2.15.1) (2017-07-17)
+<a name="2.16.0"></a>
+# [2.16.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.16.0...v2.16.0) (2017-07-31)
 
+
+
+
+<a name="2.16.0"></a>
+# [2.16.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.15.1...v2.16.0) (2017-07-31)
+
+
+### Features
+
+* **sections:** add the possibility to have more access_policies ([4ee57e0](https://github.com/algolia/algoliasearch-zendesk/commit/4ee57e0))
 
 
 
