@@ -1,3 +1,4 @@
+require_relative '../config'
 require_relative '../translation_item.rb'
 
 module Zendesk
@@ -16,7 +17,7 @@ module Zendesk
       super(t) ||
         !category.exists?(t.locale) ||
         category.ignore?(t) ||
-        access_policy != 'everybody'
+        !CONFIG['access_policies'].include?(access_policy)
     end
 
     protected
