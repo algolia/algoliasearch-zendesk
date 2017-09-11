@@ -41,7 +41,6 @@ class Crawler
     count = ZendeskAPI::CLIENT.send(type.plural).count!
     i = 1
     last = []
-    type.start_indexing
     ZendeskAPI::CLIENT.send(type.plural).all! do |obj|
       last << set(type, obj)
       if i % 100 == 0
@@ -53,6 +52,6 @@ class Crawler
       i += 1
     end
     type.index last
-    type.finish_indexing
+    type.move_temporary
   end
 end

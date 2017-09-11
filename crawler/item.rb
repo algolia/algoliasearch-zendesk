@@ -26,12 +26,14 @@ module Zendesk
       end
 
       def index_settings
-        return DEFAULT_INDEX_SETTINGS.merge(self::INDEX_SETTINGS) if first_indexing?
-        old_settings
-      end
-
-      def start_indexing
-        target_index.set_settings index_settings
+        default_settings = JSON.parse(DEFAULT_INDEX_SETTINGS.merge(self::INDEX_SETTINGS).to_json)
+        return default_settings if first_indexing?
+        settings = old_settings.clone
+        default_settings.each do |k, v|
+          curr = settings[k]
+          settings[k] = v if curr.nil? || curr == 0 || curr == [] # rubocop:disable Style/NumericPredicate, Metrics/LineLength
+        end
+        settings
       end
 
       def index items
@@ -41,10 +43,11 @@ module Zendesk
         puts "Indexed #{to_index.count} #{plural}"
       end
 
-      def finish_indexing
+      def move_temporary
+        target_index.set_settings! index_settings
         from, to = target_index.name, index_name
         return if from == to
-        Algolia.move_index from, to
+        Algolia.move_index! from, to
       end
 
       private
