@@ -1,6 +1,16 @@
-<a name="2.16.0"></a>
-# [2.16.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.16.0...v2.16.0) (2017-07-31)
+<a name="2.16.1"></a>
+## [2.16.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.16.1...v2.16.1) (2017-09-11)
 
+
+
+
+<a name="2.16.1"></a>
+## [2.16.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.16.0...v2.16.1) (2017-09-11)
+
+
+### Bug Fixes
+
+* **crawler:** mitigate settings wiped issue ([3ca6493](https://github.com/algolia/algoliasearch-zendesk/commit/3ca6493))
 
 
 
