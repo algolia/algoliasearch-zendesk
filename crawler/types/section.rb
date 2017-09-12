@@ -25,6 +25,10 @@ module Zendesk
 
     def access_policy complete: false
       res = @zendesk_obj.access_policy['access_policy']
+      return res['viewable_by'] unless complete
+      res['restricted_to_group_ids_empty'] = res['restricted_to_group_ids'].empty?
+      res['restricted_to_organization_ids_empty'] = res['restricted_to_organization_ids'].empty?
+      res['required_tags_empty'] = res['required_tags'].empty?
       complete ? res : res['viewable_by']
     end
 
