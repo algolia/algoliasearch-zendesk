@@ -29,6 +29,7 @@ module Zendesk
       res['restricted_to_group_ids_empty'] = res['restricted_to_group_ids'].empty?
       res['restricted_to_organization_ids_empty'] = res['restricted_to_organization_ids'].empty?
       res['required_tags_empty'] = res['required_tags'].empty?
+      res['required_tags_concatenated'] = res['required_tags'].join('-')
       complete ? res : res['viewable_by']
     end
 
