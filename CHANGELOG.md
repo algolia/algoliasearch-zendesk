@@ -1,6 +1,16 @@
-<a name="2.16.1"></a>
-## [2.16.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.16.1...v2.16.1) (2017-09-11)
+<a name="2.17.0"></a>
+# [2.17.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.17.0...v2.17.0) (2017-09-12)
 
+
+
+
+<a name="2.17.0"></a>
+# [2.17.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.16.1...v2.17.0) (2017-09-12)
+
+
+### Features
+
+* **crawler:** add possibility of indexing private articles ([950444e](https://github.com/algolia/algoliasearch-zendesk/commit/950444e))
 
 
 
