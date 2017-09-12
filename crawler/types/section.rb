@@ -17,14 +17,18 @@ module Zendesk
       super(t) ||
         !category.exists?(t.locale) ||
         category.ignore?(t) ||
-        !CONFIG['access_policies'].include?(access_policy)
+        (
+          !CONFIG['private'] &&
+          !CONFIG['access_policies'].include?(access_policy)
+        )
+    end
+
+    def access_policy complete: false
+      res = @zendesk_obj.access_policy['access_policy']
+      complete ? res : res['viewable_by']
     end
 
     protected
-
-    def access_policy
-      @zendesk_obj.access_policy['access_policy']['viewable_by']
-    end
 
     def translation t
       super(t).merge(

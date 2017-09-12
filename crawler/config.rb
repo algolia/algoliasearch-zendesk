@@ -7,3 +7,4 @@ CONFIG = {
 }.merge(JSON.parse(ENV['CONFIG']))
 
 CONFIG['access_policies'] ||= ['everybody']
+CONFIG['private'] ||= false
