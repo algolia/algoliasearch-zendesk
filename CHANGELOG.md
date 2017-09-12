@@ -1,6 +1,16 @@
-<a name="2.17.1"></a>
-## [2.17.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.17.1...v2.17.1) (2017-09-12)
+<a name="2.17.2"></a>
+## [2.17.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.17.2...v2.17.2) (2017-09-12)
 
+
+
+
+<a name="2.17.2"></a>
+## [2.17.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.17.1...v2.17.2) (2017-09-12)
+
+
+### Features
+
+* **crawler:** add concatenated required tags ([b2a5e7f](https://github.com/algolia/algoliasearch-zendesk/commit/b2a5e7f))
 
 
 
