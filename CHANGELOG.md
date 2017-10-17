@@ -1,6 +1,16 @@
-<a name="2.17.2"></a>
-## [2.17.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.17.2...v2.17.2) (2017-09-12)
+<a name="2.17.3"></a>
+## [2.17.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.17.3...v2.17.3) (2017-10-17)
 
+
+
+
+<a name="2.17.3"></a>
+## [2.17.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.17.2...v2.17.3) (2017-10-17)
+
+
+### Bug Fixes
+
+* **translation_item:** change default truncate to 5000 chars ([d8efba0](https://github.com/algolia/algoliasearch-zendesk/commit/d8efba0))
 
 
 
