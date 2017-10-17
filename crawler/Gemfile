@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'zendesk_api'
 gem 'algoliasearch'
+# Fork needed to follow redirects
+gem 'zendesk_api', github: 'Jerskouille/zendesk_api_client_rb'
 # See PR #20 on htmlentities
 # https://github.com/threedaymonk/htmlentities/pull/22
 gem 'htmlentities', github: 'Jerskouille/htmlentities'
