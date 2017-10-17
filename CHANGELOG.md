@@ -1,6 +1,16 @@
-<a name="2.17.3"></a>
-## [2.17.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.17.3...v2.17.3) (2017-10-17)
+<a name="2.17.4"></a>
+## [2.17.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.17.4...v2.17.4) (2017-10-17)
 
+
+
+
+<a name="2.17.4"></a>
+## [2.17.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.17.3...v2.17.4) (2017-10-17)
+
+
+### Bug Fixes
+
+* **zendesk_api:** use a fork to handle redirects ([d127463](https://github.com/algolia/algoliasearch-zendesk/commit/d127463))
 
 
 
