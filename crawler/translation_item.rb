@@ -42,7 +42,7 @@ module Zendesk
         updated_at: t.updated_at.to_i / TIME_FRAME,
         position: @zendesk_obj.position,
         title: t.title,
-        body_safe: truncate(DECODER.decode(t.body.to_s.gsub(/<\/?[^>]*>/, ' ')), 30_000),
+        body_safe: truncate(DECODER.decode(t.body.to_s.gsub(/<\/?[^>]*>/, ' ')), 5_000),
         outdated: @zendesk_obj.outdated || t.outdated
       }
     end
