@@ -6,3 +6,5 @@ gem 'zendesk_api', github: 'Jerskouille/zendesk_api_client_rb'
 # See PR #20 on htmlentities
 # https://github.com/threedaymonk/htmlentities/pull/22
 gem 'htmlentities', github: 'Jerskouille/htmlentities'
+
+gem 'pry'
