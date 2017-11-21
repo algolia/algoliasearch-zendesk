@@ -85,7 +85,7 @@ module Zendesk
     end
 
     def to_index
-      @data.nil ? [] : [@data]
+      @data.nil? ? [] : [@data]
     end
 
     def exists?
