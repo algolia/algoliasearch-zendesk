@@ -15,11 +15,16 @@ read -p "[App] We'll \`npm publish\` with \"v$ALGOLIASEARCH_ZENDESK_VERSION\". C
 echo
 [[ $REPLY =~ ^[Yy]$ ]] || exit -1
 
+read -p "[App] One time password: " -n 1 -r
+echo
+[[ $REPLY =~ \d{6} ]] || exit -1
+OTP=$REPLY
+
 # Build and publish app
 cd app/
 # No git-tag-version also disables the commit (See https://github.com/npm/npm/issues/7186)
 npm version --no-git-tag-version $ALGOLIASEARCH_ZENDESK_VERSION
 npm run clean
 NODE_ENV=production npm run build
-npm publish
+npm publish --otp=$OTP
 cd ../
