@@ -17,7 +17,7 @@ echo
 
 echo "[App] One time password: "
 read line
-[[ $line =~ \d{6} ]] || exit -1
+[[ $line =~ [0-9]{6} ]] || exit -1
 OTP=$line
 
 # Build and publish app
