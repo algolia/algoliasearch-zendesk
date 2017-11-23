@@ -15,10 +15,10 @@ read -p "[App] We'll \`npm publish\` with \"v$ALGOLIASEARCH_ZENDESK_VERSION\". C
 echo
 [[ $REPLY =~ ^[Yy]$ ]] || exit -1
 
-read -p "[App] One time password: " -n 1 -r
-echo
-[[ $REPLY =~ \d{6} ]] || exit -1
-OTP=$REPLY
+echo "[App] One time password: "
+read line
+[[ $line =~ \d{6} ]] || exit -1
+OTP=$line
 
 # Build and publish app
 cd app/
