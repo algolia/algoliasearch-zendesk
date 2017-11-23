@@ -38,14 +38,16 @@ class Crawler
   end
 
   def crawl_and_index type
+    return unless CONFIG['types'].include? type.plural.to_s
     count = ZendeskAPI::CLIENT.send(type.plural).count!
     i = 1
     last = []
     ZendeskAPI::CLIENT.send(type.plural).all! do |obj|
-      last << set(type, obj)
+      last << type.new(self, obj)
       if i % 100 == 0
         type.index(last)
         last = []
+        GC.start
       end
       puts "#{type.plural.capitalize}: #{i}/#{count}"
       STDOUT.flush

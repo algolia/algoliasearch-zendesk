@@ -43,6 +43,26 @@ module ZendeskAPI
     has :author, class: User
   end
 
+  class Topic < Resource; end
+  class Post < Resource; end
+  class Comment < Resource; end
+
+  class Topic < Resource
+    namespace 'community'
+    has_many Post
+  end
+
+  class Post < Resource
+    namespace 'community'
+    has_many Comment
+    has Topic
+    has :author, class: User
+  end
+
+  class Comment
+    namespace 'community'
+  end
+
   CLIENT = ZendeskAPI::Client.new do |config|
     config.url = "https://#{CONFIG['app_name']}.zendesk.com/api/v2"
     if CONFIG['oauth_token'].nil? # To remove in the end

@@ -8,3 +8,4 @@ CONFIG = {
 
 CONFIG['access_policies'] ||= ['everybody']
 CONFIG['private'] ||= false
+CONFIG['types'] ||= ['articles']

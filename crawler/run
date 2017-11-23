@@ -2,4 +2,6 @@
 
 require_relative './crawler.rb'
 
-Crawler.new.crawl_and_index Zendesk::Article
+@crawler = Crawler.new
+@crawler.crawl_and_index Zendesk::Article
+@crawler.crawl_and_index Zendesk::Post

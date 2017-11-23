@@ -1,3 +1,6 @@
 require './types/category.rb'
 require './types/section.rb'
 require './types/article.rb'
+require './types/topic.rb'
+require './types/post.rb'
+require './types/user.rb'

@@ -1,6 +1,7 @@
 require_relative './config.rb'
 require_relative './algolia.rb'
 require_relative './zendesk.rb'
+require_relative './decoder.rb'
 
 module Zendesk
   class Item
@@ -77,7 +78,6 @@ module Zendesk
     end
 
     def build
-      return nil if @zendesk_obj.nil?
       {
         objectID: @zendesk_obj.id,
         updated_at: @zendesk_obj.updated_at.to_i / TIME_FRAME
@@ -85,7 +85,7 @@ module Zendesk
     end
 
     def to_index
-      @data.nil? ? [] : [@data]
+      ignore? ? [] : [@data]
     end
 
     def exists?
@@ -101,6 +101,14 @@ module Zendesk
     def fetch obj
       return obj unless obj.is_a? Integer
       @zendesk_obj = ZendeskAPI::CLIENT.send(self.class.plural).find!(id: obj)
+    end
+
+    def decode body
+      DECODER.decode(body.to_s.gsub(/<\/?[^>]*>/, ' '))
+    end
+
+    def truncate str, max = 5_000
+      str.length > max ? "#{str[0...max]}..." : str
     end
   end
 end
