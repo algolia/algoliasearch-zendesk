@@ -1,6 +1,20 @@
-<a name="2.17.4"></a>
-## [2.17.4](https://github.com/algolia/algoliasearch-zendesk/compare/v2.17.4...v2.17.4) (2017-10-17)
+<a name="2.18.0"></a>
+# [2.18.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.18.0...v2.18.0) (2017-11-25)
 
+
+
+
+<a name="2.18.0"></a>
+# [2.18.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.17.4...v2.18.0) (2017-11-25)
+
+
+### Bug Fixes
+
+* **item:** correct wrong condition ([a575445](https://github.com/algolia/algoliasearch-zendesk/commit/a575445))
+
+### Features
+
+* **community:** index community posts ([e726fd8](https://github.com/algolia/algoliasearch-zendesk/commit/e726fd8))
 
 
 
