@@ -1,6 +1,16 @@
-<a name="2.18.0"></a>
-# [2.18.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.18.0...v2.18.0) (2017-11-25)
+<a name="2.19.0"></a>
+# [2.19.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.19.0...v2.19.0) (2017-12-01)
 
+
+
+
+<a name="2.19.0"></a>
+# [2.19.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.18.0...v2.19.0) (2017-12-01)
+
+
+### Features
+
+* **reindexing:** copy synonyms and query rules ([9cbd3ea](https://github.com/algolia/algoliasearch-zendesk/commit/9cbd3ea))
 
 
 
