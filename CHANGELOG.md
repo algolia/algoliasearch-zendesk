@@ -1,6 +1,16 @@
-<a name="2.19.0"></a>
-# [2.19.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.19.0...v2.19.0) (2017-12-01)
+<a name="2.19.1"></a>
+## [2.19.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.19.1...v2.19.1) (2017-12-01)
 
+
+
+
+<a name="2.19.1"></a>
+## [2.19.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.19.0...v2.19.1) (2017-12-01)
+
+
+### Bug Fixes
+
+* **autocomplete:** fix IE11 issue ([e94f969](https://github.com/algolia/algoliasearch-zendesk/commit/e94f969))
 
 
 
