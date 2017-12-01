@@ -46,15 +46,19 @@ module Zendesk
 
       def move_temporary
         target_index.set_settings! index_settings
-        from, to = target_index.name, index_name
-        return if from == to
-        Algolia.move_index! from, to
+        return if first_indexing?
+        Algolia.copy_index! main_index.name, target_index.name, %w(synonyms rules)
+        Algolia.move_index! target_index.name, main_index.name
       end
 
       private
 
       def target_index
         Algolia::Index.new("#{index_name}#{'.tmp' unless first_indexing?}")
+      end
+
+      def main_index
+        Algolia::Index.new(index_name)
       end
 
       def first_indexing?
