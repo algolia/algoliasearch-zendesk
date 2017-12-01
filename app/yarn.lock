@@ -63,13 +63,9 @@ acorn@^3.1.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
 
-agentkeepalive@^2.1.1:
+agentkeepalive@^2.1.1, agentkeepalive@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/agentkeepalive/-/agentkeepalive-2.2.0.tgz#c5d1bd4b129008f1163f236f86e5faea2026e2ef"
-
-algolia-ms@0.7.1-fix-future-reserved-words:
-  version "0.7.1-fix-future-reserved-words"
-  resolved "https://registry.yarnpkg.com/algolia-ms/-/algolia-ms-0.7.1-fix-future-reserved-words.tgz#fa2e440152706a055283ac95468beee3bea5f2b3"
 
 algoliasearch-helper@^2.16.0:
   version "2.16.0"
@@ -82,24 +78,24 @@ algoliasearch-helper@^2.16.0:
     util "^0.10.3"
 
 algoliasearch@^3.18.1:
-  version "3.18.1"
-  resolved "https://registry.yarnpkg.com/algoliasearch/-/algoliasearch-3.18.1.tgz#84e8b3c2a1d5419afee8b05e60c5178528c0834b"
+  version "3.24.7"
+  resolved "https://registry.yarnpkg.com/algoliasearch/-/algoliasearch-3.24.7.tgz#7ba6c41c9c87b3d36c3181e1d93d482b2ae1a660"
   dependencies:
-    agentkeepalive "^2.1.1"
-    debug "^2.2.0"
-    debug-ms-fix-yui-compressor "2.2.2-future-reserved-word-fix-ms"
-    envify "^3.4.0"
-    es6-promise "^3.2.1"
+    agentkeepalive "^2.2.0"
+    debug "^2.6.8"
+    envify "^4.0.0"
+    es6-promise "^4.1.0"
     events "^1.1.0"
     foreach "^2.0.5"
-    global "^4.3.0"
+    global "^4.3.2"
     inherits "^2.0.1"
-    isarray "^1.0.0"
+    isarray "^2.0.1"
     load-script "^1.0.0"
+    object-keys "^1.0.11"
     querystring-es3 "^0.2.1"
     reduce "^1.0.1"
     semver "^5.1.0"
-    tunnel-agent "^0.4.3"
+    tunnel-agent "^0.6.0"
 
 algoliasearch@^3.20.0:
   version "3.20.2"
@@ -337,8 +333,8 @@ atob@~1.1.0:
   resolved "https://registry.yarnpkg.com/atob/-/atob-1.1.3.tgz#95f13629b12c3a51a5d215abdce2aa9f32f80773"
 
 autocomplete.js@^0.28.1:
-  version "0.28.1"
-  resolved "https://registry.yarnpkg.com/autocomplete.js/-/autocomplete.js-0.28.1.tgz#da9a0ae5919061d6e3927f20994a94214844b84a"
+  version "0.28.3"
+  resolved "https://registry.yarnpkg.com/autocomplete.js/-/autocomplete.js-0.28.3.tgz#b90dc01688613ab16488bbb6f5314fd2a365ec4b"
   dependencies:
     immediate "^3.2.3"
 
@@ -1869,13 +1865,7 @@ debug-fabulous@0.0.X:
     lazy-debug-legacy "0.0.X"
     object-assign "4.1.0"
 
-debug-ms-fix-yui-compressor@2.2.2-future-reserved-word-fix-ms:
-  version "2.2.2-future-reserved-word-fix-ms"
-  resolved "https://registry.yarnpkg.com/debug-ms-fix-yui-compressor/-/debug-ms-fix-yui-compressor-2.2.2-future-reserved-word-fix-ms.tgz#500947391250ec13c020b15c901365f1a01620ec"
-  dependencies:
-    algolia-ms "0.7.1-fix-future-reserved-words"
-
-debug@2.2.0, debug@^2.1.1, debug@^2.2.0, debug@~2.2.0:
+debug@2.2.0, debug@^2.1.1, debug@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
   dependencies:
@@ -1886,6 +1876,12 @@ debug@2.X, debug@^2.3.2:
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.4.5.tgz#34c7b12a1ca96674428f41fe92c49b4ce7cd0607"
   dependencies:
     ms "0.7.2"
+
+debug@^2.2.0, debug@^2.6.8:
+  version "2.6.9"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
+  dependencies:
+    ms "2.0.0"
 
 debug@~1.0.2:
   version "1.0.4"
@@ -2213,13 +2209,13 @@ es6-map@^0.1.3:
     es6-symbol "~3.1.0"
     event-emitter "~0.3.4"
 
-es6-promise@^3.2.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-3.3.1.tgz#a08cdde84ccdbf34d027a1451bc91d4bcd28a613"
-
 es6-promise@^4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.0.5.tgz#7882f30adde5b240ccfa7f7d78c548330951ae42"
+
+es6-promise@^4.1.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.1.1.tgz#8811e90915d9a0dba36274f0b242dbda78f9c92a"
 
 es6-set@~0.1.3:
   version "0.1.4"
@@ -2960,9 +2956,9 @@ global-prefix@^0.1.4:
     osenv "^0.1.3"
     which "^1.2.10"
 
-global@^4.3.0:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/global/-/global-4.3.1.tgz#5f757908c7cbabce54f386ae440e11e26b7916df"
+global@^4.3.0, global@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/global/-/global-4.3.2.tgz#e76989268a6c74c38908b1305b10fc0e394e9d0f"
   dependencies:
     min-document "^2.19.0"
     process "~0.5.1"
@@ -4680,6 +4676,10 @@ ms@0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
 
+ms@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
+
 multiparty@3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/multiparty/-/multiparty-3.3.2.tgz#35de6804dc19643e5249f3d3e3bdc6c8ce301d3f"
@@ -5907,6 +5907,10 @@ rx-lite@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
 
+safe-buffer@^5.0.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
+
 sass-graph@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/sass-graph/-/sass-graph-2.1.2.tgz#965104be23e8103cb7e5f710df65935b317da57b"
@@ -5923,13 +5927,17 @@ sax@^1.1.4, sax@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
 
-"semver@2 || 3 || 4 || 5", "semver@2.x || 3.x || 4 || 5", semver@^5.1.0, semver@~5.3.0:
+"semver@2 || 3 || 4 || 5", "semver@2.x || 3.x || 4 || 5", semver@~5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
 
 semver@^4.1.0:
   version "4.3.6"
   resolved "https://registry.yarnpkg.com/semver/-/semver-4.3.6.tgz#300bc6e0e86374f7ba61068b5b1ecd57fc6532da"
+
+semver@^5.1.0:
+  version "5.4.1"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
 
 send@0.13.2:
   version "0.13.2"
@@ -6554,6 +6562,12 @@ tty-browserify@~0.0.0:
 tunnel-agent@^0.4.3, tunnel-agent@~0.4.0, tunnel-agent@~0.4.1:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.4.3.tgz#6373db76909fe570e08d73583365ed828a74eeeb"
+
+tunnel-agent@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.6.0.tgz#27a5dea06b36b04a0a9966774b290868f0fc40fd"
+  dependencies:
+    safe-buffer "^5.0.1"
 
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.3"
