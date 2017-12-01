@@ -1,7 +1,11 @@
 // Small hack to remove verticalAlign on the input
-import css from 'autocomplete.js/src/autocomplete/css.js';
-delete css.input.verticalAlign;
-delete css.inputWithNoHint.verticalAlign;
+// Makes IE11 fail though
+import _ from 'autocomplete.js/src/common/utils.js';
+if (!_.isMsie()) {
+  const css = require('autocomplete.js/src/autocomplete/css.js');
+  delete css.input.verticalAlign;
+  delete css.inputWithNoHint.verticalAlign;
+}
 
 import autocomplete from 'autocomplete.js';
 import zepto from 'autocomplete.js/zepto.js';
