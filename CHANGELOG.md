@@ -1,6 +1,16 @@
-<a name="2.19.1"></a>
-## [2.19.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.19.1...v2.19.1) (2017-12-01)
+<a name="2.20.0"></a>
+# [2.20.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.20.0...v2.20.0) (2017-12-14)
 
+
+
+
+<a name="2.20.0"></a>
+# [2.20.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.19.1...v2.20.0) (2017-12-14)
+
+
+### Features
+
+* **UserSegment:** handle user segments instead of access policies ([4c5c883](https://github.com/algolia/algoliasearch-zendesk/commit/4c5c883))
 
 
 

@@ -291,7 +291,7 @@ We do not index community forums for now. If you're using them, you'll probably 
 ## Indexing private articles
 
 Since we're providing a front-end search, and we can't securely know which access a user has in Zendesk's templates, we have to limit our indexing to public articles only.  
-A public article is not a draft and its access policy is `everybody`.  
+A public article is not a draft and its section belongs to no user segment (i.e. `everybody`).  
 If you're in such a scenario, we recommend you to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
 
 ## Modifying templates
