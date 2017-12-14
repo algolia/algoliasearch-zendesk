@@ -12,12 +12,11 @@ module Zendesk
       @crawler.get Category, @zendesk_obj.category_id
     end
 
-    protected
-
     def ignore? t
-      ap = @zendesk_obj.access_policy['access_policy']['viewable_by']
-      super(t) || ap != 'everybody'
+      super(t) || !@zendesk_obj.user_segment_id.nil?
     end
+
+    protected
 
     def translation t
       super(t).merge(

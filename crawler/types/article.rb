@@ -22,8 +22,7 @@ module Zendesk
     protected
 
     def ignore? t
-      ap = @zendesk_obj.section.access_policy['access_policy']['viewable_by']
-      super(t) || @zendesk_obj.draft || t.draft || ap != 'everybody'
+      super(t) || @zendesk_obj.draft || t.draft || section.ignore?(t)
     end
 
     def selected
