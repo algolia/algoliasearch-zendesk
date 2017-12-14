@@ -1,6 +1,16 @@
-<a name="1.8.1"></a>
-## [1.8.1](https://github.com/algolia/algoliasearch-zendesk/compare/v1.8.1...v1.8.1) (2017-12-14)
+<a name="1.8.2"></a>
+## [1.8.2](https://github.com/algolia/algoliasearch-zendesk/compare/v1.8.2...v1.8.2) (2017-12-14)
 
+
+
+
+<a name="1.8.2"></a>
+## [1.8.2](https://github.com/algolia/algoliasearch-zendesk/compare/v1.8.1...v1.8.2) (2017-12-14)
+
+
+### Bug Fixes
+
+* **run:** adjust permissions and shebang ([a0f0ee7](https://github.com/algolia/algoliasearch-zendesk/commit/a0f0ee7))
 
 
 
