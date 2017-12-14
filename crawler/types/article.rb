@@ -50,7 +50,7 @@ module Zendesk
         category: simple_category,
         section: simple_section.merge(
           full_path: "#{simple_category[:title]} > #{simple_section[:title]}",
-          access_policy: section.access_policy(complete: CONFIG['private'])
+          user_segment: section.user_segment(complete: CONFIG['private'])
         ),
         label_names: tags(t.locale),
         created_at_iso: @zendesk_obj.created_at.utc.iso8601,

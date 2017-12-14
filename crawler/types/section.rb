@@ -14,23 +14,30 @@ module Zendesk
     end
 
     def ignore? t
+      require 'pry'
       super(t) ||
         !category.exists?(t.locale) ||
         category.ignore?(t) ||
-        (
-          !CONFIG['private'] &&
-          !CONFIG['access_policies'].include?(access_policy)
-        )
+        !user_segment_allowed?
     end
 
-    def access_policy complete: false
-      res = @zendesk_obj.access_policy['access_policy']
-      return res['viewable_by'] unless complete
-      res['restricted_to_group_ids_empty'] = res['restricted_to_group_ids'].empty?
-      res['restricted_to_organization_ids_empty'] = res['restricted_to_organization_ids'].empty?
-      res['required_tags_empty'] = res['required_tags'].empty?
-      res['required_tags_concatenated'] = res['required_tags'].join('-')
-      complete ? res : res['viewable_by']
+    def user_segment_allowed?
+      return true if CONFIG['private']
+      segment = user_segment
+      return false unless segment['built_in']
+      CONFIG['user_types'].include?(segment['user_type'])
+    end
+
+    def user_segment complete: true
+      id = @zendesk_obj.user_segment_id
+      res = id.nil? ? UserSegment::DEFAULT_DATA : @crawler.get(UserSegment, id).data
+      res = JSON.parse(res.to_json)
+      return res['user_type'] unless complete
+      res['group_ids_empty'] = res['group_ids'].empty?
+      res['organization_ids_empty'] = res['organization_ids'].empty?
+      res['tags_empty'] = res['tags'].empty?
+      res['tags_concatenated'] = res['tags'].join('-')
+      res
     end
 
     protected

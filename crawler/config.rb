@@ -6,6 +6,6 @@ CONFIG = {
   'algolia_index_prefix' => ENV['INDEX_PREFIX']
 }.merge(JSON.parse(ENV['CONFIG']))
 
-CONFIG['access_policies'] ||= ['everybody']
+CONFIG['user_types'] ||= ['everybody']
 CONFIG['private'] ||= false
 CONFIG['types'] ||= ['articles']

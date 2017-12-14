@@ -1,4 +1,5 @@
 require './types/category.rb'
+require './types/user_segment.rb'
 require './types/section.rb'
 require './types/article.rb'
 require './types/topic.rb'
