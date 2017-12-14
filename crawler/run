@@ -1,9 +1,3 @@
-#! /usr/bin/env ruby
+#! /bin.sh
 
-require_relative './crawler.rb'
-
-crawler = Crawler.new
-crawler.crawl Zendesk::Section
-crawler.crawl Zendesk::Article
-
-crawler.index Zendesk::Article
+bundle exec ./main.rb
