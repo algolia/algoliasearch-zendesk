@@ -1,6 +1,16 @@
-<a name="1.8.0"></a>
-# [1.8.0](https://github.com/algolia/algoliasearch-zendesk/compare/v1.8.0...v1.8.0) (2017-12-14)
+<a name="1.8.1"></a>
+## [1.8.1](https://github.com/algolia/algoliasearch-zendesk/compare/v1.8.1...v1.8.1) (2017-12-14)
 
+
+
+
+<a name="1.8.1"></a>
+## [1.8.1](https://github.com/algolia/algoliasearch-zendesk/compare/v1.8.0...v1.8.1) (2017-12-14)
+
+
+### Bug Fixes
+
+* **run:** add bundle exec to the main command ([6679bfd](https://github.com/algolia/algoliasearch-zendesk/commit/6679bfd))
 
 
 
