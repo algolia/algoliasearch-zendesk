@@ -1,6 +1,16 @@
-<a name="1.7.5"></a>
-## [1.7.5](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.5...v1.7.5) (2017-02-28)
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/algolia/algoliasearch-zendesk/compare/v1.8.0...v1.8.0) (2017-12-14)
 
+
+
+
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/algolia/algoliasearch-zendesk/compare/v1.7.5...v1.8.0) (2017-12-14)
+
+
+### Features
+
+* **UserSegment:** replace access policies with user segments ([f22bb7c](https://github.com/algolia/algoliasearch-zendesk/commit/f22bb7c))
 
 
 
