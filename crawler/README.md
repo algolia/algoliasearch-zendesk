@@ -18,8 +18,8 @@ Then, to run the crawler:
 APPLICATION_ID='xxx' \
 API_KEY='xxx' \
 INDEX_PREFIX='zendesk_' \
-CONFIG='{ "app_name": "your-zendesk-subdomain", "email": "xxx@xxx.xx", "api_token": "xxx" }'
-bundle exec ./run
+CONFIG='{ "app_name": "your-zendesk-subdomain", "email": "xxx@xxx.xx", "api_token": "xxx" }' \
+./run
 ```
 
 You can generate an API token to your Zendesk instance in the *Agent Section* > *Admin/Settings* > *API*.
