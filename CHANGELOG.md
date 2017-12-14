@@ -1,6 +1,16 @@
-<a name="2.20.2"></a>
-## [2.20.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.20.2...v2.20.2) (2017-12-14)
+<a name="2.20.3"></a>
+## [2.20.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.20.3...v2.20.3) (2017-12-14)
 
+
+
+
+<a name="2.20.3"></a>
+## [2.20.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.20.2...v2.20.3) (2017-12-14)
+
+
+### Bug Fixes
+
+* **run:** ensure run is called with bundle exec ([4ef5eef](https://github.com/algolia/algoliasearch-zendesk/commit/4ef5eef))
 
 
 
