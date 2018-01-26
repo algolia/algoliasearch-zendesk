@@ -6,7 +6,7 @@ module Zendesk
       attributesToIndex: %w(title section.title category.title label_names unordered(body_safe)),
       attributesForFaceting: %w(label_names locale.name locale.locale category.title section.title section.full_path),
       removeWordsIfNoResults: 'allOptional',
-      customRanking: %w(asc(outdated) desc(promoted) desc(vote_sum) asc(position) desc(updated_at)),
+      customRanking: %w(asc(outdated) desc(promoted) desc(vote_sum) asc(position) desc(edited_at)),
       attributesToHighlight: %w(title section.title category.title label_names),
       attributesToSnippet: %w(body_safe:30)
     }
@@ -46,6 +46,7 @@ module Zendesk
     def translation t
       simple_category = category.simple(t.locale)
       simple_section = section.simple(t.locale)
+      edited_at = @zendesk_obj.edited_at || @zendesk_obj.updated_at
       super(t).merge(selected).merge(
         category: simple_category,
         section: simple_section.merge(
@@ -54,7 +55,9 @@ module Zendesk
         ),
         label_names: tags(t.locale),
         created_at_iso: @zendesk_obj.created_at.utc.iso8601,
-        updated_at_iso: @zendesk_obj.updated_at.utc.iso8601
+        updated_at_iso: @zendesk_obj.updated_at.utc.iso8601,
+        edited_at: edited_at.to_i / TIME_FRAME,
+        edited_at_iso: edited_at.utc.iso8601
       )
     end
   end
