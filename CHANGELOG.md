@@ -1,6 +1,16 @@
-<a name="2.20.3"></a>
-## [2.20.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.20.3...v2.20.3) (2017-12-14)
+<a name="2.21.0"></a>
+# [2.21.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.21.0...v2.21.0) (2018-01-26)
 
+
+
+
+<a name="2.21.0"></a>
+# [2.21.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.20.3...v2.21.0) (2018-01-26)
+
+
+### Features
+
+* **article:** add edited_at{,iso} attributes to articles ([f101e32](https://github.com/algolia/algoliasearch-zendesk/commit/f101e32))
 
 
 
