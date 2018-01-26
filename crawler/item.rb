@@ -5,7 +5,7 @@ require_relative './decoder.rb'
 
 module Zendesk
   class Item
-    TIME_FRAME = 60
+    TIME_FRAME = 60 * 60 * 24
 
     DEFAULT_INDEX_SETTINGS = { maxValuesPerFacet: 5 }
     INDEX_SETTINGS = {}
