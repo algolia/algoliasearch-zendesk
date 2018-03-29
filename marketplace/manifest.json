@@ -1,0 +1,15 @@
+{
+  "name": "Algolia Search",
+  "author": {
+    "name": "Algolia",
+    "email": "support@algolia.com",
+    "url": "https://www.algolia.com"
+  },
+  "location": {
+    "support": {
+    }
+  },
+  "defaultLocale": "en",
+  "marketingOnly": true,
+  "private": false
+}
