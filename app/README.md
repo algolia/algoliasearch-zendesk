@@ -17,7 +17,7 @@ To browse through the crawler, visit the [crawler/](../crawler/) folder.
 ### Synchronize Algolia with your Help Center
 
 <div align="center">
-  <img src="https://community.algolia.com/zendesk/img/connection.png" alt="Data connection visualization" />
+  <img src="https://community.algolia.com/zendesk/img/algolia-zendesk.svg" alt="Data connection visualization" />
 </div>
 
 1. Create an [Algolia account](https://www.algolia.com/users/sign_up).
@@ -45,7 +45,7 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
   1. In the top left corner dropdown, select the **Document Head** template
 
 <div align="center">
-  <img src="https://res.cloudinary.com/hilnmyskv/image/upload/w_800/v1462530610/zendesk-tutorial-v2_lww7ls.gif" alt="Document Head opening GIF" />
+  <img src="https://res.cloudinary.com/hilnmyskv/image/upload/v1522421354/Onboarding--First-Gif_wsuvrs.gif" alt="Document Head opening GIF" />
 </div>
 
 * Copy the **JavaScript** snippet & **Publish** changes:
@@ -54,7 +54,7 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
   1. Click **Publish Changes**
 
 <div align="center">
-  <img src="https://res.cloudinary.com/hilnmyskv/image/upload/w_800/v1462207923/zendesk-preview_idcs7k.gif" alt="Document Head editing GIF" />
+  <img src="https://res.cloudinary.com/hilnmyskv/image/upload/v1522421175/Onboarding--Second-Gif_y0i5pe.gif" alt="Document Head editing GIF" />
 </div>
 
 &nbsp;
