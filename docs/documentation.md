@@ -6,6 +6,11 @@ permalink: /documentation/
 ---
 
 
+<!--
+  docs/documentation.md is generated from the content of the ## Documentation section of app/README.md
+  To change its content, modify app/README.md, go to the app/ folder and run `yarn && yarn build:docs`
+-->
+
 ## Synchronize Algolia with your Help Center
 
 <div align="center">
