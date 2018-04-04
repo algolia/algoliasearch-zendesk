@@ -18,7 +18,7 @@ permalink: /documentation/
 </div>
 
 1. Create an [Algolia account](https://www.algolia.com/users/sign_up).
-1. Follow the <a href="https://www.algolia.com/zendesk" rel="nofollow">Get Started</a> guide to connect your Zendesk Help Center with your Agolia account.
+1. Follow the <a href="https://www.algolia.com/zendesk" rel="nofollow">Get Started</a> guide to connect your Zendesk Help Center with your Algolia account.
 
 ## Indexing
 
