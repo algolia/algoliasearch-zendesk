@@ -22,24 +22,25 @@ const defaultTemplates = {
     [[# sizeModifier ]]aa-article-hit__[[ sizeModifier ]][[/ sizeModifier]]
   "
 >
-<div class="aa-article-hit--category">
-  <span class="aa-article-hit--category--content">
-    [[ category.title ]]
-  </span>
-</div>
-<div class="aa-article-hit--line">
-  <div class="aa-article-hit--section">
-    [[ section.title ]]
+  <div class="aa-article-hit--category">
+    <span class="aa-article-hit--category--content">
+      [[ category.title ]]
+    </span>
   </div>
-  <div class="aa-article-hit--content">
-    <div class="aa-article-hit--headline">
-      <span class="aa-article-hit--title">
-        [[& _highlightResult.title.value ]]
-      </span>
+  <div class="aa-article-hit--line">
+    <div class="aa-article-hit--section">
+      [[ section.title ]]
     </div>
-    [[# _snippetResult.body_safe.value ]]
-      <div class="aa-article-hit--body">[[& _snippetResult.body_safe.value ]]</div>
-    [[/ _snippetResult.body_safe.value ]]
+    <div class="aa-article-hit--content">
+      <div class="aa-article-hit--headline">
+        <span class="aa-article-hit--title">
+          [[& _highlightResult.title.value ]]
+        </span>
+      </div>
+      [[# _snippetResult.body_safe.value ]]
+        <div class="aa-article-hit--body">[[& _snippetResult.body_safe.value ]]</div>
+      [[/ _snippetResult.body_safe.value ]]
+    </div>
   </div>
 </div>
 <div class="clearfix"></div>`
