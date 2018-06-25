@@ -90,7 +90,7 @@ Here is a full breakdown of the available options for the JavaScript library:
     autocomplete: {
       enabled: true,                      // is the autocomplete feature enabled?
       inputSelector: '#query',            // the DOM selector to select the search box
-      hits: 5                             // the number of suggestions to display
+      hitsPerPage: 5                      // the number of suggestions to display
     },
     instantsearch: {
       enabled: true,                      // is the instantsearch feature enabled?
