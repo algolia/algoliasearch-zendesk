@@ -23,6 +23,7 @@ module Zendesk
       super(t) ||
         @zendesk_obj.draft ||
         t.draft ||
+        tags(t.locale).include?('algolia-ignore') ||
         !section.exists?(t.locale) ||
         section.ignore?(t)
     end

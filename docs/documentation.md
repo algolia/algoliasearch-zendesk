@@ -299,6 +299,11 @@ Since we're providing a front-end search, and we can't securely know which acces
 A public article is not a draft and its section belongs to no user segment (i.e. `everybody`).
 If you're in such a scenario, we recommend you to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
 
+## Removing specific articles from the search results
+
+You can let our script know that you'd want for an article not to be indexed. For this, all you need to do is to add an `algolia-ignore` tag on your article.
+After the next reindex, the article should not be searchable anymore.
+
 ## Modifying templates
 
 __WARNING__: We don't provide any guarantee that we won't change the templates between versions.
