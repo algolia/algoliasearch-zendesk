@@ -1,6 +1,16 @@
-<a name="2.21.2"></a>
-## [2.21.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.21.2...v2.21.2) (2018-06-28)
+<a name="2.22.0"></a>
+# [2.22.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.22.0...v2.22.0) (2018-07-13)
 
+
+
+
+<a name="2.22.0"></a>
+# [2.22.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.21.2...v2.22.0) (2018-07-13)
+
+
+### Features
+
+* **crawler:** add algolia-ignore tag support ([77606c7](https://github.com/algolia/algoliasearch-zendesk/commit/77606c7))
 
 
 
