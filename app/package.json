@@ -1,6 +1,6 @@
 {
   "name": "algoliasearch.zendesk-hc",
-  "version": "2.22.0",
+  "version": "2.22.1",
   "description": "Algolia Search for Zendesk's Help Center",
   "author": "Algolia <support@algolia.com>",
   "keywords": [

@@ -1,6 +1,16 @@
-<a name="2.22.0"></a>
-# [2.22.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.22.0...v2.22.0) (2018-07-13)
+<a name="2.22.1"></a>
+## [2.22.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.22.1...v2.22.1) (2018-07-31)
 
+
+
+
+<a name="2.22.1"></a>
+## [2.22.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.22.0...v2.22.1) (2018-07-31)
+
+
+### Features
+
+* **section:** allow for user segment id in user_types ([a1fa4e0](https://github.com/algolia/algoliasearch-zendesk/commit/a1fa4e0))
 
 
 
