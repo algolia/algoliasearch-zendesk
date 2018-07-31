@@ -14,7 +14,6 @@ module Zendesk
     end
 
     def ignore? t
-      require 'pry'
       super(t) ||
         !category.exists?(t.locale) ||
         category.ignore?(t) ||
@@ -24,8 +23,15 @@ module Zendesk
     def user_segment_allowed?
       return true if CONFIG['private']
       segment = user_segment
-      return false unless segment['built_in']
-      CONFIG['user_types'].include?(segment['user_type'])
+      CONFIG['user_types'].any? do |user_type|
+        if user_type.is_a? String
+          # Built in types
+          segment['built_in'] && segment['user_type'] == user_type
+        else
+          # User segment id
+          segment['id'] == user_type
+        end
+      end
     end
 
     def user_segment complete: true
