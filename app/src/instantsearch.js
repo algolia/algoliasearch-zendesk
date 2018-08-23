@@ -282,7 +282,10 @@ class InstantSearch {
       for (let target = e.target; target && target !== this; target = target.parentNode) {
         if (target.classList === undefined) continue;
         if (target.classList.contains('ais-clear-filters')) {
-          this.instantsearch.helper.clearRefinements().search();
+          this.instantsearch.helper
+            .clearRefinements()
+            .addFacetRefinement('locale.locale', this.locale)
+            .search();
         }
       }
     }, false);
