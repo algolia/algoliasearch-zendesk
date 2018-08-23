@@ -1,6 +1,16 @@
-<a name="2.22.2"></a>
-## [2.22.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.22.2...v2.22.2) (2018-08-23)
+<a name="2.22.3"></a>
+## [2.22.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.22.3...v2.22.3) (2018-08-23)
 
+
+
+
+<a name="2.22.3"></a>
+## [2.22.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.22.2...v2.22.3) (2018-08-23)
+
+
+### Bug Fixes
+
+* **instantsearch:** set locale even when clearing refinements ([a6d2e28](https://github.com/algolia/algoliasearch-zendesk/commit/a6d2e28))
 
 
 
