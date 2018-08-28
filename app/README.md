@@ -347,6 +347,60 @@ If set to production, it also creates minified files and map files.
 
 `server` accepts a `PORT` environment variable to change on which port it will run.
 
+### Example
+
+```sh
+$ PORT=3005 npm run dev
+
+> algoliasearch.zendesk-hc@2.22.3 dev /Users/jerska/algolia/zendesk/app
+> gulp dev
+
+[13:59:53] Failed to load external module @babel/register
+[13:59:53] Requiring external module babel-register
+[13:59:56] Using gulpfile ~/algolia/zendesk/app/gulpfile.babel.js
+[13:59:56] Starting 'build:js:watch'...
+[13:59:56] Environment for 'build:js': NODE_ENV=development
+[13:59:56] Starting 'build:css'...
+[13:59:56] Environment for 'build:css': NODE_ENV=development
+[13:59:56] Starting 'build:css:watcher'...
+[13:59:56] Finished 'build:css:watcher' after 8.64 ms
+[13:59:56] Starting 'build:docs'...
+[13:59:56] Starting 'build:docs:watcher'...
+[13:59:56] Finished 'build:docs:watcher' after 1.11 ms
+[13:59:56] Starting 'server'...
+[13:59:56] Finished 'server' after 42 ms
+[13:59:56] Server started http://localhost:3005
+[13:59:56] Finished 'build:docs' after 66 ms
+[13:59:56] Starting 'build:docs:watch'...
+[13:59:56] Finished 'build:docs:watch' after 40 μs
+[13:59:56] Finished 'build:css' after 109 ms
+[13:59:56] Starting 'build:css:watch'...
+[13:59:56] Finished 'build:css:watch' after 3.4 μs
+[14:00:00] Finished 'build:js:watch' after 4.05 s
+[14:00:00] Starting 'dev'...
+[14:00:00] Finished 'dev' after 2.68 μs
+```
+
+When running, you can then add this custom script to your Help Center, inside the Document Head template:
+
+```html
+<link rel="stylesheet" type="text/css" href="http://localhost:3005/dist/algoliasearch.zendesk-hc.css">
+<script type="text/javascript" src="http://localhost:3005/dist/algoliasearch.zendesk-hc.js"></script>
+<script type="text/javascript">
+  algoliasearchZendeskHC({
+    applicationId: 'FIXME',
+    apiKey: 'FIXME',
+    subdomain: 'FIXME',
+  })
+</script>
+```
+
+This might however not load, due to trying to load HTTP content on an HTTPS site.
+Some browsers will prevent the connection and print warnings in your browser console.  
+In this case, you'll need to authorize insecure loading.
+This will most often be hidden behind a shield icon or the green lock icon in your location bar.  
+For instance, on Firefox: click the lock icon in the location bar > Right arrow with label "Show connection details" > Disable protection for now
+
 ## Contributing
 
 We're considering any contribution and PR, please go ahead!
