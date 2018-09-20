@@ -94,6 +94,7 @@ Here is a full breakdown of the available options for the JavaScript library:
     },
     instantsearch: {
       enabled: true,                      // is the instantsearch feature enabled?
+      hitsPerPage: 20,                    // the number of suggestions to display
       paginationSelector: '.pagination',  // the DOM selector for the current pagination (to hide it)
       reuseAutocomplete: false,           // do not add a search input for the instant-search page
       hideAutocomplete: true,             // whether or not to hide the autocomplete on the instantsearch page (ignored if reuseAutocomplete is used)
