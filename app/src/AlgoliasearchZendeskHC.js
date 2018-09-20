@@ -28,6 +28,7 @@ const optionsStructure = {required: true, type: 'Object', children: {
   indexPrefix: {type: 'string', value: 'zendesk_'},
   instantsearch: {type: 'Object', value: {}, children: {
     enabled: {type: 'boolean', value: true},
+    hitsPerPage: {type: 'number', value: 20},
     paginationSelector: {type: 'string', value: '.pagination'},
     reuseAutocomplete: {type: 'boolean', value: false},
     hideAutocomplete: {type: 'boolean', value: true},

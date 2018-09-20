@@ -70,6 +70,7 @@ class InstantSearch {
     highlightColor,
     instantsearch: {
       enabled,
+      hitsPerPage,
       selector,
       paginationSelector,
       reuseAutocomplete,
@@ -190,6 +191,7 @@ class InstantSearch {
     this.instantsearch.addWidget(
       instantsearch.widgets.hits({
         container: '#algolia-hits',
+        hitsPerPage,
         templates: {
           empty: templates.instantsearch.noResult,
           item: templates.instantsearch.hit
