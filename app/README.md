@@ -404,6 +404,15 @@ In this case, you'll need to authorize insecure loading.
 This will most often be hidden behind a shield icon or the green lock icon in your location bar.  
 For instance, on Firefox: click the lock icon in the location bar > Right arrow with label "Show connection details" > Disable protection for now
 
+### Documentation
+
+To update the documentation of the project, you only need to update this README.
+To propagate the changes to the `docs/` website, you simply need to run:
+
+```sh
+yarn build:docs
+```
+
 ## Contributing
 
 We're considering any contribution and PR, please go ahead!
