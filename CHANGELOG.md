@@ -1,6 +1,16 @@
-<a name="2.22.3"></a>
-## [2.22.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.22.3...v2.22.3) (2018-08-23)
+<a name="2.23.0"></a>
+# [2.23.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.23.0...v2.23.0) (2018-09-20)
 
+
+
+
+<a name="2.23.0"></a>
+# [2.23.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.22.3...v2.23.0) (2018-09-20)
+
+
+### Features
+
+* **instantsearch:** add support for hitsPerPage configuration (#74) ([66f1a20](https://github.com/algolia/algoliasearch-zendesk/commit/66f1a20))
 
 
 
