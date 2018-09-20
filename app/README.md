@@ -331,6 +331,8 @@ Also, some templates are using a `compile` function in this file. This function 
 
 ## Development
 
+We recommend using `yarn` for dependency management.
+
 The `package.json` holds multiple scripts:
 - `build:css`: Compiles the CSS files to `dist/algoliasearch.zendesk-hc.css`
 - `build:docs`: Extracts the documentation from this `README.md` to [`../docs/documentation.md`](../docs/documentation.md)
@@ -351,7 +353,7 @@ If set to production, it also creates minified files and map files.
 ### Example
 
 ```sh
-$ PORT=3005 npm run dev
+$ PORT=3005 yarn dev
 
 > algoliasearch.zendesk-hc@2.22.3 dev /Users/jerska/algolia/zendesk/app
 > gulp dev
