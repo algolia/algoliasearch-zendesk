@@ -1,6 +1,16 @@
-<a name="2.23.0"></a>
-# [2.23.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.23.0...v2.23.0) (2018-09-20)
+<a name="2.23.1"></a>
+## [2.23.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.23.1...v2.23.1) (2018-10-18)
 
+
+
+
+<a name="2.23.1"></a>
+## [2.23.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.23.0...v2.23.1) (2018-10-18)
+
+
+### Bug Fixes
+
+* **article:** allow user_segment on article ([bec8ecc](https://github.com/algolia/algoliasearch-zendesk/commit/bec8ecc))
 
 
 
