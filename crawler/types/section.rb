@@ -1,8 +1,10 @@
-require_relative '../config'
 require_relative '../translation_item.rb'
+require_relative './with_user_segment.rb'
 
 module Zendesk
   class Section < TranslationItem
+    include WithUserSegment
+
     INDEX_SETTINGS = {
       attributesToIndex: %w(title category.title unordered(body_safe)),
       attributesForFaceting: %w(locale.locale),
@@ -16,34 +18,7 @@ module Zendesk
     def ignore? t
       super(t) ||
         !category.exists?(t.locale) ||
-        category.ignore?(t) ||
-        !user_segment_allowed?
-    end
-
-    def user_segment_allowed?
-      return true if CONFIG['private']
-      segment = user_segment
-      CONFIG['user_types'].any? do |user_type|
-        if user_type.is_a? String
-          # Built in types
-          segment['built_in'] && segment['user_type'] == user_type
-        else
-          # User segment id
-          segment['id'] == user_type
-        end
-      end
-    end
-
-    def user_segment complete: true
-      id = @zendesk_obj.user_segment_id
-      res = id.nil? ? UserSegment::DEFAULT_DATA : @crawler.get(UserSegment, id).data
-      res = JSON.parse(res.to_json)
-      return res['user_type'] unless complete
-      res['group_ids_empty'] = res['group_ids'].empty?
-      res['organization_ids_empty'] = res['organization_ids'].empty?
-      res['tags_empty'] = res['tags'].empty?
-      res['tags_concatenated'] = res['tags'].join('-')
-      res
+        category.ignore?(t)
     end
 
     protected

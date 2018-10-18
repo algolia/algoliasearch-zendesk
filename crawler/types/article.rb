@@ -1,7 +1,10 @@
 require_relative '../translation_item.rb'
+require_relative './with_user_segment.rb'
 
 module Zendesk
   class Article < TranslationItem
+    include WithUserSegment
+
     INDEX_SETTINGS = {
       attributesToIndex: %w(title section.title category.title label_names unordered(body_safe)),
       attributesForFaceting: %w(label_names locale.name locale.locale category.title section.title section.full_path),
@@ -25,7 +28,8 @@ module Zendesk
         t.draft ||
         tags(t.locale).include?('algolia-ignore') ||
         !section.exists?(t.locale) ||
-        section.ignore?(t)
+        section.ignore?(t) ||
+        !user_segment_allowed?
     end
 
     protected
@@ -54,6 +58,7 @@ module Zendesk
           full_path: "#{simple_category[:title]} > #{simple_section[:title]}",
           user_segment: section.user_segment(complete: CONFIG['private'])
         ),
+        user_segment: user_segment(complete: CONFIG['private']),
         label_names: tags(t.locale),
         created_at_iso: @zendesk_obj.created_at.utc.iso8601,
         updated_at_iso: @zendesk_obj.updated_at.utc.iso8601,
