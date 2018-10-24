@@ -62,6 +62,7 @@ class InstantSearch {
   }
 
   render({
+    analytics,
     autocomplete: {
       inputSelector: autocompleteSelector
     },
@@ -190,6 +191,7 @@ class InstantSearch {
 
     this.instantsearch.addWidget(
       instantsearch.widgets.hits({
+        analytics,
         container: '#algolia-hits',
         hitsPerPage,
         templates: {

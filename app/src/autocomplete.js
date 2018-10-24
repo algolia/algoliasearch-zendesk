@@ -23,6 +23,7 @@ const SM_WIDTH = 600;
 
 class Autocomplete {
   constructor({
+    analytics,
     applicationId,
     apiKey,
     autocomplete: {

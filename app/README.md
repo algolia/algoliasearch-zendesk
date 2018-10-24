@@ -87,6 +87,7 @@ Here is a full breakdown of the available options for the JavaScript library:
     color: '#158EC2',                     // main color (used for links)
     highlightColor: '#158EC2',            // highlight color to emphasize matching text
     responsive: true,                     // responsive instantsearch page
+    analytics: true,                      // if the current query should be taken into account in analytics
     autocomplete: {
       enabled: true,                      // is the autocomplete feature enabled?
       inputSelector: '#query',            // the DOM selector to select the search box
