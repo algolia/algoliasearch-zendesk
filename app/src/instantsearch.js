@@ -7,7 +7,6 @@ import getOptionalWords from './stopwords.js';
 
 class InstantSearch {
   constructor({
-    analytics,
     applicationId,
     apiKey,
     autocomplete: {
@@ -43,6 +42,7 @@ class InstantSearch {
         }
       },
       searchParameters: {
+        analytics,
         attributesToSnippet: ['body_safe:40'],
         highlightPreTag: '<span class="ais-highlight">',
         highlightPostTag: '</span>',
@@ -63,7 +63,6 @@ class InstantSearch {
   }
 
   render({
-    analytics,
     autocomplete: {
       inputSelector: autocompleteSelector
     },

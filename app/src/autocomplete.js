@@ -23,7 +23,6 @@ const SM_WIDTH = 600;
 
 class Autocomplete {
   constructor({
-    analytics,
     applicationId,
     apiKey,
     autocomplete: {
@@ -76,6 +75,7 @@ class Autocomplete {
       const sizeModifier = this._sizeModifier(dropdownMenuWidth);
       const nbSnippetWords = this._nbSnippetWords(dropdownMenuWidth);
       const params = {
+        analytics
         hitsPerPage,
         facetFilters: `["locale.locale:${locale}"]`,
         highlightPreTag: '<span class="aa-article-hit--highlight">',
