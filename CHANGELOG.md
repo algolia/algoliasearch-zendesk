@@ -1,6 +1,16 @@
-<a name="2.23.1"></a>
-## [2.23.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.23.1...v2.23.1) (2018-10-18)
+<a name="2.24.0"></a>
+# [2.24.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.24.0...v2.24.0) (2018-11-05)
 
+
+
+
+<a name="2.24.0"></a>
+# [2.24.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.23.1...v2.24.0) (2018-11-05)
+
+
+### Features
+
+* **AlgoliasearchZendeskHC:** add analytics option (#78) ([f8dc332](https://github.com/algolia/algoliasearch-zendesk/commit/f8dc332))
 
 
 
