@@ -73,6 +73,7 @@ Here is a full breakdown of the available options for the JavaScript library:
     // Optional configuration:
     //
     indexPrefix: 'zendesk_',              // or your custom <INDEX_PREFIX>
+    analytics: true,                      // should queries be processed by Algolia analytics
     baseUrl: '/hc/',                      // the base URL of your Help Center
     poweredBy: true,                      // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
     debug: false,                         // debug mode prevents the autocomplete to close when trying to inspect it

@@ -42,6 +42,7 @@ class Autocomplete {
   }
 
   render({
+    analytics,
     autocomplete: {
       enabled,
       hitsPerPage,
@@ -75,6 +76,7 @@ class Autocomplete {
       const sizeModifier = this._sizeModifier(dropdownMenuWidth);
       const nbSnippetWords = this._nbSnippetWords(dropdownMenuWidth);
       const params = {
+        analytics,
         hitsPerPage,
         facetFilters: `["locale.locale:${locale}"]`,
         highlightPreTag: '<span class="aa-article-hit--highlight">',
