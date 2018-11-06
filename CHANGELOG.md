@@ -1,6 +1,16 @@
-<a name="2.24.0"></a>
-# [2.24.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.24.0...v2.24.0) (2018-11-05)
+<a name="2.24.1"></a>
+## [2.24.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.24.1...v2.24.1) (2018-11-06)
 
+
+
+
+<a name="2.24.1"></a>
+## [2.24.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.24.0...v2.24.1) (2018-11-06)
+
+
+### Bug Fixes
+
+* **zendesk:** fix default value of analytics ([b8a6e7c](https://github.com/algolia/algoliasearch-zendesk/commit/b8a6e7c))
 
 
 
