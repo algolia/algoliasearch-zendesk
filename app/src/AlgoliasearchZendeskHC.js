@@ -13,7 +13,7 @@ function instantsearchPage() {
   return window.location.pathname.match(/\/search$/) !== null;
 }
 const optionsStructure = {required: true, type: 'Object', children: {
-  analytics: {type: 'boolean', value: 'true'},
+  analytics: {type: 'boolean', value: true},
   applicationId: {type: 'string', required: true},
   apiKey: {type: 'string', required: true},
   autocomplete: {type: 'Object', value: {}, children: {
