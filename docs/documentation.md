@@ -309,11 +309,11 @@ After the next reindex, the article should not be searchable anymore.
 ## Modifying templates
 
 __WARNING__: We don't provide any guarantee that we won't change the templates between versions.
-If you chose to modify a template, you'll need to lock your version to MAJOR.MINOR.PATCH instead of just MAJOR in
+If you chose to modify a template, you'll need to update the URLs to specify the full semver (`/MAJOR.MINOR.PATCH/`) instead of only the major version (`/2/`) in your theme's `document_head` 
 
 ```html
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.css">
-<script type="text/javascript" src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2.24.1/algoliasearch.zendesk-hc.min.css">
+<script type="text/javascript" src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2.24.1/algoliasearch.zendesk-hc.min.js"></script>
 ```
 
 The latest version is [![version](https://img.shields.io/npm/v/algoliasearch.zendesk-hc.png)](https://www.npmjs.com/package/algoliasearch.zendesk-hc).
