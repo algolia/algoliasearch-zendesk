@@ -27,14 +27,7 @@ module Zendesk
       end
 
       def index_settings
-        default_settings = JSON.parse(DEFAULT_INDEX_SETTINGS.merge(self::INDEX_SETTINGS).to_json)
-        return default_settings if first_indexing?
-        settings = old_settings.clone
-        default_settings.each do |k, v|
-          curr = settings[k]
-          settings[k] = v if curr.nil? || curr == 0 || curr == [] # rubocop:disable Style/NumericPredicate, Metrics/LineLength
-        end
-        settings
+        JSON.parse(DEFAULT_INDEX_SETTINGS.merge(self::INDEX_SETTINGS).to_json)
       end
 
       def index items
@@ -45,10 +38,12 @@ module Zendesk
       end
 
       def move_temporary
-        target_index.set_settings! index_settings
-        return if first_indexing?
-        Algolia.copy_index! main_index.name, target_index.name, %w(synonyms rules)
-        Algolia.move_index! target_index.name, main_index.name
+        if first_indexing?
+          target_index.set_settings! index_settings
+        else
+          Algolia.copy_index! main_index.name, target_index.name, %w(settings synonyms rules)
+          Algolia.move_index! target_index.name, main_index.name
+        end
       end
 
       private
