@@ -1,6 +1,16 @@
-<a name="2.24.1"></a>
-## [2.24.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.24.1...v2.24.1) (2018-11-06)
+<a name="2.24.2"></a>
+## [2.24.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.24.2...v2.24.2) (2019-01-25)
 
+
+
+
+<a name="2.24.2"></a>
+## [2.24.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.24.1...v2.24.2) (2019-01-25)
+
+
+### Bug Fixes
+
+* **crawler:** use copy_index even for settings ([9debe8c](https://github.com/algolia/algoliasearch-zendesk/commit/9debe8c))
 
 
 
