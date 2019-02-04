@@ -2,7 +2,7 @@
   "name": "algoliasearch.zendesk-hc.tools",
   "description": "Algolia Search for Zendesk's Help Center. This private project is used for the tools and scripts at the root of the repository.",
   "author": "Algolia <support@algolia.com>",
-  "version": "2.24.2",
+  "version": "2.24.3",
   "private": true,
   "license": "MIT",
   "repository": {

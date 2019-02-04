@@ -1,6 +1,16 @@
-<a name="2.24.2"></a>
-## [2.24.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.24.2...v2.24.2) (2019-01-25)
+<a name="2.24.3"></a>
+## [2.24.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.24.3...v2.24.3) (2019-02-04)
 
+
+
+
+<a name="2.24.3"></a>
+## [2.24.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.24.2...v2.24.3) (2019-02-04)
+
+
+### Bug Fixes
+
+* **truncate:** allow any utf-8 chars ([1e7ece0](https://github.com/algolia/algoliasearch-zendesk/commit/1e7ece0))
 
 
 
