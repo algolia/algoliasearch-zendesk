@@ -107,7 +107,15 @@ module Zendesk
     end
 
     def truncate str, max = 5_000
-      str.length > max ? "#{str[0...max]}..." : str
+      truncated = str.length > max
+      res = str[0...max]
+      # Algolia doesn't count the actual string length, but the byte size
+      # Remove 10 chars until we get lower than the max
+      loop do
+        break if res.bytesize <= max
+        res = res[0...-10]
+      end
+      "#{res}#{'...' if truncated}"
     end
   end
 end
