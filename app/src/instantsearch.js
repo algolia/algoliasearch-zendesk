@@ -44,6 +44,7 @@ class InstantSearch {
       },
       searchParameters: {
         analytics,
+        clickAnalytics: analytics,
         attributesToSnippet: ['body_safe:40'],
         highlightPreTag: '<span class="ais-highlight">',
         highlightPostTag: '</span>',
