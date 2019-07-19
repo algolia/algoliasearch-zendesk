@@ -2,11 +2,11 @@
 
 [![GitHub license](https://img.shields.io/github/license/algolia/algoliasearch-zendesk.svg)](../LICENSE)
 
-This folder is meant to be built into a docker container which will be run as an Algolia connector.
+This folder is meant to be built into a gem.
 
 ## Usage
 
-To run it without docker, first, make sure you've correctly run
+To run it directly, first, make sure you've correctly run
 
 ```sh
 bundle install

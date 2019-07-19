@@ -5,7 +5,6 @@ module ZendeskAPI
   class Article < Resource; end
   class Section < Resource; end
   class Translation < Resource; end
-  class AccessPolicy < Resource; end
   class UserSegment < Resource; end
   class UserSegment < Resource
     namespace 'help_center'
@@ -37,14 +36,23 @@ module ZendeskAPI
     has :author, class: User
   end
 
-  CLIENT = ZendeskAPI::Client.new do |config|
-    config.url = "https://#{CONFIG['app_name']}.zendesk.com/api/v2"
-    if CONFIG['oauth_token'].nil? # To remove in the end
-      config.username = CONFIG['email']
-      config.token = CONFIG['api_token']
-    else
-      config.access_token = CONFIG['oauth_token']
-    end
-    config.retry = true
+  class Topic < Resource; end
+  class Post < Resource; end
+  class Comment < Resource; end
+
+  class Topic < Resource
+    namespace 'community'
+    has_many Post
+  end
+
+  class Post < Resource
+    namespace 'community'
+    has_many Comment
+    has Topic
+    has :author, class: User
+  end
+
+  class Comment
+    namespace 'community'
   end
 end

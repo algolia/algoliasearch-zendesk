@@ -1,8 +1,6 @@
-require_relative './config.rb'
-require_relative './algolia.rb'
 require_relative './zendesk.rb'
 
-module Zendesk
+module ZendeskIntegration::V1::Zendesk
   class Item
     TIME_FRAME = 60
 
@@ -20,21 +18,17 @@ module Zendesk
       "#{singular}s".to_sym
     end
 
-    def self.index_name
-      "#{CONFIG['algolia_index_prefix']}#{CONFIG['app_name']}_#{plural}"
-    end
-
     def self.index_settings
-      DEFAULT_INDEX_SETTINGS.merge(self::INDEX_SETTINGS)
+      JSON.parse(DEFAULT_INDEX_SETTINGS.merge(self::INDEX_SETTINGS).to_json)
     end
 
-    def self.index items
+    def self.index crawler, items
+      index_name = crawler.index_name(self)
       to_index = items.map(&:to_index).flatten
-      idx = Algolia::Index.new("#{index_name}.tmp")
+      idx = crawler.algolia_client.init_index("#{index_name}.tmp")
       idx.set_settings index_settings
       to_index.each_slice(1000).each { |sub| idx.save_objects! sub }
-      Algolia.move_index "#{index_name}.tmp", index_name
-      puts "Indexed #{to_index.count} #{plural}"
+      crawler.algolia_client.move_index "#{index_name}.tmp", index_name
     end
 
     def initialize crawler, obj # Or object id, see fetch
@@ -68,7 +62,7 @@ module Zendesk
 
     def fetch obj
       return obj unless obj.is_a? Integer
-      @zendesk_obj = ZendeskAPI::CLIENT.send(self.class.plural).find!(id: obj)
+      @zendesk_obj = @crawler.zendesk_client.send(self.class.plural).find!(id: obj)
     end
   end
 end

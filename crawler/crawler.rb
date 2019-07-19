@@ -1,20 +1,63 @@
 require 'json'
-require_relative './config.rb'
-require_relative './algolia.rb'
+require 'algoliasearch'
 require_relative './zendesk.rb'
+require_relative './user_agent.rb'
 require_relative './types.rb'
 
 LOCALES = JSON.parse File.open('./locales.json', 'r').read
 
-class Crawler
-  attr_accessor :data
+class ZendeskIntegration::V1::Crawler
+  attr_accessor :data, :algolia_client, :zendesk_client, :config
 
-  def initialize
+  def initialize(
+    application_id:,
+    api_key:,
+    index_prefix:,
+    zendesk_app_name:,
+    zendesk_email:,
+    zendesk_token:,
+    zendesk_oauth_token:,
+    config:,
+    logs:
+  )
+    # Algolia
+    @algolia_client = Algolia::Client.new(
+      application_id: application_id,
+      api_key: api_key,
+      user_agent: ZendeskIntegration::V1::UserAgent.to_s
+    )
+    @index_prefix = index_prefix
+
+    # Zendesk
+    @zendesk_app_name = zendesk_app_name
+    @zendesk_client = ZendeskAPI::Client.new do |config|
+      config.url = "https://#{zendesk_app_name}.zendesk.com/api/v2"
+      if zendesk_oauth_token.nil? # To remove in the end
+        config.username = zendesk_email
+        config.token = zendesk_token
+      else
+        config.access_token = zendesk_oauth_token
+      end
+      config.retry = true
+    end
+
+    # Config
+    @config = config
+    @config['user_types'] ||= ['everybody']
+    @config['private'] ||= false
+    @config['types'] ||= ['articles']
+
+    # Internal cache
     @data = {}
+    @logs = logs
+  end
+
+  def index_name(type)
+    "#{@index_prefix}#{@zendesk_app_name}_#{type.plural}"
   end
 
   def locales
-    @locales ||= ZendeskAPI::CLIENT.hc_locales.to_a!.map do |l|
+    @locales ||= @zendesk_client.hc_locales.to_a!.map do |l|
       [l.id, LOCALES[l.id]]
     end.to_h
   end
@@ -27,12 +70,12 @@ class Crawler
   alias_method :set, :get
 
   def crawl type
-    ZendeskAPI::CLIENT.send(type.plural).all! do |obj|
+    @zendesk_client.send(type.plural).all! do |obj|
       set type, obj
     end
   end
 
   def index type
-    type.index(@data[type.plural].values)
+    type.index(self, @data[type.plural].values)
   end
 end

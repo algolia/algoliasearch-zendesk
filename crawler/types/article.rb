@@ -1,6 +1,6 @@
 require_relative '../translation_item.rb'
 
-module Zendesk
+module ZendeskIntegration::V1::Zendesk
   class Article < TranslationItem
     INDEX_SETTINGS = {
       attributesToIndex: %w(title section.title category.title label_names unordered(body_safe)),

@@ -1,7 +1,7 @@
 require_relative './item.rb'
 require_relative './decoder.rb'
 
-module Zendesk
+module ZendeskIntegration::V1::Zendesk
   class TranslationItem < Item
     def build
       @translations = {}
@@ -42,8 +42,8 @@ module Zendesk
         updated_at: t.updated_at.to_i / TIME_FRAME,
         position: @zendesk_obj.position,
         title: t.title,
-        body: DECODER.decode(t.body.to_s),
-        body_safe: DECODER.decode(t.body.to_s.gsub(/<\/?[^>]*>/, ' ')),
+        body: ZendeskIntegration::V1::DECODER.decode(t.body.to_s),
+        body_safe: ZendeskIntegration::V1::DECODER.decode(t.body.to_s.gsub(/<\/?[^>]*>/, ' ')),
         outdated: @zendesk_obj.outdated || t.outdated
       }
     end

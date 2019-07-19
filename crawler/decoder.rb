@@ -1,8 +1,8 @@
 require 'htmlentities'
 
-class Decoder < HTMLEntities
+class ZendeskIntegration::V1::Decoder < HTMLEntities
   def decode input
     super input, exclude: ['<', '>']
   end
 end
-DECODER = Decoder.new
+ZendeskIntegration::V1::DECODER = ZendeskIntegration::V1::Decoder.new
