@@ -1,5 +1,7 @@
 # -*- encoding: utf-8 -*-
 
+require 'date'
+
 Gem::Specification.new do |s|
   s.name        = "algoliasearch-zendeskv2"
   s.version     = File.read('crawler/VERSION')
@@ -12,7 +14,10 @@ Gem::Specification.new do |s|
   s.description = "A simple integration script for Zendesk data into Algolia"
   s.homepage    = "https://github.com/algolia/algoliasearch-zendesk"
 
+  s.require_path = "crawler"
+
   s.files = [
+    "crawler/locales.json",
     "crawler/crawler.rb",
     "crawler/item.rb",
     "crawler/types/article.rb",
@@ -24,7 +29,7 @@ Gem::Specification.new do |s|
     "crawler/types/post.rb",
     "crawler/types/user.rb",
     "crawler/locales.json",
-    "crawler/main.rb",
+    "crawler/algoliasearch-zendeskv2.rb",
     "crawler/README.md",
     "crawler/types.rb",
     "crawler/translation_item.rb",

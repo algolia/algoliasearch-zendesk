@@ -4,9 +4,10 @@ require_relative './zendesk.rb'
 require_relative './user_agent.rb'
 require_relative './types.rb'
 
-LOCALES = JSON.parse File.open('./locales.json', 'r').read
-
 class ZendeskIntegration::V2::Crawler
+  LOCALES_PATH = File.join(File.dirname(__FILE__), 'locales.json')
+  LOCALES = JSON.parse File.open(LOCALES_PATH, 'r').read
+
   attr_accessor :data, :algolia_client, :zendesk_client, :config
 
   def initialize(
