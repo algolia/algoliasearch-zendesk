@@ -44,9 +44,6 @@ class ZendeskIntegration::V1::Crawler
 
     # Config
     @config = config
-    @config['user_types'] ||= ['everybody']
-    @config['private'] ||= false
-    @config['types'] ||= ['articles']
 
     # Internal cache
     @data = {}
