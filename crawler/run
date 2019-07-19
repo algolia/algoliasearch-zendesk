@@ -1,3 +1,17 @@
-#! /bin/sh
+#! /usr/bin/env ruby
 
-bundle exec ./main.rb
+require_relative './main.rb'
+
+config = JSON.parse(ENV['CONFIG'])
+
+logs = ZendeskIntegration::V2.run(
+  application_id: ENV['APPLICATION_ID'],
+  api_key: ENV['API_KEY'],
+  index_prefix: ENV['INDEX_PREFIX'],
+  zendesk_app_name: config['app_name'],
+  zendesk_email: config['email'],
+  zendesk_token: config['token'],
+  zendesk_oauth_token: config['oauth_token'],
+  config: config
+)
+puts logs.join("\n")

@@ -1,6 +1,6 @@
 require_relative '../translation_item.rb'
 
-module Zendesk
+module ZendeskIntegration::V2::Zendesk
   class UserSegment < Item
     DEFAULT_DATA = {
       'id' => nil,

@@ -1,4 +1,4 @@
-module Zendesk
+module ZendeskIntegration::V2::Zendesk
   class Post < Item
     INDEX_SETTINGS = {
       searchableAttributes: %w(title topic.name details),

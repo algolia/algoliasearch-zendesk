@@ -1,9 +1,7 @@
-require_relative './config.rb'
-require_relative './algolia.rb'
 require_relative './zendesk.rb'
 require_relative './decoder.rb'
 
-module Zendesk
+module ZendeskIntegration::V2::Zendesk
   class Item
     TIME_FRAME = 60 * 60 * 24
 
@@ -22,50 +20,46 @@ module Zendesk
         "#{singular}s".to_sym
       end
 
-      def index_name
-        "#{CONFIG['algolia_index_prefix']}#{CONFIG['app_name']}_#{plural}"
-      end
-
       def index_settings
         JSON.parse(DEFAULT_INDEX_SETTINGS.merge(self::INDEX_SETTINGS).to_json)
       end
 
-      def index items
+      def index crawler, items
         return if items.empty?
         to_index = items.map(&:to_index).flatten
-        to_index.each_slice(1000).each { |sub| target_index.save_objects! sub }
+        to_index.each_slice(1000).each { |sub| target_index(crawler).save_objects! sub }
         puts "Indexed #{to_index.count} #{plural}"
       end
 
-      def move_temporary
-        if first_indexing?
-          target_index.set_settings! index_settings
+      def move_temporary(crawler)
+        main = main_index(crawler)
+        target = target_index(crawler)
+        old_settings = get_old_settings(crawler)
+
+        # First indexing?
+        if old_settings == false
+          target.set_settings! index_settings
         else
-          Algolia.copy_index! main_index.name, target_index.name, %w(settings synonyms rules)
-          Algolia.move_index! target_index.name, main_index.name
+          crawler.algolia_client.copy_index! main.name, target.name, %w(settings synonyms rules)
         end
+
+        crawler.algolia_client.move_index! target.name, main.name
       end
 
       private
 
-      def target_index
-        Algolia::Index.new("#{index_name}#{'.tmp' unless first_indexing?}")
+      def target_index(crawler)
+        crawler.algolia_client.init_index("#{crawler.index_name(self)}.tmp")
       end
 
-      def main_index
-        Algolia::Index.new(index_name)
+      def main_index(crawler)
+        crawler.algolia_client.init_index(crawler.index_name(self))
       end
 
-      def first_indexing?
-        return @first_indexing unless @first_indexing.nil?
-        @first_indexing = old_settings == false
-      end
-
-      def old_settings
-        return @old_settings unless @old_settings.nil?
-        @old_settings = Algolia::Index.new(index_name).get_settings
+      def get_old_settings(crawler)
+        crawler.algolia_client.init_index(crawler.index_name(self)).get_settings
       rescue => e
-        return @old_settings = false if e.code == 404 && e.message =~ /Index does not exist/
+        return false if e.code == 404
         raise
       end
     end
@@ -99,11 +93,11 @@ module Zendesk
 
     def fetch obj
       return obj unless obj.is_a? Integer
-      @zendesk_obj = ZendeskAPI::CLIENT.send(self.class.plural).find!(id: obj)
+      @zendesk_obj = @crawler.zendesk_client.send(self.class.plural).find!(id: obj)
     end
 
     def decode body
-      DECODER.decode(body.to_s.gsub(/<\/?[^>]*>/, ' '))
+      ZendeskIntegration::V2::DECODER.decode(body.to_s.gsub(/<\/?[^>]*>/, ' '))
     end
 
     def truncate str, max = 5_000

@@ -1,7 +1,7 @@
 require_relative '../translation_item.rb'
 require_relative './with_user_segment.rb'
 
-module Zendesk
+module ZendeskIntegration::V2::Zendesk
   class Article < TranslationItem
     include WithUserSegment
 
@@ -56,9 +56,9 @@ module Zendesk
         category: simple_category,
         section: simple_section.merge(
           full_path: "#{simple_category[:title]} > #{simple_section[:title]}",
-          user_segment: section.user_segment(complete: CONFIG['private'])
+          user_segment: section.user_segment(complete: @crawler.config['private'])
         ),
-        user_segment: user_segment(complete: CONFIG['private']),
+        user_segment: user_segment(complete: @crawler.config['private']),
         label_names: tags(t.locale),
         created_at_iso: @zendesk_obj.created_at.utc.iso8601,
         updated_at_iso: @zendesk_obj.updated_at.utc.iso8601,

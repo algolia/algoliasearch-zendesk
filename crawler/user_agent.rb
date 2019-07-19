@@ -1,6 +1,6 @@
 require 'algoliasearch'
 
-class UserAgent
+class ZendeskIntegration::V2::UserAgent
   class Version
     def self.crawler
       File.read('VERSION').strip

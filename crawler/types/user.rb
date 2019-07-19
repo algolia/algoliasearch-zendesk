@@ -1,4 +1,4 @@
-module Zendesk
+module ZendeskIntegration::V2::Zendesk
   # Can't be used with only Help Center ACLs
   class User < Item
     def ignore

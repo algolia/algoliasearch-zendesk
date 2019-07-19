@@ -1,14 +1,13 @@
-require_relative '../config.rb'
 require_relative './user_segment.rb'
 
-module Zendesk
+module ZendeskIntegration::V2::Zendesk
   # Assumes the presence of @crawler and @zendesk_obj
   # (Can only be used for a class extending Item)
   module WithUserSegment
     def user_segment_allowed?
-      return true if CONFIG['private']
+      return true if @crawler.config['private']
       segment = user_segment
-      CONFIG['user_types'].any? do |user_type|
+      @crawler.config['user_types'].any? do |user_type|
         if user_type.is_a? String
           # Built in types
           segment['built_in'] && segment['user_type'] == user_type

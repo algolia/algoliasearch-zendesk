@@ -55,15 +55,4 @@ module ZendeskAPI
   class Comment
     namespace 'community'
   end
-
-  CLIENT = ZendeskAPI::Client.new do |config|
-    config.url = "https://#{CONFIG['app_name']}.zendesk.com/api/v2"
-    if CONFIG['oauth_token'].nil? # To remove in the end
-      config.username = CONFIG['email']
-      config.token = CONFIG['api_token']
-    else
-      config.access_token = CONFIG['oauth_token']
-    end
-    config.retry = true
-  end
 end

@@ -1,20 +1,63 @@
 require 'json'
-require_relative './config.rb'
-require_relative './algolia.rb'
+require 'algoliasearch'
 require_relative './zendesk.rb'
+require_relative './user_agent.rb'
 require_relative './types.rb'
 
 LOCALES = JSON.parse File.open('./locales.json', 'r').read
 
-class Crawler
-  attr_accessor :data
+class ZendeskIntegration::V2::Crawler
+  attr_accessor :data, :algolia_client, :zendesk_client, :config
 
-  def initialize
+  def initialize(
+    application_id:,
+    api_key:,
+    index_prefix:,
+    zendesk_app_name:,
+    zendesk_email:,
+    zendesk_token:,
+    zendesk_oauth_token:,
+    config:,
+    logs:
+  )
+    # Algolia
+    @algolia_client = Algolia::Client.new(
+      application_id: application_id,
+      api_key: api_key,
+      user_agent: ZendeskIntegration::V2::UserAgent.to_s
+    )
+    @index_prefix = index_prefix
+
+    # Zendesk
+    @zendesk_app_name = zendesk_app_name
+    @zendesk_client = ZendeskAPI::Client.new do |config|
+      config.url = "https://#{zendesk_app_name}.zendesk.com/api/v2"
+      if zendesk_oauth_token.nil? # To remove in the end
+        config.username = zendesk_email
+        config.token = zendesk_token
+      else
+        config.access_token = zendesk_oauth_token
+      end
+      config.retry = true
+    end
+
+    # Config
+    @config = config
+    @config['user_types'] ||= ['everybody']
+    @config['private'] ||= false
+    @config['types'] ||= ['articles']
+
+    # Internal cache
     @data = {}
+    @logs = logs
+  end
+
+  def index_name(type)
+    "#{@index_prefix}#{@zendesk_app_name}_#{type.plural}"
   end
 
   def locales
-    @locales ||= ZendeskAPI::CLIENT.hc_locales.to_a!.map do |l|
+    @locales ||= @zendesk_client.hc_locales.to_a!.map do |l|
       [l.id, LOCALES[l.id]]
     end.to_h
   end
@@ -27,33 +70,33 @@ class Crawler
   alias_method :set, :get
 
   def crawl type
-    count = ZendeskAPI::CLIENT.send(type.plural).count!
+    count = @zendesk_client.send(type.plural).count!
     i = 1
-    ZendeskAPI::CLIENT.send(type.plural).all! do |obj|
+    @zendesk_client.send(type.plural).all! do |obj|
       set(type, obj)
-      puts "#{type.plural.capitalize}: #{i}/#{count}"
+      @logs << "#{Time.now.utc.to_s}: #{type.plural.capitalize}: #{i}/#{count}"
       STDOUT.flush
       i += 1
     end
   end
 
   def crawl_and_index type
-    return unless CONFIG['types'].include? type.plural.to_s
-    count = ZendeskAPI::CLIENT.send(type.plural).count!
+    return unless @config['types'].include? type.plural.to_s
+    count = @zendesk_client.send(type.plural).count!
     i = 1
     last = []
-    ZendeskAPI::CLIENT.send(type.plural).all! do |obj|
+    @zendesk_client.send(type.plural).all! do |obj|
       last << type.new(self, obj)
       if i % 100 == 0
-        type.index(last)
+        type.index(self, last)
         last = []
         GC.start
       end
-      puts "#{type.plural.capitalize}: #{i}/#{count}"
+      @logs << "#{Time.now.utc.to_s}: #{type.plural.capitalize}: #{i}/#{count}"
       STDOUT.flush
       i += 1
     end
-    type.index last
-    type.move_temporary
+    type.index(self, last)
+    type.move_temporary(self)
   end
 end

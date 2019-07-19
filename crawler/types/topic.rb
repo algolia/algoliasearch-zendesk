@@ -1,4 +1,4 @@
-module Zendesk
+module ZendeskIntegration::V2::Zendesk
   class Topic < Item
     def ignore?
       super ||

@@ -1,7 +1,7 @@
 require_relative '../translation_item.rb'
 require_relative './with_user_segment.rb'
 
-module Zendesk
+module ZendeskIntegration::V2::Zendesk
   class Section < TranslationItem
     include WithUserSegment
 

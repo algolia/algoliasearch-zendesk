@@ -1,6 +1,6 @@
 require_relative './item.rb'
 
-module Zendesk
+module ZendeskIntegration::V2::Zendesk
   class TranslationItem < Item
     def build
       @translations = {}
