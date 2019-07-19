@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
     "crawler/types/category.rb",
     "crawler/types/section.rb",
     "crawler/locales.json",
-    "crawler/algoliasearch-zendeskv2.rb",
+    "crawler/algoliasearch-zendeskv1.rb",
     "crawler/README.md",
     "crawler/types.rb",
     "crawler/translation_item.rb",
