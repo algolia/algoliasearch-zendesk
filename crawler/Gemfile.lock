@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/Jerskouille/htmlentities.git
-  revision: cc049b3bee56f5f8c3a9cd39afbab4841e63ba50
-  specs:
-    htmlentities (4.3.3)
-
-GIT
   remote: git://github.com/Jerskouille/zendesk_api_client_rb.git
   revision: e94ecce851ff0f7933da3f516c9e652471461cb3
   specs:
@@ -25,6 +19,7 @@ GEM
     faraday (0.13.1)
       multipart-post (>= 1.2, < 3)
     hashie (3.5.6)
+    htmlentities (4.3.4)
     httpclient (2.8.3)
     inflection (1.0.0)
     json (2.1.0)
@@ -42,9 +37,9 @@ PLATFORMS
 
 DEPENDENCIES
   algoliasearch
-  htmlentities!
+  htmlentities
   pry
   zendesk_api!
 
 BUNDLED WITH
-   1.16.0
+   1.17.3
