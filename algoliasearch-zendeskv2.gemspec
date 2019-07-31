@@ -4,7 +4,7 @@ require 'date'
 
 Gem::Specification.new do |s|
   s.name        = "algoliasearch-zendeskv2"
-  s.version     = File.read('crawler/VERSION')
+  s.version     = File.read(File.join(File.dirname(__FILE__), 'crawler', 'VERSION'))
   s.authors     = ["Algolia"]
   s.email       = "contact@algolia.com"
 

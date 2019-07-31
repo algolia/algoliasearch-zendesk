@@ -3,7 +3,7 @@ require 'algoliasearch'
 class ZendeskIntegration::V2::UserAgent
   class Version
     def self.crawler
-      File.read('VERSION').strip
+      File.read(File.join(File.dirname(__FILE__), 'VERSION')).strip
     end
 
     def self.client
