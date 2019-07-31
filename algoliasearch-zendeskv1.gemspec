@@ -35,5 +35,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency               'algoliasearch'
   s.add_dependency               'zendesk_api'
-  s.add_dependency               'jerska-htmlentities', '4.3.3'
+  s.add_dependency               'htmlentities'
 end
