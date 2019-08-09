@@ -48,9 +48,21 @@ module ZendeskIntegration::V2::Zendesk
       return labels
     end
 
+    def build_path locale, section, path
+      return path if section.nil?
+      return "#{section.parent.simple(locale)[:title]} / #{path}" if section.parent
+      "#{section.category.simple(locale)[:title]} / #{path}"
+    end
+
     def translation t
-      simple_category = category.simple(t.locale)
+      if section.parent
+        path = build_path(t.locale, section.parent, section.parent.simple(t.locale)[:title])
+        simple_category = section.parent.simple(t.locale).merge({ title: path, is_actually_section: true })
+      else
+        simple_category = category.simple(t.locale)
+      end
       simple_section = section.simple(t.locale)
+      path = "#{simple_category[:title]} > #{simple_section[:title]}"
       edited_at = @zendesk_obj.edited_at || @zendesk_obj.updated_at
       super(t).merge(selected).merge(
         category: simple_category,

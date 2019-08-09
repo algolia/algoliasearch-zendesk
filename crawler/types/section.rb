@@ -15,6 +15,12 @@ module ZendeskIntegration::V2::Zendesk
       @crawler.get Category, @zendesk_obj.category_id
     end
 
+    def parent
+      parent_id = @zendesk_obj.parent_section_id
+      return nil if parent_id.nil?
+      @crawler.get Section, parent_id
+    end
+
     def ignore? t
       super(t) ||
         !category.exists?(t.locale) ||

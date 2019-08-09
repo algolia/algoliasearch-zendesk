@@ -29,6 +29,16 @@ module ZendeskAPI
     has Category
     has UserSegment
   end
+  class ParentSection < Section
+    namespace 'help_center'
+
+    def self.singular_resource_name
+      'parent_section'
+    end
+  end
+  class Section < Resource
+    has ParentSection
+  end
   class Article < Resource
     namespace 'help_center'
     has_many Translation
