@@ -1,6 +1,6 @@
 #! /usr/bin/env ruby
 
-require_relative './main.rb'
+require_relative './algoliasearch-zendeskv2.rb'
 
 config = JSON.parse(ENV['CONFIG'])
 
