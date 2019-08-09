@@ -12,6 +12,6 @@ logs = ZendeskIntegration::V2.run(
   zendesk_email: config['email'],
   zendesk_token: config['token'],
   zendesk_oauth_token: config['oauth_token'],
+  live_logs: true,
   config: config
 )
-puts logs.join("\n")

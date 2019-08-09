@@ -18,6 +18,7 @@ class ZendeskIntegration::V2::Crawler
     zendesk_email:,
     zendesk_token:,
     zendesk_oauth_token:,
+    live_logs:,
     config:,
     logs:
   )
@@ -51,6 +52,16 @@ class ZendeskIntegration::V2::Crawler
     # Internal cache
     @data = {}
     @logs = logs
+
+    # Dev environment
+    @live_logs = live_logs
+  end
+
+  def log msg
+    @logs << msg.to_s
+    return unless @live_logs
+    puts msg.to_s
+    STDOUT.flush
   end
 
   def index_name(type)
@@ -75,15 +86,16 @@ class ZendeskIntegration::V2::Crawler
     i = 1
     @zendesk_client.send(type.plural).all! do |obj|
       set(type, obj)
-      @logs << "#{Time.now.utc.to_s}: #{type.plural.capitalize}: #{i}/#{count}"
-      STDOUT.flush
+      log "#{Time.now.utc.to_s}: #{type.plural.capitalize}: #{i}/#{count}"
       i += 1
     end
   end
 
   def crawl_and_index type
     return unless @config['types'].include? type.plural.to_s
+
     count = @zendesk_client.send(type.plural).count!
+
     i = 1
     last = []
     @zendesk_client.send(type.plural).all! do |obj|
@@ -93,8 +105,7 @@ class ZendeskIntegration::V2::Crawler
         last = []
         GC.start
       end
-      @logs << "#{Time.now.utc.to_s}: #{type.plural.capitalize}: #{i}/#{count}"
-      STDOUT.flush
+      log "#{Time.now.utc.to_s}: #{type.plural.capitalize}: #{i}/#{count}"
       i += 1
     end
     type.index(self, last)

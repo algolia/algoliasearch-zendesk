@@ -15,6 +15,7 @@ module ZendeskIntegration::V2
     zendesk_email:,
     zendesk_token:,
     zendesk_oauth_token:,
+    live_logs: false,
     config:
   )
     logs = []
@@ -27,6 +28,7 @@ module ZendeskIntegration::V2
       zendesk_email: zendesk_email,
       zendesk_token: zendesk_token,
       zendesk_oauth_token: zendesk_oauth_token,
+      live_logs: live_logs,
       config: config,
       logs: logs
     )
