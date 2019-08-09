@@ -73,12 +73,12 @@
     "jsdom-global": "^1.6.1",
     "merge-stream": "^1.0.0",
     "mochawesome": "^1.2.2",
-    "stringify": "^5.1.0",
+    "stringify": "^5.2.0",
     "to-factory": "^1.0.0",
     "uglifyify": "^3.0.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.7.0",
+    "watchify": "^3.11.1",
     "yiewd": "^0.6.0"
   },
   "scripts": {
