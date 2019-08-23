@@ -23,13 +23,13 @@ permalink: /documentation/
 ## Indexing
 
 When you install our Zendesk integration, it creates what we call a connector in your Algolia account.
-You can access it with the left sidebar in your dashboard or by following [this link](https://www.algolia.com/connectors).
+You can access it with the left sidebar in your dashboard.
 
 This connector will every day take your public Help Center articles and put them inside an Algolia index.
 In most cases, this should be enough to have an up-to-date search.
 
 However, if you'd rather have it updated right now, like when you add a lot of support articles, you can manually trigger a full reindex.
-On this page, just click the "Reindex" button in the top right corner. A few minutes later, your search index will be updated.
+On this page, just click the "Reindex" button in the bottom right corner. A few minutes later, your search index will be updated.
 
 ## Updating your Help Center theme
 
