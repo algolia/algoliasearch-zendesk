@@ -11,7 +11,6 @@ import autocomplete from 'autocomplete.js';
 import zepto from 'autocomplete.js/zepto.js';
 
 import algoliasearch from 'algoliasearch';
-import 'es6-collections';
 
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';

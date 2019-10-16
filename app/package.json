@@ -47,7 +47,6 @@
     "chalk": "^1.1.1",
     "del": "^2.2.0",
     "envify": "^3.4.0",
-    "es6-collections": "^0.5.5",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^2.0.0",
     "eslint-config-algolia": "^4.6.0",
