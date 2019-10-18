@@ -100,7 +100,7 @@ module ZendeskIntegration::V2::Zendesk
       ZendeskIntegration::V2::DECODER.decode(body.to_s.gsub(/<\/?[^>]*>/, ' '))
     end
 
-    def truncate str, max = 5_000
+    def truncate str, max
       truncated = str.length > max
       res = str[0...max]
       # Algolia doesn't count the actual string length, but the byte size

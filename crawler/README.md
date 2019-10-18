@@ -37,7 +37,9 @@ CONFIG='{ "app_name": "your-zendesk-subdomain", "oauth_token": "xxx" }' \
 * `oauth_token` or (`email` + `token`) - **required** - Credentials to identify on Zendesk's API
 * `types` - *optional* - Default: `["articles"]` - Defines which content should be crawled. Supported types: `articles` and `posts`
 * `user_types` - *optional* - Default: `["everybody"]` - Which default Zendesk user segments to index
-* `private` - *optional* - Default: `false` - Set to `true` to index all articles, regardless of their user segment
+* `private` - *optional* - Default: `false` - Set to true to index all articles, regardless of their user segment
+* `max_content_size` - *optional* - Default: `5000` - Maximum byte size after which the text of an attribute will be truncated
+
 
 ## Contributing
 

@@ -48,6 +48,7 @@ class ZendeskIntegration::V2::Crawler
     @config['user_types'] ||= ['everybody']
     @config['private'] ||= false
     @config['types'] ||= ['articles']
+    @config['max_content_size'] ||= 5000
 
     # Internal cache
     @data = {}
