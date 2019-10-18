@@ -31,6 +31,14 @@ If you have one, just replace the `CONFIG` line with
 CONFIG='{ "app_name": "your-zendesk-subdomain", "oauth_token": "xxx" }' \
 ```
 
+## Configuration
+
+* `app_name` - **required** - Zendesk subdomain
+* `oauth_token` or (`email` + `token`) - **required** - Credentials to identify on the Zendesk API
+* `types` - *optional* - Default: ["articles"] - Defines which content should be crawled. Supported types: `articles` and `posts`.
+* `user_types` - *optional* - Default: `["everybody"]` - Which default Zendesk user segments to index
+* `private` - *optional* - Default: `false` - Set to true to index all articles, regardless of their user segment
+
 ## Contributing
 
 We're considering any contribution and PR, please go ahead!
