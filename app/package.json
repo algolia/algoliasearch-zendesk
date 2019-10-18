@@ -25,6 +25,9 @@
     "moment": "global:moment",
     "I18n": "global:I18n"
   },
+  "engines": {
+    "node": ">=8 <11"
+  },
   "dependencies": {
     "algoliasearch": "^3.18.1",
     "autocomplete.js": "^0.28.1",
