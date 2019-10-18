@@ -92,7 +92,7 @@ class ZendeskIntegration::V2::Crawler
   end
 
   def crawl_and_index type
-    return unless @config['types'].include? type.plural.to_s
+    return unless @config['types'].include? type.plural.to_s 
 
     count = @zendesk_client.send(type.plural).count!
 
