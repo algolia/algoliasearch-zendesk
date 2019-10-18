@@ -1,0 +1,42 @@
+---
+aliases:
+  - &restore-root-cache
+    keys:
+      - v1-root-deps-{{ checksum "package.json" }}
+  - &save-root-cache
+    paths:
+      - node_modules
+    key: v1-root-deps-{{ checksum "package.json" }}
+  - &restore-app-cache
+    keys:
+      - v1-app-deps-{{ checksum "app/package.json" }}
+  - &save-app-cache
+    paths:
+      - app/node_modules
+    key: v1-app-deps-{{ checksum "app/package.json" }}
+
+version: 2
+
+jobs:
+  test:
+    working_directory: ~/crawler
+    docker:
+      - image: circleci/node:10.16.3
+
+    steps:
+      # Setup and fetch
+      - checkout
+      - restore_cache: *restore-root-cache
+      - restore_cache: *restore-app-cache
+      - run: npm install
+      - save_cache: *save-root-cache
+      - save_cache: *save-app-cache
+
+      # Lint
+      - run: "cd app && npm run lint"
+
+workflows:
+  version: 2
+  suite:
+    jobs:
+      - test
