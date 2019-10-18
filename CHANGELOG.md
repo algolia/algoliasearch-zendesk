@@ -1,6 +1,34 @@
-<a name="2.24.3"></a>
-## [2.24.3](https://github.com/algolia/algoliasearch-zendesk/compare/v2.24.3...v2.24.3) (2019-02-04)
+<a name="2.25.2"></a>
+## [2.25.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.25.2...v2.25.2) (2019-10-16)
 
+
+
+
+<a name="2.25.2"></a>
+## [2.25.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.25.1...v2.25.2) (2019-10-16)
+
+
+
+
+<a name="2.25.1"></a>
+## [2.25.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.25.0...v2.25.1) (2019-10-16)
+
+
+
+
+<a name="2.25.0"></a>
+# [2.25.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.24.3...v2.25.0) (2019-10-16)
+
+
+### Bug Fixes
+
+* gem version ([1f26ffc](https://github.com/algolia/algoliasearch-zendesk/commit/1f26ffc))
+* **user-agent:** fixed VERSION file reading ([2ac2b16](https://github.com/algolia/algoliasearch-zendesk/commit/2ac2b16))
+
+### Features
+
+* add parent section support ([2d17e98](https://github.com/algolia/algoliasearch-zendesk/commit/2d17e98))
+* use as gem ([2eb6049](https://github.com/algolia/algoliasearch-zendesk/commit/2eb6049))
 
 
 

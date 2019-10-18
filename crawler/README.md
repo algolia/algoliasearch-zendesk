@@ -18,7 +18,7 @@ Then, to run the crawler:
 APPLICATION_ID='xxx' \
 API_KEY='xxx' \
 INDEX_PREFIX='zendesk_' \
-CONFIG='{ "app_name": "your-zendesk-subdomain", "email": "xxx@xxx.xx", "api_token": "xxx" }'
+CONFIG='{ "app_name": "your-zendesk-subdomain", "email": "xxx@xxx.xx", "token": "xxx" }' \
 bundle exec ./run
 ```
 
