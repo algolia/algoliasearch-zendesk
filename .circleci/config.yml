@@ -35,3 +35,8 @@ jobs:
       # Lint
       - npm run lint
 
+workflows:
+  version: 2
+  suite:
+    jobs:
+      - test
