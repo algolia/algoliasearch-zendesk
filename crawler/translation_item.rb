@@ -41,7 +41,7 @@ module ZendeskIntegration::V2::Zendesk
         updated_at: t.updated_at.to_i / TIME_FRAME,
         position: @zendesk_obj.position,
         title: t.title,
-        body_safe: @crawler.config['max_content_size']? truncate(decode(t.body), @crawler.config['max_content_size']) : truncate(decode(t.body)),
+        body_safe: truncate(decode(t.body), @crawler.config['max_content_size']),
         outdated: @zendesk_obj.outdated || t.outdated
       }
     end
