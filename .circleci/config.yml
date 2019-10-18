@@ -1,0 +1,15 @@
+version: 2
+
+jobs:
+  test:
+    working_directory: ~/crawler
+    docker:
+      - image: circleci/node:10.16.3
+
+    steps:
+      # Setup and fetch
+      - checkout
+      - run: npm install
+
+      # Lint
+      - npm run lint
