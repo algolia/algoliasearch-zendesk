@@ -33,7 +33,7 @@ jobs:
       - save_cache: *save-app-cache
 
       # Lint
-      - run: npm run lint
+      - run: "cd app && npm run lint"
 
 workflows:
   version: 2
