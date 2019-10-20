@@ -226,7 +226,7 @@ const defaultTemplates = {
   }
 };
 
-export default function loadTemplates (options) {
+export default function loadTemplates(options) {
   options.templates = {
     autocomplete: {
       ...defaultTemplates.autocomplete,
@@ -237,4 +237,4 @@ export default function loadTemplates (options) {
       ...options.templates.instantsearch
     }
   };
-};
+}
