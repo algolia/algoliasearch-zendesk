@@ -1,5 +1,5 @@
 import instantsearch from 'instantsearch.js';
-import {initInsights, trackClick} from './clickAnalytics.js';
+import {initInsights, enableTrackClick} from './clickAnalytics.js';
 
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
@@ -28,7 +28,13 @@ class InstantSearch {
   }) {
     if (!enabled) return;
 
+    if (clickAnalyticsEnabled) {
+      initInsights(applicationId, apiKey);
+    }
+
     this.locale = null;
+    this.indexName = `${indexPrefix}${subdomain}_articles`;
+    this.trackClick = enableTrackClick(this.indexName);
 
     this._temporaryHiding({
       hideAutocomplete,
@@ -40,7 +46,7 @@ class InstantSearch {
     this.instantsearch = instantsearch({
       appId: applicationId,
       apiKey,
-      indexName: `${indexPrefix}${subdomain}_articles`,
+      indexName: this.indexName,
       urlSync: {
         mapping: {
           q: 'query'
@@ -52,7 +58,7 @@ class InstantSearch {
         highlightPreTag: '<span class="ais-highlight">',
         highlightPostTag: '</span>',
         snippetEllipsisText: '...',
-        clickAnalytics: true
+        clickAnalytics: clickAnalyticsEnabled
       },
       searchFunction: ({search}) => {
         let helper = this.instantsearch.helper;
@@ -69,8 +75,6 @@ class InstantSearch {
   }
 
   render({
-    applicationId,
-    apiKey,
     autocomplete: {
       inputSelector: autocompleteSelector
     },
@@ -95,10 +99,6 @@ class InstantSearch {
     translations
   }) {
     if (!enabled) return;
-
-    if (clickAnalyticsEnabled) {
-      initInsights(applicationId, apiKey);
-    }
 
     this.locale = locale;
 
@@ -226,7 +226,9 @@ class InstantSearch {
     );
 
     this.instantsearch.addWidget({
-      init: this._addClickListener.bind(this)
+      init: () => {
+        this._addClickListener(clickAnalyticsEnabled);
+      }
     });
 
     let firstRender = true;
@@ -351,9 +353,10 @@ class InstantSearch {
     delete this._temporaryHidingCSS;
   }
 
+// attach the event listener only once on container and find article link at click time
   _addClickListener(clickAnalyticsEnabled) {
     if (!clickAnalyticsEnabled) return;
-    this.$container.addEventListener('click', function (e) {
+    this.$container.addEventListener('click', (e) => {
       const $target = e.target;
       const $link = $target.closest('a.search-result-link');
       if (!$link) return;
@@ -365,9 +368,7 @@ class InstantSearch {
       const objectID = $article.getAttribute('data-algolia-objectid');
       const position = $article.getAttribute('data-algolia-position');
       const queryID = $article.getAttribute('data-algolia-queryid');
-      // console.log($article, objectID, position, queryID);
-      console.log('click', objectID, position, queryID);
-      trackClick(objectID, position, queryID);
+      this.trackClick(objectID, position, queryID);
     });
   }
 }

@@ -1,6 +1,6 @@
 
 export function initInsights(appId, apiKey) {
-  const ALGOLIA_INSIGHTS_SRC = "https://cdn.jsdelivr.net/npm/search-insights@1.3.0";
+  const ALGOLIA_INSIGHTS_SRC = 'https://cdn.jsdelivr.net/npm/search-insights@1';
 
   /* eslint-disable */
   !function(e,a,t,n,s,i,c){e.AlgoliaAnalyticsObject=s,e.aa=e.aa||function(){
@@ -16,13 +16,14 @@ export function initInsights(appId, apiKey) {
 }
 
 
-export function trackClick(objectID, position, queryID) {
-
-  window.aa('clickedObjectIDsAfterSearch', {
-    eventName: 'article_clicked',
-    index: 'zendesk_algolia-test_articles',
-    queryID,
-    objectIDs: [objectID],
-    positions: [Number(position)]
-  });
+export function enableTrackClick(index) {
+  return function trackClick(objectID, position, queryID) {
+    window.aa('clickedObjectIDsAfterSearch', {
+      eventName: 'article_clicked',
+      index,
+      queryID,
+      objectIDs: [objectID],
+      positions: [Number(position)]
+    });
+  };
 }
