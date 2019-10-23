@@ -11,6 +11,8 @@ import autocomplete from 'autocomplete.js';
 import zepto from 'autocomplete.js/zepto.js';
 
 import algoliasearch from 'algoliasearch';
+import {initInsights, trackClick} from './clickAnalytics.js';
+
 
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';

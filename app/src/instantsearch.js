@@ -1,4 +1,5 @@
 import instantsearch from 'instantsearch.js';
+import {initInsights, trackClick} from './clickAnalytics.js';
 
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
@@ -13,6 +14,7 @@ class InstantSearch {
     autocomplete: {
       inputSelector: autocompleteSelector
     },
+    clickAnalyticsEnabled,
     indexPrefix,
     instantsearch: {
       enabled,
@@ -47,7 +49,8 @@ class InstantSearch {
         attributesToSnippet: ['body_safe:40'],
         highlightPreTag: '<span class="ais-highlight">',
         highlightPostTag: '</span>',
-        snippetEllipsisText: '...'
+        snippetEllipsisText: '...',
+        clickAnalytics: true
       },
       searchFunction: ({search}) => {
         let helper = this.instantsearch.helper;
@@ -64,10 +67,13 @@ class InstantSearch {
   }
 
   render({
+    applicationId,
+    apiKey,
     autocomplete: {
       inputSelector: autocompleteSelector
     },
     baseUrl,
+    clickAnalyticsEnabled,
     color,
     highlightColor,
     instantsearch: {
@@ -87,6 +93,10 @@ class InstantSearch {
     translations
   }) {
     if (!enabled) return;
+
+    if (clickAnalyticsEnabled) {
+      initInsights(applicationId, apiKey);
+    }
 
     this.locale = locale;
 
@@ -205,7 +215,9 @@ class InstantSearch {
           }),
           item: hit => ({
             ...hit,
-            baseUrl
+            baseUrl,
+            position: hit.__hitIndex + 1,
+            queryID: this.instantsearch.helper.lastResults._rawResults[0].queryID
           })
         }
       })
@@ -214,6 +226,7 @@ class InstantSearch {
     let firstRender = true;
     this.instantsearch.on('render', () => {
       this._displayTimes();
+      this._addClickListeners(clickAnalyticsEnabled);
       if (firstRender) {
         firstRender = false;
         this._bindNoResultActions();
@@ -332,5 +345,23 @@ class InstantSearch {
     removeCSS(this._temporaryHidingCSS);
     delete this._temporaryHidingCSS;
   }
+
+  _addClickListeners(clickAnalyticsEnabled) {
+    const articles = document.getElementById('algolia-hits');
+    for (let i = 0; i < articles.children[0].children.length; i++) {
+      const singleArticle = articles.children[0].children[i].firstElementChild;
+      const objectID = singleArticle.getAttribute('data-algolia-objectid');
+      const position = singleArticle.getAttribute('data-algolia-position');
+      const queryID = singleArticle.getAttribute('data-algolia-queryid');
+      //console.log(singleArticle, objectID, position, queryID);
+      singleArticle.addEventListener('click', function () {
+        if (clickAnalyticsEnabled) {
+          console.log('click', objectID, position, queryID);
+          trackClick(objectID, position, queryID);
+        }
+      });
+    }
+  }
 }
 export default (...args) => new InstantSearch(...args);
+

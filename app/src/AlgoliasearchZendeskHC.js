@@ -23,6 +23,7 @@ const optionsStructure = {required: true, type: 'Object', children: {
   }},
   baseUrl: {type: 'string', value: '/hc/'},
   color: {type: 'string', value: '#158EC2'},
+  clickAnalyticsEnabled: {type: 'boolean', value: true},
   debug: {type: 'boolean', value: false},
   locale: {type: 'string'},
   highlightColor: {type: 'string'},
