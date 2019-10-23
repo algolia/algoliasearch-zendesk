@@ -6,6 +6,8 @@ import removeCSS from './removeCSS.js';
 
 import getOptionalWords from './stopwords.js';
 
+import './closestPolyfill.js';
+
 class InstantSearch {
   constructor({
     analytics,
@@ -223,10 +225,13 @@ class InstantSearch {
       })
     );
 
+    this.instantsearch.addWidget({
+      init: this._addClickListener.bind(this)
+    });
+
     let firstRender = true;
     this.instantsearch.on('render', () => {
       this._displayTimes();
-      this._addClickListeners(clickAnalyticsEnabled);
       if (firstRender) {
         firstRender = false;
         this._bindNoResultActions();
@@ -346,22 +351,24 @@ class InstantSearch {
     delete this._temporaryHidingCSS;
   }
 
-  _addClickListeners(clickAnalyticsEnabled) {
-    const articles = document.getElementById('algolia-hits');
-    for (let i = 0; i < articles.children[0].children.length; i++) {
-      const singleArticle = articles.children[0].children[i].firstElementChild;
-      const objectID = singleArticle.getAttribute('data-algolia-objectid');
-      const position = singleArticle.getAttribute('data-algolia-position');
-      const queryID = singleArticle.getAttribute('data-algolia-queryid');
-      //console.log(singleArticle, objectID, position, queryID);
-      singleArticle.addEventListener('click', function () {
-        if (clickAnalyticsEnabled) {
-          console.log('click', objectID, position, queryID);
-          trackClick(objectID, position, queryID);
-        }
-      });
-    }
+  _addClickListener(clickAnalyticsEnabled) {
+    if (!clickAnalyticsEnabled) return;
+    this.$container.addEventListener('click', function (e) {
+      const $target = e.target;
+      const $link = $target.closest('a.search-result-link');
+      if (!$link) return;
+      const $article = $link.closest('.search-result');
+      if (!$article) {
+        console.error("Couldn't find associated article for link", $link); // eslint-disable-line no-console
+        return;
+      }
+      const objectID = $article.getAttribute('data-algolia-objectid');
+      const position = $article.getAttribute('data-algolia-position');
+      const queryID = $article.getAttribute('data-algolia-queryid');
+      // console.log($article, objectID, position, queryID);
+      console.log('click', objectID, position, queryID);
+      trackClick(objectID, position, queryID);
+    });
   }
 }
 export default (...args) => new InstantSearch(...args);
-
