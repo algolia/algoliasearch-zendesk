@@ -1,6 +1,17 @@
-<a name="2.25.2"></a>
-## [2.25.2](https://github.com/algolia/algoliasearch-zendesk/compare/v2.25.2...v2.25.2) (2019-10-16)
+<a name="2.26.0"></a>
+# [2.26.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.26.0...v2.26.0) (2019-10-24)
 
+
+
+
+<a name="2.26.0"></a>
+# [2.26.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.25.2...v2.26.0) (2019-10-24)
+
+
+### Features
+
+* **analytics:** add click analytics (#117) ([124f770](https://github.com/algolia/algoliasearch-zendesk/commit/124f770))
+* **crawler:** add  optional max_config_size option in config (#114) ([9fc4d45](https://github.com/algolia/algoliasearch-zendesk/commit/9fc4d45))
 
 
 
