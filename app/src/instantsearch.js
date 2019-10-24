@@ -16,7 +16,7 @@ class InstantSearch {
     autocomplete: {
       inputSelector: autocompleteSelector
     },
-    clickAnalyticsEnabled,
+    clickAnalytics,
     indexPrefix,
     instantsearch: {
       enabled,
@@ -28,7 +28,7 @@ class InstantSearch {
   }) {
     if (!enabled) return;
 
-    if (clickAnalyticsEnabled) {
+    if (clickAnalytics) {
       initInsights(applicationId, apiKey);
     }
 
@@ -58,7 +58,7 @@ class InstantSearch {
         highlightPreTag: '<span class="ais-highlight">',
         highlightPostTag: '</span>',
         snippetEllipsisText: '...',
-        clickAnalytics: clickAnalyticsEnabled
+        clickAnalytics
       },
       searchFunction: ({search}) => {
         let helper = this.instantsearch.helper;
@@ -79,7 +79,7 @@ class InstantSearch {
       inputSelector: autocompleteSelector
     },
     baseUrl,
-    clickAnalyticsEnabled,
+    clickAnalytics,
     color,
     highlightColor,
     instantsearch: {
@@ -227,7 +227,7 @@ class InstantSearch {
 
     this.instantsearch.addWidget({
       init: () => {
-        this._addClickListener(clickAnalyticsEnabled);
+        this._addClickListener(clickAnalytics);
       }
     });
 
@@ -354,8 +354,8 @@ class InstantSearch {
   }
 
 // attach the event listener only once on container and find article link at click time
-  _addClickListener(clickAnalyticsEnabled) {
-    if (!clickAnalyticsEnabled) return;
+  _addClickListener(clickAnalytics) {
+    if (!clickAnalytics) return;
     this.$container.addEventListener('click', (e) => {
       const $target = e.target;
       const $link = $target.closest('a.search-result-link');

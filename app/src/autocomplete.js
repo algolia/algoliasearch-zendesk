@@ -30,13 +30,13 @@ class Autocomplete {
       enabled,
       inputSelector
     },
-    clickAnalyticsEnabled,
+    clickAnalytics,
     indexPrefix,
     subdomain
   }) {
     if (!enabled) return;
 
-    if (clickAnalyticsEnabled) {
+    if (clickAnalytics) {
       initInsights(applicationId, apiKey);
     }
 
@@ -58,7 +58,7 @@ class Autocomplete {
     },
     baseUrl,
     color,
-    clickAnalyticsEnabled,
+    clickAnalytics,
     debug,
     locale,
     highlightColor,
@@ -101,13 +101,13 @@ class Autocomplete {
         templates: this._templates({poweredBy, subdomain, templates, translations}),
         appendTo: 'body'
       }, [{
-        source: this._source(params, locale, clickAnalyticsEnabled),
+        source: this._source(params, locale, clickAnalytics),
         name: 'articles',
         templates: {
           suggestion: this._renderSuggestion(templates, sizeModifier)
         }
       }]);
-      aa.on('autocomplete:selected', this._onSelected(baseUrl, locale, clickAnalyticsEnabled));
+      aa.on('autocomplete:selected', this._onSelected(baseUrl, locale, clickAnalytics));
       aa.on('autocomplete:redrawn', function () {
         aa.autocomplete.getWrapper().style.zIndex = 10000;
       });
@@ -138,12 +138,14 @@ class Autocomplete {
     return Math.floor(inputWidth / 35);
   }
 
-  _source(params, locale, clickAnalyticsEnabled) {
+  _source(params, locale, clickAnalytics) {
     return (query, callback) => {
-      this.index.search({...params, clickAnalytics: clickAnalyticsEnabled, query, optionalWords: getOptionalWords(query, locale)})
-        .then((content) => { 
-          const hits = this._addPositionToHits(content.hits, content.queryID);
-          callback(this._reorderedHits(hits));
+      this.index.search({
+        ...params, clickAnalytics, query, optionalWords: getOptionalWords(query, locale)})
+        .then((content) => {
+          const hitsWithPosition = this._addPositionToHits(content.hits, content.queryID, clickAnalytics);
+          const reorderedHits = this._reorderedHits(hitsWithPosition);
+          callback(reorderedHits);
         });
     };
   }
@@ -194,9 +196,9 @@ class Autocomplete {
     };
   }
 
-  _onSelected(baseUrl, locale, clickAnalyticsEnabled) {
+  _onSelected(baseUrl, locale, clickAnalytics) {
     return (event, suggestion, dataset) => {
-      if (clickAnalyticsEnabled) {
+      if (clickAnalytics) {
         const {objectID, _position, _queryID} = suggestion;
         this.trackClick(objectID, _position, _queryID);
       }
@@ -232,7 +234,8 @@ class Autocomplete {
     }
   }
 
-  _addPositionToHits(hits, queryID) {
+  _addPositionToHits(hits, queryID, clickAnalytics) {
+    if (!clickAnalytics) return hits;
     return hits.map(function (hit, index) {
       hit._position = index + 1;
       hit._queryID = queryID;
