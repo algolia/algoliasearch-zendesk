@@ -1,9 +1,12 @@
 import instantsearch from 'instantsearch.js';
+import {initInsights, enableTrackClick} from './clickAnalytics.js';
 
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
 
 import getOptionalWords from './stopwords.js';
+
+import './closestPolyfill.js';
 
 class InstantSearch {
   constructor({
@@ -13,6 +16,7 @@ class InstantSearch {
     autocomplete: {
       inputSelector: autocompleteSelector
     },
+    clickAnalytics,
     indexPrefix,
     instantsearch: {
       enabled,
@@ -24,7 +28,13 @@ class InstantSearch {
   }) {
     if (!enabled) return;
 
+    if (clickAnalytics) {
+      initInsights(applicationId, apiKey);
+    }
+
     this.locale = null;
+    this.indexName = `${indexPrefix}${subdomain}_articles`;
+    this.trackClick = enableTrackClick(this.indexName);
 
     this._temporaryHiding({
       hideAutocomplete,
@@ -36,7 +46,7 @@ class InstantSearch {
     this.instantsearch = instantsearch({
       appId: applicationId,
       apiKey,
-      indexName: `${indexPrefix}${subdomain}_articles`,
+      indexName: this.indexName,
       urlSync: {
         mapping: {
           q: 'query'
@@ -47,7 +57,8 @@ class InstantSearch {
         attributesToSnippet: ['body_safe:40'],
         highlightPreTag: '<span class="ais-highlight">',
         highlightPostTag: '</span>',
-        snippetEllipsisText: '...'
+        snippetEllipsisText: '...',
+        clickAnalytics
       },
       searchFunction: ({search}) => {
         let helper = this.instantsearch.helper;
@@ -68,6 +79,7 @@ class InstantSearch {
       inputSelector: autocompleteSelector
     },
     baseUrl,
+    clickAnalytics,
     color,
     highlightColor,
     instantsearch: {
@@ -205,11 +217,19 @@ class InstantSearch {
           }),
           item: hit => ({
             ...hit,
-            baseUrl
+            baseUrl,
+            position: hit.__hitIndex + 1,
+            queryID: this.instantsearch.helper.lastResults._rawResults[0].queryID
           })
         }
       })
     );
+
+    this.instantsearch.addWidget({
+      init: () => {
+        this._addClickListener(clickAnalytics);
+      }
+    });
 
     let firstRender = true;
     this.instantsearch.on('render', () => {
@@ -331,6 +351,25 @@ class InstantSearch {
   _temporaryHidingCancel() {
     removeCSS(this._temporaryHidingCSS);
     delete this._temporaryHidingCSS;
+  }
+
+// attach the event listener only once on container and find article link at click time
+  _addClickListener(clickAnalytics) {
+    if (!clickAnalytics) return;
+    this.$container.addEventListener('click', (e) => {
+      const $target = e.target;
+      const $link = $target.closest('a.search-result-link');
+      if (!$link) return;
+      const $article = $link.closest('.search-result');
+      if (!$article) {
+        console.error("Couldn't find associated article for link", $link); // eslint-disable-line no-console
+        return;
+      }
+      const objectID = $article.getAttribute('data-algolia-objectid');
+      const position = $article.getAttribute('data-algolia-position');
+      const queryID = $article.getAttribute('data-algolia-queryid');
+      this.trackClick(objectID, position, queryID);
+    });
   }
 }
 export default (...args) => new InstantSearch(...args);

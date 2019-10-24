@@ -11,6 +11,8 @@ import autocomplete from 'autocomplete.js';
 import zepto from 'autocomplete.js/zepto.js';
 
 import algoliasearch from 'algoliasearch';
+import {initInsights, enableTrackClick} from './clickAnalytics.js';
+
 
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
@@ -28,16 +30,23 @@ class Autocomplete {
       enabled,
       inputSelector
     },
+    clickAnalytics,
     indexPrefix,
     subdomain
   }) {
     if (!enabled) return;
 
+    if (clickAnalytics) {
+      initInsights(applicationId, apiKey);
+    }
+
     this._temporaryHiding(inputSelector);
 
     this.client = algoliasearch(applicationId, apiKey);
     this.client.addAlgoliaAgent('Zendesk Integration (__VERSION__)');
-    this.index = this.client.initIndex(`${indexPrefix}${subdomain}_articles`);
+    this.indexName = `${indexPrefix}${subdomain}_articles`;
+    this.index = this.client.initIndex(this.indexName);
+    this.trackClick = enableTrackClick(this.indexName);
   }
 
   render({
@@ -49,6 +58,7 @@ class Autocomplete {
     },
     baseUrl,
     color,
+    clickAnalytics,
     debug,
     locale,
     highlightColor,
@@ -91,13 +101,13 @@ class Autocomplete {
         templates: this._templates({poweredBy, subdomain, templates, translations}),
         appendTo: 'body'
       }, [{
-        source: this._source(params, locale),
+        source: this._source(params, locale, clickAnalytics),
         name: 'articles',
         templates: {
           suggestion: this._renderSuggestion(templates, sizeModifier)
         }
       }]);
-      aa.on('autocomplete:selected', this._onSelected(baseUrl, locale));
+      aa.on('autocomplete:selected', this._onSelected(baseUrl, locale, clickAnalytics));
       aa.on('autocomplete:redrawn', function () {
         aa.autocomplete.getWrapper().style.zIndex = 10000;
       });
@@ -128,10 +138,15 @@ class Autocomplete {
     return Math.floor(inputWidth / 35);
   }
 
-  _source(params, locale) {
+  _source(params, locale, clickAnalytics) {
     return (query, callback) => {
-      this.index.search({...params, query, optionalWords: getOptionalWords(query, locale)})
-        .then((content) => { callback(this._reorderedHits(content.hits)); });
+      this.index.search({
+        ...params, clickAnalytics, query, optionalWords: getOptionalWords(query, locale)})
+        .then((content) => {
+          const hitsWithPosition = this._addPositionToHits(content.hits, content.queryID, clickAnalytics);
+          const reorderedHits = this._reorderedHits(hitsWithPosition);
+          callback(reorderedHits);
+        });
     };
   }
 
@@ -181,8 +196,12 @@ class Autocomplete {
     };
   }
 
-  _onSelected(baseUrl, locale) {
+  _onSelected(baseUrl, locale, clickAnalytics) {
     return (event, suggestion, dataset) => {
+      if (clickAnalytics) {
+        const {objectID, _position, _queryID} = suggestion;
+        this.trackClick(objectID, _position, _queryID);
+      }
       location.href = `${baseUrl}${locale}/${dataset}/${suggestion.id}`;
     };
   }
@@ -213,6 +232,15 @@ class Autocomplete {
         this.$inputs[i] = $new;
       }
     }
+  }
+
+  _addPositionToHits(hits, queryID, clickAnalytics) {
+    if (!clickAnalytics) return hits;
+    return hits.map(function (hit, index) {
+      hit._position = index + 1;
+      hit._queryID = queryID;
+      return hit;
+    });
   }
 }
 export default (...args) => new Autocomplete(...args);
