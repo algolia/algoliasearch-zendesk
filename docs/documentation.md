@@ -160,8 +160,10 @@ This library supports out of the box Help Centers with multiple languages.
    - __en-gb__: English (Great Britain)
    - __en-ie__: English (Ireland)
    - __en-us__: English (United States)
+   - __en-150__: English (Europe)
    - __es__: Español / Spanish
    - __es-es__: Español (España) / Spanish (Spain)
+   - __es-mx__: Español (Mexico) / Spanish (Mexico)
    - __es-419__: Español (Latinoamérica) / Spanish (Latin America)
    - __fi__: Suomi / Finnish
    - __fr__: Français / French
