@@ -1,6 +1,16 @@
-<a name="2.26.0"></a>
-# [2.26.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.26.0...v2.26.0) (2019-10-24)
+<a name="2.27.0"></a>
+# [2.27.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.27.0...v2.27.0) (2019-10-29)
 
+
+
+
+<a name="2.27.0"></a>
+# [2.27.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.26.0...v2.27.0) (2019-10-29)
+
+
+### Features
+
+* **crawler:** add en-150 support ([b89459a](https://github.com/algolia/algoliasearch-zendesk/commit/b89459a))
 
 
 

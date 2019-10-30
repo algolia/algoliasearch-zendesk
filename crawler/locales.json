@@ -31,6 +31,7 @@
   "en-ca": { "locale": "en-ca", "name": "Canadian English", "rtl": false },
   "en-ie": { "locale": "en-ie", "name": "English (Ireland)", "rtl": false },
   "en-gb": { "locale": "en-gb", "name": "British English", "rtl": false },
+  "en-150": { "locale": "en-150", "name": "English (Europe)", "rtl": false },
   "es": { "locale": "es", "name": "Spanish - español", "rtl": false },
   "es-es": {
     "locale": "es-es",
