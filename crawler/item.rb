@@ -102,7 +102,6 @@ module ZendeskIntegration::V2::Zendesk
       ZendeskIntegration::V2::DECODER.decode(body_without_html)
     end
 
-
     def truncate str, max
       truncated = str.length > max
       res = str[0...max]
