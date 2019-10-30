@@ -97,8 +97,11 @@ module ZendeskIntegration::V2::Zendesk
     end
 
     def decode body
-      ZendeskIntegration::V2::DECODER.decode(body.to_s.gsub(/<\/?[^>]*>/, ' '))
+      body_without_comments = body.to_s.gsub(/(<!--) +(algolia-ignore) +(-->).+?\1 +\/\2 +\3/m, '')
+      body_without_html = body_without_comments.gsub(/<\/?[^>]*>/, ' ')
+      ZendeskIntegration::V2::DECODER.decode(body_without_html)
     end
+
 
     def truncate str, max
       truncated = str.length > max
