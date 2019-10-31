@@ -76,7 +76,7 @@ Here is a full breakdown of the available options for the JavaScript library:
     analytics: true,                      // should queries be processed by Algolia analytics
     baseUrl: '/hc/',                      // the base URL of your Help Center
     poweredBy: true,                      // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
-    clickAnalytics: false,                // wether or not to enable the clikAnalytics feature (available on the Enterprise plan)
+    clickAnalytics: false,                // whether or not to enable the clickAnalytics feature (available on the Enterprise plan)
     debug: false,                         // debug mode prevents the autocomplete to close when trying to inspect it
     color: '#158EC2',                     // main color (used for links)
     highlightColor: '#158EC2',            // highlight color to emphasize matching text
@@ -293,6 +293,14 @@ For `fr` and `fr-*` locales, we'll index `{ "label_names": ["Incroyable"] }`.
 For `en-au`, `en-ca` and `en-us` locales, we'll index `{ "label_names": ["Awesome"] }`.
 For the `en-gb` locale, we'll index `{ "label_names": ["Good"] }`.
 For all the other locales, we'll index `{ "label_names": ["Wow"] }`.
+
+## Analytics
+
+The `analytics` parameter enables searches capturing, for reports about popular queries, searches without results, and more. It defaults to `true`.
+
+The `clickAnalytics` parameter enables click capturing in search results, for reports about the click rate and average position of clicks for specific queries. It defaults to `false`, as this feature is only accessible on our Enterprise plan.
+
+With `clickAnalytics` enabled, you can use `algoliasearchZendeskHC.trackConversion()` on an article page to capture a “conversion” if your articles include Calls To Action.
 
 ## Zendesk Community search
 
