@@ -76,7 +76,7 @@ Here is a full breakdown of the available options for the JavaScript library:
     analytics: true,                      // should queries be processed by Algolia analytics
     baseUrl: '/hc/',                      // the base URL of your Help Center
     poweredBy: true,                      // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
-    clickAnalytics: false,                // wether or not to enable the clikAnalytics feature (available on the Enterprise plan)
+    clickAnalytics: false,                // whether or not to enable the clickAnalytics feature (available on the Enterprise plan)
     debug: false,                         // debug mode prevents the autocomplete to close when trying to inspect it
     color: '#158EC2',                     // main color (used for links)
     highlightColor: '#158EC2',            // highlight color to emphasize matching text
