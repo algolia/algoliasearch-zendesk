@@ -194,7 +194,7 @@ class Autocomplete {
   _onSelected(baseUrl, locale, clickAnalytics) {
     return (event, suggestion, dataset) => {
       if (clickAnalytics) {
-        const {objectID, _position, _queryID} = suggestion;
+        const {_position, _queryID} = suggestion;
         this.trackClick(suggestion, _position, _queryID);
       }
       location.href = `${baseUrl}${locale}/${dataset}/${suggestion.id}`;
