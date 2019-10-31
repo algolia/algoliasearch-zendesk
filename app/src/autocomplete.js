@@ -11,7 +11,7 @@ import autocomplete from 'autocomplete.js';
 import zepto from 'autocomplete.js/zepto.js';
 
 import algoliasearch from 'algoliasearch';
-import {initInsights, enableTrackClick} from './clickAnalytics.js';
+import {createClickTracker} from './clickAnalytics.js';
 
 
 import addCSS from './addCSS.js';
@@ -30,15 +30,10 @@ class Autocomplete {
       enabled,
       inputSelector
     },
-    clickAnalytics,
     indexPrefix,
     subdomain
   }) {
     if (!enabled) return;
-
-    if (clickAnalytics) {
-      initInsights(applicationId, apiKey);
-    }
 
     this._temporaryHiding(inputSelector);
 
@@ -46,7 +41,7 @@ class Autocomplete {
     this.client.addAlgoliaAgent('Zendesk Integration (__VERSION__)');
     this.indexName = `${indexPrefix}${subdomain}_articles`;
     this.index = this.client.initIndex(this.indexName);
-    this.trackClick = enableTrackClick(this.indexName);
+    this.trackClick = createClickTracker(this, this.indexName);
   }
 
   render({
@@ -200,7 +195,7 @@ class Autocomplete {
     return (event, suggestion, dataset) => {
       if (clickAnalytics) {
         const {objectID, _position, _queryID} = suggestion;
-        this.trackClick(objectID, _position, _queryID);
+        this.trackClick(suggestion, _position, _queryID);
       }
       location.href = `${baseUrl}${locale}/${dataset}/${suggestion.id}`;
     };

@@ -292,6 +292,14 @@ For `en-au`, `en-ca` and `en-us` locales, we'll index `{ "label_names": ["Awesom
 For the `en-gb` locale, we'll index `{ "label_names": ["Good"] }`.
 For all the other locales, we'll index `{ "label_names": ["Wow"] }`.
 
+## Analytics
+
+The `analytics` parameter enables searches capturing, for reports about popular queries, searches without results, and more. It defaults to `true`.
+
+The `clickAnalytics` parameter enables click capturing in search results, for reports about the click rate and average position of clicks for specific queries. It defaults to `false`, as this feature is only accessible on our Enterprise plan.
+
+With `clickAnalytics` enabled, you can use `algoliasearchZendeskHC.trackConversion()` on an article page to capture a “conversion” if your articles include Calls To Action.
+
 ## Zendesk Community search
 
 We do not index community forums for now. If you're using them, you'll probably want to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.

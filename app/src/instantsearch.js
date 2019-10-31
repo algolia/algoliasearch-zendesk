@@ -1,5 +1,5 @@
 import instantsearch from 'instantsearch.js';
-import {initInsights, enableTrackClick} from './clickAnalytics.js';
+import {createClickTracker} from './clickAnalytics.js';
 
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
@@ -28,13 +28,9 @@ class InstantSearch {
   }) {
     if (!enabled) return;
 
-    if (clickAnalytics) {
-      initInsights(applicationId, apiKey);
-    }
-
     this.locale = null;
     this.indexName = `${indexPrefix}${subdomain}_articles`;
-    this.trackClick = enableTrackClick(this.indexName);
+    this.trackClick = createClickTracker(this, this.indexName);
 
     this._temporaryHiding({
       hideAutocomplete,
@@ -366,9 +362,10 @@ class InstantSearch {
         return;
       }
       const objectID = $article.getAttribute('data-algolia-objectid');
+      const articleID = $article.getAttribute('data-algolia-articleid');
       const position = $article.getAttribute('data-algolia-position');
       const queryID = $article.getAttribute('data-algolia-queryid');
-      this.trackClick(objectID, position, queryID);
+      this.trackClick({objectID, articleID}, position, queryID);
     });
   }
 }

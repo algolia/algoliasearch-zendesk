@@ -193,7 +193,13 @@ const defaultTemplates = {
 
     // Instant search result template
     hit: compile(
-`<div class="search-result" data-algolia-position="[[ position ]]" data-algolia-queryid="[[ queryID ]]" data-algolia-objectid="[[ objectID ]]">
+`<div
+  class="search-result"
+  data-algolia-position="[[ position ]]"
+  data-algolia-queryid="[[ queryID ]]"
+  data-algolia-articleid="[[ id ]]"
+  data-algolia-objectid="[[ objectID ]]"
+>
   <div class="search-result-meta">
     <time data-datetime="relative" datetime="[[ created_at_iso ]]"></time>
   </div>
