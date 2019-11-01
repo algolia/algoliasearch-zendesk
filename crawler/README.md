@@ -40,22 +40,6 @@ CONFIG='{ "app_name": "your-zendesk-subdomain", "oauth_token": "xxx" }' \
 * `private` - *optional* - Default: `false` - Set to true to index all articles, regardless of their user segment
 * `max_content_size` - *optional* - Default: `5000` - Maximum byte size after which the text of an attribute will be truncated
 
-## Excluding portions of article from indexing
-To prevent certain specific portion of your article to be indexed to Algolia, you can wrap the html source code of these portion between `<!-- algolia-ignore --> <!-- /algolia-ignore -->` tags. This way, these portions of text won't be searchable. 
-
-Example: 
-```html
-<h1>This is a test article</h1>
-<!-- algolia-ignore -->
-<p>
-  This paragraph won't be indexed to Algolia.
-</p>
-<!-- /algolia-ignore -->
-<p>
-  This paragraph will be indexed to Algolia.
-</p>
-```
-
 ## Contributing
 
 We're considering any contribution and PR, please go ahead!
