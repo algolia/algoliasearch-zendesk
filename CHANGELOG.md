@@ -1,6 +1,17 @@
-<a name="2.27.0"></a>
-# [2.27.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.27.0...v2.27.0) (2019-10-29)
+<a name="2.28.0"></a>
+# [2.28.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.28.0...v2.28.0) (2019-11-01)
 
+
+
+
+<a name="2.28.0"></a>
+# [2.28.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.27.0...v2.28.0) (2019-11-01)
+
+
+### Features
+
+* **app:** add support for conversions (#119) ([48e9bf8](https://github.com/algolia/algoliasearch-zendesk/commit/48e9bf8))
+* **crawler:** option to exclude portions of articles from indexing (#118) ([144d79f](https://github.com/algolia/algoliasearch-zendesk/commit/144d79f))
 
 
 

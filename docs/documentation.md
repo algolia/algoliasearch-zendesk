@@ -294,14 +294,6 @@ For `en-au`, `en-ca` and `en-us` locales, we'll index `{ "label_names": ["Awesom
 For the `en-gb` locale, we'll index `{ "label_names": ["Good"] }`.
 For all the other locales, we'll index `{ "label_names": ["Wow"] }`.
 
-## Analytics
-
-The `analytics` parameter enables searches capturing, for reports about popular queries, searches without results, and more. It defaults to `true`.
-
-The `clickAnalytics` parameter enables click capturing in search results, for reports about the click rate and average position of clicks for specific queries. It defaults to `false`, as this feature is only accessible on our Enterprise plan.
-
-With `clickAnalytics` enabled, you can use `algoliasearchZendeskHC.trackConversion()` on an article page to capture a “conversion” if your articles include Calls To Action.
-
 ## Zendesk Community search
 
 We do not index community forums for now. If you're using them, you'll probably want to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
@@ -316,6 +308,31 @@ If you're in such a scenario, we recommend you to disable `instantsearch` by set
 
 You can let our script know that you'd want for an article not to be indexed. For this, all you need to do is to add an `algolia-ignore` tag on your article.
 After the next reindex, the article should not be searchable anymore.
+
+## Excluding portions of article from indexing
+
+To prevent certain specific portion of your article to be indexed to Algolia, you can wrap the html source code of these portion between `<!-- algolia-ignore --> <!-- /algolia-ignore -->` tags. This way, these portions of text won't be searchable. 
+
+Example:
+```html
+<h1>This is a test article</h1>
+<!-- algolia-ignore -->
+<p>
+  This paragraph won't be indexed to Algolia.
+</p>
+<!-- /algolia-ignore -->
+<p>
+  This paragraph will be indexed to Algolia.
+</p>
+```
+
+## Analytics
+
+The `analytics` parameter enables searches capturing, for reports about popular queries, searches without results, and more. It defaults to `true`.
+
+The `clickAnalytics` parameter enables click capturing in search results, for reports about the click rate and average position of clicks for specific queries. It defaults to `false`, as this feature is only accessible on our Enterprise plan.
+
+With `clickAnalytics` enabled, you can use `algoliasearchZendeskHC.trackConversion()` on an article page to capture a “conversion” if your articles include Calls To Action.
 
 ## Modifying templates
 
