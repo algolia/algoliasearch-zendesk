@@ -1,6 +1,16 @@
-<a name="2.28.0"></a>
-# [2.28.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.28.0...v2.28.0) (2019-11-01)
+<a name="2.28.1"></a>
+## [2.28.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.28.1...v2.28.1) (2019-11-05)
 
+
+
+
+<a name="2.28.1"></a>
+## [2.28.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.28.0...v2.28.1) (2019-11-05)
+
+
+### Bug Fixes
+
+* **instantsearch:** fix click analytics ([59d2872](https://github.com/algolia/algoliasearch-zendesk/commit/59d2872))
 
 
 
