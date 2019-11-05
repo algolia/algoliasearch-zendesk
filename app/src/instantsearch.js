@@ -365,7 +365,7 @@ class InstantSearch {
       const articleID = $article.getAttribute('data-algolia-articleid');
       const position = $article.getAttribute('data-algolia-position');
       const queryID = $article.getAttribute('data-algolia-queryid');
-      this.trackClick({objectID, articleID}, position, queryID);
+      this.trackClick({objectID, id: articleID}, position, queryID);
     });
   }
 }
