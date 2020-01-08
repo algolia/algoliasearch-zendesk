@@ -2,6 +2,7 @@ import fargs from 'fargs';
 
 import autocomplete from './autocomplete.js';
 import compile from './compile.js';
+import getCurrentLocale from './getCurrentLocale.js';
 import loadTranslations from './translations.js';
 import loadTemplates from './templates.js';
 import instantsearch from './instantsearch.js';
@@ -83,7 +84,7 @@ class AlgoliasearchZendeskHC {
   }
 
   render(options) {
-    options.locale = options.locale || require('./I18n.js').locale;
+    options.locale = options.locale || getCurrentLocale();
     loadTranslations(options);
     loadTemplates(options);
     this.search.render(options);

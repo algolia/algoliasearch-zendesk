@@ -1,6 +1,7 @@
 /* eslint object-shorthand: 0 */
 
 import escapeHTML from './escapeHTML.js';
+import getCurrentLocale from './getCurrentLocale.js';
 
 const LOCALES_ASSOCIATIONS = {
   'ar-eg': 'ar',
@@ -688,8 +689,7 @@ function setLang(userTranslations, langKey) {
 }
 
 export function loadTranslations(options) {
-  let I18n = require('./I18n.js');
-  setLang(options.translations, I18n.locale);
+  setLang(options.translations, getCurrentLocale());
 }
 
 export default loadTranslations;

@@ -243,10 +243,9 @@ class InstantSearch {
   // Protected
 
   _displayTimes() {
-    let I18n = require('./I18n.js');
-    let moment = require('moment');
+    let moment = require('moment'); // eslint-disable-line algolia/no-require
     const timezoneOffset = moment().zone();
-    moment().lang(this.locale, I18n.datetime_translations);
+    moment().lang(this.locale); // Doesn't work, as we're missing translations
     let times = document.querySelectorAll('time');
     for (let i = 0; i < times.length; ++i) {
       let $time = times[i];

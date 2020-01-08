@@ -22,8 +22,7 @@
   ],
   "main": "dist-es5-module/index.js",
   "browserify-shim": {
-    "moment": "global:moment",
-    "I18n": "global:I18n"
+    "moment": "global:moment"
   },
   "engines": {
     "node": ">=8 <11"
