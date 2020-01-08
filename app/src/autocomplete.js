@@ -4,6 +4,7 @@ import 'autocomplete.js/index_jquery.js';
 import algoliasearch from 'algoliasearch';
 import 'es6-collections';
 
+import getCurrentLocale from './getCurrentLocale.js';
 import templates from './templates.js';
 import addCSS from './addCSS.js';
 import removeCSS from './removeCSS.js';
@@ -45,7 +46,7 @@ class Autocomplete {
 
     this.$input = $(inputSelector);
 
-    this.locale = require('I18n').locale;
+    this.locale = getCurrentLocale();
 
     // Add a mock autocomplete to check the width the
     // menu would have

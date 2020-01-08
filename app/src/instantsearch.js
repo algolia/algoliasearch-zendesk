@@ -1,5 +1,7 @@
 import $ from 'jquery';
 import instantsearch from 'instantsearch.js';
+
+import getCurrentLocale from './getCurrentLocale.js';
 import templates from './templates.js';
 
 import addCSS from './addCSS.js';
@@ -60,8 +62,6 @@ class InstantSearch {
     translations
   }) {
     if (!enabled) return;
-    let I18n = require('I18n');
-
     this.$autocompleteInput = $(autocompleteSelector);
     this._hideAutocomplete();
 
@@ -75,7 +75,7 @@ class InstantSearch {
       getConfiguration: () => ({facets: ['locale.locale']}),
       init: ({helper}) => {
         // Filter by language
-        helper.toggleRefine('locale.locale', I18n.locale);
+        helper.toggleRefine('locale.locale', getCurrentLocale());
       }
     });
 
@@ -160,7 +160,7 @@ class InstantSearch {
 
   _displayTimes() {
     const timezoneOffset = moment().zone();
-    require('moment')().lang(I18n.locale, I18n.datetime_translations);
+    require('moment')().lang(getCurrentLocale());
     $('time').each(() => {
       let $this = $(this);
       const datetime = $this.attr('datetime');

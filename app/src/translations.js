@@ -23,7 +23,7 @@ function addTranslation(I18n, translations, key, fallback, I18nKey) {
 export function loadTranslations(options) {
   let ts = options.translations;
   // Requiring it here because window.I18n isn't defined in the Document Head template
-  let I18n = require('I18n');
+  let I18n = require('I18n') || {translations: {}};
   addTranslation(I18n, ts, 'article', 'Article', 'txt.help_center.views.admin.manage_knowledge_base.table.article');
   addTranslation(I18n, ts, 'articles', 'Articles', 'txt.help_center.javascripts.arrange_content.articles');
   addTranslation(I18n, ts, 'categories', 'Categories', 'txt.help_center.javascripts.arrange_content.categories');
