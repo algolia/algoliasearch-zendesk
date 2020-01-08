@@ -1,6 +1,21 @@
-<a name="1.8.2"></a>
-## [1.8.2](https://github.com/algolia/algoliasearch-zendesk/compare/v1.8.2...v1.8.2) (2017-12-14)
+<a name="1.9.0"></a>
+# [1.9.0](https://github.com/algolia/algoliasearch-zendesk/compare/v1.9.0...v1.9.0) (2020-01-08)
 
+
+
+
+<a name="1.9.0"></a>
+# [1.9.0](https://github.com/algolia/algoliasearch-zendesk/compare/v1.8.2...v1.9.0) (2020-01-08)
+
+
+### Bug Fixes
+
+* gem version ([d673c15](https://github.com/algolia/algoliasearch-zendesk/commit/d673c15))
+* **locale:** make I18n optional ([51b8aaa](https://github.com/algolia/algoliasearch-zendesk/commit/51b8aaa))
+
+### Features
+
+* use as gem ([87353b2](https://github.com/algolia/algoliasearch-zendesk/commit/87353b2))
 
 
 
