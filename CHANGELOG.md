@@ -1,6 +1,16 @@
-<a name="2.28.1"></a>
-## [2.28.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.28.1...v2.28.1) (2019-11-05)
+<a name="2.29.0"></a>
+# [2.29.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.29.0...v2.29.0) (2020-01-08)
 
+
+
+
+<a name="2.29.0"></a>
+# [2.29.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.28.1...v2.29.0) (2020-01-08)
+
+
+### Bug Fixes
+
+* **locale:** new strategy for locale fetching ([01557b7](https://github.com/algolia/algoliasearch-zendesk/commit/01557b7))
 
 
 
