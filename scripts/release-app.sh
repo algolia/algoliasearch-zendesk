@@ -23,9 +23,8 @@ npm run clean
 NODE_ENV=production npm run build
 
 echo "[App] One time password: "
-read line
-[[ $line =~ [0-9]{6} ]] || exit -1
-OTP=$line
+read OTP
+[[ $OTP =~ [0-9]{6} ]] || exit -1
 npm publish --otp=$OTP
 
 cd ../

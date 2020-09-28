@@ -6,7 +6,7 @@ set -e
 # Check if the git directory is clean
 if [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]]; then
   echo "Your git directory is unclean"
-  exit
+  exit 1
 fi
 
 current=`json -f package.json version`
