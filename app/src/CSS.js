@@ -1,5 +1,5 @@
 // hide the regular search results
-export default (css, $mainStyle = null) => {
+function addCSS(css, $mainStyle = null) {
   $mainStyle = $mainStyle
     || document.querySelector('link[rel=stylesheet][href*="algoliasearch.zendesk-hc"]')
     || document.getElementsByTagName('head')[0].lastChild;
@@ -11,4 +11,14 @@ export default (css, $mainStyle = null) => {
     $styleTag.appendChild(document.createTextNode(css));
   }
   return $mainStyle.parentNode.insertBefore($styleTag, $mainStyle.nextSibling);
+};
+
+function removeCSS(childNode) {
+  document.head.removeChild(childNode);
+};
+
+
+export {
+  addCSS,
+  removeCSS
 };

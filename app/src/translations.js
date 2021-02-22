@@ -1,7 +1,10 @@
 /* eslint object-shorthand: 0 */
 
-import escapeHTML from './escapeHTML.js';
-import getCurrentLocale from './getCurrentLocale.js';
+function escapeHTML(str) {
+  const div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
 
 const LOCALES_ASSOCIATIONS = {
   'ar-eg': 'ar',
@@ -655,7 +658,7 @@ const TRANSLATIONS = {
   }
 };
 
-function setLang(userTranslations, langKey) {
+function loadTranslations(userTranslations, langKey) {
   const associatedLangKey = LOCALES_ASSOCIATIONS[langKey];
   for (let key in TRANSLATIONS) {
     if (!TRANSLATIONS.hasOwnProperty(key)) continue;
@@ -686,10 +689,6 @@ function setLang(userTranslations, langKey) {
 
     userTranslations[key] = trad;
   }
-}
-
-export function loadTranslations(options) {
-  setLang(options.translations, getCurrentLocale());
 }
 
 export default loadTranslations;

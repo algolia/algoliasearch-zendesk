@@ -1,19 +1,24 @@
 import fargs from 'fargs';
 
 import autocomplete from './autocomplete.js';
-import compile from './compile.js';
-import getCurrentLocale from './getCurrentLocale.js';
 import loadTranslations from './translations.js';
 import loadTemplates from './templates.js';
-import instantsearch from './instantsearch.js';
 import {initInsights, extendWithConversionTracking} from './clickAnalytics.js';
 
 function hitsPerPageValidator(val) {
   return (val >= 1 && val <= 20) || 'should be between 1 and 20';
 }
-function instantsearchPage() {
-  return window.location.pathname.match(/\/search$/) !== null;
+
+function getCurrentLocale() {
+  const splittedPathname = window.location.pathname.split('/');
+  const res = splittedPathname[2];
+  if (!res) {
+    console.error('[Algolia] Could not retrieve current locale from URL'); // eslint-disable-line no-console
+    return 'en-us';
+  }
+  return res;
 }
+
 const optionsStructure = {required: true, type: 'Object', children: {
   analytics: {type: 'boolean', value: true},
   applicationId: {type: 'string', required: true},
@@ -39,7 +44,6 @@ const optionsStructure = {required: true, type: 'Object', children: {
     selector: {type: 'string', value: '.search-results'},
     tagsLimit: {type: 'number', value: 15}
   }},
-  instantsearchPage: {type: 'function', value: instantsearchPage},
   poweredBy: {type: 'boolean', value: true},
   responsive: {type: 'boolean', value: true},
   subdomain: {type: 'string', required: true},
@@ -58,10 +62,7 @@ class AlgoliasearchZendeskHC {
 
     options.highlightColor = options.highlightColor || options.color;
 
-    this.search = (options.instantsearch.enabled && options.instantsearchPage()
-      ? instantsearch
-      : autocomplete
-    )(options);
+    this.search = autocomplete(options);
 
     AlgoliasearchZendeskHC.instances.push(this.search);
 
@@ -85,14 +86,13 @@ class AlgoliasearchZendeskHC {
 
   render(options) {
     options.locale = options.locale || getCurrentLocale();
-    loadTranslations(options);
+    loadTranslations(options.translations, options.locale);
     loadTemplates(options);
     this.search.render(options);
   }
 }
 
 AlgoliasearchZendeskHC.instances = [];
-AlgoliasearchZendeskHC.compile = compile;
 AlgoliasearchZendeskHC.trackConversion = articleID => {
   const instances = AlgoliasearchZendeskHC.instances;
   if (instances.length === 0) {

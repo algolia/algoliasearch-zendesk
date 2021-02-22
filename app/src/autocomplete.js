@@ -13,11 +13,7 @@ import zepto from 'autocomplete.js/zepto.js';
 import algoliasearch from 'algoliasearch';
 import {createClickTracker} from './clickAnalytics.js';
 
-
-import addCSS from './addCSS.js';
-import removeCSS from './removeCSS.js';
-
-import getOptionalWords from './stopwords.js';
+import {addCSS, removeCSS} from './CSS.js';
 
 const XS_WIDTH = 400;
 const SM_WIDTH = 600;
@@ -135,10 +131,10 @@ class Autocomplete {
 
   _source(params, locale, clickAnalytics) {
     return (query, callback) => {
-      this.index.search({
-        ...params, clickAnalytics, query, optionalWords: getOptionalWords(query, locale)})
-        .then((content) => {
-          const hitsWithPosition = this._addPositionToHits(content.hits, content.queryID, clickAnalytics);
+      this.index.search(query, {
+        ...params, clickAnalytics, queryLanguages: [locale.split('-')[0]], removeStopWords: true
+        }).then((content) => {
+          const hitsWithPosition = this._addPositionToHits(content.hits, content.queryID);
           const reorderedHits = this._reorderedHits(hitsWithPosition);
           callback(reorderedHits);
         });
@@ -229,8 +225,7 @@ class Autocomplete {
     }
   }
 
-  _addPositionToHits(hits, queryID, clickAnalytics) {
-    if (!clickAnalytics) return hits;
+  _addPositionToHits(hits, queryID) {
     return hits.map(function (hit, index) {
       hit._position = index + 1;
       hit._queryID = queryID;

@@ -1,6 +1,6 @@
 {
   "name": "algoliasearch.zendesk-hc",
-  "version": "2.29.1",
+  "version": "3.0.0",
   "description": "Algolia Search for Zendesk's Help Center",
   "author": "Algolia <support@algolia.com>",
   "keywords": [
@@ -17,83 +17,34 @@
     "url": "https://github.com/algolia/algoliasearch-zendesk.git"
   },
   "files": [
-    "dist/",
-    "dist-es5-module/"
+    "dist/"
   ],
-  "main": "dist-es5-module/index.js",
-  "browserify-shim": {
-    "moment": "global:moment"
-  },
-  "engines": {
-    "node": ">=8 <11"
-  },
+  "main": "dist/index.js",
   "dependencies": {
-    "algoliasearch": "^3.18.1",
-    "autocomplete.js": "^0.28.1",
+    "@algolia/autocomplete-js": "1.0.0-alpha.42",
+    "@algolia/autocomplete-plugin-algolia-insights": "1.0.0-alpha.42",
+    "@algolia/autocomplete-plugin-recent-searches": "1.0.0-alpha.42",
+    "@algolia/autocomplete-preset-algolia": "1.0.0-alpha.42",
+    "@algolia/autocomplete-theme-classic": "1.0.0-alpha.42",
+    "@algolia/client-search": "4.8.3",
+    "algoliasearch": "4.8.3",
+    "autocomplete.js": "^0.38.0",
+    "fargs": "^1.1.1",
     "hogan.js": "^3.0.2",
-    "instantsearch.js": "^1.0.0",
     "js-cookie": "^2.2.1",
-    "stopwords": "https://github.com/6/stopwords/tarball/ccec79a4ba22d65eb095bc277d79a7ad8096552c",
-    "unorm": "^1.4.1",
-    "vietnamese-stopwords": "0.0.2"
+    "preact": "10.5.7",
+    "search-insights": "1.6.3",
+    "to-factory": "^1.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.9.0",
-    "babel-eslint": "^4.1.6",
-    "babel-loader": "^6.2.0",
-    "babel-plugin-transform-object-rest-spread": "^6.6.4",
-    "babel-preset-es2015": "^6.3.13",
-    "babelify": "^7.2.0",
-    "browserify": "^13.0.0",
-    "browserify-shim": "^3.8.12",
-    "browserify-versionify": "^1.0.6",
-    "chalk": "^1.1.1",
-    "del": "^2.2.0",
-    "envify": "^3.4.0",
-    "eslint": "^4.18.2",
-    "eslint-config-airbnb": "^2.0.0",
-    "eslint-config-algolia": "^4.6.0",
-    "eslint-plugin-algolia": "^1.5.0",
-    "eslint-plugin-react": "^3.16.1",
-    "expect": "^1.13.4",
-    "fargs": "^1.1.0",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^6.1.1",
-    "gulp-connect": "^2.3.1",
-    "gulp-cssnano": "^2.1.0",
-    "gulp-eslint": "^1.1.1",
-    "gulp-header": "^1.8.8",
-    "gulp-istanbul": "^0.10.3",
-    "gulp-mocha": "^2.2.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.2.0",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^2.0.0",
-    "gulp-util": "^3.0.7",
-    "isparta": "^4.0.0",
-    "jsdom": "^7.2.2",
-    "jsdom-global": "^1.6.1",
-    "merge-stream": "^1.0.0",
-    "mochawesome": "^1.2.2",
-    "stringify": "^5.2.0",
-    "to-factory": "^1.0.0",
-    "uglifyify": "^3.0.1",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.11.1",
-    "yiewd": "^0.6.0"
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "parcel-bundler": "1.12.4",
+    "sass": "^1.32.8"
   },
   "scripts": {
-    "build:css": "gulp build:css",
-    "build:docs": "gulp build:docs",
-    "build:js": "gulp build:js",
-    "build": "gulp build",
-    "clean": "gulp clean",
-    "dev": "gulp dev",
-    "lint": "gulp lint",
-    "start": "npm run dev",
-    "server": "gulp server",
-    "test:coverage": "gulp test:coverage",
-    "test": "gulp test"
+    "build": "parcel build index.html --global algoliasearchZendeskHC",
+    "dev": "parcel index.html --global algoliasearchZendeskHC"
   }
 }
