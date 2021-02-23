@@ -66,24 +66,21 @@ class Autocomplete {
       debug: process.env.NODE_ENV === 'development' || debug,
       plugins: [recentSearchesPlugin],
       openOnFocus: true,
-      onStateChange({ prevState, state }) {
-        if (prevState.query !== state.query) {
-          debounceGetAnswers(
-            self.client.initIndex(self.indexName),
-            state.query,
-            lang,
-            ({ hits }) => {
-              answersRef.current = hits;
-              search.refresh();
-            }
-          );
-        }
+      onStateChange({ state }) {
+        debounceGetAnswers(
+          self.client.initIndex(self.indexName),
+          state.query,
+          lang,
+          {
+            facetFilters: `["locale.locale:${locale}"]`,
+          },
+          ({ hits }) => {
+            answersRef.current = hits;
+            search.refresh();
+          }
+        );
       },
-      getSources({ query }) {
-        if (!query) {
-          return [];
-        }
-
+      getSources() {
         return [
           {
             // ----------------

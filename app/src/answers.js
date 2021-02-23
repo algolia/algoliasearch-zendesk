@@ -1,11 +1,11 @@
-function findAnswers(index, query, lang, callback) {
+function findAnswers(index, query, lang, params, callback) {
   index
     .findAnswers(query, [lang], {
       attributesForPrediction: ['section', 'category', 'title', 'body_safe'],
       threshold: 0,
       nbHits: 1,
       params: {
-        typoTolerance: 'min',
+        ...params,
         highlightPreTag: '__aa-highlight__',
         highlightPostTag: '__/aa-highlight__',
       },
