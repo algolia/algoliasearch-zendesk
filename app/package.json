@@ -47,11 +47,10 @@
     "eslint-plugin-prettier": "3.2.0",
     "eslint-plugin-react": "7.21.5",
     "parcel-bundler": "1.12.4",
-    "prettier": "^2.2.1",
-    "sass": "^1.32.8"
+    "prettier": "^2.2.1"
   },
   "scripts": {
-    "build": "parcel build index.html --global algoliasearchZendeskHC",
+    "build": "parcel build index.js  --global algoliasearchZendeskHC",
     "dev": "parcel index.html --global algoliasearchZendeskHC",
     "format": "prettier --write .",
     "lint": "eslint --ext .js src"
