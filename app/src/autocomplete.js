@@ -120,7 +120,7 @@ class Autocomplete {
                 queries: [
                   {
                     indexName: self.indexName,
-                    q,
+                    query: q,
                     params: {
                       ...defaultParams,
                       clickAnalytics,
