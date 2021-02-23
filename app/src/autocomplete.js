@@ -129,6 +129,13 @@ class Autocomplete {
                     },
                   },
                 ],
+              }).then((results) => {
+                // filter out the best answer from this list
+                return [
+                  results[0].filter(
+                    (h) => h.objectID !== answersRef.current?.[0]?.objectID
+                  ),
+                ];
               });
             },
             templates: {
