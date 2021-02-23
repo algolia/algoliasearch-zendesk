@@ -16,7 +16,7 @@
     <div class="container">
       <div class="row">
         <h1>Test me</h1>
-        <input type="text" name="master" class="form-control" />
+        <div id="autocomplete"></div>
       </div>  
     </div>
     <script type="text/javascript" charset="utf-8" src="./index.js"></script>
@@ -28,7 +28,7 @@
         color: '#158EC2',
         highlightColor: '#F08',
         autocomplete: {
-          inputSelector: 'input'
+          inputSelector: '#autocomplete'
         },
         clickAnalytics: true
       });

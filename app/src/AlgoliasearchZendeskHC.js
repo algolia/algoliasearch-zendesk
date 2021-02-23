@@ -2,7 +2,7 @@ import fargs from 'fargs';
 
 import autocomplete from './autocomplete.js';
 import loadTranslations from './translations.js';
-import loadTemplates from './templates.js';
+import defaultTemplates from './templates.js';
 import {initInsights, extendWithConversionTracking} from './clickAnalytics.js';
 
 function hitsPerPageValidator(val) {
@@ -48,8 +48,7 @@ const optionsStructure = {required: true, type: 'Object', children: {
   responsive: {type: 'boolean', value: true},
   subdomain: {type: 'string', required: true},
   templates: {type: 'Object', value: {}, children: {
-    autocomplete: {type: 'Object', value: {}},
-    instantsearch: {type: 'Object', value: {}}
+    autocomplete: {type: 'Object', value: {}}
   }},
   translations: {type: 'Object', value: {}}
 }};
@@ -62,9 +61,11 @@ class AlgoliasearchZendeskHC {
 
     options.highlightColor = options.highlightColor || options.color;
 
-    this.search = autocomplete(options);
+    options.templates = {
+      autocomplete: { ...defaultTemplates.autocomplete, ...options.templates.autocomplete }
+    };
 
-    AlgoliasearchZendeskHC.instances.push(this.search);
+    this.search = autocomplete(options);
 
     if (options.clickAnalytics) {
       initInsights(options);
@@ -73,35 +74,20 @@ class AlgoliasearchZendeskHC {
 
     // once the DOM is initialized
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
-      this.render(options);
+      this.init(options);
     } else {
-      document.addEventListener('DOMContentLoaded', this.render.bind(this, options));
+      document.addEventListener('DOMContentLoaded', this.init.bind(this, options));
     }
   }
 
-  enableDebugMode() {
-    if (!this.search.enableDebugMode) return;
-    this.search.enableDebugMode();
-  }
-
-  render(options) {
+  init(options) {
     options.locale = options.locale || getCurrentLocale();
     loadTranslations(options.translations, options.locale);
-    loadTemplates(options);
-    this.search.render(options);
+    this.search.init(options);
   }
 }
 
-AlgoliasearchZendeskHC.instances = [];
 AlgoliasearchZendeskHC.trackConversion = articleID => {
-  const instances = AlgoliasearchZendeskHC.instances;
-  if (instances.length === 0) {
-    throw new Error('AlgoliasearchZendeskHCError: Trying to track conversion without an instance loaded');
-  }
-  if (instances.length > 1) {
-    throw new Error('AlgoliasearchZendeskHCError: Trying to track conversion with multiple instances loaded - Use the instance method directly');
-  }
-
   if (articleID === undefined) {
     if (window.location.pathname.indexOf('/articles/') === -1) {
       throw new Error('AlgoliasearchZendeskHCError: Calling trackConversion without an articleID on a non-article page');
@@ -113,7 +99,7 @@ AlgoliasearchZendeskHC.trackConversion = articleID => {
     }
   }
 
-  instances[0].trackConversion(articleID);
+  this.search.trackConversion(articleID);
 };
 
 export default AlgoliasearchZendeskHC;
