@@ -34,7 +34,7 @@ const templates = {
 
     // eslint-disable-next-line no-unused-vars
     bestArticleHeader: (_translations, _locale, _items) => (
-      <Fragment>        
+      <Fragment>
         <span className="aa-SourceHeaderTitle">
           {window?.I18N?.translations?.[
             'txt.help_center.helpers.application.articles.promoted'
@@ -71,7 +71,7 @@ const templates = {
 
     noResults: (translations, locale, query) => (
       <Fragment>
-          {translate(translations, locale, 'noResultsFor', query)}
+        {translate(translations, locale, 'noResultsFor', query)}
       </Fragment>
     ),
   },
