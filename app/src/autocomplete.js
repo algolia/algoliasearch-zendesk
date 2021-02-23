@@ -66,7 +66,10 @@ class Autocomplete {
       debug: process.env.NODE_ENV === 'development' || debug,
       plugins: [recentSearchesPlugin],
       openOnFocus: true,
-      onStateChange({ state }) {
+      onStateChange({ prevState, state }) {
+        if (prevState.query === state.query) {
+          return;
+        }
         debounceGetAnswers(
           self.client.initIndex(self.indexName),
           state.query,
