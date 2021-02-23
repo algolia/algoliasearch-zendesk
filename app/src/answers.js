@@ -1,8 +1,8 @@
 function findAnswers(index, query, lang, params, callback) {
   index
     .findAnswers(query, [lang], {
-      attributesForPrediction: ['section', 'category', 'title', 'body_safe'],
-      threshold: 0,
+      attributesForPrediction: ['title', 'category', 'section', 'body_safe'],
+      threshold: 50,
       nbHits: 1,
       params: {
         ...params,
