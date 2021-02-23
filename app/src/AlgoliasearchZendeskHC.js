@@ -1,7 +1,6 @@
 import fargs from 'fargs';
 
 import autocomplete from './autocomplete.js';
-import loadTranslations from './translations.js';
 import defaultTemplates from './templates.js';
 import {initInsights, extendWithConversionTracking} from './clickAnalytics.js';
 
@@ -82,7 +81,6 @@ class AlgoliasearchZendeskHC {
 
   init(options) {
     options.locale = options.locale || getCurrentLocale();
-    loadTranslations(options.translations, options.locale);
     this.search.init(options);
   }
 }

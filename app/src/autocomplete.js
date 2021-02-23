@@ -2,10 +2,11 @@ import algoliasearch from "algoliasearch/lite";
 import { autocomplete, getAlgoliaHits } from "@algolia/autocomplete-js";
 import "@algolia/autocomplete-theme-classic";
 
+import translate from './translations.js';
 import {debounceGetAnswers} from './answers.js';
 import {createClickTracker} from './clickAnalytics.js';
 
-import {addCSS, removeCSS} from './CSS.js';
+import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 
 const XS_WIDTH = 400;
 const SM_WIDTH = 600;
@@ -61,10 +62,15 @@ class Autocomplete {
     };
     const lang = locale.split('-')[0];
 
+    const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
+      key: 'navbar',
+    });    
+
     const search = autocomplete({
       container: inputSelector,
-      placeholder: translations.placeholder,
+      placeholder: translate(translations, locale, 'placeholder'),
       debug: process.env.NODE_ENV === 'development' || debug,
+      plugins: [recentSearchesPlugin],
       openOnFocus: true,
       onStateChange({ prevState, state }) {
         if (prevState.query !== state.query) {
@@ -90,7 +96,10 @@ class Autocomplete {
             },
             templates: {
               header({ items }) {
-                return templates.autocomplete.bestAnswer(translations, items);
+                if (items.length === 0) {
+                  return null;
+                }
+                return templates.autocomplete.bestArticleHeader(translations, locale, items);
               },
               item({ item }) {
                 return templates.autocomplete.article(item);
@@ -121,15 +130,13 @@ class Autocomplete {
             },
             templates: {
               header({ items }) {
-                return templates.autocomplete.header(translations, items);
+                return templates.autocomplete.articlesHeader(translations, locale, items);
               },
               item({ item }) {
                 return templates.autocomplete.article(item);
               },
-              empty({ query }) {
-                // FIXME: not called
-                console.log('empty', arguments);
-                return templates.autocomplete.noResults(translations, query);
+              empty({ state }) {
+                return templates.autocomplete.noResults(translations, locale, state.query);
               },
             },
             onSelect({ item }) {

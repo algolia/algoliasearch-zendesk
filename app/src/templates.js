@@ -4,6 +4,8 @@ import {
   snippetHit
 } from '@algolia/autocomplete-js';
 
+import translate from './translations.js';
+
 const templates = {
   autocomplete: {
     // Algolia logo
@@ -15,13 +17,13 @@ const templates = {
       </a>
     </Fragment>,
 
-    header: (translations, items) => <Fragment>
-      <span className="aa-SourceHeaderTitle">Articles</span> { /* FIXME: translations */ }
+    articlesHeader: (translations, locale, items) => <Fragment>
+      <span className="aa-SourceHeaderTitle">{window?.I18N?.translations?.['txt.help_center.javascripts.arrange_content.articles'] || 'Articles'}</span>
       <div className="aa-SourceHeaderLine" />
     </Fragment>,
 
-    bestAnswer: (translations, items) => <Fragment>
-      <span className="aa-SourceHeaderTitle">Best Article</span> { /* FIXME: translations */ }
+    bestArticleHeader: (translations, locale, items) => <Fragment>
+      <span className="aa-SourceHeaderTitle">{window?.I18N?.translations?.['txt.help_center.helpers.application.articles.promoted'] || 'Best Article'}</span>
       <div className="aa-SourceHeaderLine" />
     </Fragment>,
 
@@ -41,8 +43,8 @@ const templates = {
       </div>
     </Fragment>),
 
-    noResults: (translations, query) => <Fragment>
-      <div className="aa-ItemContent">{translations.no_result_for(query)}</div>
+    noResults: (translations, locale, query) => <Fragment>
+      <div className="aa-ItemContent">{translate(translations, locale, 'noResultsFor', query)}</div>
     </Fragment>
   }
 };

@@ -1,12 +1,6 @@
 /* eslint object-shorthand: 0 */
 
-function escapeHTML(str) {
-  const div = document.createElement('div');
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-}
-
-const LOCALES_ASSOCIATIONS = {
+const localeToLang = {
   'ar-eg': 'ar',
   'de-at': 'de',
   'de-ch': 'de',
@@ -25,158 +19,8 @@ const LOCALES_ASSOCIATIONS = {
   'pt-br': 'pt'
 };
 
-const TRANSLATIONS = {
-  categories: {
-    ar: 'الفئات',
-    bg: 'Категории',
-    cs: 'Kategorie',
-    da: 'Kategorier',
-    de: 'Kategorien',
-    en: 'Categories',
-    el: 'Ελληνικά',
-    es: 'Categorías',
-    fi: 'Kategoriat',
-    fr: 'Catégories',
-    hu: 'Kategóriák',
-    id: 'Kategori',
-    it: 'Categorie',
-    ja: 'カテゴリー',
-    ko: '카테고리',
-    nl: 'Categorieën',
-    no: 'Kategorier',
-    pl: 'Kategorie',
-    pt: 'Categorias',
-    ro: 'Categorii',
-    ru: 'Категории',
-    sk: 'Kategorier',
-    sv: 'Kategorier',
-    th: 'หมวดหมู่',
-    tr: 'Kategoriler',
-    uk: 'Категорії',
-    vi: 'Loại',
-    'zh-cn': '类别',
-    'zh-tw': '類別'
-  },
-  change_query: {
-    ar: 'قم بتغيير الاستفسار',
-    bg: 'променете вашата заявка',
-    cs: 'Změňte svůj dotaz',
-    da: 'Ændr din forespørgsel',
-    de: 'Ihre Abfrage ändern',
-    el: 'Αλλάξτε το ερώτημά σας',
-    en: 'Change your query',
-    es: 'Cambiar su consulta',
-    fi: 'Vaihda hakusanaasi',
-    fr: 'Changer votre requête',
-    hu: 'Módosítsa keresését',
-    id: 'Ubah pencarian Anda',
-    it: 'Modifica la tua query',
-    ja: '検索内容を変更',
-    ko: '검색어를 변경하',
-    nl: 'Wijzig je zoekopdracht',
-    no: 'Endre søket ditt',
-    pl: 'Zmień zapytanie',
-    pt: 'Modifique a sua pesquisa',
-    'pt-br': 'Altere sua consulta',
-    ro: 'Modificați-vă întrebările',
-    ru: 'Изменить запрос',
-    sk: 'Zmeňte dotaz',
-    sv: 'Ändra din fråga',
-    th: 'เปลี่ยนการสืบค้นของคุณ',
-    tr: 'Sorgunuzu değiştirin',
-    uk: 'змініть свій запит',
-    vi: 'Thay đổi truy vấn của bạn',
-    'zh-cn': '更改您的查询',
-    'zh-tw': '變更問題'
-  },
-  clear_filters: {
-    ar: 'قم بمسح المرشحات',
-    bg: 'почистете вашите филтри',
-    cs: 'zrušte své filtry',
-    da: 'ryd dine filtre',
-    de: 'Ihre Filter leeren',
-    el: 'καθαρίστε τα φίλτρα σας',
-    en: 'clear your filters',
-    es: 'borrar sus filtros',
-    fi: 'nollaa hakuehdot',
-    fr: 'enlever vos filtres',
-    hu: 'törölje a szűrőket',
-    id: 'hapus filter Anda',
-    it: 'elimina i filtri',
-    ja: 'フィルターをリセットしてください。',
-    ko: '필터를 제거하세요',
-    nl: 'wis je filters',
-    no: 'tøm filtrene dine',
-    pl: 'zresetuj filtry',
-    pt: 'limpe os seus filtros',
-    'pt-br': 'retirar filtros',
-    ro: 'ștergeți-vă filtrele',
-    ru: 'сбросить фильтры',
-    sk: 'vymažte filtre',
-    sv: 'rensa filter',
-    th: 'ล้างตัวกรอง',
-    tr: 'filtrelerinizi temizleyin',
-    uk: 'очистіть свої фільтри',
-    vi: 'xóa bộ lọc của bạn',
-    'zh-cn': '清除过滤条件',
-    'zh-tw': '清理篩選'
-  },
-  format_number: {
-    ar: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ''),
-    bg: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
-    cs: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '), // Non-breaking space
-    da: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-    de: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-    el: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-    en: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
-    es: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-    fr: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
-    hu: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
-    id: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-    it: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-    nl: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-    no: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '), // Non-breaking space
-    pl: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
-    pt: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-    ro: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-    ru: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
-    sk: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '), // Non-breaking space
-    sv: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
-    tr: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-    uk: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-  },
-  filter: {
-    ar: 'نتائج الترشيح',
-    bg: 'Филтриране на резултати',
-    cs: 'Filtrovat výsledky',
-    da: 'Filterresultater',
-    de: 'Ergebnisse filtern',
-    el: 'Αποτελέσματα φίλτρου',
-    en: 'Filter results',
-    es: 'Filtrar los resultados',
-    fi: 'Muokkaa hakuehtoja',
-    fr: 'Filtrer les résultats',
-    hu: 'Eredmények szűrése',
-    id: 'Filter hasil',
-    it: 'Filtrare risultati',
-    ja: 'フィルターされた結果',
-    ko: '필터 결과',
-    nl: 'Filter resultaten',
-    no: 'Filtrer resultater',
-    pl: 'Filtruj wyniki',
-    pt: 'Filtrar resultados',
-    ro: 'Filtrează rezultate',
-    ru: 'фильтр',
-    sk: 'Výsledky filtrovania',
-    sv: 'Filtrera resultat',
-    th: 'ผลลัพธ์จากตัวกรอง',
-    tr: 'Sonuçları filtrele',
-    uk: 'Фільтрувати результати',
-    vi: 'Lọc kết quả',
-    'zh-cn': '筛选结果',
-    'zh-tw': '篩選結果'
-  },
-  nb_results: {
+const defaultTranslations = {
+  nbResults: {
     ar: function (nb) {
       return nb > 1 ? `${this.format_number(nb)} نتيجة` : 'نتيجة واحدة';
     },
@@ -279,185 +123,96 @@ const TRANSLATIONS = {
       return `${this.format_number(nb)} 項結果`;
     }
   },
-  no_result_for: {
+  noResultsFor: {
     ar: function (query) {
-      return `لم يتم العثور على نتائج لصالح ${this.quoted(query)}`;
+      return `لم يتم العثور على نتائج لصالح "${query}"`;
     },
     bg: function (query) {
-      return `Няма намерен резултат за ${this.quoted(query)}`;
+      return `Няма намерен резултат за "${query}"`;
     },
     cs: function (query) {
-      return `Pro dotaz ${this.quoted(query)} nebyly nalezeny žádné výsledky`;
+      return `Pro dotaz „${query}“ nebyly nalezeny žádné výsledky`;
     },
     da: function (query) {
-      return `Ingen resultater fundet for ${this.quoted(query)}`;
+      return `Ingen resultater fundet for "${query}"`;
     },
     de: function (query) {
-      return `Keine Ergebnisse für ${this.quoted(query)} gefunden`;
+      return `Keine Ergebnisse für "${query}" gefunden`;
     },
     el: function (query) {
-      return `Δεν βρέθηκε αποτέλεσμα για ${this.quoted(query)}`;
+      return `Δεν βρέθηκε αποτέλεσμα για «${query}»`;
     },
     en: function (query) {
-      return `No result found for ${this.quoted(query)}`;
+      return `No result found for "${query}"`;
     },
     es: function (query) {
-      return `No se han encontrado resultados para ${this.quoted(query)}`;
+      return `No se han encontrado resultados para "${query}"`;
     },
     fi: function (query) {
-      return `Tuloksia hakusanalla ${this.quoted(query)} ei löytynyt`;
+      return `Tuloksia hakusanalla ”${query}” ei löytynyt`;
     },
     fr: function (query) {
-      return `Aucun résultat pour ${this.quoted(query)}`;
+      return `Aucun résultat pour "${query}"`;
     },
     hu: function (query) {
-      return `Nicns találat erre: ${this.quoted(query)}`;
+      return `Nicns találat erre: "${query}"`;
     },
     id: function (query) {
-      return `Tak ditemukan hasil untuk ${this.quoted(query)}`;
+      return `Tak ditemukan hasil untuk "${query}"`;
     },
     it: function (query) {
-      return `Nessun risultato trovato per ${this.quoted(query)}`;
+      return `Nessun risultato trovato per "${query}"`;
     },
     ja: function (query) {
-      return `${this.quoted(query)}の結果が見つかりませんでした。`;
+      return `"${query}"の結果が見つかりませんでした。`;
     },
     ko: function (query) {
-      return `${this.quoted(query)}에 대한 검색 결과가 없습니다`;
+      return `"${query}"에 대한 검색 결과가 없습니다`;
     },
     nl: function (query) {
-      return `Geen resultaten voor ${this.quoted(query)}`;
+      return `Geen resultaten voor "${query}"`;
     },
     no: function (query) {
-      return `Ingen resultater funnet for ${this.quoted(query)}`;
+      return `Ingen resultater funnet for "${query}"`;
     },
     pl: function (query) {
-      return `Nie znaleziono wyników dla ${this.quoted(query)}`;
+      return `Nie znaleziono wyników dla "${query}"`;
     },
     pt: function (query) {
-      return `Não foram encontrados resultados para ${this.quoted(query)}`;
+      return `Não foram encontrados resultados para "${query}"`;
     },
     'pt-br': function (query) {
-      return `Nenhum resultado encontrado para ${this.quoted(query)}`;
+      return `Nenhum resultado encontrado para "${query}"`;
     },
     ro: function (query) {
-      return `Niciun rezultat pentru ${this.quoted(query)}`;
+      return `Niciun rezultat pentru "${query}"`;
     },
     ru: function (query) {
-      return `По запросу ${this.quoted(query)} ничего не найдено`;
+      return `По запросу "${query}" ничего не найдено`;
     },
     sk: function (query) {
-      return `Pre ${this.quoted(query)} nebol nájdený žiadny výsledok`;
+      return `Pre "${query}" nebol nájdený žiadny výsledok`;
     },
     sv: function (query) {
-      return `Inget resultat hittades för ${this.quoted(query)}`;
+      return `Inget resultat hittades för "${query}"`;
     },
     th: function (query) {
-      return `ไม่พบผลลัพธ์สำหรับ ${this.quoted(query)}`;
+      return `ไม่พบผลลัพธ์สำหรับ "${query}"`;
     },
     tr: function (query) {
-      return `${this.quoted(query)} için sonuç bulunamadı`;
+      return `"${query}" için sonuç bulunamadı`;
     },
     uk: function (query) {
-      return `Не знайдено результатів для ${this.quoted(query)}`;
+      return `Не знайдено результатів для "${query}"`;
     },
     vi: function (query) {
-      return `Không có kết quả được tìm thấy cho ${this.quoted(query)}`;
+      return `Không có kết quả được tìm thấy cho "${query}"`;
     },
     'zh-cn': function (query) {
-      return `未找到 ${this.quoted(query)} 的结果`;
+      return `未找到 “${query}” 的结果`;
     },
     'zh-tw': function (query) {
-      return `查無 ${this.quoted(query)} 相關結果`;
-    }
-  },
-  no_result_actions: {
-    ar: function () {
-      return `${this.change_query} أو ${this.clear_filters}`;
-    },
-    bg: function () {
-      return `${this.change_query} или ${this.clear_filters}`;
-    },
-    cs: function () {
-      return `${this.change_query} nebo ${this.clear_filters}`;
-    },
-    da: function () {
-      return `${this.change_query} eller ${this.clear_filters}`;
-    },
-    de: function () {
-      return `${this.change_query} oder ${this.clear_filters}`;
-    },
-    el: function () {
-      return `${this.change_query} ή ${this.clear_filters}`;
-    },
-    en: function () {
-      return `${this.change_query} or ${this.clear_filters}`;
-    },
-    es: function () {
-      return `${this.change_query} o ${this.clear_filters}`;
-    },
-    fi: function () {
-      return `${this.change_query} tai ${this.clear_filters}`;
-    },
-    fr: function () {
-      return `${this.change_query} ou ${this.clear_filters}`;
-    },
-    hu: function () {
-      return `${this.change_query} vagy ${this.clear_filters}`;
-    },
-    id: function () {
-      return `${this.change_query} atau ${this.clear_filters}`;
-    },
-    it: function () {
-      return `${this.change_query} o ${this.clear_filters}`;
-    },
-    ja: function () {
-      return `${this.change_query}するか、${this.clear_filters}`;
-    },
-    ko: function () {
-      return `${this.change_query} 거나 ${this.clear_filters}`;
-    },
-    nl: function () {
-      return `${this.change_query} of ${this.clear_filters}`;
-    },
-    no: function () {
-      return `${this.change_query} eller ${this.clear_filters}`;
-    },
-    pl: function () {
-      return `${this.change_query} lub ${this.clear_filters}`;
-    },
-    pt: function () {
-      return `${this.change_query} ou ${this.clear_filters}`;
-    },
-    ro: function () {
-      return `${this.change_query} sau ${this.clear_filters}`;
-    },
-    ru: function () {
-      return `${this.change_query} или ${this.clear_filters}`;
-    },
-    sk: function () {
-      return `${this.change_query} alebo ${this.clear_filters}`;
-    },
-    sv: function () {
-      return `${this.change_query} eller ${this.clear_filters}`;
-    },
-    th: function () {
-      return `${this.change_query} หรือ ${this.clear_filters}`;
-    },
-    tr: function () {
-      return `${this.change_query} ya da ${this.clear_filters}`;
-    },
-    uk: function () {
-      return `${this.change_query} або ${this.clear_filters}`;
-    },
-    vi: function () {
-      return `${this.change_query} hoặc ${this.clear_filters}`;
-    },
-    'zh-cn': function () {
-      return `${this.change_query}或${this.clear_filters}`;
-    },
-    'zh-tw': function () {
-      return `${this.change_query}或${this.clear_filters}`;
+      return `查無 「${query}」 相關結果`;
     }
   },
   placeholder: {
@@ -492,110 +247,7 @@ const TRANSLATIONS = {
     'zh-cn': '在我们的文章中搜索',
     'zh-tw': '在文章中搜尋'
   },
-  quoted: {
-    cs: text => `„${escapeHTML(text)}“`,
-    el: text => `«${escapeHTML(text)}»`,
-    en: text => `"${escapeHTML(text)}"`,
-    fi: text => `”${escapeHTML(text)}”`,
-    'zh-cn': text => `“${escapeHTML(text)}”`,
-    'zh-tw': text => `「${escapeHTML(text)}」`
-  },
-  stats: {
-    ar: function (nbHits, processing) {
-      return `تم العثور على ${this.nb_results(nbHits)} في ${processing} مللي ثانية`;
-    },
-    bg: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} намерен${nbHits > 1 ? 'и' : ''} за ${processing} мс`;
-    },
-    cs: function (nbHits, processing) {
-      let suffix = '';
-      if (nbHits > 1) suffix = 'y';
-      if (nbHits > 4) suffix = 'o';
-      return `${this.nb_results(nbHits)} nalezen${suffix} za ${processing} ms`;
-    },
-    da: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} fundet på ${processing} ms`;
-    },
-    de: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} gefunden in ${processing} ms`;
-    },
-    el: function (nbHits, processing) {
-      return `Βρέθηκ${nbHits > 1 ? 'αν' : 'ε'} ${this.nb_results(nbHits)} σε ${processing} ms`;
-    },
-    en: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} found in ${processing} ms`;
-    },
-    es: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} encontrado${nbHits > 1 ? 's' : ''} en ${processing} ms`;
-    },
-    fi: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} löydetty ajassa ${processing} ms`;
-    },
-    fr: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} trouvé${nbHits > 1 ? 's' : ''} en ${processing} ms`;
-    },
-    hu: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} ${processing} ms alatt`;
-    },
-    id: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} hasil ditemukan dalam ${processing} md`;
-    },
-    it: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} trovat${nbHits > 1 ? 'i' : 'o'} in ${processing} ms`;
-    },
-    ja: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)}が${processing}ミリ秒で見つかりました。`;
-    },
-    ko: function (nbHits, processing) {
-      return `${processing} 밀리초에 ${this.nb_results(nbHits)} 결과가 검색됨`;
-    },
-    nl: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} in ${processing} ms`;
-    },
-    no: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} funnet etter ${processing} ms`;
-    },
-    pt: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} encontrado${nbHits > 1 ? 's' : ''} em ${processing} ms`;
-    },
-    pl: function (nbHits, processing) {
-      return `Znaleziono ${this.nb_results(nbHits)} w czasie ${processing} ms`;
-    },
-    ro: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} găsit${nbHits > 1 ? 'e' : ''} în ${processing} ms`;
-    },
-    ru: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} знайдено за ${processing} мс`;
-    },
-    sk: function (nbHits, processing) {
-      let suffix = 'ý';
-      if (nbHits > 1) suffix = 'é';
-      if (nbHits > 4) suffix = 'ých';
-      return `${this.nb_results(nbHits)} nájdený${suffix} za ${processing} ms`;
-    },
-    sv: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} ${nbHits > 1 ? 'hittades' : ''} på ${processing} ms`;
-    },
-    th: function (nbHits, processing) {
-      return `พบ ${this.nb_results(nbHits)} ${processing} มิลลิวินาที`;
-    },
-    tr: function (nbHits, processing) {
-      return `${processing} ms içerisinde ${this.nb_results(nbHits)} sonuç bulundu`;
-    },
-    uk: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} знайдено за ${processing} мс`;
-    },
-    vi: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} thấy trong ${processing} mili giây`;
-    },
-    'zh-cn': function (nbHits, processing) {
-      return `在 ${processing} ms 内找到 ${this.nb_results(nbHits)}`;
-    },
-    'zh-tw': function (nbHits, processing) {
-      return `${processing} 毫秒內搜尋到 ${this.nb_results(nbHits)}`;
-    }
-  },
-  search_by_algolia: {
+  searchByAlgolia: {
     ar: algolia => `البحث بواسطة ${algolia}`,
     bg: algolia => `Търсене по ${algolia}`,
     cs: algolia => `Vyhledávat s využitím služby ${algolia}`,
@@ -626,69 +278,22 @@ const TRANSLATIONS = {
     vi: algolia => `Tìm kiếm theo ${algolia}`,
     'zh-cn': algolia => `根据 ${algolia} 搜索`,
     'zh-tw': algolia => `使用 ${algolia} 搜尋`
-  },
-  tags: {
-    ar: 'العلامات',
-    bg: 'Етикети',
-    cs: 'Značky',
-    da: 'Mærke',
-    el: 'Ετικέτες',
-    en: 'Tags',
-    es: 'Etiquetas',
-    fi: 'Merkit',
-    hu: 'Tagek',
-    id: 'Tag',
-    it: 'Tag',
-    ja: 'タグ',
-    ko: '태그',
-    nl: 'Labels',
-    no: 'Stikkord',
-    pl: 'Tagi',
-    pt: 'Etiquetas',
-    ro: 'Etichete',
-    ru: 'Теги',
-    sk: 'Tagy',
-    sv: 'Taggar',
-    th: 'ป้ายชื่อ',
-    tr: 'Etiketler',
-    uk: 'Ярлики',
-    vi: 'Thẻ',
-    'zh-cn': '标签',
-    'zh-tw': '標籤'
   }
 };
 
-function loadTranslations(userTranslations, langKey) {
-  const associatedLangKey = LOCALES_ASSOCIATIONS[langKey];
-  for (let key in TRANSLATIONS) {
-    if (!TRANSLATIONS.hasOwnProperty(key)) continue;
-    const itemTranslation = TRANSLATIONS[key];
-    const itemUserTranslation = userTranslations[key] || {};
+export default function translate(userTranslations, locale, key, ...args) {
+  const lang = localeToLang[locale] || 'en';
 
-    let trad = itemUserTranslation[langKey] ||
-      itemTranslation[langKey] ||
-      itemUserTranslation[associatedLangKey] ||
-      itemTranslation[associatedLangKey] ||
-      itemUserTranslation.en || // Fallback on english
-      itemTranslation.en;
-
-    if (['change_query', 'clear_filters'].indexOf(key) !== -1) {
-      trad = `<span class="ais-link ais-${key.replace(/_/g, '-')}">${trad}</span>`;
-    }
-    if (['nb_results', 'quoted'].indexOf(key) !== -1) {
-      trad = (function (_trad) {
-        return function (...args) {
-          return `<span class="ais-${key.replace(/_/g, '-')}">${_trad.call(this, ...args)}</span>`;
-        };
-      }(trad));
-    }
-
-    if (typeof trad === 'function') {
-      trad = trad.bind(userTranslations);
-    }
-
-    userTranslations[key] = trad;
+  const t = userTranslations[key] || defaultTranslations[key];
+  if (t === null) {
+    throw new Exception(`Unknown translation key '${key}'.`);
   }
-}
+  if (t[lang] === null) {
+    throw new Exception(`No '${lang}' (locale '${locale}') entry for translation key '${key}'.`);
+  }
+  if (typeof t[lang] === 'function') {
+    return t[lang](...args);
+  }
+  return t[lang];
+};
 
-export default loadTranslations;

@@ -1,6 +1,6 @@
 function findAnswers(index, query, lang, callback) {
   index.findAnswers(query, [lang], {
-    attributesForPrediction: ["section", "category", "body_safe"],
+    attributesForPrediction: ["section", "category", "title", "body_safe"],
     threshold: 0,
     nbHits: 1,
     params: {
