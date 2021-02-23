@@ -16,7 +16,7 @@ const localeToLang = {
   'fr-ch': 'fr',
   'fr-fr': 'fr',
   'nl-be': 'nl',
-  'pt-br': 'pt'
+  'pt-br': 'pt',
 };
 
 const defaultTranslations = {
@@ -87,7 +87,12 @@ const defaultTranslations = {
     ru: function (nb) {
       let suffix = '';
       if (nb % 10 === 1 && nb % 100 !== 11) suffix = '';
-      else if (nb % 10 >= 2 && nb % 10 <= 4 && (nb % 100 < 10 || nb % 100 >= 20)) suffix = 'а';
+      else if (
+        nb % 10 >= 2 &&
+        nb % 10 <= 4 &&
+        (nb % 100 < 10 || nb % 100 >= 20)
+      )
+        suffix = 'а';
       else suffix = 'ов';
       return `${this.format_number(nb)} результат${suffix}`;
     },
@@ -109,7 +114,12 @@ const defaultTranslations = {
     uk: function (nb) {
       let suffix = '';
       if (nb % 10 === 1 && nb % 100 !== 11) suffix = '';
-      else if (nb % 10 >= 2 && nb % 10 <= 4 && (nb % 100 < 10 || nb % 100 >= 20)) suffix = 'и';
+      else if (
+        nb % 10 >= 2 &&
+        nb % 10 <= 4 &&
+        (nb % 100 < 10 || nb % 100 >= 20)
+      )
+        suffix = 'и';
       else suffix = '';
       return `${this.format_number(nb)} результат${suffix}`;
     },
@@ -121,7 +131,7 @@ const defaultTranslations = {
     },
     'zh-tw': function (nb) {
       return `${this.format_number(nb)} 項結果`;
-    }
+    },
   },
   noResultsFor: {
     ar: function (query) {
@@ -213,7 +223,7 @@ const defaultTranslations = {
     },
     'zh-tw': function (query) {
       return `查無 「${query}」 相關結果`;
-    }
+    },
   },
   placeholder: {
     ar: 'البحث في مقالاتنا',
@@ -245,40 +255,40 @@ const defaultTranslations = {
     uk: 'Пошук у наших статтях',
     vi: 'Tìm kiếm trong các bài viết của chúng tôi',
     'zh-cn': '在我们的文章中搜索',
-    'zh-tw': '在文章中搜尋'
+    'zh-tw': '在文章中搜尋',
   },
   searchByAlgolia: {
-    ar: algolia => `البحث بواسطة ${algolia}`,
-    bg: algolia => `Търсене по ${algolia}`,
-    cs: algolia => `Vyhledávat s využitím služby ${algolia}`,
-    da: algolia => `Søg med ${algolia}`,
-    de: algolia => `Suche über ${algolia}`,
-    el: algolia => `Αναζήτηση κατά ${algolia}`,
-    en: algolia => `Search by ${algolia}`,
-    es: algolia => `Búsqueda por ${algolia}`,
-    fi: algolia => `Haun tarjoaa ${algolia}`,
-    fr: algolia => `Recherche par ${algolia}`,
-    hu: algolia => `Keresés az ${algolia}-val`,
-    id: algolia => `Cari menggunakan ${algolia}`,
-    it: algolia => `Cerca per ${algolia}`,
-    ja: algolia => `${algolia}で検索します。`,
-    ko: algolia => `${algolia}로 검색`,
-    nl: algolia => `Zoeken op ${algolia}`,
-    no: algolia => `Søk av ${algolia}`,
-    pl: algolia => `Szukaj przez ${algolia}`,
-    pt: algolia => `Pesquisar por ${algolia}`,
-    'pt-br': algolia => `Pesquise por ${algolia}`,
-    ro: algolia => `Căutați după ${algolia}`,
-    ru: algolia => `Найти в ${algolia}`,
-    sk: algolia => `Vyhľadávať podľa ${algolia}`,
-    sv: algolia => `Sök genom ${algolia}`,
-    th: algolia => `ค้นหาโดย ${algolia}`,
-    tr: algolia => `${algolia}'ya göre ara`,
-    uk: algolia => `Пошук за допомогою ${algolia}`,
-    vi: algolia => `Tìm kiếm theo ${algolia}`,
-    'zh-cn': algolia => `根据 ${algolia} 搜索`,
-    'zh-tw': algolia => `使用 ${algolia} 搜尋`
-  }
+    ar: (algolia) => `البحث بواسطة ${algolia}`,
+    bg: (algolia) => `Търсене по ${algolia}`,
+    cs: (algolia) => `Vyhledávat s využitím služby ${algolia}`,
+    da: (algolia) => `Søg med ${algolia}`,
+    de: (algolia) => `Suche über ${algolia}`,
+    el: (algolia) => `Αναζήτηση κατά ${algolia}`,
+    en: (algolia) => `Search by ${algolia}`,
+    es: (algolia) => `Búsqueda por ${algolia}`,
+    fi: (algolia) => `Haun tarjoaa ${algolia}`,
+    fr: (algolia) => `Recherche par ${algolia}`,
+    hu: (algolia) => `Keresés az ${algolia}-val`,
+    id: (algolia) => `Cari menggunakan ${algolia}`,
+    it: (algolia) => `Cerca per ${algolia}`,
+    ja: (algolia) => `${algolia}で検索します。`,
+    ko: (algolia) => `${algolia}로 검색`,
+    nl: (algolia) => `Zoeken op ${algolia}`,
+    no: (algolia) => `Søk av ${algolia}`,
+    pl: (algolia) => `Szukaj przez ${algolia}`,
+    pt: (algolia) => `Pesquisar por ${algolia}`,
+    'pt-br': (algolia) => `Pesquise por ${algolia}`,
+    ro: (algolia) => `Căutați după ${algolia}`,
+    ru: (algolia) => `Найти в ${algolia}`,
+    sk: (algolia) => `Vyhľadávať podľa ${algolia}`,
+    sv: (algolia) => `Sök genom ${algolia}`,
+    th: (algolia) => `ค้นหาโดย ${algolia}`,
+    tr: (algolia) => `${algolia}'ya göre ara`,
+    uk: (algolia) => `Пошук за допомогою ${algolia}`,
+    vi: (algolia) => `Tìm kiếm theo ${algolia}`,
+    'zh-cn': (algolia) => `根据 ${algolia} 搜索`,
+    'zh-tw': (algolia) => `使用 ${algolia} 搜尋`,
+  },
 };
 
 export default function translate(userTranslations, locale, key, ...args) {
@@ -286,14 +296,15 @@ export default function translate(userTranslations, locale, key, ...args) {
 
   const t = userTranslations[key] || defaultTranslations[key];
   if (t === null) {
-    throw new Exception(`Unknown translation key '${key}'.`);
+    throw new Error(`Unknown translation key '${key}'.`);
   }
   if (t[lang] === null) {
-    throw new Exception(`No '${lang}' (locale '${locale}') entry for translation key '${key}'.`);
+    throw new Error(
+      `No '${lang}' (locale '${locale}') entry for translation key '${key}'.`
+    );
   }
   if (typeof t[lang] === 'function') {
     return t[lang](...args);
   }
   return t[lang];
-};
-
+}
