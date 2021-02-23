@@ -15,9 +15,13 @@ const templates = {
       </a>
     </Fragment>,
 
-    // Algolia logo
     header: (translations, items) => <Fragment>
       <span className="aa-SourceHeaderTitle">Articles</span> { /* FIXME: translations */ }
+      <div className="aa-SourceHeaderLine" />
+    </Fragment>,
+
+    bestAnswer: (translations, items) => <Fragment>
+      <span className="aa-SourceHeaderTitle">Best Article</span> { /* FIXME: translations */ }
       <div className="aa-SourceHeaderLine" />
     </Fragment>,
 

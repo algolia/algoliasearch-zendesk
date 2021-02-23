@@ -2,7 +2,7 @@ import algoliasearch from "algoliasearch/lite";
 import { autocomplete, getAlgoliaHits } from "@algolia/autocomplete-js";
 import "@algolia/autocomplete-theme-classic";
 
-
+import {debounceGetAnswers} from './answers.js';
 import {createClickTracker} from './clickAnalytics.js';
 
 import {addCSS, removeCSS} from './CSS.js';
@@ -56,17 +56,52 @@ class Autocomplete {
     };
 
     const self = this;
+    const answersRef = {
+      current: []
+    };
+    const lang = locale.split('-')[0];
 
-    autocomplete({
+    const search = autocomplete({
       container: inputSelector,
       placeholder: translations.placeholder,
       debug: process.env.NODE_ENV === 'development' || debug,
       openOnFocus: true,
-      getSources({ query, state }) {
+      onStateChange({ prevState, state }) {
+        if (prevState.query !== state.query) {
+          debounceGetAnswers(self.client.initIndex(self.indexName), state.query, lang, ({ hits }) => {
+            answersRef.current = hits;
+            search.refresh();
+          });
+        }
+      },
+      getSources({ query }) {
+        if (!query) {
+          return [];
+        }
+
         return [
           {
-            sourceId: "articles",
-            getItemInputValue: ({ state }) => state.query,
+            // ----------------
+            // Source: Algolia Answers
+            // ----------------
+            sourceId: "Answers",
+            getItems() {
+              return answersRef.current;
+            },
+            templates: {
+              header({ items }) {
+                return templates.autocomplete.bestAnswer(translations, items);
+              },
+              item({ item }) {
+                return templates.autocomplete.article(item);
+              }
+            }
+          },
+          {
+            // ----------------
+            // Source: Algolia Search
+            // ----------------
+            sourceId: "Search",
             getItems({ query }) {
               return getAlgoliaHits({
                 searchClient: self.client,
@@ -77,7 +112,7 @@ class Autocomplete {
                     params: {
                       ...defaultParams,
                       clickAnalytics,
-                      queryLanguages: [locale.split('-')[0]],
+                      queryLanguages: [lang],
                       removeStopWords: true
                     }
                   }
@@ -91,9 +126,9 @@ class Autocomplete {
               item({ item }) {
                 return templates.autocomplete.article(item);
               },
-              noResults({ query }) {
+              empty({ query }) {
                 // FIXME: not called
-                console.log('no results', arguments);
+                console.log('empty', arguments);
                 return templates.autocomplete.noResults(translations, query);
               },
             },
