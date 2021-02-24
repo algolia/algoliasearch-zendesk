@@ -31,18 +31,22 @@ class Autocomplete {
     analytics,
     autocomplete: { enabled, hitsPerPage, inputSelector },
     baseUrl,
-    // eslint-disable-next-line no-unused-vars
     color,
     clickAnalytics,
     debug,
     locale,
-    // eslint-disable-next-line no-unused-vars
     highlightColor,
     poweredBy,
     templates,
     translations,
   }) {
     if (!enabled) return;
+
+    document.documentElement.style.setProperty('--aa-primary-color', color);
+    document.documentElement.style.setProperty(
+      '--aa-highlight-color',
+      highlightColor
+    );
 
     const defaultParams = {
       analytics,
