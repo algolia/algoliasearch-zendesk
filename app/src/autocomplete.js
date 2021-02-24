@@ -1,3 +1,4 @@
+import { version } from '../package.json';
 import algoliasearch from 'algoliasearch/lite';
 import { autocomplete, getAlgoliaHits } from '@algolia/autocomplete-js';
 import '@algolia/autocomplete-theme-classic';
@@ -22,7 +23,7 @@ class Autocomplete {
   }) {
     if (!enabled) return;
     this.client = algoliasearch(applicationId, apiKey);
-    this.client.addAlgoliaAgent('Zendesk Integration (__VERSION__)');
+    this.client.addAlgoliaAgent(`Zendesk Integration (${version})`);
     this.indexName = `${indexPrefix}${subdomain}_articles`;
     this.trackClick = createClickTracker(this, this.indexName);
   }
