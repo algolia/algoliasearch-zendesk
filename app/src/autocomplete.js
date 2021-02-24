@@ -57,7 +57,7 @@ class Autocomplete {
     };
     const lang = locale.split('-')[0];
 
-    const search = autocomplete({
+    autocomplete({
       container: inputSelector,
       placeholder: translate(translations, locale, 'placeholder'),
       debug: process.env.NODE_ENV === 'development' || debug,
@@ -84,7 +84,7 @@ class Autocomplete {
         }),
       ],
       openOnFocus: true,
-      onStateChange({ prevState, state }) {
+      onStateChange({ prevState, state, refresh }) {
         if (prevState.query === state.query) {
           return;
         }
@@ -97,7 +97,7 @@ class Autocomplete {
           },
           ({ hits }) => {
             answersRef.current = hits;
-            search.refresh();
+            refresh();
           }
         );
       },
@@ -152,6 +152,7 @@ class Autocomplete {
                 ],
               }).then((results) => {
                 // filter out the best answer from this list
+
                 return [
                   results[0].filter(
                     (h) => h.objectID !== answersRef.current?.[0]?.objectID
