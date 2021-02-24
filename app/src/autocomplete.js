@@ -149,7 +149,11 @@ class Autocomplete {
           ],
         })
           .then((results) => {
-            return Object.entries(groupBy(results[0], 'section.title')).map(
+            const hitsByCategorySection = groupBy(
+              results[0],
+              (hit) => `${hit.category.title} > ${hit.section.title}`
+            );
+            return Object.entries(hitsByCategorySection).map(
               ([section, hits]) => {
                 return {
                   sourceId: section,

@@ -75,9 +75,6 @@ const templates = {
           <div className="aa-ItemContentTitle">
             {highlightHit({ hit, attribute: 'title' })}
           </div>
-          <div className="aa-ItemContentSubtitle">
-            {hit.category.title} &gt; {hit.section.title}
-          </div>
           <div className="aa-ItemContentDescription">
             {snippetHit({ hit, attribute: 'body_safe' })}
           </div>
