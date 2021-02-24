@@ -8,7 +8,7 @@ import { groupBy } from 'lodash';
 
 import translate from './translations';
 import { debounceGetAnswers } from './answers';
-import { createClickTracker } from './clickAnalytics';
+import { initInsights, extendWithConversionTracking } from './clickAnalytics';
 
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 import { search as defaultLocalStorageSearch } from '@algolia/autocomplete-plugin-recent-searches/dist/esm/usecases/localStorage';
@@ -20,12 +20,20 @@ class Autocomplete {
     autocomplete: { enabled },
     indexPrefix,
     subdomain,
+    clickAnalytics,
   }) {
     if (!enabled) return;
     this.client = algoliasearch(applicationId, apiKey);
     this.client.addAlgoliaAgent(`Zendesk Integration (${version})`);
     this.indexName = `${indexPrefix}${subdomain}_articles`;
-    this.trackClick = createClickTracker(this, this.indexName);
+
+    if (clickAnalytics) {
+      initInsights({ applicationId, apiKey });
+      extendWithConversionTracking(this, {
+        clickAnalytics,
+        indexName: this.indexName,
+      });
+    }
   }
 
   init({
@@ -43,17 +51,17 @@ class Autocomplete {
   }) {
     if (!enabled) return;
 
-    document.documentElement.style.setProperty('--aa-primary-color', color);
-    document.documentElement.style.setProperty(
-      '--aa-highlight-color',
-      highlightColor
-    );
+    const doc = document.documentElement;
+    doc.style.setProperty('--aa-primary-color', color);
+    doc.style.setProperty('--aa-highlight-color', highlightColor);
+    doc.style.setProperty('--aa-detached-modal-max-width', '960px');
+    doc.style.setProperty('--aa-detached-modal-max-height', '80%');
 
     const defaultParams = {
       analytics,
       hitsPerPage,
       facetFilters: `["locale.locale:${locale}"]`,
-      attributesToSnippet: ['body_safe:20'],
+      attributesToSnippet: ['body_safe:30'],
       snippetEllipsisText: '…',
     };
 
@@ -187,13 +195,11 @@ class Autocomplete {
                     },
                   },
                   onSelect({ item }) {
-                    if (clickAnalytics) {
-                      self.trackClick(
-                        item,
-                        item.__autocomplete_id,
-                        item.__autocomplete_queryID
-                      );
-                    }
+                    self.trackClick(
+                      item,
+                      item.__autocomplete_id,
+                      item.__autocomplete_queryID
+                    );
                   },
                 };
               }

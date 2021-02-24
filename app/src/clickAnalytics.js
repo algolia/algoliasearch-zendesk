@@ -5,40 +5,35 @@ export function initInsights({ applicationId, apiKey }) {
   aa('init', { appId: applicationId, apiKey });
 }
 
-export function createClickTracker(self, index) {
-  return function trackClick(article, position, queryID) {
-    if (self._saveLastClick) self._saveLastClick(queryID, article);
-    aa('clickedObjectIDsAfterSearch', {
-      eventName: 'article_clicked',
-      index,
-      queryID,
-      objectIDs: [article.objectID],
-      positions: [Number(position)],
-    });
-  };
-}
-
 // Extends instance with clickAnalytics specific attributes
 export function extendWithConversionTracking(
   self,
-  { clickAnalytics, indexPrefix, subdomain }
+  { clickAnalytics, indexName }
 ) {
-  const indexName = `${indexPrefix}${subdomain}_articles`;
-
   if (!clickAnalytics) {
-    self._saveLastQueryID = () => {};
-    self._saveLastClick = () => {};
+    self.trackClick = () => {};
     self.trackConversion = () => {};
     return;
   }
 
-  self._saveLastClick = (queryID, article) => {
+  const saveLastClick = (queryID, article) => {
     const cookieBody = JSON.stringify({
       queryID,
       objectID: article.objectID,
       articleID: article.id,
     });
     cookies.set('algolia-last-click', cookieBody, { expires: 1 });
+  };
+
+  self.trackClick = (article, position, queryID) => {
+    saveLastClick(queryID, article);
+    aa('clickedObjectIDsAfterSearch', {
+      eventName: 'article_clicked',
+      index: indexName,
+      queryID,
+      objectIDs: [article.objectID],
+      positions: [Number(position)],
+    });
   };
 
   self.trackConversion = (articleID) => {
@@ -58,6 +53,6 @@ export function extendWithConversionTracking(
       objectIDs: [lastClick.objectID],
     });
 
-    self._saveLastClick(lastClick.queryID, {});
+    saveLastClick(lastClick.queryID, {});
   };
 }

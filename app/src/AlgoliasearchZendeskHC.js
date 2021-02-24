@@ -2,7 +2,6 @@ import fargs from 'fargs';
 
 import autocomplete from './autocomplete';
 import defaultTemplates from './templates';
-import { initInsights, extendWithConversionTracking } from './clickAnalytics';
 
 function hitsPerPageValidator(val) {
   return (val >= 1 && val <= 20) || 'should be between 1 and 20';
@@ -66,7 +65,7 @@ class AlgoliasearchZendeskHC {
       .values([params])[0];
 
     options.highlightColor = options.highlightColor || options.color;
-
+    options.locale = options.locale || getCurrentLocale();
     options.templates = {
       autocomplete: {
         ...defaultTemplates.autocomplete,
@@ -75,11 +74,6 @@ class AlgoliasearchZendeskHC {
     };
 
     this.search = autocomplete(options);
-
-    if (options.clickAnalytics) {
-      initInsights(options);
-      extendWithConversionTracking(this.search, options);
-    }
 
     // once the DOM is initialized
     if (
@@ -96,7 +90,6 @@ class AlgoliasearchZendeskHC {
   }
 
   init(options) {
-    options.locale = options.locale || getCurrentLocale();
     this.search.init(options);
   }
 }
