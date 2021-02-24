@@ -1,6 +1,7 @@
 import algoliasearch from 'algoliasearch/lite';
 import { autocomplete, getAlgoliaHits } from '@algolia/autocomplete-js';
 import '@algolia/autocomplete-theme-classic';
+// eslint-disable-next-line no-unused-vars
 import { render, h, Fragment } from 'preact';
 import { groupBy } from 'lodash';
 
@@ -10,8 +11,6 @@ import { createClickTracker } from './clickAnalytics';
 
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 import { search as defaultLocalStorageSearch } from '@algolia/autocomplete-plugin-recent-searches/dist/esm/usecases/localStorage';
-
-
 
 class Autocomplete {
   constructor({
@@ -39,7 +38,6 @@ class Autocomplete {
     locale,
     // eslint-disable-next-line no-unused-vars
     highlightColor,
-    // eslint-disable-next-line no-unused-vars
     poweredBy,
     templates,
     translations,
@@ -201,9 +199,11 @@ class Autocomplete {
         render(
           <Fragment>
             <div className="aa-PanelLayout">{sections}</div>
-            <div className="aa-PanelFooter">
-              {templates.autocomplete.poweredBy()}
-            </div>
+            {poweredBy && (
+              <div className="aa-PanelFooter">
+                {templates.autocomplete.poweredBy()}
+              </div>
+            )}
           </Fragment>,
           root
         );
