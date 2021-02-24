@@ -10,7 +10,7 @@ import { createClickTracker } from './clickAnalytics';
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 import { search as defaultLocalStorageSearch } from '@algolia/autocomplete-plugin-recent-searches/dist/esm/usecases/localStorage';
 
-import { sortBy, groupBy } from 'lodash';
+import { groupBy } from 'lodash';
 
 class Autocomplete {
   constructor({
@@ -191,9 +191,9 @@ class Autocomplete {
               }
             );
           })
-          .then((results) => {
-            results.unshift(answersSection);
-            return results;
+          .then((sources) => {
+            sources.unshift(answersSection);
+            return sources;
           });
       },
       render({ sections }, root) {
