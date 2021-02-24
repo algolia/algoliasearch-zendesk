@@ -19,13 +19,11 @@ const templates = {
     ),
 
     // eslint-disable-next-line no-unused-vars
-    articlesHeader: (_translations, _locale, _items) => {
+    articlesHeader: (section, _items) => {
       return (
         <Fragment>
           <span className="aa-SourceHeaderTitle">
-            {window?.I18N?.translations?.[
-              'txt.help_center.javascripts.arrange_content.articles'
-            ] || 'Articles'}
+            {section}
           </span>
           <div className="aa-SourceHeaderLine" />
         </Fragment>

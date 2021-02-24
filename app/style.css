@@ -171,10 +171,21 @@ h1 {
   margin: 2em 0;
 }
 
-/* Remove when update with new release of theme-classic */
-.aa-ItemIcon--align-top {
-  align-self: flex-start;
+.aa-Panel:after {
+  margin-bottom: 30px;
 }
-.aa-Panel .aa-SourceEmpty {
-  padding: 16px;
+.aa-Panel .aa-PanelLayout {
+  top: 0;
+  bottom: 30px;
+  margin-bottom: 30px !important;
+}
+.aa-Panel .aa-PanelFooter {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 30px;
+  bottom: 0;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 16px !important;
 }

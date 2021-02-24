@@ -1,6 +1,7 @@
 import algoliasearch from 'algoliasearch/lite';
 import { autocomplete, getAlgoliaHits } from '@algolia/autocomplete-js';
 import '@algolia/autocomplete-theme-classic';
+import { render, h, Fragment } from 'preact';
 
 import translate from './translations';
 import { debounceGetAnswers } from './answers';
@@ -8,6 +9,8 @@ import { createClickTracker } from './clickAnalytics';
 
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 import { search as defaultLocalStorageSearch } from '@algolia/autocomplete-plugin-recent-searches/dist/esm/usecases/localStorage';
+
+import { sortBy, groupBy } from 'lodash';
 
 class Autocomplete {
   constructor({
@@ -60,6 +63,7 @@ class Autocomplete {
     autocomplete({
       container: inputSelector,
       placeholder: translate(translations, locale, 'placeholder'),
+      detachedMediaQuery: '',
       debug: process.env.NODE_ENV === 'development' || debug,
       plugins: [
         createLocalStorageRecentSearchesPlugin({
@@ -101,98 +105,107 @@ class Autocomplete {
           }
         );
       },
-      getSources() {
-        return [
-          {
-            // ----------------
-            // Source: Algolia Answers
-            // ----------------
-            sourceId: 'Answers',
-            getItems() {
-              return answersRef.current;
+      getSources({ query: q }) {
+        const answersSection = {
+          // ----------------
+          // Source: Algolia Answers
+          // ----------------
+          sourceId: 'Answers',
+          getItems() {
+            return answersRef.current;
+          },
+          getItemUrl({ item }) {
+            return `${baseUrl}${locale}/articles/${item.id}`;
+          },
+          templates: {
+            header({ items }) {
+              if (items.length === 0) {
+                return null;
+              }
+              return templates.autocomplete.bestArticleHeader(
+                translations,
+                locale,
+                items
+              );
             },
-            getItemUrl({ item }) {
-              return `${baseUrl}${locale}/articles/${item.id}`;
-            },
-            templates: {
-              header({ items }) {
-                if (items.length === 0) {
-                  return null;
-                }
-                return templates.autocomplete.bestArticleHeader(
-                  translations,
-                  locale,
-                  items
-                );
-              },
-              item({ item }) {
-                return templates.autocomplete.article(item);
-              },
+            item({ item }) {
+              return templates.autocomplete.article(item);
             },
           },
-          {
-            // ----------------
-            // Source: Algolia Search
-            // ----------------
-            sourceId: 'Search',
-            getItems({ query: q }) {
-              return getAlgoliaHits({
-                searchClient: self.client,
-                queries: [
-                  {
-                    indexName: self.indexName,
-                    query: q,
-                    params: {
-                      ...defaultParams,
-                      clickAnalytics,
-                      queryLanguages: [lang],
-                      removeStopWords: true,
+        };
+
+        return getAlgoliaHits({
+          searchClient: self.client,
+          queries: [
+            {
+              indexName: self.indexName,
+              query: q,
+              params: {
+                ...defaultParams,
+                clickAnalytics,
+                queryLanguages: [lang],
+                removeStopWords: true,
+              },
+            },
+          ],
+        })
+          .then((results) => {
+            return Object.entries(groupBy(results[0], 'section.title')).map(
+              ([section, hits]) => {
+                return {
+                  sourceId: section,
+                  getItems() {
+                    return hits;
+                  },
+                  getItemUrl({ item }) {
+                    return `${baseUrl}${locale}/articles/${item.id}`;
+                  },
+                  templates: {
+                    header({ items }) {
+                      return templates.autocomplete.articlesHeader(
+                        section,
+                        items
+                      );
+                    },
+                    item({ item }) {
+                      return templates.autocomplete.article(item);
+                    },
+                    noResults({ state }) {
+                      return templates.autocomplete.noResults(
+                        translations,
+                        locale,
+                        state.query
+                      );
                     },
                   },
-                ],
-              }).then((results) => {
-                // filter out the best answer from this list
-
-                return [
-                  results[0].filter(
-                    (h) => h.objectID !== answersRef.current?.[0]?.objectID
-                  ),
-                ];
-              });
-            },
-            getItemUrl({ item }) {
-              return `${baseUrl}${locale}/articles/${item.id}`;
-            },
-            templates: {
-              header({ items }) {
-                return templates.autocomplete.articlesHeader(
-                  translations,
-                  locale,
-                  items
-                );
-              },
-              item({ item }) {
-                return templates.autocomplete.article(item);
-              },
-              empty({ state }) {
-                return templates.autocomplete.noResults(
-                  translations,
-                  locale,
-                  state.query
-                );
-              },
-            },
-            onSelect({ item }) {
-              if (clickAnalytics) {
-                self.trackClick(
-                  item,
-                  item.__autocomplete_id,
-                  item.__autocomplete_queryID
-                );
+                  onSelect({ item }) {
+                    if (clickAnalytics) {
+                      self.trackClick(
+                        item,
+                        item.__autocomplete_id,
+                        item.__autocomplete_queryID
+                      );
+                    }
+                  },
+                };
               }
-            },
-          },
-        ];
+            );
+          })
+          .then((results) => {
+            results.unshift(answersSection);
+            return results;
+          });
+      },
+      render({ sections }, root) {
+        render(
+          <Fragment>
+            <div className="aa-PanelLayout">{sections}</div>
+            <div className="aa-PanelFooter">
+              {templates.autocomplete.poweredBy()}
+            </div>
+          </Fragment>,
+          root
+        );
       },
     });
   }
