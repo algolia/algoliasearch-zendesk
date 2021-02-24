@@ -2,6 +2,7 @@ import algoliasearch from 'algoliasearch/lite';
 import { autocomplete, getAlgoliaHits } from '@algolia/autocomplete-js';
 import '@algolia/autocomplete-theme-classic';
 import { render, h, Fragment } from 'preact';
+import { groupBy } from 'lodash';
 
 import translate from './translations';
 import { debounceGetAnswers } from './answers';
@@ -10,7 +11,7 @@ import { createClickTracker } from './clickAnalytics';
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 import { search as defaultLocalStorageSearch } from '@algolia/autocomplete-plugin-recent-searches/dist/esm/usecases/localStorage';
 
-import { groupBy } from 'lodash';
+
 
 class Autocomplete {
   constructor({
