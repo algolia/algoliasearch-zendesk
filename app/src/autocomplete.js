@@ -7,6 +7,7 @@ import { debounceGetAnswers } from './answers';
 import { createClickTracker } from './clickAnalytics';
 
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
+import { search as defaultLocalStorageSearch } from '@algolia/autocomplete-plugin-recent-searches/dist/esm/usecases/localStorage';
 
 class Autocomplete {
   constructor({
@@ -56,15 +57,32 @@ class Autocomplete {
     };
     const lang = locale.split('-')[0];
 
-    const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
-      key: 'navbar',
-    });
-
     const search = autocomplete({
       container: inputSelector,
       placeholder: translate(translations, locale, 'placeholder'),
       debug: process.env.NODE_ENV === 'development' || debug,
-      plugins: [recentSearchesPlugin],
+      plugins: [
+        createLocalStorageRecentSearchesPlugin({
+          key: 'navbar',
+          // in case the query is exactly the recent item, skip it to not have a useless entry
+          search({ query, items, limit }) {
+            const results = defaultLocalStorageSearch({ query, items, limit });
+            if (results.length === 1 && results[0].query === query) {
+              return [];
+            }
+            return results;
+          },
+          transformSource({ source }) {
+            return {
+              ...source,
+              // keep this open and do another search
+              onSelect({ setIsOpen }) {
+                setIsOpen(true);
+              },
+            };
+          },
+        }),
+      ],
       openOnFocus: true,
       onStateChange({ prevState, state }) {
         if (prevState.query === state.query) {
@@ -138,6 +156,9 @@ class Autocomplete {
                 ];
               });
             },
+            getItemUrl({ item }) {
+              return `${baseUrl}${locale}/articles/${item.id}`;
+            },
             templates: {
               header({ items }) {
                 return templates.autocomplete.articlesHeader(
@@ -165,7 +186,6 @@ class Autocomplete {
                   item.__autocomplete_queryID
                 );
               }
-              location.href = `${baseUrl}${locale}/articles/${item.id}`;
             },
           },
         ];
