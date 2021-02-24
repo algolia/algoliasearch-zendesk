@@ -174,12 +174,12 @@ h1 {
 .aa-Panel:after {
   margin-bottom: 30px;
 }
-.aa-Panel .aa-PanelLayout {
+.aa-PanelLayout {
   top: 0;
   bottom: 30px;
   margin-bottom: 30px !important;
 }
-.aa-Panel .aa-PanelFooter {
+.aa-PanelFooter {
   position: absolute;
   display: flex;
   width: 100%;
@@ -189,3 +189,4 @@ h1 {
   justify-content: flex-end;
   padding-right: 16px !important;
 }
+
