@@ -111,6 +111,9 @@ class Autocomplete {
             getItems() {
               return answersRef.current;
             },
+            getItemUrl({ item }) {
+              return `${baseUrl}${locale}/articles/${item.id}`;
+            },
             templates: {
               header({ items }) {
                 if (items.length === 0) {
