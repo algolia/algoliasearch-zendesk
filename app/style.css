@@ -1,5 +1,72 @@
-* {
-  box-sizing: border-box;
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Demo */
+
+:root{
+  /* --aa-base-unit: 16;
+  --aa-font-size: calc(var(--aa-base-unit) * 1px);
+  --aa-spacing-factor: 1;
+  --aa-spacing: calc(var(--aa-base-unit) * var(--aa-spacing-factor) * 1px);
+  --aa-icon-size: 18px;
+  --aa-primary-color: rgb(62, 52, 211);
+  --aa-muted-color: rgba(128, 126, 163, 0.6);
+  --aa-selected-color: rgba(62, 52, 211, 0.1);
+  --aa-icon-color: rgb(119, 119, 163);
+  --aa-text-color: rgb(38, 38, 39);
+  --aa-content-text-color: rgb(38, 38, 39, 0.7);
+  --aa-background-color: rgb(255, 255, 255);
+  --aa-background-color-alpha-0: rgba(255, 255, 255, 0);
+  --aa-panel-max-height: 500px;
+  --aa-detached-media-query: (max-width: 500px);
+  --aa-detached-modal-media-query: (min-width: 500px);
+  --aa-detached-modal-max-width: 500px;
+  --aa-detached-modal-max-height: 500px;  */
 }
 
 body {
@@ -13,39 +80,18 @@ body {
 .container {
   margin: 0 auto;
   max-width: 640px;
-  padding: 1rem;
   width: 100%;
 }
 
-:root{
-  /* --aa-base-unit: 16;
-  --aa-font-size: calc(var(--aa-base-unit) * 1px);
-  --aa-spacing-factor: 1;
-  --aa-spacing: calc(var(--aa-base-unit) * var(--aa-spacing-factor) * 1px);
-  --aa-spacing-half: calc(var(--aa-spacing) / 2);
-  --aa-icon-size: 18px;
-  --aa-icon-stroke-width: calc((20 / var(--aa-base-unit)) * 1.6);
-  --aa-primary-color: rgb(62, 52, 211);
-  --aa-muted-color: rgba(128, 126, 163, 0.6);
-  --aa-selected-color: rgba(62, 52, 211, 0.1);
-  --aa-icon-color: rgb(119, 119, 163);
-  --aa-text-color: rgb(38, 38, 39);
-  --aa-content-text-color: rgb(38, 38, 39, 0.7);
-  --aa-background-color: rgb(255, 255, 255);
-  --aa-background-color-alpha-0: rgba(255, 255, 255, 0);
-  --aa-panel-shadow: 0 0 0 1px rgba(35, 38, 59, 0.1),
-    0 6px 16px -4px rgba(35, 38, 59, 0.15);
-  --aa-panel-max-height: 500px;
-  --aa-detached-media-query: (max-width: 500px);
-  --aa-detached-modal-media-query: (min-width: 500px);
-  --aa-detached-modal-max-width: 500px;
-  --aa-detached-modal-max-height: 500px;  */
+h1 {
+  font-weight: bold;
+  margin:2em 0;
 }
 
+/* Remove when update with new release of theme-classic */
 .aa-ItemIcon--align-top {
   align-self: flex-start;
 }
-
 .aa-Panel .aa-SourceEmpty {
   padding: 16px;
 }
