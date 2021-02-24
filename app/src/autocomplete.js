@@ -63,7 +63,7 @@ class Autocomplete {
       debug: process.env.NODE_ENV === 'development' || debug,
       plugins: [
         createLocalStorageRecentSearchesPlugin({
-          key: 'navbar',
+          key: 'algolia-recent-searches',
           // in case the query is exactly the recent item, skip it to not have a useless entry
           search({ query, items, limit }) {
             const results = defaultLocalStorageSearch({ query, items, limit });
