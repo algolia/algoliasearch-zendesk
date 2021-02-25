@@ -31,9 +31,8 @@ jobs:
       - run: npm install
       - save_cache: *save-root-cache
       - save_cache: *save-app-cache
-
-      # Lint
       - run: "cd app && npm run lint"
+      - run: "cd app && npm run format"
 
 workflows:
   version: 2
