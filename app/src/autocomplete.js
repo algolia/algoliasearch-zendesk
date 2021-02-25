@@ -54,7 +54,7 @@ class Autocomplete {
     const doc = document.documentElement;
     doc.style.setProperty('--aa-primary-color', color);
     doc.style.setProperty('--aa-highlight-color', highlightColor);
-    doc.style.setProperty('--aa-detached-modal-max-width', '960px');
+    doc.style.setProperty('--aa-detached-modal-max-width', '680px');
     doc.style.setProperty('--aa-detached-modal-max-height', '80%');
 
     const defaultParams = {
@@ -67,6 +67,8 @@ class Autocomplete {
 
     // eslint-disable-next-line consistent-this
     const self = this;
+    self.state = { isOpen: false };
+
     const answersRef = {
       current: [],
     };
@@ -94,6 +96,26 @@ class Autocomplete {
       );
     }
     container.innerHTML = '';
+
+    function onKeyDown(event) {
+      console.log(event, self.state);
+      const open = document.querySelector('.aa-DetachedSearchButton');
+      const close = document.querySelector('.aa-DetachedCancelButton');
+
+      if (
+        (event.keyCode === 27 && self.state.isOpen) ||
+        // The `Cmd+K` shortcut both opens and closes the modal.
+        (event.key === 'k' && (event.metaKey || event.ctrlKey))
+      ) {
+        event.preventDefault();
+
+        if (self.state.isOpen) {
+          close.click();
+        } else {
+          open.click();
+        }
+      }
+    }
 
     autocomplete({
       container,
@@ -127,11 +149,13 @@ class Autocomplete {
           },
         }),
       ],
+
       openOnFocus: true,
       onStateChange({ prevState, state, refresh }) {
         if (!bestArticle || prevState.query === state.query) {
           return;
         }
+        self.state = state;
         debounceGetAnswers(
           self.client.initIndex(self.indexName),
           state.query,
@@ -250,6 +274,14 @@ class Autocomplete {
         );
       },
     });
+    render(
+      <div class="aa-DetachedSearchButtonSuffix">
+        <span class="aa-Key">⌘</span>
+        <span class="aa-Key">K</span>
+      </div>,
+      doc.querySelector('.aa-DetachedSearchButtonIcon')
+    );
+    window.addEventListener('keydown', onKeyDown);
   }
 }
 export default (...args) => new Autocomplete(...args);
