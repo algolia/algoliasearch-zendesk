@@ -100,6 +100,11 @@ class Autocomplete {
       placeholder: translate(translations, locale, 'placeholder'),
       detachedMediaQuery: '',
       debug: process.env.NODE_ENV === 'development' || debug,
+      onSubmit({ state }) {
+        window.location.href = `${baseUrl}${locale}/search?utf8=✓&query=${encodeURIComponent(
+          state.query
+        )}`;
+      },
       plugins: [
         createLocalStorageRecentSearchesPlugin({
           key: 'algolia-recent-searches',
