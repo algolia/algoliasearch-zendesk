@@ -153,17 +153,23 @@ class Autocomplete {
 
       openOnFocus: true,
       onStateChange({ prevState, state, refresh }) {
+        // backup state
+        self.state = state;
+
+        // hack to localize the cancel button
         if (state.isOpen && !prevState.isOpen) {
-          // hack to localize the cancel button
           render(
             translate(translations, locale, 'cancel'),
             doc.querySelector('.aa-DetachedCancelButton')
           );
         }
+
+        // if answers is disabled, stop right away
         if (!bestArticle || prevState.query === state.query) {
           return;
         }
-        self.state = state;
+
+        // debounce store the best answer
         debounceGetAnswers(
           self.client.initIndex(self.indexName),
           state.query,
