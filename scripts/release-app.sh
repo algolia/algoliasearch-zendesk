@@ -3,28 +3,12 @@
 # Exit on error
 set -e
 
-# Ask for new version number if not in env
-if [[ $ALGOLIASEARCH_ZENDESK_VERSION == "" ]]; then
-  current=`json -f package.json version`
-  read -p "New version number (current is ${current}): " version
-  export ALGOLIASEARCH_ZENDESK_VERSION=$version
-fi
+cd "$PWD/app"
 
-# Ask for confirmation
-read -p "[App] We'll \`npm publish\` with \"v$ALGOLIASEARCH_ZENDESK_VERSION\". Continue (yn)? " -n 1 -r
-echo
-[[ $REPLY =~ ^[Yy]$ ]] || exit -1
+VERSION=`node -p -e "require('./package.json').version"`
+echo "About to release version ${VERSION}"
 
-# Build and publish app
-cd app/
-# No git-tag-version also disables the commit (See https://github.com/npm/npm/issues/7186)
-npm version --no-git-tag-version $ALGOLIASEARCH_ZENDESK_VERSION
 npm run clean
+npm install
 NODE_ENV=production npm run build
-
-echo "[App] One time password: "
-read OTP
-[[ $OTP =~ [0-9]{6} ]] || exit -1
-npm publish --otp=$OTP
-
-cd ../
+npm publish

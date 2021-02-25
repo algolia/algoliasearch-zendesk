@@ -9,7 +9,16 @@
   <body>
     <div class="container">
       <h1>Test me</h1>
-      <div id="autocomplete"></div>
+      <form role="search" class="search search-full" autocomplete="off">
+        <input
+          type="search"
+          name="query"
+          id="query"
+          placeholder="Search"
+          autocomplete="off"
+          aria-label="Search"
+        />
+      </form>
     </div>
     <script type="text/javascript" charset="utf-8" src="./index.js"></script>
     <script>
@@ -20,7 +29,7 @@
         color: '#158EC2',
         highlightColor: '#F08',
         autocomplete: {
-          inputSelector: '#autocomplete',
+          inputSelector: '#query',
         },
         clickAnalytics: true,
       });

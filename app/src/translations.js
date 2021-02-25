@@ -19,70 +19,72 @@ const localeToLang = {
   'pt-br': 'pt',
 };
 
+const formatNumber = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
 const defaultTranslations = {
   nbResults: {
     ar: function (nb) {
-      return nb > 1 ? `${this.format_number(nb)} نتيجة` : 'نتيجة واحدة';
+      return nb > 1 ? `${formatNumber(nb)} نتيجة` : 'نتيجة واحدة';
     },
     bg: function (nb) {
-      return `${this.format_number(nb)} резултат${nb > 1 ? 'а' : ''}`;
+      return `${formatNumber(nb)} резултат${nb > 1 ? 'а' : ''}`;
     },
     cs: function (nb) {
       let suffix = 'ek';
       if (nb > 1) suffix = 'ky';
       if (nb > 4) suffix = 'ků';
-      return `${this.format_number(nb)} výsled${suffix}`;
+      return `${formatNumber(nb)} výsled${suffix}`;
     },
     da: function (nb) {
-      return `${this.format_number(nb)} resultat${nb > 1 ? 'er' : ''}`;
+      return `${formatNumber(nb)} resultat${nb > 1 ? 'er' : ''}`;
     },
     de: function (nb) {
-      return `${this.format_number(nb)} Ergebnis${nb > 1 ? 'se' : ''}`;
+      return `${formatNumber(nb)} Ergebnis${nb > 1 ? 'se' : ''}`;
     },
     el: function (nb) {
-      return `${this.format_number(nb)} αποτέλεσμα${nb > 1 ? 'τα' : ''}`;
+      return `${formatNumber(nb)} αποτέλεσμα${nb > 1 ? 'τα' : ''}`;
     },
     en: function (nb) {
-      return `${this.format_number(nb)} result${nb > 1 ? 's' : ''}`;
+      return `${formatNumber(nb)} result${nb > 1 ? 's' : ''}`;
     },
     es: function (nb) {
-      return `${this.format_number(nb)} resultado${nb > 1 ? 's' : ''}`;
+      return `${formatNumber(nb)} resultado${nb > 1 ? 's' : ''}`;
     },
     fi: function (nb) {
-      return `${this.format_number(nb)} tulos${nb > 1 ? 'ta' : ''}`;
+      return `${formatNumber(nb)} tulos${nb > 1 ? 'ta' : ''}`;
     },
     fr: function (nb) {
-      return `${this.format_number(nb)} résultat${nb > 1 ? 's' : ''}`;
+      return `${formatNumber(nb)} résultat${nb > 1 ? 's' : ''}`;
     },
     hu: function (nb) {
-      return `${this.format_number(nb)} találat`;
+      return `${formatNumber(nb)} találat`;
     },
     id: function (nb) {
-      return `${this.format_number(nb)} hasil`;
+      return `${formatNumber(nb)} hasil`;
     },
     it: function (nb) {
-      return `${this.format_number(nb)} risultat${nb > 1 ? 'i' : 'o'}`;
+      return `${formatNumber(nb)} risultat${nb > 1 ? 'i' : 'o'}`;
     },
     ja: function (nb) {
-      return `${this.format_number(nb)}個の結果`;
+      return `${formatNumber(nb)}個の結果`;
     },
     ko: function (nb) {
-      return `${this.format_number(nb)}건의`;
+      return `${formatNumber(nb)}건의`;
     },
     nl: function (nb) {
-      return `${this.format_number(nb)} resulta${nb > 1 ? 'ten' : 'at'}`;
+      return `${formatNumber(nb)} resulta${nb > 1 ? 'ten' : 'at'}`;
     },
     no: function (nb) {
-      return `${this.format_number(nb)} resultat${nb > 1 ? 'er' : ''}`;
+      return `${formatNumber(nb)} resultat${nb > 1 ? 'er' : ''}`;
     },
     pl: function (nb) {
-      return `${this.format_number(nb)} wynik${nb > 1 ? 'ów' : ''}`;
+      return `${formatNumber(nb)} wynik${nb > 1 ? 'ów' : ''}`;
     },
     pt: function (nb) {
-      return `${this.format_number(nb)} resultado${nb > 1 ? 's' : ''}`;
+      return `${formatNumber(nb)} resultado${nb > 1 ? 's' : ''}`;
     },
     ro: function (nb) {
-      return `${this.format_number(nb)} rezultat${nb > 1 ? 'e' : ''}`;
+      return `${formatNumber(nb)} rezultat${nb > 1 ? 'e' : ''}`;
     },
     ru: function (nb) {
       let suffix = '';
@@ -94,22 +96,22 @@ const defaultTranslations = {
       )
         suffix = 'а';
       else suffix = 'ов';
-      return `${this.format_number(nb)} результат${suffix}`;
+      return `${formatNumber(nb)} результат${suffix}`;
     },
     sk: function (nb) {
       let suffix = 'ok';
       if (nb > 1) suffix = 'ky';
       if (nb > 4) suffix = 'kov';
-      return `${this.format_number(nb)} výsled${suffix}`;
+      return `${formatNumber(nb)} výsled${suffix}`;
     },
     sv: function (nb) {
-      return `${this.format_number(nb)} träff${nb > 1 ? 'ar' : ''}`;
+      return `${formatNumber(nb)} träff${nb > 1 ? 'ar' : ''}`;
     },
     th: function (nb) {
-      return `${this.format_number(nb)} ผลลัพธ์ใน`;
+      return `${formatNumber(nb)} ผลลัพธ์ใน`;
     },
     tr: function (nb) {
-      return `${this.format_number(nb)} sonuç`;
+      return `${formatNumber(nb)} sonuç`;
     },
     uk: function (nb) {
       let suffix = '';
@@ -121,16 +123,16 @@ const defaultTranslations = {
       )
         suffix = 'и';
       else suffix = '';
-      return `${this.format_number(nb)} результат${suffix}`;
+      return `${formatNumber(nb)} результат${suffix}`;
     },
     vi: function (nb) {
-      return `${this.format_number(nb)} kết quả được tìm`;
+      return `${formatNumber(nb)} kết quả được tìm`;
     },
     'zh-cn': function (nb) {
-      return `${this.format_number(nb)}个结果`;
+      return `${formatNumber(nb)}个结果`;
     },
     'zh-tw': function (nb) {
-      return `${this.format_number(nb)} 項結果`;
+      return `${formatNumber(nb)} 項結果`;
     },
   },
   noResultsFor: {

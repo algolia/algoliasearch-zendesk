@@ -8,14 +8,7 @@
 
 This JavaScript library allows you to replace the default search of your Zendesk Help Center by Algolia. [Algolia](https://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
 
-To browse through the crawler, visit the [crawler/](../crawler/) folder.
-
 ## Documentation
-
-<!--
-  docs/documentation.md is generated from the content of the ## Documentation section of app/README.md
-  To change its content, modify app/README.md, go to the app/ folder and run `npm install && npm run build:docs`
--->
 
 ### Synchronize Algolia with your Help Center
 
@@ -50,7 +43,7 @@ Once your data has been extracted to Algolia, you need to update your Help Cente
 
 - Copy the **JavaScript** snippet & **Publish** changes:
   1. Paste the code we provide you while connecting your Zendesk Help Center with Algolia at the end of the template.
-  1. Click **Save** and ensure everything is working using the preview on the right (if you have some small CSS issues, [read this part](#customizing-the-css))
+  1. Click **Save** and ensure everything is working using the preview on the right
   1. Click **Publish Changes**
 
 <div align="center">
@@ -67,11 +60,11 @@ Here is a full breakdown of the available options for the JavaScript library:
 <link
   rel="stylesheet"
   type="text/css"
-  href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.css"
+  href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/3/algoliasearch.zendesk-hc.min.css"
 />
 <script
   type="text/javascript"
-  src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.js"
+  src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/3/algoliasearch.zendesk-hc.min.js"
 ></script>
 <script type="text/javascript">
   algoliasearchZendeskHC({
@@ -86,70 +79,35 @@ Here is a full breakdown of the available options for the JavaScript library:
     analytics: true, // should queries be processed by Algolia analytics
     baseUrl: '/hc/', // the base URL of your Help Center
     poweredBy: true, // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
-    clickAnalytics: false, // whether or not to enable the clickAnalytics feature (available on the Enterprise plan)
+    clickAnalytics: true, // whether or not to enable the clickAnalytics feature (available on the Enterprise plan)
     debug: false, // debug mode prevents the autocomplete to close when trying to inspect it
     color: '#158EC2', // main color (used for links)
     highlightColor: '#158EC2', // highlight color to emphasize matching text
-    responsive: true, // responsive instantsearch page
     autocomplete: {
       enabled: true, // is the autocomplete feature enabled?
       inputSelector: '#query', // the DOM selector to select the search box
       hitsPerPage: 5, // the number of suggestions to display
     },
-    instantsearch: {
-      enabled: true, // is the instantsearch feature enabled?
-      hitsPerPage: 20, // the number of suggestions to display
-      paginationSelector: '.pagination', // the DOM selector for the current pagination (to hide it)
-      reuseAutocomplete: false, // do not add a search input for the instant-search page
-      hideAutocomplete: true, // whether or not to hide the autocomplete on the instantsearch page (ignored if reuseAutocomplete is used)
-      selector: '.search-results', // the DOM selector for the results container
-      tagsLimit: 15, // maximum number of tags to display
-    },
-    instantsearchPage, // function to check if we're on the search page
+    // TODO: restore this
+    // instantsearch: {
+    //   enabled: true, // is the instantsearch feature enabled?
+    //   hitsPerPage: 20, // the number of suggestions to display
+    //   paginationSelector: '.pagination', // the DOM selector for the current pagination (to hide it)
+    //   reuseAutocomplete: false, // do not add a search input for the instant-search page
+    //   hideAutocomplete: true, // whether or not to hide the autocomplete on the instantsearch page (ignored if reuseAutocomplete is used)
+    //   selector: '.search-results', // the DOM selector for the results container
+    //   tagsLimit: 15, // maximum number of tags to display
+    // },
     templates: {
       // template objects (see the templates section)
       autocomplete: {},
-      instantsearch: {},
+      // TODO: restore this
+      // instantsearch: {},
     },
     translations: {}, // translation strings
   });
 </script>
 ```
-
-### Customizing the CSS
-
-It is definitely possible that, when you install the application, it doesn't exactly display as you expect. No worries, these are usually just a few conflicting rules between your design and our integration.
-
-You might also just want to change the look & feel of the search.
-
-Either way, just follow the following steps:
-
-- Ensure you read the [SCSS source file](https://github.com/algolia/algoliasearch-zendesk/blob/master/app/css/index.scss) to see all the rules we're using
-- Add a `<style>` tag after the `<link>` tag you've already added in your **Document Head** template and add your custom CSS here
-
-**Example:**
-
-```html
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/CURRENT_VERSION/algoliasearch.zendesk-hc.min.css"
-/>
-<style>
-  .aa-dropdown-menu {
-    background-color: #ccc;
-  }
-</style>
-<script
-  type="text/javascript"
-  src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/CURRENT_VERSION/algoliasearch.zendesk-hc.min.js"
-></script>
-<script type="text/javascript">
-  algoliasearchZendeskHC(/* ... */);
-</script>
-```
-
-**Note:** You might have some trouble trying to customize the autocomplete menu because it automatically closes when you try to Inspect it. Just set `debug: true` to avoid this behaviour.
 
 ### Supporting multiple languages
 
@@ -238,53 +196,22 @@ For reference, here is the list of all the translations for the `en-us` locale:
 
 ```coffee
 translations: {
-  categories: {
-    'en-us': 'Categories'
-  },
-  change_query: {
-    'en-us': 'Change your query'
-  },
-  clear_filters: {
-    'en-us': 'clear your filters'
-  },
-  format_number: {
-    'en-us': function (n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
-  },
-  filter: {
-    'en-us': 'Filter results'
-  },
-  nb_results: {
-    'en-us': function (nb) {
-      return this.format_number(nb) + ' result' + (nb > 1 ? 's' : '');
+  nbResults: {
+    en: function (nb) {
+      return `${formatNumber(nb)} result${nb > 1 ? 's' : ''}`;
     }
   },
-  no_result_for: {
-    'en-us': function (query) {
+  noResultsFor: {
+    en: function (query) {
       return 'No result found for ' + this.quoted(query);
     }
   },
-  no_result_actions: {
-    'en-us': function () {
-      return this.change_query + ' or ' + this.clear_filters;
-    }
-  },
   placeholder: {
-    'en-us': 'Search in our articles'
+    en: 'Search in our articles'
   },
-  quoted: {
-    'en-us': function (text) { return '"' + escapeHTML(text) + '"'; }
+  searchByAlgolia: {
+    en: function (algolia) { return 'Search by ' + algolia; }
   },
-  stats: {
-    'en-us': function (nbHits, processing) {
-      return this.nb_results(nbHits) + ' found in ' + processing + ' ms';
-    }
-  },
-  search_by_algolia: {
-    'en-us': function (algolia) { return 'Search by ' + algolia; }
-  },
-  tags: {
-    'en-us': 'Tags'
-  }
 }
 ```
 
@@ -329,34 +256,6 @@ Example:
 <p>This paragraph will be indexed to Algolia.</p>
 ```
 
-### Analytics
-
-The `analytics` parameter enables searches capturing, for reports about popular queries, searches without results, and more. It defaults to `true`.
-
-The `clickAnalytics` parameter enables click capturing in search results, for reports about the click rate and average position of clicks for specific queries. It defaults to `false`, as this feature is only accessible on our Enterprise plan.
-
-With `clickAnalytics` enabled, you can use `algoliasearchZendeskHC.trackConversion()` on an article page to capture a “conversion” if your articles include Calls To Action.
-
-### Modifying templates
-
-**WARNING**: We don't provide any guarantee that we won't change the templates between versions. If you chose to modify a template, you'll need to lock your version to MAJOR.MINOR.PATCH instead of just MAJOR in
-
-```html
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.css"
-/>
-<script
-  type="text/javascript"
-  src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.js"
-></script>
-```
-
-The latest version is [![version](https://img.shields.io/npm/v/algoliasearch.zendesk-hc.png)](https://www.npmjs.com/package/algoliasearch.zendesk-hc).
-
-With your version locked in place, you can now look at [`templates.js`](https://github.com/algolia/algoliasearch-zendesk/blob/master/app/src/templates.js) to know which keys you can override. The code here is ES6, you'll need to rewrite your custom template using Vanilla JavaScript instead. Also, some templates are using a `compile` function in this file. This function is internally calling the [`Hogan.js` template engine](http://mustache.github.io/mustache.5.html) with square brackets instead of braces (because Zendesk templates already use braces). This function is available using `algoliasearchZendeskHC.compile`.
-
 ### Whitelisting our IPs
 
 In case you're using Zendesk's [IP restrictions feature](https://support.zendesk.com/hc/en-us/articles/203663706-Restricting-access-to-Zendesk-Support-and-your-Help-Center-using-IP-restrictions), you'll need to whitelist our IPs for our indexing to work. Here are those IPs:
@@ -369,87 +268,11 @@ In case you're using Zendesk's [IP restrictions feature](https://support.zendesk
 
 The `package.json` holds multiple scripts:
 
-- `build:css`: Compiles the CSS files to `dist/algoliasearch.zendesk-hc.css`
-- `build:docs`: Extracts the documentation from this `README.md` to [`../docs/documentation.md`](../docs/documentation.md)
-- `build:js`: Compiles the JS files to `dist/algoliasearch.zendesk-hc.js` and `dist-es5-module/*.js`
-- `build`: Launches all 3 previous builds
-- `clean`: Removes `dist/` and `dist-es5-module`
-- `dev`: Launches `build` and `server`, and watches the files to rebuild them if needed
+- `clean`: Removes `dist/` and `node_modules/`
+- `build`: Compiles the JS & CSS files to `dist/algoliasearch.zendesk-hc.{css,js}`
+- `dev`: Launches `parcel`, and watches the files to rebuild them if needed
 - `lint`: Lints the JS files
-- `server`: Runs a simple HTTP server pointing to `dist/`
-- `test:coverage`: Runs `test` with coverage enabled
-- `test`: Runs the test suite
-
-`build:js`, `build:css`, `build` and `dev` can be passed a `NODE_ENV` environment variable. If set to production, it also creates minified files and map files.
-
-`server` accepts a `PORT` environment variable to change on which port it will run.
-
-### Example
-
-```sh
-$ PORT=3005 npm run dev
-
-> algoliasearch.zendesk-hc@2.22.3 dev /Users/jerska/algolia/zendesk/app
-> gulp dev
-
-[13:59:53] Failed to load external module @babel/register
-[13:59:53] Requiring external module babel-register
-[13:59:56] Using gulpfile ~/algolia/zendesk/app/gulpfile.babel.js
-[13:59:56] Starting 'build:js:watch'...
-[13:59:56] Environment for 'build:js': NODE_ENV=development
-[13:59:56] Starting 'build:css'...
-[13:59:56] Environment for 'build:css': NODE_ENV=development
-[13:59:56] Starting 'build:css:watcher'...
-[13:59:56] Finished 'build:css:watcher' after 8.64 ms
-[13:59:56] Starting 'build:docs'...
-[13:59:56] Starting 'build:docs:watcher'...
-[13:59:56] Finished 'build:docs:watcher' after 1.11 ms
-[13:59:56] Starting 'server'...
-[13:59:56] Finished 'server' after 42 ms
-[13:59:56] Server started http://localhost:3005
-[13:59:56] Finished 'build:docs' after 66 ms
-[13:59:56] Starting 'build:docs:watch'...
-[13:59:56] Finished 'build:docs:watch' after 40 μs
-[13:59:56] Finished 'build:css' after 109 ms
-[13:59:56] Starting 'build:css:watch'...
-[13:59:56] Finished 'build:css:watch' after 3.4 μs
-[14:00:00] Finished 'build:js:watch' after 4.05 s
-[14:00:00] Starting 'dev'...
-[14:00:00] Finished 'dev' after 2.68 μs
-```
-
-When running, you can then add this custom script to your Help Center, inside the Document Head template:
-
-```html
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="http://localhost:3005/dist/algoliasearch.zendesk-hc.css"
-/>
-<script
-  type="text/javascript"
-  src="http://localhost:3005/dist/algoliasearch.zendesk-hc.js"
-></script>
-<script type="text/javascript">
-  algoliasearchZendeskHC({
-    applicationId: 'FIXME',
-    apiKey: 'FIXME',
-    subdomain: 'FIXME',
-  });
-</script>
-```
-
-This might however not load, due to trying to load HTTP content on an HTTPS site. Some browsers will prevent the connection and print warnings in your browser console.  
-In this case, you'll need to authorize insecure loading. This will most often be hidden behind a shield icon or the green lock icon in your location bar.  
-For instance, on Firefox: click the lock icon in the location bar > Right arrow with label "Show connection details" > Disable protection for now
-
-### Documentation
-
-To update the documentation of the project, you only need to update this README. To propagate the changes to the `docs/` website, you simply need to run:
-
-```sh
-npm run build:docs
-```
+- `format`: Runs prettier
 
 ## Contributing
 

@@ -72,8 +72,31 @@ class Autocomplete {
     };
     const lang = locale.split('-')[0];
 
+    // figure out parent container of the input
+    const allInputs = document.querySelectorAll(inputSelector);
+    if (allInputs.length === 0) {
+      throw new Error(
+        `Couldn't find any input matching inputSelector '${inputSelector}'.`
+      );
+    }
+    if (allInputs.length > 1) {
+      throw new Error(
+        `Too many inputs (${allInputs.length}) matching inputSelector '${inputSelector}'.`
+      );
+    }
+    let container = allInputs[0];
+    while (container && ['INPUT', 'FORM'].includes(container.tagName)) {
+      container = container.parentElement;
+    }
+    if (!container) {
+      throw new Error(
+        `Couldn't find the parent container of inputSelector '${inputSelector}'`
+      );
+    }
+    container.innerHTML = '';
+
     autocomplete({
-      container: inputSelector,
+      container,
       placeholder: translate(translations, locale, 'placeholder'),
       detachedMediaQuery: '',
       debug: process.env.NODE_ENV === 'development' || debug,
