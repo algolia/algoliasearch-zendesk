@@ -98,7 +98,6 @@ class Autocomplete {
     container.innerHTML = '';
 
     function onKeyDown(event) {
-      console.log(event, self.state);
       const open = document.querySelector('.aa-DetachedSearchButton');
       const close = document.querySelector('.aa-DetachedCancelButton');
 
@@ -215,7 +214,13 @@ class Autocomplete {
           ],
         })
           .then((results) => {
-            const hitsByCategorySection = groupBy(results[0], sectionTitle);
+            const hitsButBestAnswer = results[0].filter(
+              (hit) => hit.objectID !== answersRef.current?.[0]?.objectID
+            );
+            const hitsByCategorySection = groupBy(
+              hitsButBestAnswer,
+              sectionTitle
+            );
             return Object.entries(hitsByCategorySection).map(
               ([section, hits]) => {
                 return {
