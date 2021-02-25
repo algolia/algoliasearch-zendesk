@@ -46,6 +46,7 @@ class Autocomplete {
     locale,
     highlightColor,
     poweredBy,
+    subdomain,
     templates,
     translations,
   }) {
@@ -151,6 +152,13 @@ class Autocomplete {
 
       openOnFocus: true,
       onStateChange({ prevState, state, refresh }) {
+        if (state.isOpen && !prevState.isOpen) {
+          // hack to localize the cancel button
+          render(
+            translate(translations, locale, 'cancel'),
+            doc.querySelector('.aa-DetachedCancelButton')
+          );
+        }
         if (!bestArticle || prevState.query === state.query) {
           return;
         }
@@ -269,10 +277,11 @@ class Autocomplete {
         render(
           <Fragment>
             <div className="aa-PanelLayout">{sections}</div>
-            {poweredBy && (
-              <div className="aa-PanelFooter">
-                {templates.autocomplete.poweredBy()}
-              </div>
+            {templates.autocomplete.footer(
+              translations,
+              locale,
+              subdomain,
+              poweredBy
             )}
           </Fragment>,
           root
