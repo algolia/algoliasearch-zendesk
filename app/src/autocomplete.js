@@ -141,6 +141,8 @@ class Autocomplete {
         );
       },
       getSources({ query: q }) {
+        const sectionTitle = (hit) =>
+          `${hit.category.title} > ${hit.section.title}`;
         const answersSection = {
           // ----------------
           // Source: Algolia Answers
@@ -157,9 +159,8 @@ class Autocomplete {
               if (items.length === 0) {
                 return null;
               }
-              return templates.autocomplete.bestArticleHeader(
-                translations,
-                locale,
+              return templates.autocomplete.articlesHeader(
+                `⚡️ ${sectionTitle(items[0])}`,
                 items
               );
             },
@@ -185,10 +186,7 @@ class Autocomplete {
           ],
         })
           .then((results) => {
-            const hitsByCategorySection = groupBy(
-              results[0],
-              (hit) => `${hit.category.title} > ${hit.section.title}`
-            );
+            const hitsByCategorySection = groupBy(results[0], sectionTitle);
             return Object.entries(hitsByCategorySection).map(
               ([section, hits]) => {
                 return {

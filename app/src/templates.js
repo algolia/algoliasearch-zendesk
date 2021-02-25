@@ -48,18 +48,6 @@ const templates = {
       );
     },
 
-    // eslint-disable-next-line no-unused-vars
-    bestArticleHeader: (_translations, _locale, _items) => (
-      <Fragment>
-        <span className="aa-SourceHeaderTitle">
-          {window?.I18N?.translations?.[
-            'txt.help_center.helpers.application.articles.promoted'
-          ] || 'Best Article'}
-        </span>
-        <div className="aa-SourceHeaderLine" />
-      </Fragment>
-    ),
-
     // Autocompletion template for an article
     article: (hit) => (
       <Fragment>
