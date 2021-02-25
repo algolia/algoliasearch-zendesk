@@ -75,7 +75,7 @@ const templates = {
           </ul>
           <a
             class="aa-PoweredByAlgolia"
-            href="https://www.algolia.com/docsearch"
+            href={`https://www.algolia.com/?utm_source=zendesk&utm_medium=link&utm_campaign=autocomplete-${subdomain}`}
             target="_blank"
             rel="noopener noreferrer"
           >
