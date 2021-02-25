@@ -2,6 +2,7 @@ import { version } from '../package.json';
 import algoliasearch from 'algoliasearch/lite';
 import { autocomplete, getAlgoliaHits } from '@algolia/autocomplete-js';
 import '@algolia/autocomplete-theme-classic';
+import './autocomplete.css';
 // eslint-disable-next-line no-unused-vars
 import { render, h, Fragment } from 'preact';
 import { groupBy } from 'lodash';
