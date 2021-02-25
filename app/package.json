@@ -1,6 +1,6 @@
 {
   "name": "algoliasearch.zendesk-hc",
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-alpha.5",
   "description": "Algolia Search for Zendesk's Help Center",
   "author": "Algolia <support@algolia.com>",
   "keywords": [
@@ -33,6 +33,7 @@
     "lodash": "^4.17.21",
     "preact": "^10.5.12",
     "search-insights": "1.6.3",
+    "throttle-debounce": "^3.0.1",
     "to-factory": "^1.0.0"
   },
   "devDependencies": {

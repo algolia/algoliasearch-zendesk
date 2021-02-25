@@ -1,3 +1,5 @@
+import { throttle } from 'throttle-debounce';
+
 function findAnswers(index, query, lang, params, callback) {
   index
     .findAnswers(query, [lang], {
@@ -15,17 +17,4 @@ function findAnswers(index, query, lang, params, callback) {
     .catch(console.error);
 }
 
-function debounce(fn, time) {
-  let timerId = undefined;
-  return function (...args) {
-    if (timerId) {
-      clearTimeout(timerId);
-    }
-    timerId = setTimeout(function () {
-      // eslint-disable-next-line prefer-spread
-      return fn.apply(null, args);
-    }, time);
-  };
-}
-
-export const debounceGetAnswers = debounce(findAnswers, 400);
+export const debounceGetAnswers = throttle(400, false, findAnswers);
