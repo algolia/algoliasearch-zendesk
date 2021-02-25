@@ -38,7 +38,7 @@ class Autocomplete {
 
   init({
     analytics,
-    autocomplete: { enabled, hitsPerPage, inputSelector },
+    autocomplete: { enabled, bestArticle, hitsPerPage, inputSelector },
     baseUrl,
     color,
     clickAnalytics,
@@ -129,7 +129,7 @@ class Autocomplete {
       ],
       openOnFocus: true,
       onStateChange({ prevState, state, refresh }) {
-        if (prevState.query === state.query) {
+        if (!bestArticle || prevState.query === state.query) {
           return;
         }
         debounceGetAnswers(

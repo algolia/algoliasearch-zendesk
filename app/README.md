@@ -85,24 +85,13 @@ Here is a full breakdown of the available options for the JavaScript library:
     highlightColor: '#158EC2', // highlight color to emphasize matching text
     autocomplete: {
       enabled: true, // is the autocomplete feature enabled?
+      bestArticle: true, // use Algolia Answers to display the best article
       inputSelector: '#query', // the DOM selector to select the search box
       hitsPerPage: 5, // the number of suggestions to display
     },
-    // TODO: restore this
-    // instantsearch: {
-    //   enabled: true, // is the instantsearch feature enabled?
-    //   hitsPerPage: 20, // the number of suggestions to display
-    //   paginationSelector: '.pagination', // the DOM selector for the current pagination (to hide it)
-    //   reuseAutocomplete: false, // do not add a search input for the instant-search page
-    //   hideAutocomplete: true, // whether or not to hide the autocomplete on the instantsearch page (ignored if reuseAutocomplete is used)
-    //   selector: '.search-results', // the DOM selector for the results container
-    //   tagsLimit: 15, // maximum number of tags to display
-    // },
     templates: {
       // template objects (see the templates section)
       autocomplete: {},
-      // TODO: restore this
-      // instantsearch: {},
     },
     translations: {}, // translation strings
   });
