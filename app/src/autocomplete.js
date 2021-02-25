@@ -226,6 +226,25 @@ class Autocomplete {
             const hitsButBestAnswer = results[0].filter(
               (hit) => hit.objectID !== answersRef.current?.[0]?.objectID
             );
+            if (!answersRef.current?.[0] && hitsButBestAnswer.length === 0) {
+              return [
+                {
+                  sourceId: 'NoResults',
+                  getItems() {
+                    return [];
+                  },
+                  templates: {
+                    noResults({ state }) {
+                      return templates.autocomplete.noResults(
+                        translations,
+                        locale,
+                        state.query
+                      );
+                    },
+                  },
+                },
+              ];
+            }
             const hitsByCategorySection = groupBy(
               hitsButBestAnswer,
               sectionTitle
@@ -249,13 +268,6 @@ class Autocomplete {
                     },
                     item({ item }) {
                       return templates.autocomplete.article(item);
-                    },
-                    noResults({ state }) {
-                      return templates.autocomplete.noResults(
-                        translations,
-                        locale,
-                        state.query
-                      );
                     },
                   },
                   onSelect({ item }) {

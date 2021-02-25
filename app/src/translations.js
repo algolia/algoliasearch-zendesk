@@ -155,7 +155,7 @@ const defaultTranslations = {
       return `Δεν βρέθηκε αποτέλεσμα για «${query}»`;
     },
     en: function (query) {
-      return `No result found for "${query}"`;
+      return `No results found for "${query}"`;
     },
     es: function (query) {
       return `No se han encontrado resultados para "${query}"`;
