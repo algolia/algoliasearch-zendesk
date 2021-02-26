@@ -3,7 +3,7 @@ import { throttle } from 'throttle-debounce';
 function findAnswers(index, query, lang, params, callback) {
   index
     .findAnswers(query, [lang], {
-      attributesForPrediction: ['title', 'category', 'section', 'body_safe'],
+      attributesForPrediction: ['body_safe'],
       threshold: 50,
       nbHits: 1,
       params: {
