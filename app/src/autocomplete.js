@@ -139,11 +139,16 @@ class Autocomplete {
       plugins: [
         createLocalStorageRecentSearchesPlugin({
           key: 'algolia-recent-searches',
-          // in case the query is exactly the recent item, skip it to not have a useless entry
+          limit: 5,
           search({ query, items, limit }) {
+            // in case the query is exactly the recent item, skip it to not have a useless entry
             const results = defaultLocalStorageSearch({ query, items, limit });
             if (results.length === 1 && results[0].query === query) {
               return [];
+            }
+            // if the query is non-empty, really display only 2 insted of 5
+            if (query !== '') {
+              return results.slice(0, 2);
             }
             return results;
           },
