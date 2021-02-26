@@ -95,23 +95,4 @@ class AlgoliasearchZendeskHC {
   }
 }
 
-AlgoliasearchZendeskHC.trackConversion = (articleID) => {
-  if (articleID === undefined) {
-    if (window.location.pathname.indexOf('/articles/') === -1) {
-      throw new Error(
-        'AlgoliasearchZendeskHCError: Calling trackConversion without an articleID on a non-article page'
-      );
-    }
-    try {
-      articleID = window.location.pathname.split('/')[4].split('-')[0];
-    } catch (err) {
-      throw new Error(
-        'AlgoliasearchZendeskHCError: Failed to extract the article articleID from the URL'
-      );
-    }
-  }
-
-  this.search.trackConversion(articleID);
-};
-
 export default AlgoliasearchZendeskHC;

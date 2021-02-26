@@ -53,6 +53,8 @@ class Autocomplete {
   }) {
     if (!enabled) return;
 
+    this.state = { isOpen: false };
+
     const doc = document.documentElement;
     doc.style.setProperty('--aa-primary-color', color);
     doc.style.setProperty('--aa-highlight-color', highlightColor);
@@ -66,10 +68,6 @@ class Autocomplete {
       attributesToSnippet: ['body_safe:30'],
       snippetEllipsisText: '…',
     };
-
-    // eslint-disable-next-line consistent-this
-    const self = this;
-    self.state = { isOpen: false };
 
     const answersRef = {
       current: [],
@@ -99,25 +97,35 @@ class Autocomplete {
     }
     container.innerHTML = '';
 
-    function onKeyDown(event) {
+    const onKeyDown = (event) => {
       const open = document.querySelector('.aa-DetachedSearchButton');
       const close = document.querySelector('.aa-DetachedCancelButton');
 
       if (
-        (event.keyCode === 27 && self.state.isOpen) ||
+        (event.keyCode === 27 && this.state.isOpen) ||
         // The `Cmd+K` shortcut both opens and closes the modal.
         (event.key === 'k' && (event.metaKey || event.ctrlKey))
       ) {
         event.preventDefault();
 
-        if (self.state.isOpen) {
+        if (this.state.isOpen) {
           close.click();
         } else {
           open.click();
         }
       }
-    }
+    };
 
+    const onSelect = ({ item }) => {
+      this.trackClick(
+        item,
+        item.__autocomplete_id,
+        item.__autocomplete_queryID
+      );
+    };
+
+    // eslint-disable-next-line consistent-this
+    const self = this;
     autocomplete({
       container,
       placeholder: translate(translations, locale, 'placeholder'),
@@ -176,9 +184,16 @@ class Autocomplete {
           lang,
           {
             facetFilters: `["locale.locale:${locale}"]`,
+            clickAnalytics,
           },
-          ({ hits }) => {
-            answersRef.current = hits;
+          ({ hits, queryID }) => {
+            answersRef.current = hits.map((hit, i) => {
+              // eslint-disable-next-line camelcase
+              hit.__autocomplete_id = i;
+              // eslint-disable-next-line camelcase
+              hit.__autocomplete_queryID = queryID;
+              return hit;
+            });
             refresh();
           }
         );
@@ -211,6 +226,7 @@ class Autocomplete {
               return templates.autocomplete.article(item);
             },
           },
+          onSelect,
         };
 
         return getAlgoliaHits({
@@ -276,13 +292,7 @@ class Autocomplete {
                       return templates.autocomplete.article(item);
                     },
                   },
-                  onSelect({ item }) {
-                    self.trackClick(
-                      item,
-                      item.__autocomplete_id,
-                      item.__autocomplete_queryID
-                    );
-                  },
+                  onSelect,
                 };
               }
             );
