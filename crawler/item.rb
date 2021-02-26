@@ -97,7 +97,10 @@ module ZendeskIntegration::V2::Zendesk
     end
 
     def decode body
-      body_without_tags = body.to_s.gsub(/(<!--) +(algolia-ignore) +(-->).+?\1 +\/\2 +\3/m, '').gsub(/<\/?[^>]*>/, ' ')
+      body_without_tags = body.to_s.
+        gsub(/(<!--) +(algolia-ignore) +(-->).+?\1 +\/\2 +\3/m, ''). # strip out the `<!-- algolia-ignore -->` sections
+        gsub(/<a[^>]+href="#[^"]+"[^>]*>.+?<\/a>/m, '').             # strip out the links to anchors within the same page (those are usually TOC introducing noice/duplicates)
+        gsub(/<\/?[^>]*>/, ' ')                                      # strip out any remaining HTML tags
       ZendeskIntegration::V2::DECODER.decode(body_without_tags)
     end
 
