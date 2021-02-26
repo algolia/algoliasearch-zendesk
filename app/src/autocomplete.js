@@ -188,7 +188,9 @@ class Autocomplete {
           },
           ({ hits, queryID }) => {
             answersRef.current = hits.map((hit, i) => {
-              hit._snippetResult.body_safe.value = hit._answer.extract;
+              if (hit._answer.extractAttribute === 'body_safe') {
+                hit._snippetResult.body_safe.value = hit._answer.extract;
+              }
               // eslint-disable-next-line camelcase
               hit.__autocomplete_id = i;
               // eslint-disable-next-line camelcase
@@ -241,6 +243,7 @@ class Autocomplete {
                 clickAnalytics,
                 queryLanguages: [lang],
                 removeStopWords: true,
+                ignorePlurals: true,
               },
             },
           ],
