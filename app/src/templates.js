@@ -123,7 +123,7 @@ const templates = {
     // Autocompletion template for an article
     article: (hit) => (
       <Fragment>
-        <a class="aa-ItemLink" href="hit.url">
+        <a class="aa-ItemLink" href={hit.url}>
           <div className="aa-ItemIcon aa-ItemIcon--align-top">
             <svg viewBox="0 0 24 24">
               <path

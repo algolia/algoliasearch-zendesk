@@ -116,6 +116,8 @@ class Autocomplete {
       }
     };
 
+    const buildUrl = (hit) => `${baseUrl}${locale}/articles/${hit.id}`;
+
     const onSelect = ({ item }) => {
       this.trackClick(
         item,
@@ -200,6 +202,7 @@ class Autocomplete {
               hit.__autocomplete_id = i;
               // eslint-disable-next-line camelcase
               hit.__autocomplete_queryID = queryID;
+              hit.url = buildUrl(hit);
               return hit;
             });
             refresh();
@@ -218,7 +221,7 @@ class Autocomplete {
             return answersRef.current;
           },
           getItemUrl({ item }) {
-            return `${baseUrl}${locale}/articles/${item.id}`;
+            return item.url;
           },
           templates: {
             header({ items }) {
@@ -285,10 +288,13 @@ class Autocomplete {
                 return {
                   sourceId: section,
                   getItems() {
-                    return hits;
+                    return hits.map((hit) => {
+                      hit.url = buildUrl(hit);
+                      return hit;
+                    });
                   },
                   getItemUrl({ item }) {
-                    return `${baseUrl}${locale}/articles/${item.id}`;
+                    return item.url;
                   },
                   templates: {
                     header({ items }) {
