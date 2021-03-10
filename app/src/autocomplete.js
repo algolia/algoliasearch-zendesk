@@ -211,7 +211,7 @@ class Autocomplete {
       },
       getSources({ query: q }) {
         const sectionTitle = (hit) =>
-          `${hit.category.title} > ${hit.section.title}`;
+          `${hit.category.title} - ${hit.section.title}`;
         const answersSection = {
           // ----------------
           // Source: Algolia Answers
@@ -229,12 +229,12 @@ class Autocomplete {
                 return null;
               }
               return templates.autocomplete.articlesHeader(
-                `⚡️ ${sectionTitle(items[0])}`,
+                `Best Answer`,
                 items
               );
             },
             item({ item }) {
-              return templates.autocomplete.article(item);
+              return templates.autocomplete.answers(item);
             },
           },
           onSelect,

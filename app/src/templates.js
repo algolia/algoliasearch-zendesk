@@ -144,6 +144,28 @@ const templates = {
       </Fragment>
     ),
 
+    answers: (hit) => (
+      <Fragment>
+        <a class="aa-ItemLink" href={hit.url}>
+          <div className="aa-ItemIcon aa-ItemIcon--align-top">
+            <svg viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M17.016 12q0 0.422-0.305 0.703t-0.727 0.281h-9.984l-3.984 4.031v-14.016q0-0.422 0.281-0.703t0.703-0.281h12.984q0.422 0 0.727 0.281t0.305 0.703v9zM21 6q0.422 0 0.703 0.281t0.281 0.703v15l-3.984-3.984h-11.016q-0.422 0-0.703-0.281t-0.281-0.703v-2.016h12.984v-9h2.016z"
+              ></path>
+            </svg>
+          </div>
+          <div className="aa-ItemContent aa-ItemContent--dual">
+            <div className="aa-answers-question">{hit.title}</div>
+            <div className="aa-answers-questionTopic">
+              in {hit.category.title} - {hit.section.title}
+            </div>
+            <div className="aa-answers-answer">{hit.body_safe}</div>
+          </div>
+        </a>
+      </Fragment>
+    ),
+
     noResults: (translations, locale, query) => (
       <Fragment>
         {translate(translations, locale, 'noResultsFor', query)}

@@ -62,3 +62,23 @@
   margin-left: 8px !important;
   color: rgb(84, 104, 255);
 }
+
+.aa-answers-question {
+  font-weight: bold;
+}
+.aa-answers-questionTopic {
+  font-size: 0.95em;
+  opacity: .7;
+  margin: .5em 0;
+}
+
+.aa-answers-answer {
+  font-size: 0.95em;
+  opacity: .9;
+  line-height: 1.3em;
+}
+
+section[data-autocomplete-source-id="Answers"] .aa-ItemIcon{
+  background-color: var(--aa-primary-color);
+  color: white;
+}
