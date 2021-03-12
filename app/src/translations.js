@@ -230,94 +230,94 @@ const defaultTranslations = {
 
   in: {
     ar: function (section) {
-      return `${section}`;
+      return `في ${section}`;
     },
     bg: function (section) {
-      return `${section}`;
+      return `в ${section}`;
     },
     cs: function (section) {
-      return `${section}`;
+      return `v ${section}`;
     },
     da: function (section) {
-      return `${section}`;
+      return `i ${section}`;
     },
     de: function (section) {
-      return `${section}`;
+      return `im ${section}`;
     },
     el: function (section) {
-      return `${section}`;
+      return `σε ${section}`;
     },
     en: function (section) {
       return `in ${section}`;
     },
     es: function (section) {
-      return `${section}`;
+      return `en ${section}`;
     },
     fi: function (section) {
-      return `${section}`;
+      return `sisään ${section}`;
     },
     fr: function (section) {
       return `dans ${section}`;
     },
     hu: function (section) {
-      return `${section}`;
+      return `ban ben ${section}`;
     },
     id: function (section) {
-      return `${section}`;
+      return `di ${section}`;
     },
     it: function (section) {
-      return `${section}`;
+      return `nel ${section}`;
     },
     ja: function (section) {
-      return `${section}`;
+      return `に ${section}`;
     },
     ko: function (section) {
-      return `${section}`;
+      return `에 ${section}`;
     },
     nl: function (section) {
-      return `${section}`;
+      return `in ${section}`;
     },
     no: function (section) {
-      return `${section}`;
+      return `i ${section}`;
     },
     pl: function (section) {
-      return `${section}`;
+      return `w ${section}`;
     },
     pt: function (section) {
-      return `${section}`;
+      return `no ${section}`;
     },
     'pt-br': function (section) {
-      return `${section}`;
+      return `no ${section}`;
     },
     ro: function (section) {
-      return `${section}`;
+      return `în ${section}`;
     },
     ru: function (section) {
-      return `${section}`;
+      return `в ${section}`;
     },
     sk: function (section) {
-      return `${section}`;
+      return `v ${section}`;
     },
     sv: function (section) {
-      return `${section}`;
+      return `i ${section}`;
     },
     th: function (section) {
-      return `${section}`;
+      return `ใน ${section}`;
     },
     tr: function (section) {
-      return `${section}`;
+      return `içinde ${section}`;
     },
     uk: function (section) {
-      return `${section}`;
+      return `в ${section}`;
     },
     vi: function (section) {
-      return `${section}`;
+      return `trong ${section}`;
     },
     'zh-cn': function (section) {
-      return `${section}`;
+      return `在 ${section}`;
     },
     'zh-tw': function (section) {
-      return `${section}`;
+      return `在 ${section}`;
     },
   },
   placeholder: {
@@ -386,168 +386,168 @@ const defaultTranslations = {
   },
 
   bestAnswer: {
-    ar: null,
-    bg: null,
-    cs: null,
-    da: null,
-    de: null,
-    el: null,
+    ar: 'افضل جواب',
+    bg: 'Най-добър отговор',
+    cs: 'Nejlepší odpověď',
+    da: 'Bedste svar',
+    de: 'Beste Antwort',
+    el: 'Καλύτερη απάντηση',
     en: 'Best Answer',
-    es: null,
-    fi: null,
-    fr: 'Meilleure Réponse',
-    hu: null,
-    id: null,
-    it: null,
-    ja: null,
-    ko: null,
-    nl: null,
-    no: null,
-    pl: null,
-    pt: null,
-    'pt-br': null,
-    ro: null,
-    ru: null,
-    sk: null,
-    sv: null,
-    th: null,
-    tr: null,
-    uk: null,
-    vi: null,
-    'zh-cn': null,
-    'zh-tw': null,
+    es: 'La mejor respuesta',
+    fi: 'Paras vastaus',
+    fr: 'Meilleure réponse',
+    hu: 'Legjobb válasz',
+    id: 'Jawaban Terbaik',
+    it: 'Migliore risposta',
+    ja: 'ベスト回答',
+    ko: '우수 답변',
+    nl: 'Beste antwoord',
+    no: 'Beste svar',
+    pl: 'Najlepsza odpowiedź',
+    pt: 'Melhor resposta',
+    'pt-br': 'Melhor resposta',
+    ro: 'Cel mai bun raspuns',
+    ru: 'Лучший ответ',
+    sk: 'najlepšiu odpoveď',
+    sv: 'Bästa svaret',
+    th: 'ตอบที่ดีที่สุด',
+    tr: 'En iyi cevap',
+    uk: 'Найкращою відповіддю',
+    vi: 'Câu trả lời tốt nhất',
+    'zh-cn': '最佳答案',
+    'zh-tw': '最佳答案',
   },
 
   cancel: {
-    ar: null,
-    bg: null,
-    cs: null,
-    da: null,
-    de: null,
-    el: null,
+    ar: 'إلغاء',
+    bg: 'анулира',
+    cs: 'zrušení',
+    da: 'afbestille',
+    de: 'stornieren',
+    el: 'Ματαίωση',
     en: 'cancel',
-    es: null,
-    fi: null,
-    fr: 'fermer',
-    hu: null,
-    id: null,
-    it: null,
-    ja: null,
-    ko: null,
-    nl: null,
-    no: null,
-    pl: null,
-    pt: null,
-    'pt-br': null,
-    ro: null,
-    ru: null,
-    sk: null,
-    sv: null,
-    th: null,
-    tr: null,
-    uk: null,
-    vi: null,
-    'zh-cn': null,
-    'zh-tw': null,
+    es: 'cancelar',
+    fi: 'peruuttaa',
+    fr: 'Annuler',
+    hu: 'megszünteti',
+    id: 'membatalkan',
+    it: 'Annulla',
+    ja: 'キャンセル',
+    ko: '취소',
+    nl: 'annuleren',
+    no: 'Avbryt',
+    pl: 'Anuluj',
+    pt: 'cancelar',
+    'pt-br': 'cancelar',
+    ro: 'Anulare',
+    ru: 'Отмена',
+    sk: 'Zrušiť',
+    sv: 'Avbryt',
+    th: 'ยกเลิก',
+    tr: 'iptal etmek',
+    uk: 'скасувати',
+    vi: 'hủy bỏ',
+    'zh-cn': '取消',
+    'zh-tw': '取消',
   },
 
   toSelect: {
-    ar: null,
-    bg: null,
-    cs: null,
-    da: null,
-    de: null,
-    el: null,
-    en: 'to select',
-    es: null,
-    fi: null,
-    fr: 'selectionner',
-    hu: null,
-    id: null,
-    it: null,
-    ja: null,
-    ko: null,
-    nl: null,
-    no: null,
-    pl: null,
-    pt: null,
-    'pt-br': null,
-    ro: null,
-    ru: null,
-    sk: null,
-    sv: null,
-    th: null,
-    tr: null,
-    uk: null,
-    vi: null,
-    'zh-cn': null,
-    'zh-tw': null,
+    ar: 'تحديد',
+    bg: 'изберете',
+    cs: 'vybrat',
+    da: 'Vælg',
+    de: 'wählen',
+    el: 'επιλέγω',
+    en: 'select',
+    es: 'Seleccione',
+    fi: 'valita',
+    fr: 'sélectionner',
+    hu: 'választ',
+    id: 'Pilih',
+    it: 'Selezionare',
+    ja: '選択する',
+    ko: '고르다',
+    nl: 'kiezen',
+    no: 'å velge',
+    pl: 'Wybierz',
+    pt: 'selecionar',
+    'pt-br': 'selecionar',
+    ro: 'Selectați',
+    ru: 'Выбрать',
+    sk: 'vybrať',
+    sv: 'Välj',
+    th: 'เลือก',
+    tr: 'seçmek',
+    uk: 'вибрати',
+    vi: 'lựa chọn',
+    'zh-cn': '选择',
+    'zh-tw': '選擇',
   },
 
   toNavigate: {
-    ar: null,
-    bg: null,
-    cs: null,
-    da: null,
-    de: null,
-    el: null,
-    en: 'to navigate',
-    es: null,
-    fi: null,
+    ar: 'التنقل',
+    bg: 'навигация',
+    cs: 'navigovat',
+    da: 'navigere',
+    de: 'navigieren',
+    el: 'κυβερνώ',
+    en: 'navigate',
+    es: 'navegar',
+    fi: 'navigoida',
     fr: 'naviguer',
-    hu: null,
-    id: null,
-    it: null,
-    ja: null,
-    ko: null,
-    nl: null,
-    no: null,
-    pl: null,
-    pt: null,
-    'pt-br': null,
-    ro: null,
-    ru: null,
-    sk: null,
-    sv: null,
-    th: null,
-    tr: null,
-    uk: null,
-    vi: null,
-    'zh-cn': null,
-    'zh-tw': null,
+    hu: 'hajózik',
+    id: 'menavigasi',
+    it: 'navigare',
+    ja: 'ナビゲート',
+    ko: '탐색',
+    nl: 'navigeren',
+    no: 'navigere',
+    pl: 'nawigować',
+    pt: 'navegar',
+    'pt-br': 'navegar',
+    ro: 'Naviga',
+    ru: 'навигации',
+    sk: 'navigáciu',
+    sv: 'navigera',
+    th: 'นำทาง',
+    tr: 'gezinme',
+    uk: 'навігації',
+    vi: 'điều hướng',
+    'zh-cn': '导航',
+    'zh-tw': '導航',
   },
 
   toClose: {
-    ar: null,
-    bg: null,
-    cs: null,
-    da: null,
-    de: null,
-    el: null,
-    en: 'to close',
-    es: null,
-    fi: null,
-    fr: 'fermer',
-    hu: null,
-    id: null,
-    it: null,
-    ja: null,
-    ko: null,
-    nl: null,
-    no: null,
-    pl: null,
-    pt: null,
-    'pt-br': null,
-    ro: null,
-    ru: null,
-    sk: null,
-    sv: null,
-    th: null,
-    tr: null,
-    uk: null,
-    vi: null,
-    'zh-cn': null,
-    'zh-tw': null,
+    ar: 'أغلق',
+    bg: 'близо',
+    cs: 'zavřít',
+    da: 'tæt',
+    de: 'schließen',
+    el: 'Κλείσε',
+    en: 'close',
+    es: 'cerrar',
+    fi: 'kiinni',
+    fr: 'Fermer',
+    hu: 'Bezárás',
+    id: 'Menutup',
+    it: 'vicino',
+    ja: '閉じる',
+    ko: '닫기',
+    nl: 'dichtbij',
+    no: 'Lukk',
+    pl: 'blisko',
+    pt: 'fechar',
+    'pt-br': 'fechar',
+    ro: 'închide',
+    ru: 'Закрыть',
+    sk: 'Zavrieť',
+    sv: 'stänga',
+    th: 'ปิด',
+    tr: 'kapat',
+    uk: 'близько',
+    vi: 'đóng',
+    'zh-cn': '关闭',
+    'zh-tw': '關閉',
   },
 };
 
