@@ -227,6 +227,99 @@ const defaultTranslations = {
       return `查無 「${query}」 相關結果`;
     },
   },
+
+  in: {
+    ar: function (section) {
+      return `${section}`;
+    },
+    bg: function (section) {
+      return `${section}`;
+    },
+    cs: function (section) {
+      return `${section}`;
+    },
+    da: function (section) {
+      return `${section}`;
+    },
+    de: function (section) {
+      return `${section}`;
+    },
+    el: function (section) {
+      return `${section}`;
+    },
+    en: function (section) {
+      return `in ${section}`;
+    },
+    es: function (section) {
+      return `${section}`;
+    },
+    fi: function (section) {
+      return `${section}`;
+    },
+    fr: function (section) {
+      return `dans ${section}`;
+    },
+    hu: function (section) {
+      return `${section}`;
+    },
+    id: function (section) {
+      return `${section}`;
+    },
+    it: function (section) {
+      return `${section}`;
+    },
+    ja: function (section) {
+      return `${section}`;
+    },
+    ko: function (section) {
+      return `${section}`;
+    },
+    nl: function (section) {
+      return `${section}`;
+    },
+    no: function (section) {
+      return `${section}`;
+    },
+    pl: function (section) {
+      return `${section}`;
+    },
+    pt: function (section) {
+      return `${section}`;
+    },
+    'pt-br': function (section) {
+      return `${section}`;
+    },
+    ro: function (section) {
+      return `${section}`;
+    },
+    ru: function (section) {
+      return `${section}`;
+    },
+    sk: function (section) {
+      return `${section}`;
+    },
+    sv: function (section) {
+      return `${section}`;
+    },
+    th: function (section) {
+      return `${section}`;
+    },
+    tr: function (section) {
+      return `${section}`;
+    },
+    uk: function (section) {
+      return `${section}`;
+    },
+    vi: function (section) {
+      return `${section}`;
+    },
+    'zh-cn': function (section) {
+      return `${section}`;
+    },
+    'zh-tw': function (section) {
+      return `${section}`;
+    },
+  },
   placeholder: {
     ar: 'البحث في مقالاتنا',
     bg: 'Търсене в нашите статии',
@@ -290,6 +383,39 @@ const defaultTranslations = {
     vi: (algolia) => `Tìm kiếm theo ${algolia}`,
     'zh-cn': (algolia) => `根据 ${algolia} 搜索`,
     'zh-tw': (algolia) => `使用 ${algolia} 搜尋`,
+  },
+
+  bestAnswer: {
+    ar: null,
+    bg: null,
+    cs: null,
+    da: null,
+    de: null,
+    el: null,
+    en: 'Best Answer',
+    es: null,
+    fi: null,
+    fr: 'Meilleure Réponse',
+    hu: null,
+    id: null,
+    it: null,
+    ja: null,
+    ko: null,
+    nl: null,
+    no: null,
+    pl: null,
+    pt: null,
+    'pt-br': null,
+    ro: null,
+    ru: null,
+    sk: null,
+    sv: null,
+    th: null,
+    tr: null,
+    uk: null,
+    vi: null,
+    'zh-cn': null,
+    'zh-tw': null,
   },
 
   cancel: {

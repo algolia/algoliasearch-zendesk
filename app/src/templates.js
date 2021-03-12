@@ -144,7 +144,7 @@ const templates = {
       </Fragment>
     ),
 
-    answers: (hit) => (
+    answers: (translations, locale, hit) => (
       <Fragment>
         <a class="aa-ItemLink" href={hit.url}>
           <div className="aa-ItemIcon aa-ItemIcon--align-top">
@@ -156,11 +156,20 @@ const templates = {
             </svg>
           </div>
           <div className="aa-ItemContent aa-ItemContent--dual">
-            <div className="aa-answers-question">{hit.title}</div>
-            <div className="aa-answers-questionTopic">
-              in {hit.category.title} - {hit.section.title}
+            <div className="aa-answers-question">
+              {highlightHit({ hit, attribute: 'title' })}
             </div>
-            <div className="aa-answers-answer">{hit.body_safe}</div>
+            <div className="aa-answers-questionTopic">
+              {translate(
+                translations,
+                locale,
+                'in',
+                `${hit.category.title} - ${hit.section.title}`
+              )}
+            </div>
+            <div className="aa-answers-answer">
+              {snippetHit({ hit, attribute: 'body_safe' })}
+            </div>
           </div>
         </a>
       </Fragment>

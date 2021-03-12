@@ -229,12 +229,12 @@ class Autocomplete {
                 return null;
               }
               return templates.autocomplete.articlesHeader(
-                `Best Answer`,
+                translate(translations, locale, 'bestAnswer'),
                 items
               );
             },
             item({ item }) {
-              return templates.autocomplete.answers(item);
+              return templates.autocomplete.answers(translations, locale, item);
             },
           },
           onSelect,
