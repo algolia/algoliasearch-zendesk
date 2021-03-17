@@ -168,7 +168,7 @@ const templates = {
               )}
             </div>
             <div className="aa-answers-answer">
-              {snippetHit({ hit, attribute: 'body_safe' })}
+              {snippetHit({ hit, attribute: 'body_safe', tagName: 'span' })}
             </div>
           </div>
         </a>

@@ -29,6 +29,7 @@ const optionsStructure = {
       value: {},
       children: {
         enabled: { type: 'boolean', value: true },
+        keyboardShortcut: { type: 'boolean', value: true },
         bestArticle: { type: 'boolean', value: true },
         inputSelector: { type: 'string', value: '#query' },
         hitsPerPage: {

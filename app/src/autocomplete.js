@@ -39,7 +39,13 @@ class Autocomplete {
 
   init({
     analytics,
-    autocomplete: { enabled, bestArticle, hitsPerPage, inputSelector },
+    autocomplete: {
+      enabled,
+      bestArticle,
+      hitsPerPage,
+      inputSelector,
+      keyboardShortcut,
+    },
     baseUrl,
     color,
     clickAnalytics,
@@ -96,25 +102,6 @@ class Autocomplete {
       );
     }
     container.innerHTML = '';
-
-    const onKeyDown = (event) => {
-      const open = document.querySelector('.aa-DetachedSearchButton');
-      const close = document.querySelector('.aa-DetachedCancelButton');
-
-      if (
-        (event.keyCode === 27 && this.state.isOpen) ||
-        // The `Cmd+K` shortcut both opens and closes the modal.
-        (event.key === 'k' && (event.metaKey || event.ctrlKey))
-      ) {
-        event.preventDefault();
-
-        if (this.state.isOpen) {
-          close.click();
-        } else {
-          open.click();
-        }
-      }
-    };
 
     const buildUrl = (hit) => `${baseUrl}${locale}/articles/${hit.id}`;
 
@@ -332,14 +319,37 @@ class Autocomplete {
         );
       },
     });
-    render(
-      <div class="aa-DetachedSearchButtonSuffix">
-        <span class="aa-Key">⌘</span>
-        <span class="aa-Key">K</span>
-      </div>,
-      doc.querySelector('.aa-DetachedSearchButtonIcon')
-    );
-    window.addEventListener('keydown', onKeyDown);
+
+    if (keyboardShortcut) {
+      const onKeyDown = (event) => {
+        const open = document.querySelector('.aa-DetachedSearchButton');
+        const close = document.querySelector('.aa-DetachedCancelButton');
+
+        if (
+          (event.keyCode === 27 && this.state.isOpen) ||
+          // The `Cmd+K` shortcut both opens and closes the modal.
+          (event.key === 'k' && (event.metaKey || event.ctrlKey))
+        ) {
+          event.preventDefault();
+
+          if (this.state.isOpen) {
+            close.click();
+          } else {
+            open.click();
+          }
+        }
+      };
+
+      render(
+        <div class="aa-DetachedSearchButtonSuffix">
+          <span class="aa-Key">⌘</span>
+          <span class="aa-Key">K</span>
+        </div>,
+        doc.querySelector('.aa-DetachedSearchButtonIcon')
+      );
+
+      window.addEventListener('keydown', onKeyDown);
+    }
   }
 }
 export default (...args) => new Autocomplete(...args);
