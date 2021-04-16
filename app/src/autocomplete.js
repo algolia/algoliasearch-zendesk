@@ -94,16 +94,18 @@ class Autocomplete {
         `Too many inputs (${allInputs.length}) matching inputSelector '${inputSelector}'.`
       );
     }
-    let container = allInputs[0];
-    while (container && ['INPUT', 'FORM'].includes(container.tagName)) {
-      container = container.parentElement;
+    let form = allInputs[0];
+    while (form && form.tagName !== 'FORM') {
+      form = form.parentElement;
     }
-    if (!container) {
+    if (!form) {
       throw new Error(
         `Couldn't find the parent container of inputSelector '${inputSelector}'`
       );
     }
-    container.innerHTML = '';
+    const container = document.createElement('div');
+    container.className = form.className;
+    form.parentNode.replaceChild(container, form);
 
     const buildUrl = (hit) => `${baseUrl}${locale}/articles/${hit.id}`;
 
