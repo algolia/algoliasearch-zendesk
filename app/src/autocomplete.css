@@ -1,28 +1,5 @@
-.aa-Panel:after {
-  margin-bottom: 40px;
-}
-.aa-PanelLayout {
-  top: 0;
-  bottom: 40px;
-  margin-bottom: 40px !important;
-}
-.aa-PanelFooter {
-  position: absolute;
-  display: flex;
-  width: 100%;
-  height: 40px;
-  bottom: 0;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 16px !important;
-  /* TEMPORARY */
-  background-color: rgb(255, 255, 255);
-  border-bottom-color: rgb(65, 65, 65);
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-  border-left-color: rgb(65, 65, 65);
-  border-right-color: rgb(65, 65, 65);
-  box-shadow: rgba(35, 38, 59, 0.1) 0px 0px 0px 1px, rgba(35, 38, 59, 0.15) 0px 6px 16px -4px;
+.aa-Source {
+  padding: 0 8px;
 }
 .aa-Commands {
   display: flex;
@@ -76,17 +53,16 @@
 }
 .aa-answers-questionTopic {
   font-size: 0.95em;
-  opacity: .7;
-  margin: .5em 0;
+  opacity: 0.7;
 }
 
 .aa-answers-answer {
   font-size: 0.95em;
-  opacity: .9;
+  opacity: 0.9;
   line-height: 1.3em;
 }
 
-section[data-autocomplete-source-id="Answers"] .aa-ItemIcon{
+section[data-autocomplete-source-id='Answers'] .aa-ItemIcon {
   background-color: var(--aa-primary-color);
   color: white;
 }

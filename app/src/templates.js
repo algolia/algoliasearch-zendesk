@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 import { h, Fragment } from 'preact';
-import { highlightHit, snippetHit } from '@algolia/autocomplete-js';
 
 import translate from './translations';
 
@@ -121,54 +120,60 @@ const templates = {
     },
 
     // Autocompletion template for an article
-    article: (hit) => (
+    // eslint-disable-next-line no-unused-vars
+    article: (hit, components) => (
       <Fragment>
         <a class="aa-ItemLink" href={hit.url}>
-          <div className="aa-ItemIcon aa-ItemIcon--align-top">
-            <svg viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M17.586 7h-2.586v-2.586zM20.707 7.293l-6-6c-0.092-0.092-0.202-0.166-0.324-0.217s-0.253-0.076-0.383-0.076h-8c-0.828 0-1.58 0.337-2.121 0.879s-0.879 1.293-0.879 2.121v16c0 0.828 0.337 1.58 0.879 2.121s1.293 0.879 2.121 0.879h12c0.828 0 1.58-0.337 2.121-0.879s0.879-1.293 0.879-2.121v-12c0-0.276-0.112-0.526-0.293-0.707zM13 3v5c0 0.552 0.448 1 1 1h5v11c0 0.276-0.111 0.525-0.293 0.707s-0.431 0.293-0.707 0.293h-12c-0.276 0-0.525-0.111-0.707-0.293s-0.293-0.431-0.293-0.707v-16c0-0.276 0.111-0.525 0.293-0.707s0.431-0.293 0.707-0.293zM16 12h-8c-0.552 0-1 0.448-1 1s0.448 1 1 1h8c0.552 0 1-0.448 1-1s-0.448-1-1-1zM16 16h-8c-0.552 0-1 0.448-1 1s0.448 1 1 1h8c0.552 0 1-0.448 1-1s-0.448-1-1-1zM10 8h-2c-0.552 0-1 0.448-1 1s0.448 1 1 1h2c0.552 0 1-0.448 1-1s-0.448-1-1-1z"
-              ></path>
-            </svg>
-          </div>
-          <div className="aa-ItemContent aa-ItemContent--dual">
-            <div className="aa-ItemContentTitle">
-              {highlightHit({ hit, attribute: 'title' })}
+          <div className="aa-ItemContent">
+            <div className="aa-ItemIcon aa-ItemIcon--alignTop">
+              <svg viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M17.586 7h-2.586v-2.586zM20.707 7.293l-6-6c-0.092-0.092-0.202-0.166-0.324-0.217s-0.253-0.076-0.383-0.076h-8c-0.828 0-1.58 0.337-2.121 0.879s-0.879 1.293-0.879 2.121v16c0 0.828 0.337 1.58 0.879 2.121s1.293 0.879 2.121 0.879h12c0.828 0 1.58-0.337 2.121-0.879s0.879-1.293 0.879-2.121v-12c0-0.276-0.112-0.526-0.293-0.707zM13 3v5c0 0.552 0.448 1 1 1h5v11c0 0.276-0.111 0.525-0.293 0.707s-0.431 0.293-0.707 0.293h-12c-0.276 0-0.525-0.111-0.707-0.293s-0.293-0.431-0.293-0.707v-16c0-0.276 0.111-0.525 0.293-0.707s0.431-0.293 0.707-0.293zM16 12h-8c-0.552 0-1 0.448-1 1s0.448 1 1 1h8c0.552 0 1-0.448 1-1s-0.448-1-1-1zM16 16h-8c-0.552 0-1 0.448-1 1s0.448 1 1 1h8c0.552 0 1-0.448 1-1s-0.448-1-1-1zM10 8h-2c-0.552 0-1 0.448-1 1s0.448 1 1 1h2c0.552 0 1-0.448 1-1s-0.448-1-1-1z"
+                ></path>
+              </svg>
             </div>
-            <div className="aa-ItemContentDescription">
-              {snippetHit({ hit, attribute: 'body_safe' })}
+            <div className="aa-ItemContentBody">
+              <div className="aa-ItemContentTitle">
+                <components.Highlight hit={hit} attribute="title" />
+              </div>
+              <div className="aa-ItemContentDescription">
+                <components.Snippet hit={hit} attribute="body_safe" />
+              </div>
             </div>
           </div>
         </a>
       </Fragment>
     ),
 
-    answers: (translations, locale, hit) => (
+    // eslint-disable-next-line no-unused-vars
+    answers: (translations, locale, hit, components) => (
       <Fragment>
         <a class="aa-ItemLink" href={hit.url}>
-          <div className="aa-ItemIcon aa-ItemIcon--align-top">
-            <svg viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M17.016 12q0 0.422-0.305 0.703t-0.727 0.281h-9.984l-3.984 4.031v-14.016q0-0.422 0.281-0.703t0.703-0.281h12.984q0.422 0 0.727 0.281t0.305 0.703v9zM21 6q0.422 0 0.703 0.281t0.281 0.703v15l-3.984-3.984h-11.016q-0.422 0-0.703-0.281t-0.281-0.703v-2.016h12.984v-9h2.016z"
-              ></path>
-            </svg>
-          </div>
-          <div className="aa-ItemContent aa-ItemContent--dual">
-            <div className="aa-answers-question">
-              {highlightHit({ hit, attribute: 'title' })}
+          <div className="aa-ItemContent">
+            <div className="aa-ItemIcon aa-ItemIcon--alignTop">
+              <svg viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M17.016 12q0 0.422-0.305 0.703t-0.727 0.281h-9.984l-3.984 4.031v-14.016q0-0.422 0.281-0.703t0.703-0.281h12.984q0.422 0 0.727 0.281t0.305 0.703v9zM21 6q0.422 0 0.703 0.281t0.281 0.703v15l-3.984-3.984h-11.016q-0.422 0-0.703-0.281t-0.281-0.703v-2.016h12.984v-9h2.016z"
+                ></path>
+              </svg>
             </div>
-            <div className="aa-answers-questionTopic">
-              {translate(
-                translations,
-                locale,
-                'in',
-                `${hit.category.title} - ${hit.section.title}`
-              )}
-            </div>
-            <div className="aa-answers-answer">
-              {snippetHit({ hit, attribute: 'body_safe' })}
+            <div className="aa-ItemContentBody">
+              <div className="aa-answers-question">
+                <components.Highlight hit={hit} attribute="title" />
+              </div>
+              <div className="aa-answers-questionTopic">
+                {translate(
+                  translations,
+                  locale,
+                  'in',
+                  `${hit.category.title} - ${hit.section.title}`
+                )}
+              </div>
+              <div className="aa-answers-answer">
+                <components.Snippet hit={hit} attribute="body_safe" />
+              </div>
             </div>
           </div>
         </a>

@@ -11,8 +11,10 @@ import translate from './translations';
 import { debounceGetAnswers } from './answers';
 import { initInsights, extendWithConversionTracking } from './clickAnalytics';
 
-import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
-import { search as defaultLocalStorageSearch } from '@algolia/autocomplete-plugin-recent-searches/dist/esm/usecases/localStorage';
+import {
+  createLocalStorageRecentSearchesPlugin,
+  search as defaultLocalStorageSearch,
+} from '@algolia/autocomplete-plugin-recent-searches';
 
 class Autocomplete {
   constructor({
@@ -115,7 +117,7 @@ class Autocomplete {
 
     // eslint-disable-next-line consistent-this
     const self = this;
-    autocomplete({
+    const ac = autocomplete({
       container,
       placeholder: translate(translations, locale, 'placeholder'),
       // eslint-disable-next-line spaced-comment
@@ -160,7 +162,11 @@ class Autocomplete {
         self.state = state;
 
         // hack to localize the cancel button
-        if (state.isOpen && !prevState.isOpen) {
+        if (
+          state.isOpen &&
+          !prevState.isOpen &&
+          doc.querySelector('.aa-DetachedCancelButton') // only if displayed
+        ) {
           render(
             translate(translations, locale, 'cancel'),
             doc.querySelector('.aa-DetachedCancelButton')
@@ -221,8 +227,13 @@ class Autocomplete {
                 items
               );
             },
-            item({ item }) {
-              return templates.autocomplete.answers(translations, locale, item);
+            item({ item, components }) {
+              return templates.autocomplete.answers(
+                translations,
+                locale,
+                item,
+                components
+              );
             },
           },
           onSelect,
@@ -291,8 +302,8 @@ class Autocomplete {
                         items
                       );
                     },
-                    item({ item }) {
-                      return templates.autocomplete.article(item);
+                    item({ item, components }) {
+                      return templates.autocomplete.article(item, components);
                     },
                   },
                   onSelect,
@@ -323,21 +334,14 @@ class Autocomplete {
 
     if (keyboardShortcut) {
       const onKeyDown = (event) => {
-        const open = document.querySelector('.aa-DetachedSearchButton');
-        const close = document.querySelector('.aa-DetachedCancelButton');
-
         if (
           (event.keyCode === 27 && this.state.isOpen) ||
           // The `Cmd+K` shortcut both opens and closes the modal.
           (event.key === 'k' && (event.metaKey || event.ctrlKey))
         ) {
           event.preventDefault();
-
-          if (this.state.isOpen) {
-            close.click();
-          } else {
-            open.click();
-          }
+          ac.setIsOpen(!this.state.isOpen);
+          ac.refresh();
         }
       };
 
@@ -346,7 +350,7 @@ class Autocomplete {
           <span class="aa-Key">⌘</span>
           <span class="aa-Key">K</span>
         </div>,
-        doc.querySelector('.aa-DetachedSearchButtonIcon')
+        doc.querySelector('.aa-InputWrapperSuffix')
       );
 
       window.addEventListener('keydown', onKeyDown);
