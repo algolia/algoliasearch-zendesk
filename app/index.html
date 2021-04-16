@@ -6,6 +6,17 @@
     <title>Zendesk test</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
+    <link
+      rel="stylesheet"
+      media="all"
+      href="//static.zdassets.com/hc/assets/application-79172500fb4dbec2484043d570946543.css"
+      id="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//p18.zdassets.com/hc/theming_assets/613986/371941/style.css?digest=4399775617298"
+    />
   </head>
   <body>
     <ul>
@@ -16,9 +27,19 @@
       <li><a href="/hc/it/">it</a></li>
       <li><a href="/hc/ar/">ar</a></li>
     </ul>
-    <div class="container">
-      <form role="search" class="search search-full" autocomplete="off">
-        <input
+    <div class="hero-inner">
+      <h2 class="visibility-hidden">Search</h2>
+      <form
+        role="search"
+        class="search search-full"
+        data-search=""
+        data-instant="true"
+        autocomplete="off"
+        action="/hc/en-us/search"
+        accept-charset="UTF-8"
+        method="get"
+      >
+        <input name="utf8" type="hidden" value="✓" /><input
           type="search"
           name="query"
           id="query"

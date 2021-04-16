@@ -34,6 +34,10 @@
   left: unset !important;
   right: unset !important;
 }
+/* Hide the footer when in detached mode, it's appearing top */
+.aa-DetachedContainer .aa-PanelFooter {
+  display: none;
+}
 
 /* Custom */
 .aa-Commands {
