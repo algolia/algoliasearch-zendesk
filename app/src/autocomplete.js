@@ -121,6 +121,7 @@ class Autocomplete {
     const self = this;
     const ac = autocomplete({
       container,
+      panelContainer: container.parentNode,
       placeholder: translate(translations, locale, 'placeholder'),
       // eslint-disable-next-line spaced-comment
       //detachedMediaQuery: '', // FIXME
