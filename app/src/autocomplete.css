@@ -1,6 +1,41 @@
+/* Override Zendesk's `input:not([type="checkbox"]):focus` rule */
+.aa-Input:focus {
+  border: none !important;
+}
+
+/* Rather use the InputWrapper{Prefix,,Suffix} as the bordered input to append the submit button to the form */
+.aa-Form {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.aa-InputWrapperPrefix {
+  border: 1px solid var(--aa-primary-color);
+  border-right: none;
+}
+.aa-InputWrapper {
+  border: 1px solid var(--aa-primary-color);
+  border-left: none;
+  border-right: none;
+  height: var(--aa-search-input-height);
+}
+.aa-InputWrapperSuffix {
+  border: 1px solid var(--aa-primary-color);
+  border-left: none;
+}
+
+/* Fix padding issue in alpha.45 */
 .aa-Source {
   padding: 0 8px;
 }
+
+/* the container we create is `position: relative` */
+.aa-Panel {
+  left: unset !important;
+  right: unset !important;
+}
+
+/* Custom */
 .aa-Commands {
   display: flex;
 }
@@ -55,13 +90,11 @@
   font-size: 0.95em;
   opacity: 0.7;
 }
-
 .aa-answers-answer {
   font-size: 0.95em;
   opacity: 0.9;
   line-height: 1.3em;
 }
-
 section[data-autocomplete-source-id='Answers'] .aa-ItemIcon {
   background-color: var(--aa-primary-color);
   color: white;

@@ -100,11 +100,11 @@ class Autocomplete {
     }
     if (!form) {
       throw new Error(
-        `Couldn't find the parent container of inputSelector '${inputSelector}'`
+        `Couldn't find the form container of inputSelector '${inputSelector}'`
       );
     }
     const container = document.createElement('div');
-    container.className = form.className;
+    container.style = 'position: relative';
     form.parentNode.replaceChild(container, form);
 
     const buildUrl = (hit) => `${baseUrl}${locale}/articles/${hit.id}`;
@@ -121,10 +121,8 @@ class Autocomplete {
     const self = this;
     const ac = autocomplete({
       container,
-      panelContainer: container.parentNode,
+      panelContainer: container,
       placeholder: translate(translations, locale, 'placeholder'),
-      // eslint-disable-next-line spaced-comment
-      //detachedMediaQuery: '', // FIXME
       debug: process.env.NODE_ENV === 'development' || debug,
       onSubmit({ state }) {
         window.location.href = `${baseUrl}${locale}/search?utf8=✓&query=${encodeURIComponent(
@@ -334,6 +332,12 @@ class Autocomplete {
         );
       },
     });
+
+    const submitButton = form.querySelector('input[type="submit"]');
+    if (submitButton) {
+      submitButton.style = 'display: flex; order: 5; margin-left: 16px;';
+      container.querySelector('form').appendChild(submitButton);
+    }
 
     if (keyboardShortcut) {
       const onKeyDown = (event) => {
