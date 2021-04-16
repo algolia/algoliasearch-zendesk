@@ -6,6 +6,12 @@ function findAnswers(index, query, lang, params, callback) {
       attributesForPrediction: ['title', 'body_safe'],
       threshold: 50,
       nbHits: 1,
+      // eslint-disable-next-line camelcase
+      EXPERIMENTAL_illuminate: 1,
+      // eslint-disable-next-line camelcase
+      EXPERIMENTAL_overwriteSnippetSize: 30,
+      // eslint-disable-next-line camelcase
+      EXPERIMENTAL_overwriteHitsPerPage: 20,
       params: {
         ...params,
         highlightPreTag: '__aa-highlight__',

@@ -118,7 +118,8 @@ class Autocomplete {
     autocomplete({
       container,
       placeholder: translate(translations, locale, 'placeholder'),
-      detachedMediaQuery: '',
+      // eslint-disable-next-line spaced-comment
+      //detachedMediaQuery: '', // FIXME
       debug: process.env.NODE_ENV === 'development' || debug,
       onSubmit({ state }) {
         window.location.href = `${baseUrl}${locale}/search?utf8=✓&query=${encodeURIComponent(
