@@ -136,7 +136,7 @@ class Autocomplete {
           search({ query, items, limit }) {
             // in case the query is exactly the recent item, skip it to not have a useless entry
             const results = defaultLocalStorageSearch({ query, items, limit });
-            if (results.length === 1 && results[0].query === query) {
+            if (results.length === 1 && results[0].label === query) {
               return [];
             }
             // if the query is non-empty, really display only 2 insted of 5
