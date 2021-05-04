@@ -1,9 +1,9 @@
 import { throttle } from 'throttle-debounce';
 
-function findAnswers(index, query, lang, params, callback) {
+const findAnswers = (index, query, lang, params, callback) =>
   index
     .findAnswers(query, [lang], {
-      attributesForPrediction: ['title', 'body_safe'],
+      attributesForPrediction: ['body_safe'],
       threshold: 50,
       nbHits: 1,
       // eslint-disable-next-line camelcase
@@ -14,6 +14,7 @@ function findAnswers(index, query, lang, params, callback) {
       EXPERIMENTAL_overwriteHitsPerPage: 20,
       params: {
         ...params,
+        restrictSearchableAttributes: ['title', 'body_safe'],
         highlightPreTag: '__aa-highlight__',
         highlightPostTag: '__/aa-highlight__',
       },
@@ -21,6 +22,5 @@ function findAnswers(index, query, lang, params, callback) {
     .then(callback)
     // eslint-disable-next-line no-console
     .catch(console.error);
-}
 
 export const debounceGetAnswers = throttle(400, false, findAnswers);

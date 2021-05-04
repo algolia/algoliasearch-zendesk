@@ -1,6 +1,6 @@
 import { version } from '../package.json';
 import algoliasearch from 'algoliasearch/lite';
-import { autocomplete, getAlgoliaHits } from '@algolia/autocomplete-js';
+import { autocomplete } from '@algolia/autocomplete-js';
 import '@algolia/autocomplete-theme-classic';
 import './autocomplete.css';
 // eslint-disable-next-line no-unused-vars
@@ -10,11 +10,7 @@ import { groupBy } from 'lodash';
 import translate from './translations';
 import { debounceGetAnswers } from './answers';
 import { initInsights, extendWithConversionTracking } from './clickAnalytics';
-
-import {
-  createLocalStorageRecentSearchesPlugin,
-  search as defaultLocalStorageSearch,
-} from '@algolia/autocomplete-plugin-recent-searches';
+import { getContainerAndButton, recentSearchesPlugin } from './utils';
 
 class Autocomplete {
   constructor({
@@ -61,102 +57,31 @@ class Autocomplete {
   }) {
     if (!enabled) return;
 
+    // eslint-disable-next-line consistent-this
+    const self = this;
     this.state = { isOpen: false };
 
     const doc = document.documentElement;
     doc.style.setProperty('--aa-primary-color', color);
     doc.style.setProperty('--aa-highlight-color', highlightColor);
-    doc.style.setProperty('--aa-detached-modal-max-width', '680px');
-    doc.style.setProperty('--aa-detached-modal-max-height', '80%');
 
-    const defaultParams = {
-      analytics,
-      hitsPerPage,
-      facetFilters: `["locale.locale:${locale}"]`,
-      attributesToSnippet: ['body_safe:30'],
-      snippetEllipsisText: '…',
+    const lang = locale.split('-')[0];
+    const buildUrl = (hit) => `${baseUrl}${locale}/articles/${hit.id}`;
+    const onSelect = ({ item }) => {
+      this.trackClick(item, item.__position, item.__queryID);
     };
 
     const answersRef = {
       current: [],
     };
-    const lang = locale.split('-')[0];
+    const [container, submitButton] = getContainerAndButton(inputSelector);
 
-    // figure out parent container of the input
-    const allInputs = document.querySelectorAll(inputSelector);
-    if (allInputs.length === 0) {
-      throw new Error(
-        `Couldn't find any input matching inputSelector '${inputSelector}'.`
-      );
-    }
-    if (allInputs.length > 1) {
-      throw new Error(
-        `Too many inputs (${allInputs.length}) matching inputSelector '${inputSelector}'.`
-      );
-    }
-    let form = allInputs[0];
-    while (form && form.tagName !== 'FORM') {
-      form = form.parentElement;
-    }
-    if (!form) {
-      throw new Error(
-        `Couldn't find the form container of inputSelector '${inputSelector}'`
-      );
-    }
-    const container = document.createElement('div');
-    container.style = 'position: relative';
-    form.parentNode.replaceChild(container, form);
-
-    const buildUrl = (hit) => `${baseUrl}${locale}/articles/${hit.id}`;
-
-    const onSelect = ({ item }) => {
-      this.trackClick(
-        item,
-        item.__autocomplete_id,
-        item.__autocomplete_queryID
-      );
-    };
-
-    // eslint-disable-next-line consistent-this
-    const self = this;
     const ac = autocomplete({
       container,
       panelContainer: container,
       placeholder: translate(translations, locale, 'placeholder'),
       debug: process.env.NODE_ENV === 'development' || debug,
-      onSubmit({ state }) {
-        window.location.href = `${baseUrl}${locale}/search?utf8=✓&query=${encodeURIComponent(
-          state.query
-        )}`;
-      },
-      plugins: [
-        createLocalStorageRecentSearchesPlugin({
-          key: 'algolia-recent-searches',
-          limit: 5,
-          search({ query, items, limit }) {
-            // in case the query is exactly the recent item, skip it to not have a useless entry
-            const results = defaultLocalStorageSearch({ query, items, limit });
-            if (results.length === 1 && results[0].label === query) {
-              return [];
-            }
-            // if the query is non-empty, really display only 2 insted of 5
-            if (query !== '') {
-              return results.slice(0, 2);
-            }
-            return results;
-          },
-          transformSource({ source }) {
-            return {
-              ...source,
-              // keep this open and do another search
-              onSelect({ setIsOpen }) {
-                setIsOpen(true);
-              },
-            };
-          },
-        }),
-      ],
-
+      plugins: [recentSearchesPlugin],
       openOnFocus: true,
       onStateChange({ prevState, state, refresh }) {
         // backup state
@@ -193,10 +118,8 @@ class Autocomplete {
               if (hit._answer.extractAttribute === 'body_safe') {
                 hit._snippetResult.body_safe.value = hit._answer.extract;
               }
-              // eslint-disable-next-line camelcase
-              hit.__autocomplete_id = i;
-              // eslint-disable-next-line camelcase
-              hit.__autocomplete_queryID = queryID;
+              hit.__position = i + 1;
+              hit.__queryID = queryID;
               hit.url = buildUrl(hit);
               return hit;
             });
@@ -204,13 +127,21 @@ class Autocomplete {
           }
         );
       },
+      onSubmit({ state }) {
+        window.location.href = `${baseUrl}${locale}/search?utf8=✓&query=${encodeURIComponent(
+          state.query
+        )}`;
+      },
       getSources({ query: q }) {
         const sectionTitle = (hit) =>
           `${hit.category.title} - ${hit.section.title}`;
-        const answersSection = {
-          // ----------------
-          // Source: Algolia Answers
-          // ----------------
+
+        const sources = [];
+
+        // ----------------
+        // Source: Algolia Answers
+        // ----------------
+        sources.push({
           sourceId: 'Answers',
           getItems() {
             return answersRef.current;
@@ -238,26 +169,28 @@ class Autocomplete {
             },
           },
           onSelect,
-        };
+        });
 
-        return getAlgoliaHits({
-          searchClient: self.client,
-          queries: [
-            {
-              indexName: self.indexName,
-              query: q,
-              params: {
-                ...defaultParams,
-                clickAnalytics,
-                queryLanguages: [lang],
-                removeStopWords: true,
-                ignorePlurals: true,
-              },
-            },
-          ],
-        })
+        // ----------------
+        // Source: Algolia Search
+        // ----------------
+        return self.client
+          .initIndex(self.indexName)
+          .search(q, {
+            hitsPerPage,
+            facetFilters: `["locale.locale:${locale}"]`,
+            attributesToSnippet: ['body_safe:30'],
+            snippetEllipsisText: '…',
+            analytics,
+            clickAnalytics,
+            queryLanguages: [lang],
+            removeStopWords: true,
+            ignorePlurals: true,
+            highlightPreTag: '__aa-highlight__',
+            highlightPostTag: '__/aa-highlight__',
+          })
           .then((results) => {
-            const hitsButBestAnswer = results[0].filter(
+            const hitsButBestAnswer = results.hits.filter(
               (hit) => hit.objectID !== answersRef.current?.[0]?.objectID
             );
             if (!answersRef.current?.[0] && hitsButBestAnswer.length === 0) {
@@ -279,41 +212,40 @@ class Autocomplete {
                 },
               ];
             }
+
             const hitsByCategorySection = groupBy(
               hitsButBestAnswer,
               sectionTitle
             );
-            return Object.entries(hitsByCategorySection).map(
-              ([section, hits]) => {
-                return {
-                  sourceId: section,
-                  getItems() {
-                    return hits.map((hit) => {
-                      hit.url = buildUrl(hit);
-                      return hit;
-                    });
+            let position = 1;
+            Object.entries(hitsByCategorySection).forEach(([section, hits]) => {
+              sources.push({
+                sourceId: section,
+                getItems() {
+                  return hits.map((hit) => {
+                    hit.url = buildUrl(hit);
+                    hit.__position = position++;
+                    hit.__queryID = results.queryID;
+                    return hit;
+                  });
+                },
+                getItemUrl({ item }) {
+                  return item.url;
+                },
+                templates: {
+                  header({ items }) {
+                    return templates.autocomplete.articlesHeader(
+                      section,
+                      items
+                    );
                   },
-                  getItemUrl({ item }) {
-                    return item.url;
+                  item({ item, components }) {
+                    return templates.autocomplete.article(item, components);
                   },
-                  templates: {
-                    header({ items }) {
-                      return templates.autocomplete.articlesHeader(
-                        section,
-                        items
-                      );
-                    },
-                    item({ item, components }) {
-                      return templates.autocomplete.article(item, components);
-                    },
-                  },
-                  onSelect,
-                };
-              }
-            );
-          })
-          .then((sources) => {
-            sources.unshift(answersSection);
+                },
+                onSelect,
+              });
+            });
             return sources;
           });
       },
@@ -333,10 +265,10 @@ class Autocomplete {
       },
     });
 
-    const submitButton = form.querySelector('input[type="submit"]');
     if (submitButton) {
       submitButton.style = 'display: flex; order: 5; margin-left: 16px;';
-      container.querySelector('form').appendChild(submitButton);
+      // on mobile, we might not have the form at all; therefore do not append the button
+      container.querySelector('form')?.appendChild(submitButton);
     }
 
     if (keyboardShortcut) {

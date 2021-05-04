@@ -31,12 +31,23 @@
 
 /* the container we create is `position: relative` */
 .aa-Panel {
-  left: unset !important;
-  right: unset !important;
+  top: unset !important;
+  left: 0 !important;
+  right: 0 !important;
 }
+.aa-PanelLayout {
+  height: auto !important;
+  overflow-y: unset !important;
+}
+
 /* Hide the footer when in detached mode, it's appearing top */
 .aa-DetachedContainer .aa-PanelFooter {
   display: none;
+}
+
+/* disable default link style 8*/
+.aa-ItemLink:hover {
+  text-decoration: none !important;
 }
 
 /* Custom */

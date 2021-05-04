@@ -1,0 +1,60 @@
+import {
+  createLocalStorageRecentSearchesPlugin,
+  search as defaultLocalStorageSearch,
+} from '@algolia/autocomplete-plugin-recent-searches';
+
+export const getContainerAndButton = (inputSelector) => {
+  // figure out parent container of the input
+  const allInputs = document.querySelectorAll(inputSelector);
+  if (allInputs.length === 0) {
+    throw new Error(
+      `Couldn't find any input matching inputSelector '${inputSelector}'.`
+    );
+  }
+  if (allInputs.length > 1) {
+    throw new Error(
+      `Too many inputs (${allInputs.length}) matching inputSelector '${inputSelector}'.`
+    );
+  }
+  let form = allInputs[0];
+  while (form && form.tagName !== 'FORM') {
+    form = form.parentElement;
+  }
+  if (!form) {
+    throw new Error(
+      `Couldn't find the form container of inputSelector '${inputSelector}'`
+    );
+  }
+  const container = document.createElement('div');
+  container.style = 'position: relative';
+  form.parentNode.replaceChild(container, form);
+
+  const submitButton = form.querySelector('input[type="submit"]');
+  return [container, submitButton];
+};
+
+export const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
+  key: 'algolia-recent-searches',
+  limit: 5,
+  search({ query, items, limit }) {
+    // in case the query is exactly the recent item, skip it to not have a useless entry
+    const results = defaultLocalStorageSearch({ query, items, limit });
+    if (results.length === 1 && results[0].label === query) {
+      return [];
+    }
+    // if the query is non-empty, really display only 2 insted of 5
+    if (query !== '') {
+      return results.slice(0, 2);
+    }
+    return results;
+  },
+  transformSource({ source }) {
+    return {
+      ...source,
+      // keep this open and do another search
+      onSelect({ setIsOpen }) {
+        setIsOpen(true);
+      },
+    };
+  },
+});
