@@ -10,7 +10,7 @@ import { groupBy } from 'lodash';
 import translate from './translations';
 import { debounceGetAnswers } from './answers';
 import { initInsights, extendWithConversionTracking } from './clickAnalytics';
-import { getContainerAndButton, recentSearchesPlugin } from './utils';
+import { getContainerAndButton, recentSearchesPlugin, getRGB } from './utils';
 
 class Autocomplete {
   constructor({
@@ -62,8 +62,8 @@ class Autocomplete {
     this.state = { isOpen: false };
 
     const doc = document.documentElement;
-    doc.style.setProperty('--aa-primary-color', color);
-    doc.style.setProperty('--aa-highlight-color', highlightColor);
+    doc.style.setProperty('--aa-primary-color-rgb', getRGB(color));
+    doc.style.setProperty('--aa-highlight-color-rgb', getRGB(highlightColor));
 
     const lang = locale.split('-')[0];
     const buildUrl = (hit) => `${baseUrl}${locale}/articles/${hit.id}`;

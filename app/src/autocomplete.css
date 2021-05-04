@@ -10,21 +10,21 @@
   box-shadow: none !important;
 }
 .aa-InputWrapperPrefix {
-  border: 1px solid var(--aa-primary-color);
+  border: 1px solid rgb(var(--aa-primary-color-rgb));
   border-right: none;
 }
 .aa-InputWrapper {
-  border: 1px solid var(--aa-primary-color);
+  border: 1px solid rgb(var(--aa-primary-color-rgb));
   border-left: none;
   border-right: none;
   height: var(--aa-search-input-height);
 }
 .aa-InputWrapperSuffix {
-  border: 1px solid var(--aa-primary-color);
+  border: 1px solid rgb(var(--aa-primary-color-rgb));
   border-left: none;
 }
 
-/* Fix padding issue in alpha.45 */
+/* Fix padding issue */
 .aa-Source {
   padding: 0 8px;
 }
@@ -111,6 +111,6 @@
   line-height: 1.3em;
 }
 section[data-autocomplete-source-id='Answers'] .aa-ItemIcon {
-  background-color: var(--aa-primary-color);
+  background-color: rgb(var(--aa-primary-color-rgb));
   color: white;
 }
