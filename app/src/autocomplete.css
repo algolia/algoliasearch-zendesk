@@ -8,20 +8,33 @@
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
+  background-color: transparent !important;
 }
 .aa-InputWrapperPrefix {
   border: 1px solid rgb(var(--aa-primary-color-rgb));
   border-right: none;
+  background-color: rgba(
+    var(--aa-input-background-color-rgb),
+    var(--aa-input-background-color-alpha)
+  );
 }
 .aa-InputWrapper {
   border: 1px solid rgb(var(--aa-primary-color-rgb));
   border-left: none;
   border-right: none;
   height: var(--aa-search-input-height);
+  background-color: rgba(
+    var(--aa-input-background-color-rgb),
+    var(--aa-input-background-color-alpha)
+  );
 }
 .aa-InputWrapperSuffix {
   border: 1px solid rgb(var(--aa-primary-color-rgb));
   border-left: none;
+  background-color: rgba(
+    var(--aa-input-background-color-rgb),
+    var(--aa-input-background-color-alpha)
+  );
 }
 
 /* Fix padding issue */
