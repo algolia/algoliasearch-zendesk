@@ -266,7 +266,7 @@ class Autocomplete {
     });
 
     if (submitButton) {
-      submitButton.style = 'display: flex; order: 5; margin-left: 16px;';
+      submitButton.style = 'order: 5; margin-left: 16px;';
       // on mobile, we might not have the form at all; therefore do not append the button
       container.querySelector('form')?.appendChild(submitButton);
     }
