@@ -68,6 +68,25 @@ const optionsStructure = {
           value: '[data-hc-class="searchbox"]',
         },
         requireSubject: { type: 'boolean', value: true },
+        descriptionSelector: {
+          type: 'string',
+          value: '#hc-wysiwyg [role="group"]',
+        },
+        descriptionLockClasses: {
+          type: 'Object',
+          value: {},
+          children: {
+            descriptionGroup: { type: 'string', value: 'tf-description-group' },
+            disabledDescriptionGroup: {
+              type: 'string',
+              value: 'tf-description-group--disabled',
+            },
+            descriptionWarning: {
+              type: 'string',
+              value: 'tf-description-warning',
+            },
+          },
+        },
         answersParameters: { type: 'Object', value: {} }, // optional, params passed to Answers
       },
     },

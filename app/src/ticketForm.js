@@ -1,9 +1,11 @@
 import { version } from '../package.json';
 import algoliasearch from 'algoliasearch/lite';
 import { highlight, snippet } from 'instantsearch.js/es/helpers';
+import './ticketform.css';
 // eslint-disable-next-line no-unused-vars
 import { render, h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
+import translate from './translations';
 
 import { debounceGetAnswers } from './answers';
 import { initInsights, extendWithConversionTracking } from './clickAnalytics';
@@ -35,17 +37,35 @@ class TicketForm {
     baseUrl,
     clickAnalytics,
     locale,
+    translations,
     ticketForms: {
       enabled,
       inputSelector,
       suggestionsListSelector,
+      descriptionSelector,
       answersParameters,
+      requireSubject,
+      descriptionLockClasses: {
+        descriptionGroup,
+        disabledDescriptionGroup,
+        descriptionWarning,
+      },
     },
   }) {
     if (!enabled) return;
 
     // eslint-disable-next-line consistent-this
     const self = this;
+
+    if (requireSubject) {
+      self.descriptionElement = document.querySelector(descriptionSelector);
+      self.descriptionElement.classList.add(descriptionGroup);
+      self.descriptionElement.classList.add(disabledDescriptionGroup);
+      const warning = document.createElement('span');
+      warning.classList.add(descriptionWarning);
+      warning.textContent = translate(translations, locale, 'descriptionLock');
+      self.descriptionElement.append(warning);
+    }
 
     document
       .querySelector(suggestionsListSelector)
@@ -81,6 +101,11 @@ class TicketForm {
                 return hit;
               })
             );
+            if (requireSubject) {
+              self.descriptionElement.classList.remove(
+                disabledDescriptionGroup
+              );
+            }
           },
           autocomplete: false,
         });
@@ -88,7 +113,7 @@ class TicketForm {
 
       const onClick = (e, item) => {
         e.preventDefault();
-        this.trackClick(item, item.__position, item.__queryID);
+        self.trackClick(item, item.__position, item.__queryID);
         window.location = e.target.href;
       };
 
@@ -108,7 +133,7 @@ class TicketForm {
           {answers.length ? (
             <div className="suggestion-list">
               <div className="searchbox">
-                <label>Best Answer</label>
+                <label>{translate(translations, locale, 'bestAnswer')}</label>
                 <div className="searchbox-suggestions">
                   <ul>
                     {answers.map((hit) => (
