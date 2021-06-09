@@ -1,6 +1,6 @@
 import { version } from '../package.json';
 import algoliasearch from 'algoliasearch/lite';
-import instantsearch from 'instantsearch.js';
+import { highlight, snippet } from 'instantsearch.js/es/helpers';
 // eslint-disable-next-line no-unused-vars
 import { render, h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
@@ -121,7 +121,7 @@ class TicketForm {
                                 onClick(e, hit);
                               }}
                               dangerouslySetInnerHTML={{
-                                __html: instantsearch.highlight({
+                                __html: highlight({
                                   attribute: 'title',
                                   hit,
                                   highlightedTagName: 'strong',
@@ -131,7 +131,7 @@ class TicketForm {
                           </h4>
                           <div
                             dangerouslySetInnerHTML={{
-                              __html: instantsearch.snippet({
+                              __html: snippet({
                                 attribute: 'body_safe',
                                 hit,
                                 highlightedTagName: 'strong',
