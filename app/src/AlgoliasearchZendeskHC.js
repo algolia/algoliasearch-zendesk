@@ -1,6 +1,7 @@
 import fargs from 'fargs';
 
 import autocomplete from './autocomplete';
+import ticketForm from './ticketForm';
 import defaultTemplates from './templates';
 
 function hitsPerPageValidator(val) {
@@ -56,6 +57,20 @@ const optionsStructure = {
       },
     },
     translations: { type: 'Object', value: {} },
+    ticketForms: {
+      type: 'Object',
+      value: {},
+      children: {
+        enabled: { type: 'boolean', value: false },
+        inputSelector: { type: 'string', value: 'input#request_subject' },
+        suggestionsListSelector: {
+          type: 'string',
+          value: '[data-hc-class="searchbox"]',
+        },
+        requireSubject: { type: 'boolean', value: true },
+        answersParameters: { type: 'Object', value: {} }, // optional, params passed to Answers
+      },
+    },
   },
 };
 
@@ -76,6 +91,7 @@ class AlgoliasearchZendeskHC {
     };
 
     this.search = autocomplete(options);
+    this.form = ticketForm(options);
 
     // once the DOM is initialized
     if (
@@ -93,6 +109,7 @@ class AlgoliasearchZendeskHC {
 
   init(options) {
     this.search.init(options);
+    this.form.init(options);
   }
 }
 

@@ -105,15 +105,15 @@ class Autocomplete {
         }
 
         // debounce store the best answer
-        debounceGetAnswers(
-          self.client.initIndex(self.indexName),
-          state.query,
+        debounceGetAnswers({
+          index: self.client.initIndex(self.indexName),
+          query: state.query,
           lang,
-          {
+          params: {
             facetFilters: `["locale.locale:${locale}"]`,
             clickAnalytics,
           },
-          ({ hits, queryID }) => {
+          callback: ({ hits, queryID }) => {
             answersRef.current = hits.map((hit, i) => {
               if (hit._answer.extractAttribute === 'body_safe') {
                 hit._snippetResult.body_safe.value = hit._answer.extract;
@@ -121,11 +121,13 @@ class Autocomplete {
               hit.__position = i + 1;
               hit.__queryID = queryID;
               hit.url = buildUrl(hit);
+              console.log(hit);
               return hit;
             });
             refresh();
-          }
-        );
+          },
+          autocomplete: true,
+        });
       },
       onSubmit({ state }) {
         window.location.href = `${baseUrl}${locale}/search?utf8=✓&query=${encodeURIComponent(
