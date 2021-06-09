@@ -32,7 +32,6 @@ class TicketForm {
   }
 
   init({
-    analytics,
     baseUrl,
     clickAnalytics,
     locale,
@@ -54,9 +53,6 @@ class TicketForm {
 
     const lang = locale.split('-')[0];
     const buildUrl = (hit) => `${baseUrl}${locale}/articles/${hit.id}`;
-    const onSelect = ({ item }) => {
-      this.trackClick(item, item.__position, item.__queryID);
-    };
 
     const Input = () => {
       const [subject, setSubject] = useState('');
@@ -90,6 +86,12 @@ class TicketForm {
         });
       };
 
+      const onClick = (e, item) => {
+        e.preventDefault();
+        this.trackClick(item, item.__position, item.__queryID);
+        window.location = e.target.href;
+      };
+
       return (
         <Fragment>
           <input
@@ -115,6 +117,9 @@ class TicketForm {
                           <h4>
                             <a
                               href={hit.url}
+                              onClick={(e) => {
+                                onClick(e, hit);
+                              }}
                               dangerouslySetInnerHTML={{
                                 __html: instantsearch.highlight({
                                   attribute: 'title',
