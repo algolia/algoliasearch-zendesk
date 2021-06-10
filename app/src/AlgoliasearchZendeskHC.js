@@ -72,7 +72,7 @@ const optionsStructure = {
           type: 'string',
           value: '#hc-wysiwyg [role="group"]',
         },
-        descriptionLockClasses: {
+        cssClasses: {
           type: 'Object',
           value: {},
           children: {
@@ -84,6 +84,10 @@ const optionsStructure = {
             descriptionWarning: {
               type: 'string',
               value: 'tf-description-warning',
+            },
+            suggestionsList: {
+              type: 'string',
+              value: 'tf-suggestions-list',
             },
           },
         },
@@ -128,7 +132,11 @@ class AlgoliasearchZendeskHC {
 
   init(options) {
     this.search.init(options);
-    this.form.init(options);
+
+    // Need to wait for full load because TinyMCE is used for the description field on the request page and needs to be loaded to lock the descriprion field
+    window.addEventListener('load', () => {
+      this.form.init(options);
+    });
   }
 }
 

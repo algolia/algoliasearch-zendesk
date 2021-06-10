@@ -45,10 +45,11 @@ class TicketForm {
       descriptionSelector,
       answersParameters,
       requireSubject,
-      descriptionLockClasses: {
+      cssClasses: {
         descriptionGroup,
         disabledDescriptionGroup,
         descriptionWarning,
+        suggestionsList,
       },
     },
   }) {
@@ -135,35 +136,33 @@ class TicketForm {
               <div className="searchbox">
                 <label>{translate(translations, locale, 'bestAnswer')}</label>
                 <div className="searchbox-suggestions">
-                  <ul>
+                  <ul className={suggestionsList}>
                     {answers.map((hit) => (
                       <li key={hit.id}>
-                        <div>
-                          <h4>
-                            <a
-                              href={hit.url}
-                              onClick={(e) => {
-                                onClick(e, hit);
-                              }}
-                              dangerouslySetInnerHTML={{
-                                __html: highlight({
-                                  attribute: 'title',
-                                  hit,
-                                  highlightedTagName: 'strong',
-                                }),
-                              }}
-                            />
-                          </h4>
-                          <div
+                        <h4>
+                          <a
+                            href={hit.url}
+                            onClick={(e) => {
+                              onClick(e, hit);
+                            }}
                             dangerouslySetInnerHTML={{
-                              __html: snippet({
-                                attribute: 'body_safe',
+                              __html: highlight({
+                                attribute: 'title',
                                 hit,
                                 highlightedTagName: 'strong',
                               }),
                             }}
-                          ></div>
-                        </div>
+                          />
+                        </h4>
+                        <p
+                          dangerouslySetInnerHTML={{
+                            __html: snippet({
+                              attribute: 'body_safe',
+                              hit,
+                              highlightedTagName: 'strong',
+                            }),
+                          }}
+                        />
                       </li>
                     ))}
                   </ul>

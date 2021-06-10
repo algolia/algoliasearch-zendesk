@@ -20,3 +20,7 @@
 .tf-description-group--disabled .tf-description-warning {
     display: block;
 }
+
+.tf-suggestions-list h4 {
+    margin: 0;
+}
