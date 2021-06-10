@@ -109,7 +109,7 @@ class Autocomplete {
           index: self.client.initIndex(self.indexName),
           query: state.query,
           lang,
-          params: {
+          searchParams: {
             facetFilters: `["locale.locale:${locale}"]`,
             clickAnalytics,
           },

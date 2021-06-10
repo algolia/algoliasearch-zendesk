@@ -85,11 +85,11 @@ class TicketForm {
           index: self.client.initIndex(self.indexName),
           query: e.target.value,
           lang,
-          params: {
+          searchParams: {
             facetFilters: `["locale.locale:${locale}"]`,
             clickAnalytics,
-            ...answersParameters,
           },
+          answerParams: answersParameters,
           callback: ({ hits, queryID }) => {
             setAnswers(
               hits.map((hit, i) => {

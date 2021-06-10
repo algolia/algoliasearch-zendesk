@@ -1,6 +1,14 @@
 import { throttle } from 'throttle-debounce';
 
-const findAnswers = ({ index, query, lang, params, callback, autocomplete }) =>
+const findAnswers = ({
+  index,
+  query,
+  lang,
+  searchParams,
+  callback,
+  autocomplete,
+  answerParams,
+}) =>
   index
     .findAnswers(query, [lang], {
       attributesForPrediction: ['body_safe'],
@@ -13,11 +21,12 @@ const findAnswers = ({ index, query, lang, params, callback, autocomplete }) =>
       // eslint-disable-next-line camelcase
       EXPERIMENTAL_overwriteHitsPerPage: autocomplete ? 20 : null,
       params: {
-        ...params,
+        ...searchParams,
         restrictSearchableAttributes: ['title', 'body_safe'],
         highlightPreTag: autocomplete ? '__aa-highlight__' : '<mark>',
         highlightPostTag: autocomplete ? '__/aa-highlight__' : '</mark>',
       },
+      ...answerParams,
     })
     .then(callback)
     // eslint-disable-next-line no-console
