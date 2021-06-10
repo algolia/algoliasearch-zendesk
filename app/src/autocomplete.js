@@ -121,7 +121,6 @@ class Autocomplete {
               hit.__position = i + 1;
               hit.__queryID = queryID;
               hit.url = buildUrl(hit);
-              console.log(hit);
               return hit;
             });
             refresh();
