@@ -21,6 +21,12 @@
     display: block;
 }
 
+.tf-suggestions-list mark {
+    font-weight: bold;
+    background: none;
+    color: inherit;
+}
+
 .tf-suggestions-list h4 {
     margin: 0;
 }

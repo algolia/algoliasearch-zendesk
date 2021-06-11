@@ -10,7 +10,12 @@ import { groupBy } from 'lodash';
 import translate from './translations';
 import { debounceGetAnswers } from './answers';
 import { initInsights, extendWithConversionTracking } from './clickAnalytics';
-import { getContainerAndButton, recentSearchesPlugin, getRGB } from './utils';
+import {
+  getContainerAndButton,
+  recentSearchesPlugin,
+  getRGB,
+  buildUrl,
+} from './utils';
 
 class Autocomplete {
   constructor({
@@ -66,7 +71,6 @@ class Autocomplete {
     doc.style.setProperty('--aa-highlight-color-rgb', getRGB(highlightColor));
 
     const lang = locale.split('-')[0];
-    const buildUrl = (hit) => `${baseUrl}${locale}/articles/${hit.id}`;
     const onSelect = ({ item }) => {
       this.trackClick(item, item.__position, item.__queryID);
     };
@@ -120,7 +124,7 @@ class Autocomplete {
               }
               hit.__position = i + 1;
               hit.__queryID = queryID;
-              hit.url = buildUrl(hit);
+              hit.url = buildUrl({ baseUrl, locale, hit });
               return hit;
             });
             refresh();
@@ -224,7 +228,7 @@ class Autocomplete {
                 sourceId: section,
                 getItems() {
                   return hits.map((hit) => {
-                    hit.url = buildUrl(hit);
+                    hit.url = buildUrl({ baseUrl, locale, hit });
                     hit.__position = position++;
                     hit.__queryID = results.queryID;
                     return hit;

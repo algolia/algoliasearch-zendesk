@@ -9,6 +9,7 @@ import translate from './translations';
 
 import { debounceGetAnswers } from './answers';
 import { initInsights, extendWithConversionTracking } from './clickAnalytics';
+import { buildUrl } from './utils';
 
 class TicketForm {
   constructor({
@@ -55,11 +56,29 @@ class TicketForm {
   }) {
     if (!enabled) return;
 
+    const allInputs = document.querySelectorAll(inputSelector);
+    if (allInputs.length === 0) {
+      throw new Error(
+        `Couldn't find any input matching inputSelector '${inputSelector}'.`
+      );
+    }
+    if (allInputs.length > 1) {
+      throw new Error(
+        `Too many inputs (${allInputs.length}) matching inputSelector '${inputSelector}'.`
+      );
+    }
+    const input = allInputs[0];
+
     // eslint-disable-next-line consistent-this
     const self = this;
 
     if (requireSubject) {
       self.descriptionElement = document.querySelector(descriptionSelector);
+      if (!self.descriptionElement) {
+        throw new Error(
+          `Couldn't find any element matching descriptionSelector '${descriptionSelector}'.`
+        );
+      }
       self.descriptionElement.classList.add(descriptionGroup);
       self.descriptionElement.classList.add(disabledDescriptionGroup);
       const warning = document.createElement('span');
@@ -68,12 +87,17 @@ class TicketForm {
       self.descriptionElement.append(warning);
     }
 
-    document
-      .querySelector(suggestionsListSelector)
-      .setAttribute('style', 'display: none!important');
+    const suggestionsListElement = document.querySelector(
+      suggestionsListSelector
+    );
+    if (!suggestionsListElement) {
+      throw new Error(
+        `Couldn't find any element matching suggestionsListSelector '${suggestionsListSelector}'`
+      );
+    }
+    suggestionsListElement.setAttribute('style', 'display: none!important');
 
     const lang = locale.split('-')[0];
-    const buildUrl = (hit) => `${baseUrl}${locale}/articles/${hit.id}`;
 
     const Input = () => {
       const [subject, setSubject] = useState('');
@@ -98,7 +122,7 @@ class TicketForm {
                 }
                 hit.__position = i + 1;
                 hit.__queryID = queryID;
-                hit.url = buildUrl(hit);
+                hit.url = buildUrl({ baseUrl, locale, hit });
                 return hit;
               })
             );
@@ -112,10 +136,8 @@ class TicketForm {
         });
       };
 
-      const onClick = (e, item) => {
-        e.preventDefault();
+      const handleClick = (item) => {
         self.trackClick(item, item.__position, item.__queryID);
-        window.location = e.target.href;
       };
 
       return (
@@ -142,14 +164,14 @@ class TicketForm {
                         <h4>
                           <a
                             href={hit.url}
-                            onClick={(e) => {
-                              onClick(e, hit);
+                            onClick={() => {
+                              handleClick(hit);
                             }}
                             dangerouslySetInnerHTML={{
                               __html: highlight({
                                 attribute: 'title',
                                 hit,
-                                highlightedTagName: 'strong',
+                                highlightedTagName: 'mark',
                               }),
                             }}
                           />
@@ -159,7 +181,7 @@ class TicketForm {
                             __html: snippet({
                               attribute: 'body_safe',
                               hit,
-                              highlightedTagName: 'strong',
+                              highlightedTagName: 'mark',
                             }),
                           }}
                         />
@@ -174,11 +196,7 @@ class TicketForm {
       );
     };
 
-    render(
-      h(Input),
-      document.querySelector(inputSelector).parentNode,
-      document.querySelector(inputSelector)
-    );
+    render(h(Input), input.parentNode, input);
   }
 }
 export default (...args) => new TicketForm(...args);

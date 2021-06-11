@@ -77,3 +77,6 @@ export const getRGB = (color) => {
   const rgb = hexToRgb(ctx.strokeStyle);
   return `${rgb.r}, ${rgb.g}, ${rgb.b}`;
 };
+
+export const buildUrl = ({ baseUrl, locale, hit }) =>
+  `${baseUrl}${locale}/articles/${hit.id}`;
