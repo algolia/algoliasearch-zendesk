@@ -44,6 +44,7 @@ class TicketForm {
       inputSelector,
       suggestionsListSelector,
       descriptionSelector,
+      fallbackDescriptionSelector,
       answersParameters,
       requireSubject,
       cssClasses: {
@@ -75,16 +76,22 @@ class TicketForm {
     if (requireSubject) {
       self.descriptionElement = document.querySelector(descriptionSelector);
       if (!self.descriptionElement) {
-        throw new Error(
-          `Couldn't find any element matching descriptionSelector '${descriptionSelector}'.`
+        self.descriptionElement = document.querySelector(
+          fallbackDescriptionSelector
         );
+
+        if (!self.descriptionElement) {
+          throw new Error(
+            `Couldn't find any element matching descriptionSelector '${descriptionSelector}'.`
+          );
+        }
       }
-      self.descriptionElement.classList.add(descriptionGroup);
+      self.descriptionElement.parentNode.classList.add(descriptionGroup);
       self.descriptionElement.classList.add(disabledDescriptionGroup);
       const warning = document.createElement('span');
       warning.classList.add(descriptionWarning);
       warning.textContent = translate(translations, locale, 'descriptionLock');
-      self.descriptionElement.append(warning);
+      self.descriptionElement.parentNode.append(warning);
     }
 
     const suggestionsListElement = document.querySelector(

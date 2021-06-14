@@ -17,7 +17,8 @@
     pointer-events: none;
 }
 
-.tf-description-group--disabled .tf-description-warning {
+.tf-description-group--disabled .tf-description-warning, 
+.tf-description-group--disabled ~ .tf-description-warning {
     display: block;
 }
 

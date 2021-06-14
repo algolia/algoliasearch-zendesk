@@ -72,6 +72,10 @@ const optionsStructure = {
           type: 'string',
           value: '#hc-wysiwyg [role="group"]',
         },
+        fallbackDescriptionSelector: {
+          type: 'string',
+          value: '#request_description',
+        },
         cssClasses: {
           type: 'Object',
           value: {},
