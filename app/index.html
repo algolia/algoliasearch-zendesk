@@ -1,69 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Zendesk test</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <link
-      rel="stylesheet"
-      media="all"
-      href="//static.zdassets.com/hc/assets/application-79172500fb4dbec2484043d570946543.css"
-      id="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="//p18.zdassets.com/hc/theming_assets/613986/371941/style.css?digest=4399775617298"
-    />
-  </head>
-  <body>
-    <ul>
-      <li><a href="/hc/en-us/">en-us</a></li>
-      <li><a href="/hc/fr/">fr</a></li>
-      <li><a href="/hc/de/">de</a></li>
-      <li><a href="/hc/es/">es</a></li>
-      <li><a href="/hc/it/">it</a></li>
-      <li><a href="/hc/ar/">ar</a></li>
-    </ul>
-    <div class="hero-inner">
-      <h2 class="visibility-hidden">Search</h2>
-      <form
-        role="search"
-        class="search search-full"
-        data-search=""
-        data-instant="true"
-        autocomplete="off"
-        action="/hc/en-us/search"
-        accept-charset="UTF-8"
-        method="get"
-      >
-        <input name="utf8" type="hidden" value="✓" /><input
-          type="search"
-          name="query"
-          id="query"
-          placeholder="Search"
-          autocomplete="off"
-          aria-label="Search"
-        />
-      </form>
-    </div>
-    <script type="text/javascript" charset="utf-8" src="./index.js"></script>
-    <script>
-      var search = algoliasearchZendeskHC({
-        applicationId: 'latency',
-        apiKey: '88209bb425570ef10733c0ba3157bac3',
-        subdomain: 'algolia-test',
-        color: '#158EC2',
-        highlightColor: '#F08',
-        autocomplete: {
-          bestArticle: true,
-          inputSelector: '#query',
-          keyboardShortcut: true,
-        },
-        clickAnalytics: true,
-      });
-    </script>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Zendesk test</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" media="all"
+    href="//static.zdassets.com/hc/assets/application-79172500fb4dbec2484043d570946543.css" id="stylesheet" />
+  <link rel="stylesheet" type="text/css"
+    href="//p18.zdassets.com/hc/theming_assets/613986/371941/style.css?digest=4399775617298" />
+</head>
+
+<body>
+  <ul>
+    <li><a href="/hc/en-us/">en-us</a></li>
+    <li><a href="/hc/fr/">fr</a></li>
+    <li><a href="/hc/de/">de</a></li>
+    <li><a href="/hc/es/">es</a></li>
+    <li><a href="/hc/it/">it</a></li>
+    <li><a href="/hc/ar/">ar</a></li>
+  </ul>
+  <div class="hero-inner">
+    <h2 class="visibility-hidden">Search</h2>
+    <form role="search" class="search search-full" data-search="" data-instant="true" autocomplete="off"
+      action="/hc/en-us/search" accept-charset="UTF-8" method="get">
+      <input name="utf8" type="hidden" value="✓" /><input type="search" name="query" id="query" placeholder="Search"
+        autocomplete="off" aria-label="Search" />
+    </form>
+  </div>
+  <script type="text/javascript" charset="utf-8" src="./index.js"></script>
+  <script>
+    var search = algoliasearchZendeskHC({
+      applicationId: 'latency',
+      apiKey: '88209bb425570ef10733c0ba3157bac3',
+      subdomain: 'algolia-test',
+      color: '#158EC2',
+      highlightColor: '#F08',
+      autocomplete: {
+        bestArticle: true,
+        inputSelector: '#query',
+        keyboardShortcut: true,
+      },
+      clickAnalytics: true,
+    });
+  </script>
+</body>
+
 </html>

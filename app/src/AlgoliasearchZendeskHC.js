@@ -1,6 +1,7 @@
 import fargs from 'fargs';
 
 import autocomplete from './autocomplete';
+import ticketForm from './ticketForm';
 import defaultTemplates from './templates';
 
 function hitsPerPageValidator(val) {
@@ -56,6 +57,43 @@ const optionsStructure = {
       },
     },
     translations: { type: 'Object', value: {} },
+    ticketForms: {
+      type: 'Object',
+      value: {},
+      children: {
+        enabled: { type: 'boolean', value: false },
+        inputSelector: { type: 'string', value: 'input#request_subject' },
+        suggestionsListSelector: {
+          type: 'string',
+          value: '[data-hc-class="searchbox"]',
+        },
+        requireSubject: { type: 'boolean', value: true },
+        descriptionSelector: {
+          type: 'string',
+          value: '#hc-wysiwyg [role="group"]',
+        },
+        cssClasses: {
+          type: 'Object',
+          value: {},
+          children: {
+            descriptionGroup: { type: 'string', value: 'tf-description-group' },
+            disabledDescriptionGroup: {
+              type: 'string',
+              value: 'tf-description-group--disabled',
+            },
+            descriptionWarning: {
+              type: 'string',
+              value: 'tf-description-warning',
+            },
+            suggestionsList: {
+              type: 'string',
+              value: 'tf-suggestions-list',
+            },
+          },
+        },
+        answersParameters: { type: 'Object', value: {} }, // optional, params passed to Answers
+      },
+    },
   },
 };
 
@@ -76,6 +114,7 @@ class AlgoliasearchZendeskHC {
     };
 
     this.search = autocomplete(options);
+    this.form = ticketForm(options);
 
     // once the DOM is initialized
     if (
@@ -93,6 +132,11 @@ class AlgoliasearchZendeskHC {
 
   init(options) {
     this.search.init(options);
+
+    // Need to wait for full load because TinyMCE is used for the description field on the request page and needs to be loaded to lock the descriprion field
+    window.addEventListener('load', () => {
+      this.form.init(options);
+    });
   }
 }
 

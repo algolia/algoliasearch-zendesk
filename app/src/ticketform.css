@@ -1,0 +1,32 @@
+.tf-description-group {
+    position: relative;
+}
+
+.tf-description-warning {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    text-align: center;
+    display: none;
+}
+
+.tf-description-group--disabled {
+    background-color: rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+}
+
+.tf-description-group--disabled .tf-description-warning {
+    display: block;
+}
+
+.tf-suggestions-list mark {
+    font-weight: bold;
+    background: none;
+    color: inherit;
+}
+
+.tf-suggestions-list h4 {
+    margin: 0;
+}
