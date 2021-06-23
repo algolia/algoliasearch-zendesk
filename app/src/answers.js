@@ -22,6 +22,7 @@ const findAnswers = ({
       EXPERIMENTAL_overwriteHitsPerPage: autocomplete ? 20 : null,
       params: {
         ...searchParams,
+        optionalWords: query,
         restrictSearchableAttributes: ['title', 'body_safe'],
         highlightPreTag: autocomplete ? '__aa-highlight__' : '<mark>',
         highlightPostTag: autocomplete ? '__/aa-highlight__' : '</mark>',
