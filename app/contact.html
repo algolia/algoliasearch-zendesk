@@ -1,0 +1,173 @@
+<!-- 
+  If you're in dev mode and wondering why the imported CSS won't load on this page, it's because of a parcel bug when starting a dev server with multiple entry points (https://github.com/parcel-bundler/parcel/issues/2340).
+  The temporary solution would be to start the server taking only this page as an entry point. (parcel contact.html --global algoliasearchZendeskHC)
+ -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Zendesk test</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" media="all"
+    href="//static.zdassets.com/hc/assets/application-79172500fb4dbec2484043d570946543.css" id="stylesheet" />
+  <link rel="stylesheet" type="text/css"
+    href="//p18.zdassets.com/hc/theming_assets/613986/371941/style.css?digest=4399775617298" />
+</head>
+
+<body>
+  <ul>
+    <li><a href="/hc/en-us/">en-us</a></li>
+    <li><a href="/hc/fr/">fr</a></li>
+    <li><a href="/hc/de/">de</a></li>
+    <li><a href="/hc/es/">es</a></li>
+    <li><a href="/hc/it/">it</a></li>
+    <li><a href="/hc/ar/">ar</a></li>
+  </ul>
+  <div class="hero-inner">
+    <h2 class="visibility-hidden">Submit a request</h2>
+  </div>
+  <div class="container">
+
+    <div class="form">
+
+      <form id="new_request" class="request-form" data-form="" data-form-type="request" action="/hc/en-us/requests"
+        accept-charset="UTF-8" method="post">
+        <input name="utf8" type="hidden" value="✓">
+
+        <input type="hidden" name="request[ticket_form_id]" id="request_ticket_form_id" value="194865">
+
+        <div class="form-field string required request_anonymous_requester_email">
+          <label for="request_anonymous_requester_email">Your email address</label>
+          <input type="text" name="request[anonymous_requester_email]" id="request_anonymous_requester_email"
+            aria-required="true">
+        </div>
+
+        <div class="form-field string  required  request_subject">
+          <label id="request_subject_label" for="request_subject">Subject</label>
+          <input type="text" name="request[subject]" id="request_subject" maxlength="150" size="150"
+            aria-required="true" aria-labelledby="request_subject_label">
+        </div>
+
+        <div class="suggestion-list" data-hc-class="searchbox" data-hc-suggestion-list="true">
+          <div class="searchbox" style="display: none;"><label>Suggested articles</label>
+            <div class="searchbox-suggestions"></div>
+          </div>
+        </div>
+
+        <div class="form-field text  required  request_description">
+          <label id="request_description_label" for="request_description">Description</label>
+          <textarea name="request[description]" id="request_description" aria-required="true"
+            aria-describedby="request_description_hint" aria-labelledby="request_description_label"
+            data-helper="wysiwyg" style="visibility: hidden; display: none;" aria-hidden="true"></textarea>
+          <div role="application" id="hc-wysiwyg">
+            <div role="toolbar"><span aria-haspopup="true" aria-expanded="false"><span role="button"
+                  title="Paragraph styles" tabindex="0" class="wysiwyg-icon-formats"></span><span role="menu"
+                  aria-hidden="true" tabindex="-1"><span role="button" title="" tabindex="0" data-block="p">Normal
+                    text</span><span role="button" title="" tabindex="0" data-block="h2">Header 2</span><span
+                    role="button" title="" tabindex="0" data-block="h3">Header 3</span><span role="button" title=""
+                    tabindex="0" data-block="h4">Header
+                    4</span></span></span><span role="button" title="Bold" tabindex="0"
+                class="wysiwyg-icon-bold"></span><span role="button" title="Italic" tabindex="0"
+                class="wysiwyg-icon-italic"></span><span role="separator"></span><span role="button"
+                title="Bulleted list" tabindex="0" class="wysiwyg-icon-bullist"></span><span role="button"
+                title="Numbered list" tabindex="0" class="wysiwyg-icon-numlist"></span><span
+                role="separator"></span><span role="button" title="Code block" tabindex="0"
+                class="wysiwyg-icon-code-block"></span><span role="button" title="Insert/Edit link" tabindex="0"
+                class="wysiwyg-icon-link"></span><span role="button" title="Quote" tabindex="0"
+                class="wysiwyg-icon-quote"></span></div>
+            <div role="form" aria-expanded="false"></div>
+            <div role="group"><iframe id="request_description_ifr" frameborder="0" allowtransparency="true"
+                style="width: 100%; height: 100%; display: block;"></iframe></div>
+            <div role="alert" aria-hidden="true"></div>
+            <div><input name="content_type" type="hidden" value="text/html"></div>
+          </div><input type="hidden" name="request[description_mimetype]" id="request_description_mimetype"
+            value="text/html" style="display: none;">
+
+          <p id="request_description_hint">Please enter the details of your request. A member of our support staff will
+            respond as soon as possible.</p>
+        </div>
+
+
+
+
+        <script data-conditional-fields="[]"></script>
+
+        <div class="form-field">
+          <label for="request-attachments">
+            Attachments<span class="optional">(optional)</span>
+          </label>
+          <div id="upload-dropzone" class="upload-dropzone">
+            <input type="file" multiple="true" id="request-attachments" data-fileupload="true"
+              data-dropzone="upload-dropzone" data-error="upload-error" data-create-url="/hc/en-us/request_uploads"
+              data-name="request[attachments][]" data-pool="request-attachments-pool" data-delete-confirm-msg=""
+              aria-describedby="upload-error">
+            <span>
+              <a>Add file</a> or drop files here
+            </span>
+          </div>
+
+          <div id="upload-error" class="notification notification-error notification-inline" style="display: none;">
+            <span data-upload-error-message=""></span>
+          </div>
+
+
+          <ul id="request-attachments-pool" class="upload-pool" data-template="upload-template"></ul>
+
+          <!-- <script type="text/html" id="upload-template">
+      <li class="upload-item" data-upload-item>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="upload-item-icon">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" d="M2.5 4v4.5c0 1.7 1.3 3 3 3s3-1.3 3-3v-6c0-1.1-.9-2-2-2s-2 .9-2 2v6c0 .6.4 1 1 1s1-.4 1-1V4"/>
+          </svg>
+          <div aria-hidden="true" class="upload-item-icon-spacer"></div>
+        <a class="upload-link" target="_blank" data-upload-link></a>
+        <p class="upload-path" data-upload-path></p>
+        <p class="upload-path" data-upload-size></p>
+        <p data-upload-issue class="notification notification-alert notification-inline" aria-hidden="true"></p>
+        <span class="upload-remove" role="button" tabindex="0" data-upload-remove>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="upload-item-icon">
+            <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3"/>
+          </svg>
+        </span>
+        <div class="upload-progress" data-upload-progress></div>
+        <input type="hidden">
+      </li>
+      </script> -->
+
+
+        </div>
+
+
+
+
+
+
+
+        <footer><input type="submit" name="commit" value="Submit"></footer>
+
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript" charset="utf-8" src="./index.js"></script>
+  <script>
+    var search = algoliasearchZendeskHC({
+      applicationId: 'latency',
+      apiKey: '88209bb425570ef10733c0ba3157bac3',
+      subdomain: 'algolia-test',
+      color: '#158EC2',
+      highlightColor: '#F08',
+      autocomplete: {
+        enabled: false
+      },
+      clickAnalytics: true,
+      ticketForms: {
+        enabled: true,
+      }
+    });
+  </script>
+</body>
+
+</html>
