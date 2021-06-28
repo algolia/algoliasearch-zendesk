@@ -37,7 +37,8 @@ const optionsStructure = {required: true, type: 'Object', children: {
     reuseAutocomplete: {type: 'boolean', value: false},
     hideAutocomplete: {type: 'boolean', value: true},
     selector: {type: 'string', value: '.search-results'},
-    tagsLimit: {type: 'number', value: 15}
+    tagsLimit: {type: 'number', value: 15},
+    showSearchEditAt: {type: 'boolean', value: false}
   }},
   instantsearchPage: {type: 'function', value: instantsearchPage},
   poweredBy: {type: 'boolean', value: true},

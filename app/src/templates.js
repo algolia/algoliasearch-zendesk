@@ -201,7 +201,7 @@ const defaultTemplates = {
   data-algolia-objectid="[[ objectID ]]"
 >
   <div class="search-result-meta">
-    <time data-datetime="relative" datetime="[[ created_at_iso ]]"></time>
+    <time data-datetime="relative" datetime="[[ ${showSearchEditAt ? 'edited_at_iso' : 'created_at_iso'} ]]"></time>
   </div>
   <div class="search-result-link-wrapper">
     <a class="search-result-link" href="[[ baseUrl ]][[ locale.locale ]]/articles/[[ id ]]">
