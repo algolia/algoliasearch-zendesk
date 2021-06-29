@@ -192,7 +192,7 @@ const defaultTemplates = {
     ),
 
     // Instant search result template
-    hit: compile(
+    hit: showSearchEditAt => compile(
 `<div
   class="search-result"
   data-algolia-position="[[ position ]]"
