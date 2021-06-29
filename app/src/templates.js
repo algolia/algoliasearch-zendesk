@@ -192,7 +192,7 @@ const defaultTemplates = {
     ),
 
     // Instant search result template
-    hit: showSearchEditAt => compile(
+    hit: useEditedAt => compile(
 `<div
   class="search-result"
   data-algolia-position="[[ position ]]"
@@ -201,7 +201,7 @@ const defaultTemplates = {
   data-algolia-objectid="[[ objectID ]]"
 >
   <div class="search-result-meta">
-    <time data-datetime="relative" datetime="[[ ${showSearchEditAt ? 'edited_at_iso' : 'created_at_iso'} ]]"></time>
+    <time data-datetime="relative" datetime="[[ ${ useEditedAt ? 'edited_at_iso' : 'created_at_iso'} ]]"></time>
   </div>
   <div class="search-result-link-wrapper">
     <a class="search-result-link" href="[[ baseUrl ]][[ locale.locale ]]/articles/[[ id ]]">

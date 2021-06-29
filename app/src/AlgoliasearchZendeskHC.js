@@ -37,12 +37,12 @@ const optionsStructure = {required: true, type: 'Object', children: {
     reuseAutocomplete: {type: 'boolean', value: false},
     hideAutocomplete: {type: 'boolean', value: true},
     selector: {type: 'string', value: '.search-results'},
-    tagsLimit: {type: 'number', value: 15}
+    tagsLimit: {type: 'number', value: 15},
+    useEditedAt: {type: 'boolean', value: false}
   }},
   instantsearchPage: {type: 'function', value: instantsearchPage},
   poweredBy: {type: 'boolean', value: true},
   responsive: {type: 'boolean', value: true},
-  showSearchEditAt: {type: 'boolean', value: false},
   subdomain: {type: 'string', required: true},
   templates: {type: 'Object', value: {}, children: {
     autocomplete: {type: 'Object', value: {}},

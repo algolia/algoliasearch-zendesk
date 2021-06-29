@@ -85,7 +85,8 @@ class InstantSearch {
       paginationSelector,
       reuseAutocomplete,
       hideAutocomplete,
-      tagsLimit
+      tagsLimit,
+      useEditedAt
     },
     locale,
     poweredBy,
@@ -204,7 +205,7 @@ class InstantSearch {
         hitsPerPage,
         templates: {
           empty: templates.instantsearch.noResult,
-          item: templates.instantsearch.hit
+          item: templates.instantsearch.hit(useEditedAt)
         },
         transformData: {
           empty: data => ({
