@@ -1,8 +1,8 @@
-// eslint-disable-next-line no-unused-vars
 import { h, Fragment } from 'preact';
 
 import translate from './translations';
-const tree = h; // eslint-disable-line no-unused-vars
+// Otherwise h gets treeshaken by the typescript compiler
+const _h = h; // eslint-disable-line no-unused-vars
 
 const templates = {
   autocomplete: {

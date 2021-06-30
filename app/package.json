@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.11",
+    "@typescript-eslint/parser": "^4.28.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -46,6 +47,7 @@
     "eslint": "^7.20.0",
     "eslint-config-algolia": "15.0.0",
     "eslint-config-prettier": "6.15.0",
+    "eslint-import-resolver-parcel": "^1.10.6",
     "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-prettier": "3.2.0",

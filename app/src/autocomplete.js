@@ -3,7 +3,6 @@ import algoliasearch from 'algoliasearch/lite';
 import { autocomplete } from '@algolia/autocomplete-js';
 import '@algolia/autocomplete-theme-classic';
 import '~/src/autocomplete.css';
-// eslint-disable-next-line no-unused-vars
 import { render, h, Fragment } from 'preact';
 import { groupBy } from 'lodash';
 
@@ -17,7 +16,8 @@ import {
   buildUrl,
 } from './utils';
 
-const tree = h;
+// Otherwise h gets treeshaken by the typescript compiler
+const _h = h; // eslint-disable-line no-unused-vars
 
 class Autocomplete {
   constructor({
