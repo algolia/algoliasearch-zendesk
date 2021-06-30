@@ -38,6 +38,7 @@
     "to-factory": "^1.0.0"
   },
   "devDependencies": {
+    "@types/react": "^17.0.11",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -50,12 +51,13 @@
     "eslint-plugin-prettier": "3.2.0",
     "eslint-plugin-react": "7.21.5",
     "parcel-bundler": "1.12.4",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "typescript": "^4.3.4"
   },
   "scripts": {
     "clean": "rm -rf dist/ node_modules/",
-    "build": "parcel build index.js  --global algoliasearchZendeskHC -o algoliasearch.zendesk-hc.min.js",
-    "dev": "parcel index.html contact.html --global algoliasearchZendeskHC",
+    "build": "tsc && parcel build index.js  --global algoliasearchZendeskHC -o algoliasearch.zendesk-hc.min.js",
+    "dev": "tsc -w & parcel index.html contact.html --global algoliasearchZendeskHC",
     "format": "prettier --write .",
     "lint": "eslint --ext .js src"
   }

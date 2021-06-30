@@ -2,6 +2,7 @@
 import { h, Fragment } from 'preact';
 
 import translate from './translations';
+const tree = h; // eslint-disable-line no-unused-vars
 
 const templates = {
   autocomplete: {

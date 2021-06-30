@@ -3,9 +3,11 @@ import {
   search as defaultLocalStorageSearch,
 } from '@algolia/autocomplete-plugin-recent-searches';
 
-export const getContainerAndButton = (inputSelector) => {
+export const getContainerAndButton = (inputSelector: string) => {
   // figure out parent container of the input
-  const allInputs = document.querySelectorAll(inputSelector);
+  const allInputs: NodeListOf<HTMLInputElement> = document.querySelectorAll(
+    inputSelector
+  );
   if (allInputs.length === 0) {
     throw new Error(
       `Couldn't find any input matching inputSelector '${inputSelector}'.`
@@ -16,7 +18,7 @@ export const getContainerAndButton = (inputSelector) => {
       `Too many inputs (${allInputs.length}) matching inputSelector '${inputSelector}'.`
     );
   }
-  let form = allInputs[0];
+  let form: HTMLElement = allInputs[0];
   while (form && form.tagName !== 'FORM') {
     form = form.parentElement;
   }
@@ -25,8 +27,8 @@ export const getContainerAndButton = (inputSelector) => {
       `Couldn't find the form container of inputSelector '${inputSelector}'`
     );
   }
-  const container = document.createElement('div');
-  container.style = 'position: relative';
+  const container: HTMLElement = document.createElement('div');
+  container.style.position = 'relative';
   form.parentNode.replaceChild(container, form);
 
   const submitButton = form.querySelector('input[type="submit"]');
@@ -59,7 +61,7 @@ export const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
   },
 });
 
-const hexToRgb = (hex) => {
+const hexToRgb = (hex: string) => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
@@ -70,7 +72,7 @@ const hexToRgb = (hex) => {
     : null;
 };
 
-export const getRGB = (color) => {
+export const getRGB = (color: string) => {
   const ctx = document.createElement('canvas').getContext('2d');
   // the HTML5 canvas is required to parse color values when certain properties like strokeStyle and fillStyle are set
   ctx.strokeStyle = color;

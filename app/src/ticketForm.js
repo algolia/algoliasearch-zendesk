@@ -1,7 +1,7 @@
 import { version } from '../package.json';
 import algoliasearch from 'algoliasearch/lite';
 import { highlight, snippet } from 'instantsearch.js/es/helpers';
-import './ticketform.css';
+import '~/src/ticketform.css';
 // eslint-disable-next-line no-unused-vars
 import { render, h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
