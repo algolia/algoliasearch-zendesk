@@ -1,5 +1,11 @@
-<a name="2.29.1"></a>
-## [2.29.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.29.1...v2.29.1) (2020-12-03)
+<a name="2.30.0"></a>
+# [2.30.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.30.0...v2.30.0) (2021-06-30)
+
+
+
+
+<a name="2.30.0"></a>
+# [2.30.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.29.1...v2.30.0) (2021-06-30)
 
 
 
