@@ -89,7 +89,6 @@ Here is a full breakdown of the available options for the JavaScript library:
     color: '#158EC2',                     // main color (used for links)
     highlightColor: '#158EC2',            // highlight color to emphasize matching text
     responsive: true,                     // responsive instantsearch page
-    showSearchEditAt: false,              // show edited_at_iso at search results default template 
     autocomplete: {
       enabled: true,                      // is the autocomplete feature enabled?
       inputSelector: '#query',            // the DOM selector to select the search box
@@ -102,7 +101,8 @@ Here is a full breakdown of the available options for the JavaScript library:
       reuseAutocomplete: false,           // do not add a search input for the instant-search page
       hideAutocomplete: true,             // whether or not to hide the autocomplete on the instantsearch page (ignored if reuseAutocomplete is used)
       selector: '.search-results',        // the DOM selector for the results container
-      tagsLimit: 15                      // maximum number of tags to display
+      tagsLimit: 15,                      // maximum number of tags to display
+      useEditedAt: false                  // show edited_at timestamp in search results
     },
     instantsearchPage,                    // function to check if we're on the search page
     templates: {                          // template objects (see the templates section)
