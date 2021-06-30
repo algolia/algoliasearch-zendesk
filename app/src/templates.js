@@ -121,7 +121,6 @@ const templates = {
     },
 
     // Autocompletion template for an article
-    // eslint-disable-next-line no-unused-vars
     article: (hit, components) => (
       <Fragment>
         <a class="aa-ItemLink" href={hit.url}>
@@ -147,7 +146,6 @@ const templates = {
       </Fragment>
     ),
 
-    // eslint-disable-next-line no-unused-vars
     answers: (translations, locale, hit, components) => (
       <Fragment>
         <a class="aa-ItemLink" href={hit.url}>

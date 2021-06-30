@@ -1,7 +1,7 @@
 import { version } from '~/package.json';
 import algoliasearch from 'algoliasearch/lite';
 import { highlight, snippet } from 'instantsearch.js/es/helpers';
-import '~/src/ticketform.css';
+import '~/src/css/ticketform.css';
 import { render, h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
 import translate from './translations';
