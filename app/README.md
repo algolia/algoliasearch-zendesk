@@ -93,7 +93,7 @@ Here is a full breakdown of the available options for the JavaScript library:
       enabled: true,                      // is the autocomplete feature enabled?
       inputSelector: '#query',            // the DOM selector to select the search box
       hitsPerPage: 5                      // the number of suggestions to display
-    },
+    }, 
     instantsearch: {
       enabled: true,                      // is the instantsearch feature enabled?
       hitsPerPage: 20,                    // the number of suggestions to display
@@ -101,7 +101,8 @@ Here is a full breakdown of the available options for the JavaScript library:
       reuseAutocomplete: false,           // do not add a search input for the instant-search page
       hideAutocomplete: true,             // whether or not to hide the autocomplete on the instantsearch page (ignored if reuseAutocomplete is used)
       selector: '.search-results',        // the DOM selector for the results container
-      tagsLimit: 15                       // maximum number of tags to display
+      tagsLimit: 15,                      // maximum number of tags to display
+      useEditedAt: false                  // show edited_at timestamp in search results
     },
     instantsearchPage,                    // function to check if we're on the search page
     templates: {                          // template objects (see the templates section)
