@@ -56,8 +56,8 @@
   },
   "scripts": {
     "clean": "rm -rf dist/ node_modules/",
-    "build": "tsc && parcel build index.js  --global algoliasearchZendeskHC -o algoliasearch.zendesk-hc.min.js",
-    "dev": "tsc -w & parcel index.html contact.html --global algoliasearchZendeskHC",
+    "build": "tsc && parcel build built/index.js  --global algoliasearchZendeskHC -o algoliasearch.zendesk-hc.min.js",
+    "dev": "tsc; tsc -w & parcel index.html contact.html --global algoliasearchZendeskHC",
     "format": "prettier --write .",
     "lint": "eslint --ext .js src"
   }

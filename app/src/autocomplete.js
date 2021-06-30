@@ -1,4 +1,4 @@
-import { version } from '../package.json';
+import { version } from '~/package.json';
 import algoliasearch from 'algoliasearch/lite';
 import { autocomplete } from '@algolia/autocomplete-js';
 import '@algolia/autocomplete-theme-classic';

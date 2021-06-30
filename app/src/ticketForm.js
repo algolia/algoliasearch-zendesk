@@ -1,4 +1,4 @@
-import { version } from '../package.json';
+import { version } from '~/package.json';
 import algoliasearch from 'algoliasearch/lite';
 import { highlight, snippet } from 'instantsearch.js/es/helpers';
 import '~/src/ticketform.css';

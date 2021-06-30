@@ -6,11 +6,7 @@
         "moduleResolution": "node"
     },
     "include": [
+        "./index.js",
         "./src/**/*"
-    ],
-    "paths": {
-        "~/*": [
-            "./src/*"
-        ]
-    },
+    ]
 }
