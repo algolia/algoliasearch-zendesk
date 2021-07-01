@@ -41,7 +41,7 @@ const findAnswers = ({
   answerParams,
 }: FindAnswersParams) =>
   index
-    .search(query, [lang], {
+    .findAnswers(query, [lang], {
       attributesForPrediction: ['body_safe'],
       threshold: 50,
       nbHits: 1,
