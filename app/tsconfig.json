@@ -3,7 +3,10 @@
         "outDir": "./built",
         "allowJs": true,
         "target": "es6",
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "jsx": "preserve",
+        "jsxFactory": "h",
+        "jsxFragmentFactory": "Fragment"
     },
     "include": [
         "./index.js",

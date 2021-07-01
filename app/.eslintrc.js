@@ -9,12 +9,15 @@ module.exports = {
     },
   },
   parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
   overrides: [
     {
       files: ['*.js', '*.ts'],
       rules: {
         'no-param-reassign': 'off',
         'no-undef': 'off',
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': ['error'],
         'import/extensions': [
           'error',
           'ignorePackages',

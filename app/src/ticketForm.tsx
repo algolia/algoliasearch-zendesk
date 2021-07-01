@@ -9,8 +9,13 @@ import translate from './translations';
 import { debounceGetAnswers } from './answers';
 import { initInsights, extendWithConversionTracking } from './clickAnalytics';
 import { buildUrl } from './utils';
+import { SearchClient } from '@algolia/client-search';
 
 class TicketForm {
+  client: SearchClient;
+  indexName: string;
+  descriptionElement: HTMLElement;
+
   constructor({
     applicationId,
     apiKey,
@@ -69,28 +74,25 @@ class TicketForm {
     }
     const input = allInputs[0];
 
-    // eslint-disable-next-line consistent-this
-    const self = this;
-
     if (requireSubject) {
-      self.descriptionElement = document.querySelector(descriptionSelector);
-      if (!self.descriptionElement) {
-        self.descriptionElement = document.querySelector(
+      this.descriptionElement = document.querySelector(descriptionSelector);
+      if (!this.descriptionElement) {
+        this.descriptionElement = document.querySelector(
           fallbackDescriptionSelector
         );
 
-        if (!self.descriptionElement) {
+        if (!this.descriptionElement) {
           throw new Error(
             `Couldn't find any element matching descriptionSelector '${descriptionSelector}'.`
           );
         }
       }
-      self.descriptionElement.parentNode.classList.add(descriptionGroup);
-      self.descriptionElement.classList.add(disabledDescriptionGroup);
+      this.descriptionElement.parentElement.classList.add(descriptionGroup);
+      this.descriptionElement.classList.add(disabledDescriptionGroup);
       const warning = document.createElement('span');
       warning.classList.add(descriptionWarning);
       warning.textContent = translate(translations, locale, 'descriptionLock');
-      self.descriptionElement.parentNode.append(warning);
+      this.descriptionElement.parentNode.append(warning);
     }
 
     const suggestionsListElement = document.querySelector(
@@ -112,7 +114,7 @@ class TicketForm {
       const handleSubject = (e) => {
         setSubject(e.target.value);
         debounceGetAnswers({
-          index: self.client.initIndex(self.indexName),
+          index: this.client.initIndex(this.indexName),
           query: e.target.value,
           lang,
           searchParams: {
@@ -133,7 +135,7 @@ class TicketForm {
               })
             );
             if (requireSubject) {
-              self.descriptionElement.classList.remove(
+              this.descriptionElement.classList.remove(
                 disabledDescriptionGroup
               );
             }
@@ -143,7 +145,7 @@ class TicketForm {
       };
 
       const handleClick = (item) => {
-        self.trackClick(item, item.__position, item.__queryID);
+        this.trackClick(item, item.__position, item.__queryID);
       };
 
       return (
@@ -152,8 +154,8 @@ class TicketForm {
             type="text"
             name="request[subject]"
             id="request_subject"
-            maxlength="150"
-            size="150"
+            maxLength={150}
+            size={150}
             aria-required="true"
             aria-labelledby="request_subject_label"
             value={subject}
@@ -202,7 +204,9 @@ class TicketForm {
       );
     };
 
-    render(h(Input), input.parentNode, input);
+    render(h(Input, {}), input.parentNode, input);
   }
 }
 export default (...args) => new TicketForm(...args);
+
+export type { TicketForm };

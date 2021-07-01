@@ -1,4 +1,35 @@
+import {
+  CreateIndex,
+  FindAnswersOptions,
+  FindAnswersResponse,
+  Index,
+  SearchOptions,
+} from '@algolia/client-search';
 import { throttle } from 'throttle-debounce';
+
+type IndexFindAnswers = (
+  query: string,
+  lang: [string],
+  options: FindAnswersOptions
+) => Promise<FindAnswersResponse>;
+
+interface IndexMethods {
+  findAnswers: IndexFindAnswers;
+}
+
+interface FindAnswersParams {
+  index: Index & IndexMethods;
+  query: string;
+  lang: string;
+  searchParams: SearchOptions;
+  callback: () => void;
+  autocomplete: Boolean;
+  answerParams: FindAnswersOptions & {
+    EXPERIMENTAL_illuminate?: number; // eslint-disable-line camelcase
+    EXPERIMENTAL_overwriteSnippetSize?: number; // eslint-disable-line camelcase
+    EXPERIMENTAL_overwriteHitsPerPage?: number; // eslint-disable-line camelcase
+  };
+}
 
 const findAnswers = ({
   index,
@@ -8,9 +39,9 @@ const findAnswers = ({
   callback,
   autocomplete,
   answerParams,
-}) =>
+}: FindAnswersParams) =>
   index
-    .findAnswers(query, [lang], {
+    .search(query, [lang], {
       attributesForPrediction: ['body_safe'],
       threshold: 50,
       nbHits: 1,

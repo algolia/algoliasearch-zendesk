@@ -304,3 +304,5 @@ class Autocomplete {
   }
 }
 export default (...args) => new Autocomplete(...args);
+
+export type { Autocomplete }

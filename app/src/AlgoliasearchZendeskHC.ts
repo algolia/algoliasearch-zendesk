@@ -1,14 +1,14 @@
 import fargs from 'fargs';
 
-import autocomplete from './autocomplete';
-import ticketForm from './ticketForm';
+import autocomplete, { Autocomplete } from './autocomplete';
+import ticketForm, { TicketForm } from './ticketForm';
 import defaultTemplates from './templates';
 
-function hitsPerPageValidator(val) {
+function hitsPerPageValidator(val: number): Boolean | String {
   return (val >= 1 && val <= 20) || 'should be between 1 and 20';
 }
 
-function getCurrentLocale() {
+function getCurrentLocale(): String {
   const splittedPathname = window.location.pathname.split('/');
   const res = splittedPathname[2];
   if (!res) {
@@ -102,6 +102,9 @@ const optionsStructure = {
 };
 
 class AlgoliasearchZendeskHC {
+  search: Autocomplete;
+  form: TicketForm;
+
   constructor(params) {
     const options = fargs()
       .check('algoliasearchZendeskHC')
