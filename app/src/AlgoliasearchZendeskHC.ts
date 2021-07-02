@@ -3,12 +3,14 @@ import fargs from 'fargs';
 import autocomplete, { Autocomplete } from './autocomplete';
 import ticketForm, { TicketForm } from './ticketForm';
 import defaultTemplates from './templates';
+import { FindAnswersOptions } from '@algolia/client-search';
+import { Translations } from './translations';
 
-function hitsPerPageValidator(val: number): Boolean | String {
+function hitsPerPageValidator(val: number): boolean | string {
   return (val >= 1 && val <= 20) || 'should be between 1 and 20';
 }
 
-function getCurrentLocale(): String {
+function getCurrentLocale(): string {
   const splittedPathname = window.location.pathname.split('/');
   const res = splittedPathname[2];
   if (!res) {
@@ -16,6 +18,47 @@ function getCurrentLocale(): String {
     return 'en-us';
   }
   return res;
+}
+
+export interface Options {
+  analytics?: boolean;
+  applicationId: string;
+  apiKey: string;
+  autocomplete?: {
+    enabled?: boolean;
+    keyboardShortcut?: boolean;
+    bestArticle?: boolean;
+    inputSelector?: string;
+    hitsPerPage?: number;
+  };
+  baseUrl?: string;
+  color?: string;
+  clickAnalytics?: boolean;
+  debug?: boolean;
+  locale?: string;
+  highlightColor?: string;
+  indexPrefix?: string;
+  poweredBy?: boolean;
+  subdomain: string;
+  templates?: {
+    autocomplete?: typeof defaultTemplates['autocomplete'];
+  };
+  translations?: Translations;
+  ticketForms?: {
+    enabled?: boolean;
+    inputSelector?: string;
+    suggestionsListSelector?: string;
+    requireSubject?: boolean;
+    descriptionSelector?: string;
+    fallbackDescriptionSelector?: string;
+    cssClasses?: {
+      descriptionGroup?: string;
+      disabledDescriptionGroup?: string;
+      descriptionWarning?: string;
+      suggestionsList?: string;
+    };
+    answersParameters?: FindAnswersOptions;
+  };
 }
 
 const optionsStructure = {
@@ -105,8 +148,8 @@ class AlgoliasearchZendeskHC {
   search: Autocomplete;
   form: TicketForm;
 
-  constructor(params) {
-    const options = fargs()
+  constructor(params: Options) {
+    const options: Options = fargs()
       .check('algoliasearchZendeskHC')
       .arg('options', optionsStructure)
       .values([params])[0];
@@ -137,7 +180,7 @@ class AlgoliasearchZendeskHC {
     }
   }
 
-  init(options) {
+  init(options: Options) {
     this.search.init(options);
 
     // Need to wait for full load because TinyMCE is used for the description field on the request page and needs to be loaded to lock the descriprion field

@@ -1,6 +1,5 @@
 /* eslint object-shorthand: 0 */
-
-const localeToLang = {
+const localeToLang: { [key: string]: string } = {
   'ar-eg': 'ar',
   'de-at': 'de',
   'de-ch': 'de',
@@ -19,11 +18,24 @@ const localeToLang = {
   'pt-br': 'pt',
 };
 
-const formatNumber = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+const formatNumber = (n: number) =>
+  n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
-const defaultTranslations = {
+// weird TypeScript magic
+type Initializer<T> = T extends any ? T | ((param: any) => T) : never;
+function correct<T>(fnOrVal: Initializer<T>, ...args): T {
+  return typeof fnOrVal === 'function' ? fnOrVal(...args) : fnOrVal;
+}
+
+export interface Translations {
+  [key: string]: {
+    [key: string]: Initializer<string>;
+  };
+}
+
+const defaultTranslations: Translations = {
   nbResults: {
-    ar: function (nb) {
+    ar: function (nb: number) {
       return nb > 1 ? `${formatNumber(nb)} نتيجة` : 'نتيجة واحدة';
     },
     bg: function (nb) {
@@ -584,7 +596,12 @@ const defaultTranslations = {
   },
 };
 
-export default function translate(userTranslations, locale, key, ...args) {
+export default function translate(
+  userTranslations: Translations,
+  locale: string,
+  key: string,
+  ...args
+) {
   const t = userTranslations[key] || defaultTranslations[key];
   if (t === null) {
     throw new Error(`Unknown translation key '${key}'.`);
@@ -597,8 +614,5 @@ export default function translate(userTranslations, locale, key, ...args) {
     );
   }
 
-  if (typeof t[lang] === 'function') {
-    return t[lang](...args);
-  }
-  return t[lang];
+  return correct(t[lang], ...args);
 }

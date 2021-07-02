@@ -13,8 +13,8 @@ export function initInsights({
   aa('init', { appId: applicationId, apiKey });
 }
 
-type trackClick = (article, position: number, queryID: number) => void;
-type trackConversion = (articleID: number) => void;
+export type trackClick = (article, position: number, queryID: string) => void;
+export type trackConversion = (articleID: number) => void;
 
 // Extends instance with clickAnalytics specific attributes
 export function extendWithConversionTracking(
@@ -22,7 +22,7 @@ export function extendWithConversionTracking(
     trackClick: trackClick;
     trackConversion: trackConversion;
   },
-  { clickAnalytics, indexName }: { clickAnalytics: Boolean; indexName: string }
+  { clickAnalytics, indexName }: { clickAnalytics: boolean; indexName: string }
 ): void {
   if (!clickAnalytics) {
     self.trackClick = () => {};
@@ -30,7 +30,7 @@ export function extendWithConversionTracking(
     return;
   }
 
-  const saveLastClick = (queryID: number, article) => {
+  const saveLastClick = (queryID: string, article) => {
     const cookieBody = JSON.stringify({
       queryID,
       objectID: article.objectID,

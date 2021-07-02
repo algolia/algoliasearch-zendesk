@@ -7,13 +7,22 @@ import { useState } from 'preact/hooks';
 import translate from './translations';
 
 import { debounceGetAnswers } from './answers';
-import { initInsights, extendWithConversionTracking } from './clickAnalytics';
-import { buildUrl } from './utils';
+import {
+  initInsights,
+  extendWithConversionTracking,
+  trackClick,
+  trackConversion,
+} from './clickAnalytics';
+import { buildUrl, ZendeskHit } from './utils';
+import { FindAnswersResponse, Hit } from '@algolia/client-search';
+import { Options } from './AlgoliasearchZendeskHC';
 
 class TicketForm {
   client: SearchClient;
   indexName: string;
   descriptionElement: HTMLElement;
+  trackClick: trackClick;
+  trackConversion: trackConversion;
 
   constructor({
     applicationId,
@@ -22,7 +31,7 @@ class TicketForm {
     indexPrefix,
     subdomain,
     clickAnalytics,
-  }) {
+  }: Options) {
     if (!enabled) return;
     this.client = algoliasearch(applicationId, apiKey);
     this.client.addAlgoliaAgent(`Zendesk Integration (${version})`);
@@ -57,7 +66,7 @@ class TicketForm {
         suggestionsList,
       },
     },
-  }) {
+  }: Options) {
     if (!enabled) return;
 
     const allInputs = document.querySelectorAll(inputSelector);
@@ -108,7 +117,9 @@ class TicketForm {
 
     const Input = () => {
       const [subject, setSubject] = useState('');
-      const [answers, setAnswers] = useState([]);
+      const [answers, setAnswers] = useState<
+        FindAnswersResponse<ZendeskHit>['hits']
+      >([]);
 
       const handleSubject = (e) => {
         setSubject(e.target.value);
@@ -121,12 +132,15 @@ class TicketForm {
             clickAnalytics,
           },
           answerParams: answersParameters,
-          callback: ({ hits, queryID }) => {
+          callback: ({
+            hits,
+            queryID,
+          }: {
+            hits: FindAnswersResponse<ZendeskHit>['hits'];
+            queryID: string;
+          }) => {
             setAnswers(
-              hits.map((hit, i) => {
-                if (hit._answer.extractAttribute === 'body_safe') {
-                  hit._snippetResult.body_safe.value = hit._answer.extract;
-                }
+              hits.map((hit, i: number) => {
                 hit.__position = i + 1;
                 hit.__queryID = queryID;
                 hit.url = buildUrl({ baseUrl, locale, hit });
@@ -143,7 +157,9 @@ class TicketForm {
         });
       };
 
-      const handleClick = (item) => {
+      const handleClick = (
+        item: FindAnswersResponse<ZendeskHit>['hits'][0]
+      ) => {
         this.trackClick(item, item.__position, item.__queryID);
       };
 
@@ -186,7 +202,10 @@ class TicketForm {
                         <p
                           dangerouslySetInnerHTML={{
                             __html: snippet({
-                              attribute: 'body_safe',
+                              attribute:
+                                hit._answer.extractAttribute === 'body_safe'
+                                  ? 'hit._answer.extract'
+                                  : 'body_safe',
                               hit,
                               highlightedTagName: 'mark',
                             }),
@@ -203,9 +222,9 @@ class TicketForm {
       );
     };
 
-    render(h(Input, {}), input.parentNode, input);
+    render(h(Input, {}), input.parentElement, input);
   }
 }
-export default (...args) => new TicketForm(...args);
+export default (args: Options) => new TicketForm(args);
 
 export type { TicketForm };

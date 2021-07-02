@@ -7,7 +7,7 @@ interface FindAnswersParams {
   lang: string;
   searchParams: AlgoliaSearchOptions;
   callback: () => void;
-  autocomplete: Boolean;
+  autocomplete: boolean;
   answerParams: FindAnswersOptions & {
     EXPERIMENTAL_illuminate?: number; // eslint-disable-line camelcase
     EXPERIMENTAL_overwriteSnippetSize?: number; // eslint-disable-line camelcase

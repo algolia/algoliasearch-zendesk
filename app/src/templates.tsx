@@ -1,6 +1,9 @@
+import { AutocompleteComponents } from '@algolia/autocomplete-js';
+import { FindAnswersResponse, Hit } from '@algolia/client-search';
 import { h, Fragment } from 'preact';
 
 import translate from './translations';
+import { ZendeskHit } from './utils';
 // Otherwise h gets treeshaken by the typescript compiler
 const _h = h; // eslint-disable-line no-unused-vars
 
@@ -111,7 +114,7 @@ const templates = {
     },
 
     // eslint-disable-next-line no-unused-vars
-    articlesHeader: (section, _items) => {
+    articlesHeader: (section: string, _items) => {
       return (
         <Fragment>
           <span className="aa-SourceHeaderTitle">{section}</span>
@@ -121,7 +124,7 @@ const templates = {
     },
 
     // Autocompletion template for an article
-    article: (hit, components) => (
+    article: (hit: Hit<ZendeskHit>, components: AutocompleteComponents) => (
       <Fragment>
         <a class="aa-ItemLink" href={hit.url}>
           <div className="aa-ItemContent">
@@ -146,7 +149,12 @@ const templates = {
       </Fragment>
     ),
 
-    answers: (translations, locale, hit, components) => (
+    answers: (
+      translations,
+      locale,
+      hit: FindAnswersResponse<ZendeskHit>['hits'][0],
+      components: AutocompleteComponents
+    ) => (
       <Fragment>
         <a class="aa-ItemLink" href={hit.url}>
           <div className="aa-ItemContent">
@@ -171,7 +179,14 @@ const templates = {
                 )}
               </div>
               <div className="aa-answers-answer">
-                <components.Snippet hit={hit} attribute="body_safe" />
+                <components.Snippet
+                  hit={hit}
+                  attribute={
+                    hit._answer.extractAttribute === 'body_safe'
+                      ? ['_answer', 'extract']
+                      : 'body_safe'
+                  }
+                />
               </div>
             </div>
           </div>

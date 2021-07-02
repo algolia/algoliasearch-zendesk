@@ -2,8 +2,48 @@ import {
   createLocalStorageRecentSearchesPlugin,
   search as defaultLocalStorageSearch,
 } from '@algolia/autocomplete-plugin-recent-searches';
+import { FindAnswersResponse } from '@algolia/client-search';
 
-export const getContainerAndButton = (inputSelector: string) => {
+/* eslint-disable camelcase */
+export interface ZendeskHit {
+  readonly locale: {
+    readonly locale: string;
+    readonly name: string;
+    readonly rtl: boolean;
+  };
+  readonly id: string;
+  readonly updated_at: number;
+  readonly position: number;
+  readonly title: string;
+  readonly body_safe: string;
+  readonly outdated: boolean;
+  readonly promoted: boolean;
+  readonly vote_sum: number;
+  readonly comments_disabled: boolean;
+  readonly category: {
+    readonly id: string;
+    readonly title: string;
+  };
+  readonly section: {
+    readonly id: string;
+    readonly title: string;
+    readonly full_path: string;
+  };
+  readonly user_segment: string;
+  readonly label_names: any;
+  readonly created_at_iso: string;
+  readonly updated_at_iso: string;
+  readonly edited_at: number;
+  readonly edited_at_iso: string;
+  __position: number;
+  __queryID: string;
+  url: string;
+}
+/* eslint-enable camelcase */
+
+export const getContainerAndButton = (
+  inputSelector: string
+): [HTMLElement, HTMLElement] => {
   // figure out parent container of the input
   const allInputs: NodeListOf<HTMLInputElement> = document.querySelectorAll(
     inputSelector
@@ -31,7 +71,7 @@ export const getContainerAndButton = (inputSelector: string) => {
   container.style.position = 'relative';
   form.parentNode.replaceChild(container, form);
 
-  const submitButton = form.querySelector('input[type="submit"]');
+  const submitButton: HTMLElement = form.querySelector('input[type="submit"]');
   return [container, submitButton];
 };
 
@@ -80,5 +120,12 @@ export const getRGB = (color: string) => {
   return `${rgb.r}, ${rgb.g}, ${rgb.b}`;
 };
 
-export const buildUrl = ({ baseUrl, locale, hit }) =>
-  `${baseUrl}${locale}/articles/${hit.id}`;
+export const buildUrl = ({
+  baseUrl,
+  locale,
+  hit,
+}: {
+  baseUrl: string;
+  locale: string;
+  hit: FindAnswersResponse<ZendeskHit>['hits'][0];
+}): string => `${baseUrl}${locale}/articles/${hit.id}`;

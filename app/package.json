@@ -38,6 +38,7 @@
     "to-factory": "^1.0.0"
   },
   "devDependencies": {
+    "@types/node": "^15.14.0",
     "@types/react": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.1",

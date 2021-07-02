@@ -1,5 +1,5 @@
 import { version } from '~/package.json';
-import algoliasearch from 'algoliasearch/lite';
+import algoliasearch, { SearchClient } from 'algoliasearch/lite';
 import { autocomplete } from '@algolia/autocomplete-js';
 import '@algolia/autocomplete-theme-classic';
 import '~/src/css/autocomplete.css';
@@ -8,18 +8,38 @@ import { groupBy } from 'lodash';
 
 import translate from './translations';
 import { debounceGetAnswers } from './answers';
-import { initInsights, extendWithConversionTracking } from './clickAnalytics';
+import {
+  initInsights,
+  extendWithConversionTracking,
+  trackClick,
+  trackConversion,
+} from './clickAnalytics';
 import {
   getContainerAndButton,
   recentSearchesPlugin,
   getRGB,
   buildUrl,
+  ZendeskHit,
 } from './utils';
+import { Options } from './AlgoliasearchZendeskHC';
+import {
+  FindAnswersResponse,
+  Hit,
+  SearchResponse,
+} from '@algolia/client-search';
 
 // Otherwise h gets treeshaken by the typescript compiler
 const _h = h; // eslint-disable-line no-unused-vars
 
 class Autocomplete {
+  client: SearchClient;
+  indexName: string;
+  trackClick: trackClick;
+  trackConversion: trackConversion;
+  state: {
+    isOpen: boolean;
+  };
+
   constructor({
     applicationId,
     apiKey,
@@ -27,7 +47,7 @@ class Autocomplete {
     indexPrefix,
     subdomain,
     clickAnalytics,
-  }) {
+  }: Options) {
     if (!enabled) return;
     this.client = algoliasearch(applicationId, apiKey);
     this.client.addAlgoliaAgent(`Zendesk Integration (${version})`);
@@ -61,7 +81,7 @@ class Autocomplete {
     subdomain,
     templates,
     translations,
-  }) {
+  }: Options) {
     if (!enabled) return;
 
     // eslint-disable-next-line consistent-this
@@ -73,11 +93,15 @@ class Autocomplete {
     doc.style.setProperty('--aa-highlight-color-rgb', getRGB(highlightColor));
 
     const lang = locale.split('-')[0];
-    const onSelect = ({ item }) => {
+    const onSelect = ({
+      item,
+    }: {
+      item: Hit<ZendeskHit> | FindAnswersResponse<ZendeskHit>['hits'][0];
+    }) => {
       this.trackClick(item, item.__position, item.__queryID);
     };
 
-    const answersRef = {
+    const answersRef: { current: FindAnswersResponse<ZendeskHit>['hits'] } = {
       current: [],
     };
     const [container, submitButton] = getContainerAndButton(inputSelector);
@@ -119,11 +143,14 @@ class Autocomplete {
             facetFilters: `["locale.locale:${locale}"]`,
             clickAnalytics,
           },
-          callback: ({ hits, queryID }) => {
+          callback: ({
+            hits,
+            queryID,
+          }: {
+            hits: FindAnswersResponse<ZendeskHit>['hits'];
+            queryID: string;
+          }) => {
             answersRef.current = hits.map((hit, i) => {
-              if (hit._answer.extractAttribute === 'body_safe') {
-                hit._snippetResult.body_safe.value = hit._answer.extract;
-              }
               hit.__position = i + 1;
               hit.__queryID = queryID;
               hit.url = buildUrl({ baseUrl, locale, hit });
@@ -140,7 +167,7 @@ class Autocomplete {
         )}`;
       },
       getSources({ query: q }) {
-        const sectionTitle = (hit) =>
+        const sectionTitle = (hit: Hit<ZendeskHit>) =>
           `${hit.category.title} - ${hit.section.title}`;
 
         const sources = [];
@@ -196,7 +223,7 @@ class Autocomplete {
             highlightPreTag: '__aa-highlight__',
             highlightPostTag: '__/aa-highlight__',
           })
-          .then((results) => {
+          .then((results: SearchResponse<ZendeskHit>) => {
             const hitsButBestAnswer = results.hits.filter(
               (hit) => hit.objectID !== answersRef.current?.[0]?.objectID
             );
@@ -225,34 +252,42 @@ class Autocomplete {
               sectionTitle
             );
             let position = 1;
-            Object.entries(hitsByCategorySection).forEach(([section, hits]) => {
-              sources.push({
-                sourceId: section,
-                getItems() {
-                  return hits.map((hit) => {
-                    hit.url = buildUrl({ baseUrl, locale, hit });
-                    hit.__position = position++;
-                    hit.__queryID = results.queryID;
-                    return hit;
-                  });
-                },
-                getItemUrl({ item }) {
-                  return item.url;
-                },
-                templates: {
-                  header({ items }) {
-                    return templates.autocomplete.articlesHeader(
-                      section,
-                      items
-                    );
+            Object.entries(hitsByCategorySection).forEach(
+              ([section, hits]: [string, Hit<ZendeskHit>[]]) => {
+                sources.push({
+                  sourceId: section,
+                  getItems() {
+                    return hits.map((hit) => {
+                      hit.url = buildUrl({ baseUrl, locale, hit });
+                      hit.__position = position++;
+                      hit.__queryID = results.queryID;
+                      return hit;
+                    });
                   },
-                  item({ item, components }) {
-                    return templates.autocomplete.article(item, components);
+                  getItemUrl({ item }: { item: Hit<ZendeskHit> }) {
+                    return item.url;
                   },
-                },
-                onSelect,
-              });
-            });
+                  templates: {
+                    header({ items }: { items: Hit<ZendeskHit>[] }) {
+                      return templates.autocomplete.articlesHeader(
+                        section,
+                        items
+                      );
+                    },
+                    item({
+                      item,
+                      components,
+                    }: {
+                      item: Hit<ZendeskHit>;
+                      components;
+                    }) {
+                      return templates.autocomplete.article(item, components);
+                    },
+                  },
+                  onSelect,
+                });
+              }
+            );
             return sources;
           });
       },
@@ -273,7 +308,8 @@ class Autocomplete {
     });
 
     if (submitButton) {
-      submitButton.style = 'order: 5; margin-left: 16px;';
+      submitButton.style.order = '5';
+      submitButton.style.marginLeft = '16px';
       // on mobile, we might not have the form at all; therefore do not append the button
       container.querySelector('form')?.appendChild(submitButton);
     }
@@ -303,6 +339,6 @@ class Autocomplete {
     }
   }
 }
-export default (...args) => new Autocomplete(...args);
+export default (args: Options) => new Autocomplete(args);
 
 export type { Autocomplete };

@@ -1,15 +1,16 @@
 {
-    "compilerOptions": {
-        "outDir": "./built",
-        "allowJs": true,
-        "target": "es6",
-        "moduleResolution": "node",
-        "jsx": "preserve",
-        "jsxFactory": "h",
-        "jsxFragmentFactory": "Fragment"
-    },
-    "include": [
-        "./index.js",
-        "./src/**/*"
-    ]
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "outDir": "./built",
+    "allowJs": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "paths": {
+      "~/*": ["./*"]
+    }
+  },
+  "include": ["./index.js", "./src/**/*"]
 }
