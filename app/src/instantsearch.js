@@ -205,7 +205,7 @@ class InstantSearch {
         hitsPerPage,
         templates: {
           empty: templates.instantsearch.noResult,
-          item: templates.instantsearch.hit(useEditedAt)
+          item: templates.instantsearch.hit
         },
         transformData: {
           empty: data => ({
@@ -214,6 +214,7 @@ class InstantSearch {
           }),
           item: hit => ({
             ...hit,
+            useEditedAt,
             baseUrl,
             position: hit.__hitIndex + 1,
             queryID: this.instantsearch.helper.lastResults._rawResults[0].queryID
