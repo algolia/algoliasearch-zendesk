@@ -1,6 +1,16 @@
-<a name="2.30.0"></a>
-# [2.30.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.30.0...v2.30.0) (2021-06-30)
+<a name="2.30.1"></a>
+## [2.30.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.30.1...v2.30.1) (2021-07-02)
 
+
+
+
+<a name="2.30.1"></a>
+## [2.30.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.30.0...v2.30.1) (2021-07-02)
+
+
+### Bug Fixes
+
+* **2.30.0:** revert hit template to property instead of function (#143) ([25a55f8](https://github.com/algolia/algoliasearch-zendesk/commit/25a55f8))
 
 
 
