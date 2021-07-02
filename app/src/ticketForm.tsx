@@ -1,5 +1,5 @@
 import { version } from '~/package.json';
-import algoliasearch from 'algoliasearch/lite';
+import algoliasearch, { SearchClient } from 'algoliasearch/lite';
 import { highlight, snippet } from 'instantsearch.js/es/helpers';
 import '~/src/css/ticketform.css';
 import { render, h, Fragment } from 'preact';
@@ -9,7 +9,6 @@ import translate from './translations';
 import { debounceGetAnswers } from './answers';
 import { initInsights, extendWithConversionTracking } from './clickAnalytics';
 import { buildUrl } from './utils';
-import { SearchClient } from '@algolia/client-search';
 
 class TicketForm {
   client: SearchClient;

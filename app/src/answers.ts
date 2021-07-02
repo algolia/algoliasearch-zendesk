@@ -1,27 +1,11 @@
-import {
-  CreateIndex,
-  FindAnswersOptions,
-  FindAnswersResponse,
-  Index,
-  SearchOptions,
-} from '@algolia/client-search';
 import { throttle } from 'throttle-debounce';
-
-type IndexFindAnswers = (
-  query: string,
-  lang: [string],
-  options: FindAnswersOptions
-) => Promise<FindAnswersResponse>;
-
-interface IndexMethods {
-  findAnswers: IndexFindAnswers;
-}
-
+import { AlgoliaSearchOptions, SearchIndex } from 'algoliasearch/lite';
+import { FindAnswersOptions } from '@algolia/client-search';
 interface FindAnswersParams {
-  index: Index & IndexMethods;
+  index: SearchIndex;
   query: string;
   lang: string;
-  searchParams: SearchOptions;
+  searchParams: AlgoliaSearchOptions;
   callback: () => void;
   autocomplete: Boolean;
   answerParams: FindAnswersOptions & {
@@ -39,7 +23,7 @@ const findAnswers = ({
   callback,
   autocomplete,
   answerParams,
-}: FindAnswersParams) =>
+}: FindAnswersParams): Promise<void> =>
   index
     .findAnswers(query, [lang], {
       attributesForPrediction: ['body_safe'],
