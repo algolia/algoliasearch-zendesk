@@ -151,10 +151,12 @@ class Autocomplete {
             queryID: string;
           }) => {
             answersRef.current = hits.map((hit, i) => {
-              hit.__position = i + 1;
-              hit.__queryID = queryID;
-              hit.url = buildUrl({ baseUrl, locale, hit });
-              return hit;
+              return {
+                ...hit,
+                __position: i + 1,
+                __queryID: queryID,
+                url: buildUrl({ baseUrl, locale, hit }),
+              };
             });
             refresh();
           },
@@ -258,10 +260,12 @@ class Autocomplete {
                   sourceId: section,
                   getItems() {
                     return hits.map((hit) => {
-                      hit.url = buildUrl({ baseUrl, locale, hit });
-                      hit.__position = position++;
-                      hit.__queryID = results.queryID;
-                      return hit;
+                      return {
+                        ...hit,
+                        __position: position++,
+                        __queryID: results.queryID,
+                        url: buildUrl({ baseUrl, locale, hit }),
+                      };
                     });
                   },
                   getItemUrl({ item }: { item: Hit<ZendeskHit> }) {

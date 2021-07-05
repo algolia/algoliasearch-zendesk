@@ -141,10 +141,12 @@ class TicketForm {
           }) => {
             setAnswers(
               hits.map((hit, i: number) => {
-                hit.__position = i + 1;
-                hit.__queryID = queryID;
-                hit.url = buildUrl({ baseUrl, locale, hit });
-                return hit;
+                return {
+                  ...hit,
+                  __position: i + 1,
+                  __queryID: queryID,
+                  url: buildUrl({ baseUrl, locale, hit }),
+                };
               })
             );
             if (requireSubject) {
