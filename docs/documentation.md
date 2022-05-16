@@ -31,6 +31,16 @@ In most cases, this should be enough to have an up-to-date search.
 However, if you'd rather have it updated right now, like when you add a lot of support articles, you can manually trigger a full reindex.
 On this page, just click the "Reindex" button in the bottom right corner. A few minutes later, your search index will be updated.
 
+## Adding the Algolia Help Center Theme
+
+You can use the Algolia Help Center Theme.  You can import the theme from the Zendesk Theme Marketplace.
+Also, you can download from here: https://cdn.jsdelivr.net/gh/algolia/algoliasearch-zendesk@new_theme/theme/Algolia-search/Algolia-search.zip
+
+This theme has an admin section where you update your index, keys and other settings
+<div align="center">
+  <img src="https://cdn.jsdelivr.net/gh/algolia/algoliasearch-zendesk@new_theme/theme/Algolia-search/screenshots/AdminScreen.png" alt="Admin Section" />
+</div>
+
 ## Updating your Help Center theme
 
 Once your data has been extracted to Algolia, you need to update your Help Center theme in order to replace the search feature by Algolia.
