@@ -1,0 +1,65 @@
+<h1 class="visibility-hidden">{{ help_center.name }}</h1>
+
+<section id="main-content" class="section">
+    <header class='ais-header'>
+      <div id="autocomplete"></div>
+    </header>
+    <div class="ais-InstantSearch">
+        <div class="left-panel">
+          <div id="clear-refinements"></div>
+          <h3>Category</h3>
+          <div id="category-list"></div>
+          <h3>Section</h3>
+          <div id="section-list"></div>
+        </div>
+        <div class="right-panel">
+          <div id="searchbox" class="ais-SearchBox"></div>
+          <div id="hits"></div>
+          <div id="pagination"></div>
+        </div>
+  	</div>       
+      <script src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"></script>      
+      <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js" integrity="sha256-EXPXz4W6pQgfYY3yTpnDa3OH8/EPn16ciVsPQ/ypsjk=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.8.3/dist/instantsearch.production.min.js" integrity="sha256-LAGhRRdtVoD6RLo2qDQsU2mp+XVSciKRC8XPOBWmofM=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js"></script>
+      <script>
+        const { autocomplete } = window['@algolia/autocomplete-js'];
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-plugin-query-suggestions"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-plugin-recent-searches"></script>
+      <script>
+        const { createQuerySuggestionsPlugin } = window[
+          "@algolia/autocomplete-plugin-query-suggestions"
+        ];
+        const { createLocalStorageRecentSearchesPlugin } = window[
+          "@algolia/autocomplete-plugin-recent-searches"
+        ];
+      </script>
+    <script src="{{asset 'momentjs.js'}}"></script>
+    <script src="{{asset 'autocomplete.js'}}"></script>
+    <script src="{{asset 'algoliaSearch.js'}}"></script>
+    <script>
+      setupSearch('{{settings.application_id}}','{{settings.search_api_key}}','{{settings.index_name}}', {{settings.use_autocomplete}},'{{settings.query_suggestion_index}}', {{settings.use_debounce}});
+    </script>
+{{!-- 
+    {{search submit=false instant=settings.instant_search class='search search-full'}} --}}
+</section>
+
+<div class="container">
+  {{#if help_center.community_enabled}}
+    <section class="section home-section community">
+      <h2>{{t 'community'}}</h2>
+      {{#link 'community' class='community-link'}}
+        {{t 'join_conversation'}}
+      {{/link}}
+
+      <div class="community-image"></div>
+    </section>
+  {{/if}}
+
+  <section class="section home-section activity">
+    {{#if settings.show_recent_activity}}
+      {{recent_activity}}
+    {{/if}}
+  </section>
+</div>
