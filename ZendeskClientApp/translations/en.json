@@ -1,0 +1,42 @@
+{
+  "app": {
+    "name": "Algolia App",
+    "short_description": "Play the famous zen tunes in your help desk.",
+    "long_description": "Play the famous zen tunes in your help desk and \n listen to the beats it has to offer.",
+    "installation_instructions": "Simply click install.",
+    "parameters": {
+      "algoliaAppName": {
+        "label": "Algolia App Name",
+        "helpText": "The name of the Algolia App"
+      },    
+      "searchApiKey": {
+        "label": "Algolia Search Api Key",
+        "helpText": "The search API Key"
+      },    
+      "ticketIndex": {
+        "label": "Algolia Index for Tickets",
+        "helpText": "The name of the ticket index to search tickets"
+      },
+      "articleIndex": {
+        "label": "Algolia Index for Articles",
+        "helpText": "The name of the ticket index to search articles"
+      },
+      "matchingField": {
+        "label": "Matching Field",
+        "helpText": "The field to query articles with.  Can be tags,author,subject"
+      },
+      "useAutocomplete": {
+        "label": "Use Autocomplete",
+        "helpText": "Indicate to use Autocomplete in the navbar area of the app"
+      },
+      "querySuggestionsIndex": {
+        "label": "Query Suggestions Index",
+        "helpText": "The specific index to use for autocomplete's query suggestions"
+      },
+      "useDebounce": {
+        "label": "Use Debounce in Autocomplete results",
+        "helpText": "Autocomplete can have multiple queries, due to its nature.  Debouncing can help"
+      }
+    }
+  }
+}

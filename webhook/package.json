@@ -1,0 +1,20 @@
+{
+  "name": "indexer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "algoliasearch": "^4.12.2",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "https": "^1.0.0",
+    "instantsearch.js": "^4.39.1",
+    "node-zendesk": "^2.1.0"
+  }
+}

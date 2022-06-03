@@ -1,0 +1,88 @@
+{
+  "name": "Related Articles",
+  "author": {
+    "name": "Peter Hale",
+    "email": "peter.hale@algolia.com",
+    "url": "https://www.algolia.com"
+  },
+  "defaultLocale": "en",
+  "private": true,
+  "location": {
+    "support": {
+      "ticket_sidebar": {
+        "url": "assets/sidebar.html",
+        "flexible": true,
+        "size": {
+          "width":"450px",
+          "height":"900px"
+        }
+      },
+      "nav_bar": {
+        "url": "assets/navbar.html",
+        "flexible": true
+      }
+    }
+  },
+  "parameters": [
+    {
+      "name": "algoliaAppName",
+      "type": "text",
+      "required": true,
+      "secure": false,
+      "default":"TEJIG1OP44"
+    },
+    {
+      "name": "searchApiKey",
+      "type": "text",
+      "required": true,
+      "secure": false,
+      "default":"ceccf5707ee9c36062d2af126551aa8c"
+    },
+    {
+      "name": "ticketIndex",
+      "type": "text",
+      "required": true,
+      "secure": false,
+      "default":"zendesk_d3v-algolia-peter_tickets"
+    },
+    {
+      "name": "articleIndex",
+      "type": "text",
+      "required": false,
+      "secure": false,
+      "default":"zendesk_d3v-algolia-peter_articles"
+    },
+    {
+      "name": "matchingField",
+      "type": "text",
+      "required": false,
+      "secure": false,
+      "default": "tags"
+    },
+    {
+      "name": "useAutocomplete",
+      "type": "checkbox",
+      "required": false,
+      "secure": false,
+      "default": "true"
+    },
+    {
+      "name": "querySuggestionsIndex",
+      "type": "text",
+      "required": false,
+      "secure": false,
+      "default": "zendesk_d3v-algolia-peter_articles_query_suggestions"
+    },
+    {
+      "name": "useDebounce",
+      "type": "checkbox",
+      "required": false,
+      "secure": false,
+      "default": "true"
+    }
+
+  ],  
+  "version": "1.0",
+  "frameworkVersion": "2.0"
+}
+
