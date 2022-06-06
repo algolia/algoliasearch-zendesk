@@ -31,6 +31,25 @@ In most cases, this should be enough to have an up-to-date search.
 However, if you'd rather have it updated right now, like when you add a lot of support articles, you can manually trigger a full reindex.
 On this page, just click the "Reindex" button in the bottom right corner. A few minutes later, your search index will be updated.
 
+## Ticket Indexing
+
+There is a ticket indexer that indexes tickets.  The indexer is used by the Zendesk client App
+
+## Zenkdesk client app
+
+We have a Zendesk app that’s a client app that uses Algolia to search related articles in two areas:
+ Ticket details
+Navigation page.
+This way, a user looking at ticket details can view related articles loosely associated with the ticket.  The relation is configured as a parameter in the app and can be related by either:
+1. Tags (any tags in the ticket searches for related either tags/subject/etc in the article)
+2. Author (the originator of the ticket tied to the author of the article(s))
+3. Subject (the subject of the ticket is searched for related articles.)
+The app has a set of parameters, when installed can be configured: (screenshot of admin area of the Zendesk app)
+
+The settings allow an admin to configure the search, whether or not to have autocomplete, that comes with query suggestions and locally stored previous search, and whether or not to use debouncing in related to autocomplete.
+
+This App has 2 views.  The main view is in the ticket sidebar on the right in ticket details.  
+
 ## Updating your Help Center theme
 
 Once your data has been extracted to Algolia, you need to update your Help Center theme in order to replace the search feature by Algolia.
