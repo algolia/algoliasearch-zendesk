@@ -103,20 +103,7 @@ function indexSingleTicket(ticketId) {
     // get the ticket so I can get the types
     zendeskTicketClient.tickets.sideLoad = ['users'];
     zendeskTicketClient.tickets.show(parseInt(ticketId)).then(function(ticket) {
-        // console.log("ticket ", ticket);
-        let alTicket = {
-            objectID: ticket.id,
-            subject: ticket.subject,
-            description: ticket.description,
-            created_at: ticket.created_at,
-            updated_at: ticket.updated_at,
-            requester: ticket.requester.name,
-            submitter: ticket.submitter.name,
-            assignee: ticket.assignee.name,
-            status: ticket.status,
-            type: ticket.type,
-            channel: ticket.via.channel,
-        }
+        alTicket = buildTicketData(ticket);
 
         const fullName = process.env.ALGOLIA_INDEX_PREFIX + process.env.ZENDESK_APP_NAME + "_tickets";
         const index = algoliaClient.initIndex(fullName);
@@ -128,14 +115,6 @@ function indexSingleTicket(ticketId) {
         });
 
     });
-    // const tickets = [];
-    // tickets.push(ticket);
-    // algoliaIndex.saveObjects(tickets).then(res => {
-    //   console.log("Index updated ", res);
-    // }).catch(err => {
-    //   console.log("An error occurred ", err);
-    // });
-  
 }
 
 async function getAuthor(commentData) {
@@ -158,6 +137,77 @@ async function getTicketComments(ticketId) {
 
 }
 
+function getCustomFields() {
+    const customFieldsString = process.env.CUSTOM_FIELDS;
+    if ( customFieldsString ) {
+        const customFieldsArray = customFieldsString.split("|");
+        const customFields = [];
+        for (var i = 0;i < customFieldsArray.length;i++) {
+            const customFieldData = customFieldsArray[i].split(",");
+            customFields.push({"id":customFieldData[0], "name":customFieldData[1]});
+        }
+        return customFields;
+    }
+    return [];
+}
+
+async function buildTicketData(ticket) {
+    const customFields = getCustomFields();
+    const ticketComments = await getTicketComments(ticket.id);
+    let alTicket = {};
+    if ( ticketComments.length > 0 ) {
+        for (var k = 0;k < ticketComments.length;k++) {
+            const comment = ticketComments[k];
+            alTicket = {
+                objectID: `${ticket.id}_${comment.id}`,
+                subject: ticket.subject,
+                plain_body: comment.plain_body,
+                ticketCreatedAt: ticket.created_at,
+                ticketUpdatedAt: ticket.updated_at,
+                commentCreatedAt: comment.created_at,
+                ticketId: ticket.id,
+                requester: {name: ticket.requester.name, email: ticket.requester.email},
+                submitter: {name: ticket.submitter.name, email: ticket.submitter.email},
+                assignee: {name: ticket.assignee.name, email: ticket.assignee.email},
+                author: {name: comment.author.name, email: comment.author.email},
+                ticketUrl: `https://${process.env.ZENDESK_APP_NAME}.zendesk.com/agent/tickets/${ticket.id}`,
+                status: ticket.status,
+                type: ticket.type,
+                channel: ticket.via.channel,
+            }
+        }
+    } else {
+        alTicket = {
+            objectID: `${ticket.id}`,
+            subject: ticket.subject,
+            plain_body: ticket.description,
+            ticketCreatedAt: ticket.created_at,
+            ticketUpdatedAt: ticket.updated_at,
+            ticketId: ticket.id,
+            requester: {name: ticket.requester.name, email: ticket.requester.email},
+            submitter: {name: ticket.submitter.name, email: ticket.submitter.email},
+            assignee: {name: ticket.assignee.name, email: ticket.assignee.email},
+            ticketUrl: `https://${process.env.ZENDESK_APP_NAME}.zendesk.com/agent/tickets/${ticket.id}`,
+            status: ticket.status,
+            type: ticket.type,
+            channel: ticket.via.channel,
+        }
+    }
+
+    for (var i = 0;i < customFields.length;i++) {
+        // [ { id: 6656901144205, value: null } ]
+        const customFieldsInTicket = ticket.custom_fields;
+        for (var k = 0;k < customFieldsInTicket.length;k++) {
+            if ( customFields[i].id == customFieldsInTicket[k].id ) {
+                console.log("Found field " + customFields[i].name + "=" + customFieldsInTicket[k].value);
+                alTicket[customFields[i].name] = customFieldsInTicket[k].value;
+            }
+        }
+    }
+    // console.log(alTicket);
+    return alTicket;
+}
+
 async function indexTickets() {
     
     // index tickets
@@ -167,48 +217,9 @@ async function indexTickets() {
     try {
         let tickets = [];
         const ticketData = await zendeskTicketClient.tickets.list();
-        if ( ticketData.length > 0 ) {
-            for ( var i = 0;i < ticketData.length;i++) {
-                const ticket = ticketData[i];
-                const ticketComments = await getTicketComments(ticket.id);
-                for (var k = 0;k < ticketComments.length;k++) {
-                    const comment = ticketComments[k];
-                    let alTicket = {
-                        objectID: `${ticket.id}_${comment.id}`,
-                        subject: ticket.subject,
-                        plain_body: comment.plain_body,
-                        ticketCreatedAt: ticket.created_at,
-                        ticketUpdatedAt: ticket.updated_at,
-                        commentCreatedAt: comment.created_at,
-                        ticketId: ticket.id,
-                        requester: {name: ticket.requester.name, email: ticket.requester.email},
-                        submitter: {name: ticket.submitter.name, email: ticket.submitter.email},
-                        assignee: {name: ticket.assignee.name, email: ticket.assignee.email},
-                        author: {name: comment.author.name, email: comment.author.email},
-                        ticketUrl: `https://${process.env.ZENDESK_APP_NAME}.zendesk.com/agent/tickets/${ticket.id}`,
-                        status: ticket.status,
-                        type: ticket.type,
-                        channel: ticket.via.channel,
-                    }
-                    tickets.push(alTicket);
-                }
-            }
-        } else {
-            let alTicket = {
-                objectID: `${ticket.id}`,
-                subject: ticket.subject,
-                plain_body: ticket.description,
-                ticketCreatedAt: ticket.created_at,
-                ticketUpdatedAt: ticket.updated_at,
-                ticketId: ticket.id,
-                requester: {name: ticket.requester.name, email: ticket.requester.email},
-                submitter: {name: ticket.submitter.name, email: ticket.submitter.email},
-                assignee: {name: ticket.assignee.name, email: ticket.assignee.email},
-                ticketUrl: `https://${process.env.ZENDESK_APP_NAME}.zendesk.com/agent/tickets/${ticket.id}`,
-                status: ticket.status,
-                type: ticket.type,
-                channel: ticket.via.channel,
-            }
+        for ( var i = 0;i < ticketData.length;i++) {
+            const ticket = ticketData[i];
+            const alTicket = await buildTicketData(ticket);
             tickets.push(alTicket);
         }
         // console.log(tickets);
@@ -219,9 +230,6 @@ async function indexTickets() {
         console.error(e);
     }
 }
-
-// indexTickets();
-// indexArticles();
 
 module.exports = {
     indexTicket: indexSingleTicket,
