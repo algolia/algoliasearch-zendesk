@@ -1,4 +1,5 @@
 
+
 const setupSearch = async function() {
 
     const settings = await getSettings();
@@ -16,39 +17,7 @@ const setupSearch = async function() {
       routing: historyRouter,
     });
 
-    const virtualSearchBox = instantsearch.connectors.connectSearchBox(() => {})({});
-    const realSearchBox = instantsearch.widgets.searchBox({
-      container: '#searchbox',
-    });
-    const searchBox = (settings.useAutocomplete)? virtualSearchBox : realSearchBox;
-    
-    search.addWidgets([
-      searchBox,
-      instantsearch.widgets.clearRefinements({
-        container: '#clear-refinements',
-      }),
-      instantsearch.widgets.refinementList({
-        container: '#category-list',
-        attribute: 'category',
-      }),
-      instantsearch.widgets.refinementList({
-        container: '#section-list',
-        attribute: 'section',
-      }),
-      instantsearch.widgets.hits({
-        container: '#hits',
-        templates: {
-          item(hit) {
-            return itemHit(hit);
-          }
-        }
-      }),
-      instantsearch.widgets.pagination({
-        container: '#pagination',
-      }),
-    ]);
-
-    search.start();
+    setupSearchWidgets(settings, search, false);
 
     if ( settings.useAutocomplete ) {
         setupAutocomplete(settings, searchClient, search, historyRouter);

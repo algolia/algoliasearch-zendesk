@@ -10,6 +10,74 @@ const getTicketDetails = async function() {
    return ticketDetails;
 }
 
+const setupSearchWidgets = function(settings, search, sidebar) {
+  const virtualSearchBox = instantsearch.connectors.connectSearchBox(() => {})({});
+  const realSearchBox = instantsearch.widgets.searchBox({
+    container: '#searchbox',
+  });
+  const searchBox = (!sidebar && settings.useAutocomplete)? virtualSearchBox : realSearchBox;
+  const searchWidgets = [];
+  const ticketWidgets = [];
+
+  searchWidgets.push(searchBox);
+  if ( !sidebar ) {
+    searchWidgets.push( instantsearch.widgets.clearRefinements({
+      container: '#clear-refinements',
+    }));
+  }
+
+  if ( !sidebar && settings.articleFacet && settings.articleFacet.length > 0 ) {
+    searchWidgets.push(instantsearch.widgets.refinementList({
+      container: '#article-refinement',
+      attribute: settings.articleFacet,
+    }));
+  };
+  if ( settings.ticketFacet && settings.ticketFacet.length > 0 ) {
+    if (sidebar) {
+      ticketWidgets.push(instantsearch.widgets.menuSelect({
+        container: '#ticket-refinement',
+        attribute: settings.ticketFacet,
+      }));
+    } else {
+      ticketWidgets.push(instantsearch.widgets.refinementList({
+        container: '#ticket-refinement',
+        attribute: settings.ticketFacet,
+      }));
+    }
+  };
+
+  searchWidgets.push(instantsearch.widgets.hits({
+    container: '#hits',
+    templates: {
+      item(hit) {
+        return articleHit(hit);
+      }
+    }
+  }));
+
+  ticketWidgets.push(instantsearch.widgets.hits({
+    container: '#ticket-hits',
+    placeholder: 'Search Tickets',
+    templates: {
+      item(hit) {
+        return ticketHit(hit)
+      }
+    },
+  }));
+
+  searchWidgets.push(instantsearch.widgets
+    .index({ indexName: settings.ticketIndex })
+    .addWidgets(ticketWidgets));
+
+  searchWidgets.push(instantsearch.widgets.pagination({
+    container: '#pagination',
+  }));
+
+  search.addWidgets(searchWidgets);
+
+  search.start();
+}
+
 function debounce(fn, time) {
     let timerId = undefined
   

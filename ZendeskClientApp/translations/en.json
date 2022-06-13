@@ -37,9 +37,13 @@
         "label": "Use Debounce in Autocomplete results",
         "helpText": "Autocomplete can have multiple queries, due to its nature.  Debouncing can help"
       },
-      "menuSelect": {
-        "label": "Menu Select Attribute",
-        "helpText": "Add a potential Menu drop-down for tickets in the sidebar.  Specify an attribute"
+      "articleFacet": {
+        "label": "Article Facet Attribute",
+        "helpText": "Add a potential Menu drop-down (in sidebar) or refinement for articles in the sidebar.  Specify an attribute that's a facet"
+      },
+      "ticketFacet": {
+        "label": "Ticket Facet Attribute",
+        "helpText": "Add a potential Menu drop-down (in sidebar) or refinement for tickets in the sidebar.  Specify an attribute that's a facet"
       }
     }
   }

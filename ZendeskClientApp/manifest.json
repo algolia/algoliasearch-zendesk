@@ -81,7 +81,14 @@
       "default": "true"
     },
     {
-      "name": "menuSelect",
+      "name": "ticketFacet",
+      "type": "text",
+      "required": false,
+      "secure": false,
+      "default": "true"
+    },
+    {
+      "name": "articleFacet",
       "type": "text",
       "required": false,
       "secure": false,
