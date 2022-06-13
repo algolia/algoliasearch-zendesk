@@ -79,7 +79,15 @@
       "required": false,
       "secure": false,
       "default": "true"
+    },
+    {
+      "name": "menuSelect",
+      "type": "text",
+      "required": false,
+      "secure": false,
+      "default": "true"
     }
+
 
   ],  
   "version": "1.0",

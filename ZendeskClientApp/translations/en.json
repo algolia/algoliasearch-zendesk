@@ -36,6 +36,10 @@
       "useDebounce": {
         "label": "Use Debounce in Autocomplete results",
         "helpText": "Autocomplete can have multiple queries, due to its nature.  Debouncing can help"
+      },
+      "menuSelect": {
+        "label": "Menu Select Attribute",
+        "helpText": "Add a potential Menu drop-down for tickets in the sidebar.  Specify an attribute"
       }
     }
   }

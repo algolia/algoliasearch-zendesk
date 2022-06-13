@@ -26,40 +26,46 @@ const setupSearch = async function() {
         }
       }
     });
-    search.addWidgets([
-      instantsearch.widgets.searchBox({
-        container: '#searchbox',
-        placeholder: 'Search Articles',
-        showLoadingIndicator: true
-      }),
-      instantsearch.widgets.hits({
-        container: '#hits',
-        templates: {
-          item(hit) {
-            return articleHit(hit);
-          }
-        },
-      }),
-      instantsearch.widgets
-        .index({ indexName: settings.ticketIndex })
-        .addWidgets([
-        instantsearch.widgets.configure({
-          hitsPerPage: 16,
-        }),
-        instantsearch.widgets.hits({
-          container: '#ticket-hits',
-          placeholder: 'Search Tickets',
-          templates: {
-            item(hit) {
-              return ticketHit(hit)
-            }
-          },
-        }),
-      ]),
-      instantsearch.widgets.pagination({
-        container: '#pagination',
-      }),
-    ]);
+    const searchBox = instantsearch.widgets.searchBox({
+      container: '#searchbox',
+      placeholder: 'Search Articles',
+      showLoadingIndicator: true
+    });
+    const hits = instantsearch.widgets.hits({
+      container: '#hits',
+      templates: {
+        item(hit) {
+          return articleHit(hit);
+        }
+      },
+    });
+    const ticketWidgets = [];
+    ticketWidgets.push(instantsearch.widgets.configure({
+      hitsPerPage: 16,
+    }));
+    ticketWidgets.push(instantsearch.widgets.hits({
+      container: '#ticket-hits',
+      placeholder: 'Search Tickets',
+      templates: {
+        item(hit) {
+          return ticketHit(hit)
+        }
+      },
+    }));
+    if ( settings.menuSelect && settings.menuSelect.length > 0 ) {
+      ticketWidgets.push(instantsearch.widgets.menuSelect({
+        container: '#menu-select',
+        attribute: settings.menuSelect,
+      }));
+    };
+    const ticketIndexSearch = instantsearch.widgets
+    .index({ indexName: settings.ticketIndex })
+    .addWidgets(ticketWidgets);
+    const pagination = instantsearch.widgets.pagination({
+      container: '#pagination',
+    });
+
+    search.addWidgets([searchBox, hits, ticketIndexSearch, pagination]);
     
     search.start();
 }

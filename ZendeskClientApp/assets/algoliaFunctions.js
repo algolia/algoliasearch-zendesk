@@ -45,13 +45,6 @@ const articleHit = (hit) => {
         <button id="toggle-expand-ticket" onclick="expandToggle(this)">${expandToggleIcon}</button>
       </div>
   </div>`;
-
-  return `<div>
-    <div class="hit-description">By  ${hit.author} ${createdAt} <span style="float:right;">${lastComment} ${commentsSvg} ${hit.comments_count} votes ${hit.vote_count}<span></div>
-    <div class="hit-name"><a href="${hit.url}" target="_blank">${hit.name}</a></div>
-    <div class="hit-description">${body}</div>
-    <div class="hit-description">${hit.labels}</div>
-  </div>`;
 }
 
 // eslint-disable-next-line no-unused-vars
