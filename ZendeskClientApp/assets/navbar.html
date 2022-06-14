@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"
+  />
+  <link rel="stylesheet" href="index.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-theme-classic"
+  />
+</head>
+<body>
+    <div class="ais-InstantSearch">
+      <header class="header">
+        <div id="autocomplete"></div>
+      </header>
+        <div class="left-panel">
+          <div id="clear-refinements"></div>
+          <h3>Articles</h3>
+          <div id="article-refinement"></div>
+          <h3>Tickets</h3>
+          <div id="ticket-refinement"></div>
+        </div>
+  
+        <div class="right-panel">
+          <div id="searchbox"></div>
+          <div id="hits"></div>
+          <div id="ticket-hits"></div>
+          <div id="pagination"></div>
+        </div>
+      </div>        
+      <script src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"></script>      
+      <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js" integrity="sha256-EXPXz4W6pQgfYY3yTpnDa3OH8/EPn16ciVsPQ/ypsjk=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.8.3/dist/instantsearch.production.min.js" integrity="sha256-LAGhRRdtVoD6RLo2qDQsU2mp+XVSciKRC8XPOBWmofM=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js"></script>
+      <script>
+        const { autocomplete } = window['@algolia/autocomplete-js'];
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-plugin-query-suggestions"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-plugin-recent-searches"></script>
+      <script>
+        const { createQuerySuggestionsPlugin } = window[
+          "@algolia/autocomplete-plugin-query-suggestions"
+        ];
+        const { createLocalStorageRecentSearchesPlugin } = window[
+          "@algolia/autocomplete-plugin-recent-searches"
+        ];
+      </script>
+      <script src="momentjs.js"></script>
+      <script src="algoliaFunctions.js"></script>
+      <script src="autocomplete.js"></script>
+      <script src="navbar.js"></script>
+  </body>
+</html>
