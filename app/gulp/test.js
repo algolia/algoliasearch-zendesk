@@ -1,11 +1,10 @@
 import gulp from 'gulp';
-import {Instrumenter} from 'isparta';
-
 import babel from 'gulp-babel';
-import gutil from 'gulp-util';
 import istanbul from 'gulp-istanbul';
-import mergeStream from 'merge-stream';
 import mocha from 'gulp-mocha';
+import gutil from 'gulp-util';
+import { Instrumenter } from 'isparta';
+import mergeStream from 'merge-stream';
 
 const sourceFiles = ['src/**/*.js'];
 const testFiles = ['test/**/*.js'];
@@ -17,26 +16,30 @@ function logBabelError(err) {
 }
 
 export function test() {
-  let mochaOpts = {};
+  const mochaOpts = {};
   if (process.env.NODE_ENV === 'development') {
     mochaOpts.reporter = 'nyan';
   }
-  return gulp.src(testFiles)
-    .pipe(babel()).on('error', logBabelError)
+  return gulp
+    .src(testFiles)
+    .pipe(babel())
+    .on('error', logBabelError)
     .pipe(mocha(mochaOpts));
 }
 
 export function reportsTest(cb) {
   mergeStream(
-    gulp.src(sourceFiles)
-      .pipe(istanbul({instrumenter: Instrumenter, includeUntested: true})),
-    gulp.src(testFiles)
-      .pipe(babel())
-  ).pipe(istanbul.hookRequire())
+    gulp
+      .src(sourceFiles)
+      .pipe(istanbul({ instrumenter: Instrumenter, includeUntested: true })),
+    gulp.src(testFiles).pipe(babel())
+  )
+    .pipe(istanbul.hookRequire())
     .on('finish', () => {
-      gulp.src(testFiles, {read: false})
-        .pipe(mocha({reporter: 'spec'}))
+      gulp
+        .src(testFiles, { read: false })
+        .pipe(mocha({ reporter: 'spec' }))
         .pipe(istanbul.writeReports()) // Creating the reports after tests ran
-          .on('end', cb);
+        .on('end', cb);
     });
 }

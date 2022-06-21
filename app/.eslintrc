@@ -1,10 +1,12 @@
 {
   "extends": "algolia",
   "rules": {
-    "no-var": 2,
-    "algolia/relative-require": 2,
-    "algolia/force-import-root": 2,
-    "algolia/no-require": 1,
-    "algolia/no-module-exports": 2
+    "camelcase": "off",
+    "consistent-return": "off",
+    "consistent-this": "off",
+    "eslint-comments/no-unlimited-disable": "off",
+    "import/no-named-as-default": "off",
+    "no-console": "off",
+    "no-param-reassign": "off"
   }
 }

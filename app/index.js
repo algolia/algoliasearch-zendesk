@@ -1,4 +1,4 @@
-/* eslint algolia/no-module-exports: 0 */
-import algoliasearchZendeskHC from './src/index.js';
+import algoliasearchZendeskHC from './src/index';
 
+// eslint-disable-next-line import/no-commonjs
 module.exports = algoliasearchZendeskHC;

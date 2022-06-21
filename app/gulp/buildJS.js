@@ -1,22 +1,20 @@
-import chalk from 'chalk';
-import gulp from 'gulp';
-
 import babelify from 'babelify';
 import browserify from 'browserify';
+import chalk from 'chalk';
 import envify from 'envify';
-import stringify from 'stringify';
-import uglifyify from 'uglifyify';
-import watchify from 'watchify';
-
+import gulp from 'gulp';
 import babel from 'gulp-babel';
-import buffer from 'vinyl-buffer';
 import header from 'gulp-header';
-import gutil from 'gulp-util';
-import mergeStream from 'merge-stream';
 import rename from 'gulp-rename';
-import source from 'vinyl-source-stream';
 import sourcemaps from 'gulp-sourcemaps';
 import uglify from 'gulp-uglify';
+import gutil from 'gulp-util';
+import mergeStream from 'merge-stream';
+import stringify from 'stringify';
+import uglifyify from 'uglifyify';
+import buffer from 'vinyl-buffer';
+import source from 'vinyl-source-stream';
+import watchify from 'watchify';
 
 import pjson from '../package.json';
 
@@ -28,7 +26,9 @@ const exportedMethod = 'algoliasearchZendeskHC';
 const banner = `/*!
 * ${pjson.description} v${pjson.version}
 * ${pjson.homepage}
-* Copyright ${(new Date()).getFullYear()} ${pjson.author}; Licensed ${pjson.license}
+* Copyright ${new Date().getFullYear()} ${pjson.author}; Licensed ${
+  pjson.license
+}
 */
 `;
 
@@ -51,38 +51,41 @@ function mapError(err) {
   this.emit('end');
 }
 
-function bundler({watch, prod} = {}) {
-  let res = browserify(entryPoint, {standalone: exportedMethod, debug: true});
+function bundler({ watch, prod } = {}) {
+  let res = browserify(entryPoint, { standalone: exportedMethod, debug: true });
   if (watch) {
-    res = watchify(res, {poll: true});
+    res = watchify(res, { poll: true });
   }
   res = res
-    .transform({global: true}, stringify, {
-      appliesTo: {includeExtensions: ['.txt']}
+    .transform({ global: true }, stringify, {
+      appliesTo: { includeExtensions: ['.txt'] },
     })
     .transform(babelify)
     .transform(envify)
-    .transform({global: true}, 'browserify-shim')
+    .transform({ global: true }, 'browserify-shim')
     .transform('browserify-versionify');
   if (prod) res = res.transform(uglifyify);
   return res;
 }
 
-function bundle({b, prod}) {
-  let dist = b.bundle().on('error', mapError)
+function bundle({ b, prod }) {
+  let dist = b
+    .bundle()
+    .on('error', mapError)
     .pipe(source(`${exportedFileBasename}.js`))
     .pipe(header(banner))
     .pipe(gulp.dest('./dist'));
   if (!prod) return dist;
   dist = dist
     .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(uglify())
     .pipe(header(banner))
     .pipe(rename(`${exportedFileBasename}.min.js`))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./dist'));
-  let distES5 = gulp.src(['./index.js', './src/**/*.js'], {base: '.'})
+  const distES5 = gulp
+    .src(['./index.js', './src/**/*.js'], { base: '.' })
     .pipe(babel())
     .pipe(gulp.dest('./dist-es5-module'));
   return mergeStream(dist, distES5);
@@ -97,31 +100,38 @@ function oneAtATime(cb) {
       pending = false;
     });
   } else {
-    setTimeout(() => { oneAtATime(cb); }, delay);
+    setTimeout(() => {
+      oneAtATime(cb);
+    }, delay);
   }
 }
 
 function timeBuild(...args) {
   const start = new Date();
   gutil.log(`Restart ${actionStr}`);
-  let res = bundle.call(this, ...args);
+  const res = bundle.call(this, ...args);
   res.on('end', () => {
     const end = new Date();
-    const time = (end.getTime() - start.getTime());
-    const timeStr = chalk.magenta(time < 3000 ? `${time}ms` : `${time / 1000}s`);
+    const time = end.getTime() - start.getTime();
+    const timeStr = chalk.magenta(
+      time < 3000 ? `${time}ms` : `${time / 1000}s`
+    );
     gutil.log(`Finished ${actionStr} in ${timeStr}`);
   });
   return res;
 }
 
-export default function ({watch = false}) {
+export default function ({ watch = false }) {
   const prod = process.env.NODE_ENV === 'production';
   const envStr = chalk.yellow(process.env.NODE_ENV);
   gutil.log(`Environment for ${actionStr}: NODE_ENV=${envStr}`);
-  let b = bundler({watch, prod});
-  let res = bundle.call(this, {b, prod});
+  const b = bundler({ watch, prod });
+  const res = bundle.call(this, { b, prod });
   if (watch) {
-    b.on('update', oneAtATime.bind(this, () => timeBuild.call(this, {b, prod})));
+    b.on(
+      'update',
+      oneAtATime.bind(this, () => timeBuild.call(this, { b, prod }))
+    );
   }
   return res;
 }
