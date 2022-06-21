@@ -7,7 +7,6 @@
     "eslint-comments/no-unlimited-disable": "off",
     "import/no-named-as-default": "off",
     "no-console": "off",
-    "no-param-reassign": "off",
-    "no-var": 2
+    "no-param-reassign": "off"
   }
 }
