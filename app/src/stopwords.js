@@ -1,38 +1,36 @@
-import unorm from 'unorm';
-
-import regexpEscape from './regexpEscape.js';
-
 /* Languages stopwords */
 
-import ar from 'stopwords/dist/ar';
-import bg from 'stopwords/dist/bg';
-import cs from 'stopwords/dist/cs';
-import da from 'stopwords/dist/da';
-import de from 'stopwords/dist/de';
-import el from 'stopwords/dist/el';
-import en from 'stopwords/dist/en';
-import es from 'stopwords/dist/es';
-import fi from 'stopwords/dist/fi';
-import fr from 'stopwords/dist/fr';
-import hu from 'stopwords/dist/hu';
-import id from 'stopwords/dist/id';
-import it from 'stopwords/dist/it';
-import ja from 'stopwords/dist/ja';
-import ko from 'stopwords/dist/ko';
-import nl from 'stopwords/dist/nl';
-import no from 'stopwords/dist/no';
-import pl from 'stopwords/dist/pl';
-import pt from 'stopwords/dist/pt';
-import ro from 'stopwords/dist/ro';
-import ru from 'stopwords/dist/ru';
-import sk from 'stopwords/dist/sk';
-import sv from 'stopwords/dist/sv';
-import th from 'stopwords/dist/th';
-import tr from 'stopwords/dist/tr';
-import zh from 'stopwords/dist/zh';
+import ar from 'stopwords/dist/ar.json';
+import bg from 'stopwords/dist/bg.json';
+import cs from 'stopwords/dist/cs.json';
+import da from 'stopwords/dist/da.json';
+import de from 'stopwords/dist/de.json';
+import el from 'stopwords/dist/el.json';
+import en from 'stopwords/dist/en.json';
+import es from 'stopwords/dist/es.json';
+import fi from 'stopwords/dist/fi.json';
+import fr from 'stopwords/dist/fr.json';
+import hu from 'stopwords/dist/hu.json';
+import id from 'stopwords/dist/id.json';
+import it from 'stopwords/dist/it.json';
+import ja from 'stopwords/dist/ja.json';
+import ko from 'stopwords/dist/ko.json';
+import nl from 'stopwords/dist/nl.json';
+import no from 'stopwords/dist/no.json';
+import pl from 'stopwords/dist/pl.json';
+import pt from 'stopwords/dist/pt.json';
+import ro from 'stopwords/dist/ro.json';
+import ru from 'stopwords/dist/ru.json';
+import sk from 'stopwords/dist/sk.json';
+import sv from 'stopwords/dist/sv.json';
+import th from 'stopwords/dist/th.json';
+import tr from 'stopwords/dist/tr.json';
+import zh from 'stopwords/dist/zh.json';
+import unorm from 'unorm';
 
-import uk from './stopwords/uk.js';
-import vi from './stopwords/vi.js';
+import regexpEscape from './regexpEscape';
+import uk from './stopwords/uk';
+import vi from './stopwords/vi';
 
 export const STOPWORDS = {
   ar,
@@ -78,7 +76,7 @@ export const STOPWORDS = {
   uk,
   vi,
   'zh-cn': zh,
-  'zh-tw': zh
+  'zh-tw': zh,
 };
 
 let CURRENT_STOPWORDS = null;
@@ -86,14 +84,14 @@ let CURRENT_STOPWORDS = null;
 export default function getStopWords(query, lang) {
   if (CURRENT_STOPWORDS === null) {
     CURRENT_STOPWORDS = (STOPWORDS[lang] || [])
-      .map(word => unorm.nfc(word))
-      .map(word => [
+      .map((word) => unorm.nfc(word))
+      .map((word) => [
         word,
-        new RegExp(`(^|\\s)${regexpEscape(word)}(\\s|$)`, 'i')
+        new RegExp(`(^|\\s)${regexpEscape(word)}(\\s|$)`, 'i'),
       ]);
   }
   query = unorm.nfc(query);
-  return CURRENT_STOPWORDS
-    .filter(([, reg]) => reg.test(query))
-    .map(([word]) => word);
+  return CURRENT_STOPWORDS.filter(([, reg]) => reg.test(query)).map(
+    ([word]) => word
+  );
 }
