@@ -2,16 +2,16 @@
 // Makes IE11 fail though
 import algoliasearch from 'algoliasearch';
 import autocomplete from 'autocomplete.js';
-import _ from 'autocomplete.js/src/common/utils.js';
-import zepto from 'autocomplete.js/zepto.js';
+import _ from 'autocomplete.js/src/common/utils';
+import zepto from 'autocomplete.js/zepto';
 
-import addCSS from './addCSS.js';
-import { createClickTracker } from './clickAnalytics.js';
-import removeCSS from './removeCSS.js';
-import getOptionalWords from './stopwords.js';
+import addCSS from './addCSS';
+import { createClickTracker } from './clickAnalytics';
+import removeCSS from './removeCSS';
+import getOptionalWords from './stopwords';
 
 if (!_.isMsie()) {
-  const css = require('autocomplete.js/src/autocomplete/css.js');
+  const css = require('autocomplete.js/src/autocomplete/css');
   delete css.input.verticalAlign;
   delete css.inputWithNoHint.verticalAlign;
 }

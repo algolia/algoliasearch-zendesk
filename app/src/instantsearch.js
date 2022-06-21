@@ -1,11 +1,11 @@
 import instantsearch from 'instantsearch.js';
 
-import addCSS from './addCSS.js';
-import { createClickTracker } from './clickAnalytics.js';
-import removeCSS from './removeCSS.js';
-import getOptionalWords from './stopwords.js';
+import addCSS from './addCSS';
+import { createClickTracker } from './clickAnalytics';
+import removeCSS from './removeCSS';
+import getOptionalWords from './stopwords';
 
-import './closestPolyfill.js';
+import './closestPolyfill';
 
 class InstantSearch {
   constructor({
@@ -247,7 +247,8 @@ class InstantSearch {
   // Protected
 
   _displayTimes() {
-    const moment = require('moment'); // eslint-disable-line algolia/no-require
+    // eslint-disable-next-line import/no-extraneous-dependencies
+    const moment = require('moment');
     const timezoneOffset = moment().zone();
     moment().lang(this.locale); // Doesn't work, as we're missing translations
     const times = document.querySelectorAll('time');
@@ -301,6 +302,7 @@ class InstantSearch {
           target && target !== this;
           target = target.parentNode
         ) {
+          // eslint-disable-next-line no-continue
           if (target.classList === undefined) continue;
           if (target.classList.contains('ais-change-query')) {
             this.instantsearch.helper.setQuery('').search();
@@ -317,6 +319,7 @@ class InstantSearch {
           target && target !== this;
           target = target.parentNode
         ) {
+          // eslint-disable-next-line no-continue
           if (target.classList === undefined) continue;
           if (target.classList.contains('ais-clear-filters')) {
             this.instantsearch.helper
@@ -384,7 +387,7 @@ class InstantSearch {
       if (!$link) return;
       const $article = $link.closest('.search-result');
       if (!$article) {
-        console.error("Couldn't find associated article for link", $link); // eslint-disable-line no-console
+        console.error("Couldn't find associated article for link", $link);
         return;
       }
       const objectID = $article.getAttribute('data-algolia-objectid');

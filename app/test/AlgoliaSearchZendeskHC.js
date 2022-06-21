@@ -8,8 +8,7 @@ describe('AlgoliasearchZendeskHC', () => {
 
   beforeEach(function () {
     this.jsdom = jsdom();
-    AlgoliasearchZendeskHC =
-      require('../src/AlgoliasearchZendeskHC.js').default;
+    AlgoliasearchZendeskHC = require('../src/AlgoliasearchZendeskHC').default;
   });
 
   it('should exist', () => {

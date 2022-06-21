@@ -1,15 +1,12 @@
 import fargs from 'fargs';
 
-import autocomplete from './autocomplete.js';
-import {
-  initInsights,
-  extendWithConversionTracking,
-} from './clickAnalytics.js';
-import compile from './compile.js';
-import getCurrentLocale from './getCurrentLocale.js';
-import instantsearch from './instantsearch.js';
-import loadTemplates from './templates.js';
-import loadTranslations from './translations.js';
+import autocomplete from './autocomplete';
+import { initInsights, extendWithConversionTracking } from './clickAnalytics';
+import compile from './compile';
+import getCurrentLocale from './getCurrentLocale';
+import instantsearch from './instantsearch';
+import loadTemplates from './templates';
+import loadTranslations from './translations';
 
 function hitsPerPageValidator(val) {
   return (val >= 1 && val <= 20) || 'should be between 1 and 20';
@@ -79,6 +76,7 @@ class AlgoliasearchZendeskHC {
     const options = fargs()
       .check('algoliasearchZendeskHC')
       .arg('options', optionsStructure)
+      // eslint-disable-next-line prefer-rest-params
       .values(arguments)[0];
 
     options.highlightColor = options.highlightColor || options.color;

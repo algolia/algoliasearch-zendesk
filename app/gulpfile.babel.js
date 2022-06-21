@@ -2,11 +2,11 @@ import del from 'del';
 import gulp from 'gulp';
 import connect from 'gulp-connect';
 
-import buildCSS from './gulp/buildCSS.js';
-import buildDocs from './gulp/buildDocs.js';
-import buildJS from './gulp/buildJS.js';
-import lint from './gulp/lint.js';
-import { test, reportsTest } from './gulp/test.js';
+import buildCSS from './gulp/buildCSS';
+import buildDocs from './gulp/buildDocs';
+import buildJS from './gulp/buildJS';
+import lint from './gulp/lint';
+import { test, reportsTest } from './gulp/test';
 
 if (process.env.NODE_ENV !== 'production') process.env.NODE_ENV = 'development';
 

@@ -1,6 +1,13 @@
 {
   "extends": "algolia",
   "rules": {
+    "camelcase": "off",
+    "consistent-return": "off",
+    "consistent-this": "off",
+    "eslint-comments/no-unlimited-disable": "off",
+    "import/no-named-as-default": "off",
+    "no-console": "off",
+    "no-param-reassign": "off",
     "no-var": 2
   }
 }

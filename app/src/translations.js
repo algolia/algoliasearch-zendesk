@@ -1,7 +1,7 @@
 /* eslint object-shorthand: 0 */
 
-import escapeHTML from './escapeHTML.js';
-import getCurrentLocale from './getCurrentLocale.js';
+import escapeHTML from './escapeHTML';
+import getCurrentLocale from './getCurrentLocale';
 
 const LOCALES_ASSOCIATIONS = {
   'ar-eg': 'ar',
@@ -692,6 +692,7 @@ const TRANSLATIONS = {
 function setLang(userTranslations, langKey) {
   const associatedLangKey = LOCALES_ASSOCIATIONS[langKey];
   for (const key in TRANSLATIONS) {
+    // eslint-disable-next-line no-continue
     if (!TRANSLATIONS.hasOwnProperty(key)) continue;
     const itemTranslation = TRANSLATIONS[key];
     const itemUserTranslation = userTranslations[key] || {};
