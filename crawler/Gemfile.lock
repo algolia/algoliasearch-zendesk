@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/Jerskouille/zendesk_api_client_rb.git
-  revision: e94ecce851ff0f7933da3f516c9e652471461cb3
+  remote: https://github.com/Jerskouille/zendesk_api_client_rb.git
+  revision: a99a276e3f737a33a5a507036b8fb2a83bd381ae
   specs:
-    zendesk_api (1.15.0)
+    zendesk_api (1.19.0)
       faraday (~> 0.9)
       hashie (>= 3.5.2, < 4.0.0)
       inflection
@@ -16,18 +16,18 @@ GEM
       httpclient (~> 2.8.3)
       json (>= 1.5.1)
     coderay (1.1.2)
-    faraday (0.13.1)
+    faraday (0.17.5)
       multipart-post (>= 1.2, < 3)
-    hashie (3.5.6)
+    hashie (3.6.0)
     htmlentities (4.3.4)
     httpclient (2.8.3)
     inflection (1.0.0)
     json (2.1.0)
     method_source (0.8.2)
-    mime-types (3.1)
+    mime-types (3.4.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2016.0521)
-    multipart-post (2.0.0)
+    mime-types-data (3.2022.0105)
+    multipart-post (2.2.3)
     pry (0.11.0)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -42,4 +42,4 @@ DEPENDENCIES
   zendesk_api!
 
 BUNDLED WITH
-   1.17.3
+   2.3.16
