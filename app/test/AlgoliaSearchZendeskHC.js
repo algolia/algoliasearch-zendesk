@@ -1,14 +1,14 @@
 /* eslint-env mocha */
 
-import jsdom from 'jsdom-global';
 import expect from 'expect';
+import jsdom from 'jsdom-global';
 
 describe('AlgoliasearchZendeskHC', () => {
   let AlgoliasearchZendeskHC;
 
   beforeEach(function () {
     this.jsdom = jsdom();
-    AlgoliasearchZendeskHC = require('../src/AlgoliasearchZendeskHC.js').default;
+    AlgoliasearchZendeskHC = require('../src/AlgoliasearchZendeskHC').default;
   });
 
   it('should exist', () => {
@@ -16,7 +16,7 @@ describe('AlgoliasearchZendeskHC', () => {
   });
 
   it('should throw usage without options', () => {
-    expect(() => (new AlgoliasearchZendeskHC())).toThrow(/Usage/);
+    expect(() => new AlgoliasearchZendeskHC()).toThrow(/Usage/);
   });
 
   afterEach(function () {

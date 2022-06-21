@@ -1,6 +1,6 @@
 import cookies from 'js-cookie';
 
-export function initInsights({applicationId, apiKey}) {
+export function initInsights({ applicationId, apiKey }) {
   const ALGOLIA_INSIGHTS_SRC = 'https://cdn.jsdelivr.net/npm/search-insights@1';
 
   /* eslint-disable */
@@ -10,9 +10,8 @@ export function initInsights({applicationId, apiKey}) {
   }(window,document,"script",0,"aa");
   /* eslint-enable */
 
-  window.aa('init', {appId: applicationId, apiKey});
+  window.aa('init', { appId: applicationId, apiKey });
 }
-
 
 export function createClickTracker(self, index) {
   return function trackClick(article, position, queryID) {
@@ -23,13 +22,16 @@ export function createClickTracker(self, index) {
       index,
       queryID,
       objectIDs: [article.objectID],
-      positions: [Number(position)]
+      positions: [Number(position)],
     });
   };
 }
 
 // Extends instance with clickAnalytics specific attributes
-export function extendWithConversionTracking(self, {clickAnalytics, indexPrefix, subdomain}) {
+export function extendWithConversionTracking(
+  self,
+  { clickAnalytics, indexPrefix, subdomain }
+) {
   const indexName = `${indexPrefix}${subdomain}_articles`;
 
   if (!clickAnalytics) {
@@ -40,15 +42,20 @@ export function extendWithConversionTracking(self, {clickAnalytics, indexPrefix,
   }
 
   self._saveLastClick = (queryID, article) => {
-    const cookieBody = JSON.stringify({queryID, objectID: article.objectID, articleID: article.id});
-    cookies.set('algolia-last-click', cookieBody, {expires: 1});
+    const cookieBody = JSON.stringify({
+      queryID,
+      objectID: article.objectID,
+      articleID: article.id,
+    });
+    cookies.set('algolia-last-click', cookieBody, { expires: 1 });
   };
-  self.trackConversion = articleID => {
+  self.trackConversion = (articleID) => {
     const lastClickRaw = cookies.get('algolia-last-click');
     if (!lastClickRaw) return;
     const lastClick = JSON.parse(lastClickRaw);
 
-    if (!lastClick.queryID || !lastClick.objectID || !lastClick.articleID) return;
+    if (!lastClick.queryID || !lastClick.objectID || !lastClick.articleID)
+      return;
 
     if (articleID !== lastClick.articleID) return;
 
@@ -56,7 +63,7 @@ export function extendWithConversionTracking(self, {clickAnalytics, indexPrefix,
       index: indexName,
       eventName: 'article_conversion',
       queryID: lastClick.queryID,
-      objectIDs: [lastClick.objectID]
+      objectIDs: [lastClick.objectID],
     });
 
     self._saveLastClick(lastClick.queryID, {});

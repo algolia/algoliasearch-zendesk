@@ -1,12 +1,11 @@
 import chalk from 'chalk';
 import gulp from 'gulp';
-
 import cssnano from 'gulp-cssnano';
-import gutil from 'gulp-util';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
+import gutil from 'gulp-util';
 
 import pjson from '../package.json';
 
@@ -19,7 +18,9 @@ const actionStr = `'${chalk.cyan('build:css')}'`;
 const banner = `/*!
 * ${pjson.description} v${pjson.version}
 * ${pjson.homepage}
-* Copyright ${(new Date()).getFullYear()} ${pjson.author}; Licensed ${pjson.license}
+* Copyright ${new Date().getFullYear()} ${pjson.author}; Licensed ${
+  pjson.license
+}
 */
 `;
 
@@ -28,12 +29,14 @@ function build(prod) {
   if (prod) {
     res = res.pipe(sourcemaps.init());
   }
-  res = res.pipe(sass().on('error', sass.logError))
+  res = res
+    .pipe(sass().on('error', sass.logError))
     .pipe(header(banner))
     .pipe(rename(`${exportedFileBasename}.css`))
     .pipe(gulp.dest('./dist'));
   if (prod) {
-    res = res.pipe(cssnano({discardComments: {removeAll: true}}))
+    res = res
+      .pipe(cssnano({ discardComments: { removeAll: true } }))
       .pipe(header(banner))
       .pipe(rename(`${exportedFileBasename}.min.css`))
       .pipe(sourcemaps.write('./'))
