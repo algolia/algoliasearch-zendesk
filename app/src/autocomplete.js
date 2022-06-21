@@ -1,23 +1,20 @@
 // Small hack to remove verticalAlign on the input
 // Makes IE11 fail though
+import algoliasearch from 'algoliasearch';
+import autocomplete from 'autocomplete.js';
 import _ from 'autocomplete.js/src/common/utils.js';
+import zepto from 'autocomplete.js/zepto.js';
+
+import addCSS from './addCSS.js';
+import { createClickTracker } from './clickAnalytics.js';
+import removeCSS from './removeCSS.js';
+import getOptionalWords from './stopwords.js';
+
 if (!_.isMsie()) {
   const css = require('autocomplete.js/src/autocomplete/css.js');
   delete css.input.verticalAlign;
   delete css.inputWithNoHint.verticalAlign;
 }
-
-import autocomplete from 'autocomplete.js';
-import zepto from 'autocomplete.js/zepto.js';
-
-import algoliasearch from 'algoliasearch';
-import {createClickTracker} from './clickAnalytics.js';
-
-
-import addCSS from './addCSS.js';
-import removeCSS from './removeCSS.js';
-
-import getOptionalWords from './stopwords.js';
 
 const XS_WIDTH = 400;
 const SM_WIDTH = 600;
@@ -26,12 +23,9 @@ class Autocomplete {
   constructor({
     applicationId,
     apiKey,
-    autocomplete: {
-      enabled,
-      inputSelector
-    },
+    autocomplete: { enabled, inputSelector },
     indexPrefix,
-    subdomain
+    subdomain,
   }) {
     if (!enabled) return;
 
@@ -46,11 +40,7 @@ class Autocomplete {
 
   render({
     analytics,
-    autocomplete: {
-      enabled,
-      hitsPerPage,
-      inputSelector
-    },
+    autocomplete: { enabled, hitsPerPage, inputSelector },
     baseUrl,
     color,
     clickAnalytics,
@@ -60,7 +50,7 @@ class Autocomplete {
     poweredBy,
     subdomain,
     templates,
-    translations
+    translations,
   }) {
     if (!enabled) return null;
 
@@ -68,7 +58,7 @@ class Autocomplete {
     this.$inputs = Array.prototype.slice.call(this.$inputs, 0); // Transform to array
     this._disableZendeskAutocomplete();
 
-    addCSS(templates.autocomplete.css({color, highlightColor}));
+    addCSS(templates.autocomplete.css({ color, highlightColor }));
     this.autocompletes = [];
 
     for (let i = 0; i < this.$inputs.length; ++i) {
@@ -86,23 +76,37 @@ class Autocomplete {
         highlightPreTag: '<span class="aa-article-hit--highlight">',
         highlightPostTag: '</span>',
         attributesToSnippet: [`body_safe:${nbSnippetWords}`],
-        snippetEllipsisText: '...'
+        snippetEllipsisText: '...',
       };
 
       $input.setAttribute('placeholder', translations.placeholder);
-      let aa = autocomplete($input, {
-        hint: false,
-        debug: process.env.NODE_ENV === 'development' || debug,
-        templates: this._templates({poweredBy, subdomain, templates, translations}),
-        appendTo: 'body'
-      }, [{
-        source: this._source(params, locale, clickAnalytics),
-        name: 'articles',
-        templates: {
-          suggestion: this._renderSuggestion(templates, sizeModifier)
-        }
-      }]);
-      aa.on('autocomplete:selected', this._onSelected(baseUrl, locale, clickAnalytics));
+      const aa = autocomplete(
+        $input,
+        {
+          hint: false,
+          debug: process.env.NODE_ENV === 'development' || debug,
+          templates: this._templates({
+            poweredBy,
+            subdomain,
+            templates,
+            translations,
+          }),
+          appendTo: 'body',
+        },
+        [
+          {
+            source: this._source(params, locale, clickAnalytics),
+            name: 'articles',
+            templates: {
+              suggestion: this._renderSuggestion(templates, sizeModifier),
+            },
+          },
+        ]
+      );
+      aa.on(
+        'autocomplete:selected',
+        this._onSelected(baseUrl, locale, clickAnalytics)
+      );
       aa.on('autocomplete:redrawn', function () {
         aa.autocomplete.getWrapper().style.zIndex = 10000;
       });
@@ -135,10 +139,19 @@ class Autocomplete {
 
   _source(params, locale, clickAnalytics) {
     return (query, callback) => {
-      this.index.search({
-        ...params, clickAnalytics, query, optionalWords: getOptionalWords(query, locale)})
+      this.index
+        .search({
+          ...params,
+          clickAnalytics,
+          query,
+          optionalWords: getOptionalWords(query, locale),
+        })
         .then((content) => {
-          const hitsWithPosition = this._addPositionToHits(content.hits, content.queryID, clickAnalytics);
+          const hitsWithPosition = this._addPositionToHits(
+            content.hits,
+            content.queryID,
+            clickAnalytics
+          );
           const reorderedHits = this._reorderedHits(hitsWithPosition);
           callback(reorderedHits);
         });
@@ -146,7 +159,7 @@ class Autocomplete {
   }
 
   _reorderedHits(hits) {
-    let groupedHits = new Map();
+    const groupedHits = new Map();
     hits.forEach((hit) => {
       const category = hit.category.title;
       const section = hit.section.title;
@@ -162,7 +175,7 @@ class Autocomplete {
       groupedHits.get(category).get(section).push(hit);
     });
 
-    let flattenedHits = [];
+    const flattenedHits = [];
     groupedHits.forEach((sectionsValues) => {
       sectionsValues.forEach((sectionHits) => {
         sectionHits.forEach((sectionHit) => {
@@ -174,11 +187,13 @@ class Autocomplete {
     return flattenedHits;
   }
 
-  _templates({poweredBy, subdomain, templates, translations}) {
-    let res = {};
+  _templates({ poweredBy, subdomain, templates, translations }) {
+    const res = {};
     if (poweredBy === true) {
       res.header = templates.autocomplete.poweredBy({
-        content: translations.search_by_algolia(templates.autocomplete.algolia(subdomain))
+        content: translations.search_by_algolia(
+          templates.autocomplete.algolia(subdomain)
+        ),
       });
     }
     return res;
@@ -194,7 +209,7 @@ class Autocomplete {
   _onSelected(baseUrl, locale, clickAnalytics) {
     return (event, suggestion, dataset) => {
       if (clickAnalytics) {
-        const {_position, _queryID} = suggestion;
+        const { _position, _queryID } = suggestion;
         this.trackClick(suggestion, _position, _queryID);
       }
       location.href = `${baseUrl}${locale}/${dataset}/${suggestion.id}`;
@@ -217,8 +232,9 @@ class Autocomplete {
 
   _disableZendeskAutocomplete() {
     if (document.querySelector('[data-search][data-instant=true]')) {
-      console.log('[Algolia][Warning] ' +
-        'You should remove `instant=true` from your templates to save resources'
+      console.log(
+        '[Algolia][Warning] ' +
+          'You should remove `instant=true` from your templates to save resources'
       );
       for (let i = 0; i < this.$inputs.length; ++i) {
         const $input = this.$inputs[i];

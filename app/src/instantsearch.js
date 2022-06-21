@@ -1,9 +1,8 @@
 import instantsearch from 'instantsearch.js';
-import {createClickTracker} from './clickAnalytics.js';
 
 import addCSS from './addCSS.js';
+import { createClickTracker } from './clickAnalytics.js';
 import removeCSS from './removeCSS.js';
-
 import getOptionalWords from './stopwords.js';
 
 import './closestPolyfill.js';
@@ -13,18 +12,11 @@ class InstantSearch {
     analytics,
     applicationId,
     apiKey,
-    autocomplete: {
-      inputSelector: autocompleteSelector
-    },
+    autocomplete: { inputSelector: autocompleteSelector },
     clickAnalytics,
     indexPrefix,
-    instantsearch: {
-      enabled,
-      hideAutocomplete,
-      paginationSelector,
-      selector
-    },
-    subdomain
+    instantsearch: { enabled, hideAutocomplete, paginationSelector, selector },
+    subdomain,
   }) {
     if (!enabled) return;
 
@@ -36,7 +28,7 @@ class InstantSearch {
       hideAutocomplete,
       autocompleteSelector,
       instantsearchSelector: selector,
-      paginationSelector
+      paginationSelector,
     });
 
     this.instantsearch = instantsearch({
@@ -45,8 +37,8 @@ class InstantSearch {
       indexName: this.indexName,
       urlSync: {
         mapping: {
-          q: 'query'
-        }
+          q: 'query',
+        },
       },
       searchParameters: {
         analytics,
@@ -54,26 +46,26 @@ class InstantSearch {
         highlightPreTag: '<span class="ais-highlight">',
         highlightPostTag: '</span>',
         snippetEllipsisText: '...',
-        clickAnalytics
+        clickAnalytics,
       },
-      searchFunction: ({search}) => {
-        let helper = this.instantsearch.helper;
+      searchFunction: ({ search }) => {
+        const helper = this.instantsearch.helper;
         const query = helper.state.query;
         const optionalWords = getOptionalWords(query, this.locale);
         const page = helper.getPage();
         helper.setQueryParameter('optionalWords', optionalWords);
         helper.setPage(page);
         search();
-      }
+      },
     });
 
-    this.instantsearch.client.addAlgoliaAgent('Zendesk Integration (__VERSION__)');
+    this.instantsearch.client.addAlgoliaAgent(
+      'Zendesk Integration (__VERSION__)'
+    );
   }
 
   render({
-    autocomplete: {
-      inputSelector: autocompleteSelector
-    },
+    autocomplete: { inputSelector: autocompleteSelector },
     baseUrl,
     clickAnalytics,
     color,
@@ -86,14 +78,14 @@ class InstantSearch {
       reuseAutocomplete,
       hideAutocomplete,
       tagsLimit,
-      useEditedAt
+      useEditedAt,
     },
     locale,
     poweredBy,
     responsive,
     subdomain,
     templates,
-    translations
+    translations,
   }) {
     if (!enabled) return;
 
@@ -101,13 +93,14 @@ class InstantSearch {
 
     let searchBoxSelector;
 
-    addCSS(templates.instantsearch.css({color, highlightColor}));
+    addCSS(templates.instantsearch.css({ color, highlightColor }));
 
     if (reuseAutocomplete) {
       addCSS('#algolia-query { display: none }');
       searchBoxSelector = autocompleteSelector;
     } else {
-      this.$autocompleteInputs = document.querySelectorAll(autocompleteSelector);
+      this.$autocompleteInputs =
+        document.querySelectorAll(autocompleteSelector);
       if (hideAutocomplete) this._hideAutocomplete();
       searchBoxSelector = '#algolia-query';
     }
@@ -119,25 +112,32 @@ class InstantSearch {
 
     this.$container = document.querySelector(selector);
     if (this.$container === null) {
-      throw new Error(`[Algolia] Cannot find a container with the "${selector}" selector.`);
+      throw new Error(
+        `[Algolia] Cannot find a container with the "${selector}" selector.`
+      );
     }
-    this.$container.innerHTML = templates.instantsearch.layout({translations});
+    this.$container.innerHTML = templates.instantsearch.layout({
+      translations,
+    });
 
-    this._handleResponsiveness({responsive, templates});
+    this._handleResponsiveness({ responsive, templates });
 
     this.instantsearch.addWidget({
-      getConfiguration: () => ({facets: ['locale.locale']}),
-      init: ({helper}) => {
+      getConfiguration: () => ({ facets: ['locale.locale'] }),
+      init: ({ helper }) => {
         // Filter by language
         const page = helper.getPage();
         helper.addFacetRefinement('locale.locale', this.locale);
         helper.setPage(page);
-      }
+      },
     });
 
     if (poweredBy === true) {
       poweredBy = {
-        template: templates.instantsearch.poweredBy({subdomain, translations})
+        template: templates.instantsearch.poweredBy({
+          subdomain,
+          translations,
+        }),
       };
     }
 
@@ -148,8 +148,8 @@ class InstantSearch {
         autofocus: true,
         poweredBy,
         cssClasses: {
-          root: reuseAutocomplete ? '' : 'ais-with-style'
-        }
+          root: reuseAutocomplete ? '' : 'ais-with-style',
+        },
       })
     );
 
@@ -157,12 +157,13 @@ class InstantSearch {
       instantsearch.widgets.stats({
         container: '#algolia-stats',
         templates: {
-          body: ({nbHits, processingTimeMS}) => translations.stats(nbHits, processingTimeMS)
+          body: ({ nbHits, processingTimeMS }) =>
+            translations.stats(nbHits, processingTimeMS),
         },
         transformData: (data) => ({
           ...data,
-          translations
-        })
+          translations,
+        }),
       })
     );
 
@@ -170,8 +171,8 @@ class InstantSearch {
       instantsearch.widgets.pagination({
         container: '#algolia-pagination',
         cssClasses: {
-          root: 'pagination'
-        }
+          root: 'pagination',
+        },
       })
     );
 
@@ -182,8 +183,8 @@ class InstantSearch {
         separator: ' > ',
         templates: {
           header: translations.categories,
-          item: templates.instantsearch.hierarchicalItem
-        }
+          item: templates.instantsearch.hierarchicalItem,
+        },
       })
     );
 
@@ -193,9 +194,9 @@ class InstantSearch {
         attributeName: 'label_names',
         operator: 'and',
         templates: {
-          header: translations.tags
+          header: translations.tags,
         },
-        limit: tagsLimit
+        limit: tagsLimit,
       })
     );
 
@@ -205,28 +206,29 @@ class InstantSearch {
         hitsPerPage,
         templates: {
           empty: templates.instantsearch.noResult,
-          item: templates.instantsearch.hit
+          item: templates.instantsearch.hit,
         },
         transformData: {
-          empty: data => ({
+          empty: (data) => ({
             ...data,
-            translations
+            translations,
           }),
-          item: hit => ({
+          item: (hit) => ({
             ...hit,
             useEditedAt,
             baseUrl,
             position: hit.__hitIndex + 1,
-            queryID: this.instantsearch.helper.lastResults._rawResults[0].queryID
-          })
-        }
+            queryID:
+              this.instantsearch.helper.lastResults._rawResults[0].queryID,
+          }),
+        },
       })
     );
 
     this.instantsearch.addWidget({
       init: () => {
         this._addClickListener(clickAnalytics);
-      }
+      },
     });
 
     let firstRender = true;
@@ -245,12 +247,12 @@ class InstantSearch {
   // Protected
 
   _displayTimes() {
-    let moment = require('moment'); // eslint-disable-line algolia/no-require
+    const moment = require('moment'); // eslint-disable-line algolia/no-require
     const timezoneOffset = moment().zone();
     moment().lang(this.locale); // Doesn't work, as we're missing translations
-    let times = document.querySelectorAll('time');
+    const times = document.querySelectorAll('time');
     for (let i = 0; i < times.length; ++i) {
-      let $time = times[i];
+      const $time = times[i];
       const datetime = $time.getAttribute('datetime');
       const formattedDatetime = moment(datetime).utc().zone(timezoneOffset);
       const isoTitle = formattedDatetime.format('YYYY-MM-DD HH:mm');
@@ -291,49 +293,72 @@ class InstantSearch {
   }
 
   _bindNoResultActions() {
-    this.$container.addEventListener('click', (e) => {
-      for (let target = e.target; target && target !== this; target = target.parentNode) {
-        if (target.classList === undefined) continue;
-        if (target.classList.contains('ais-change-query')) {
-          this.instantsearch.helper.setQuery('').search();
+    this.$container.addEventListener(
+      'click',
+      (e) => {
+        for (
+          let target = e.target;
+          target && target !== this;
+          target = target.parentNode
+        ) {
+          if (target.classList === undefined) continue;
+          if (target.classList.contains('ais-change-query')) {
+            this.instantsearch.helper.setQuery('').search();
+          }
         }
-      }
-    }, false);
-    this.$container.addEventListener('click', (e) => {
-      for (let target = e.target; target && target !== this; target = target.parentNode) {
-        if (target.classList === undefined) continue;
-        if (target.classList.contains('ais-clear-filters')) {
-          this.instantsearch.helper
-            .clearRefinements()
-            .addFacetRefinement('locale.locale', this.locale)
-            .search();
+      },
+      false
+    );
+    this.$container.addEventListener(
+      'click',
+      (e) => {
+        for (
+          let target = e.target;
+          target && target !== this;
+          target = target.parentNode
+        ) {
+          if (target.classList === undefined) continue;
+          if (target.classList.contains('ais-clear-filters')) {
+            this.instantsearch.helper
+              .clearRefinements()
+              .addFacetRefinement('locale.locale', this.locale)
+              .search();
+          }
         }
-      }
-    }, false);
+      },
+      false
+    );
   }
 
-  _handleResponsiveness({templates, responsive}) {
+  _handleResponsiveness({ templates, responsive }) {
     if (!responsive) return;
     const $mainStyle = addCSS(templates.instantsearch.responsiveCSS);
 
     // Responsive filters
     let $responsiveCSSFacets = null;
-    document.getElementById('algolia-facets-open').addEventListener('click', function () {
-      if ($responsiveCSSFacets === null) {
-        $responsiveCSSFacets = addCSS(templates.instantsearch.responsiveCSSFacets, $mainStyle);
-      }
-    });
-    document.getElementById('algolia-facets-close').addEventListener('click', function () {
-      removeCSS($responsiveCSSFacets);
-      $responsiveCSSFacets = null;
-    });
+    document
+      .getElementById('algolia-facets-open')
+      .addEventListener('click', function () {
+        if ($responsiveCSSFacets === null) {
+          $responsiveCSSFacets = addCSS(
+            templates.instantsearch.responsiveCSSFacets,
+            $mainStyle
+          );
+        }
+      });
+    document
+      .getElementById('algolia-facets-close')
+      .addEventListener('click', function () {
+        removeCSS($responsiveCSSFacets);
+        $responsiveCSSFacets = null;
+      });
   }
 
   _temporaryHiding({
     hideAutocomplete,
     autocompleteSelector,
     instantsearchSelector,
-    paginationSelector
+    paginationSelector,
   }) {
     let selector = `${instantsearchSelector}, ${paginationSelector}`;
     if (hideAutocomplete) selector += `, ${autocompleteSelector}`;
@@ -350,7 +375,7 @@ class InstantSearch {
     delete this._temporaryHidingCSS;
   }
 
-// attach the event listener only once on container and find article link at click time
+  // attach the event listener only once on container and find article link at click time
   _addClickListener(clickAnalytics) {
     if (!clickAnalytics) return;
     this.$container.addEventListener('click', (e) => {
@@ -366,7 +391,7 @@ class InstantSearch {
       const articleID = $article.getAttribute('data-algolia-articleid');
       const position = $article.getAttribute('data-algolia-position');
       const queryID = $article.getAttribute('data-algolia-queryid');
-      this.trackClick({objectID, id: articleID}, position, queryID);
+      this.trackClick({ objectID, id: articleID }, position, queryID);
     });
   }
 }

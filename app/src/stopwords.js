@@ -1,7 +1,3 @@
-import unorm from 'unorm';
-
-import regexpEscape from './regexpEscape.js';
-
 /* Languages stopwords */
 
 import ar from 'stopwords/dist/ar';
@@ -30,7 +26,9 @@ import sv from 'stopwords/dist/sv';
 import th from 'stopwords/dist/th';
 import tr from 'stopwords/dist/tr';
 import zh from 'stopwords/dist/zh';
+import unorm from 'unorm';
 
+import regexpEscape from './regexpEscape.js';
 import uk from './stopwords/uk.js';
 import vi from './stopwords/vi.js';
 
@@ -78,7 +76,7 @@ export const STOPWORDS = {
   uk,
   vi,
   'zh-cn': zh,
-  'zh-tw': zh
+  'zh-tw': zh,
 };
 
 let CURRENT_STOPWORDS = null;
@@ -86,14 +84,14 @@ let CURRENT_STOPWORDS = null;
 export default function getStopWords(query, lang) {
   if (CURRENT_STOPWORDS === null) {
     CURRENT_STOPWORDS = (STOPWORDS[lang] || [])
-      .map(word => unorm.nfc(word))
-      .map(word => [
+      .map((word) => unorm.nfc(word))
+      .map((word) => [
         word,
-        new RegExp(`(^|\\s)${regexpEscape(word)}(\\s|$)`, 'i')
+        new RegExp(`(^|\\s)${regexpEscape(word)}(\\s|$)`, 'i'),
       ]);
   }
   query = unorm.nfc(query);
-  return CURRENT_STOPWORDS
-    .filter(([, reg]) => reg.test(query))
-    .map(([word]) => word);
+  return CURRENT_STOPWORDS.filter(([, reg]) => reg.test(query)).map(
+    ([word]) => word
+  );
 }

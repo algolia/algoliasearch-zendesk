@@ -3,18 +3,17 @@ import compile from './compile.js';
 const defaultTemplates = {
   autocomplete: {
     // Algolia logo
-    algolia: subdomain => (
-`<a
+    algolia: (subdomain) =>
+      `<a
   href="https://www.algolia.com/?utm_source=zendesk&utm_medium=link&utm_campaign=autocomplete-${subdomain}"
   class="aa-powered-by-link"
 >
   Algolia
-</a>`
-    ),
+</a>`,
 
     // Autocompletion template for an article
     article: compile(
-`<div
+      `<div
   class="
     aa-article-hit
     [[# isCategoryHeader ]]aa-article-hit__category-first[[/ isCategoryHeader ]]
@@ -48,14 +47,14 @@ const defaultTemplates = {
 
     // Powered By
     poweredBy: compile(
-`<div class="aa-powered-by">
+      `<div class="aa-powered-by">
   [[& content ]]
 </div>`
     ),
 
     // CSS to add to handle the color
     css: compile(
-`.aa-article-hit--highlight {
+      `.aa-article-hit--highlight {
   color: [[ color ]];
 }
 
@@ -70,12 +69,12 @@ const defaultTemplates = {
 .aa-article-hit--title .aa-article-hit--highlight::before {
   background-color: [[ highlightColor ]];
 }`
-    )
+    ),
   },
 
   instantsearch: {
     css: compile(
-`.search-result-link, .ais-hierarchical-menu--link, .ais-link {
+      `.search-result-link, .ais-hierarchical-menu--link, .ais-link {
   color: [[ color ]];
 }
 
@@ -90,10 +89,9 @@ const defaultTemplates = {
 #algolia-facets-open {
   color: [[ color ]];
 }`
-   ),
+    ),
 
-    responsiveCSS: (
-`@media (max-width: 768px) {
+    responsiveCSS: `@media (max-width: 768px) {
   #algolia-facets-open {
     display: block;
     text-align: center;
@@ -119,11 +117,9 @@ const defaultTemplates = {
     margin-left: 0;
     width: 100%;
   }
-}`
-    ),
+}`,
 
-    responsiveCSSFacets: (
-`@media (max-width: 768px) {
+    responsiveCSSFacets: `@media (max-width: 768px) {
   body {
     position: fixed;
     overflow: hidden;
@@ -153,11 +149,10 @@ const defaultTemplates = {
     padding: 20px 20px;
     cursor: pointer;
   }
-}`
-    ),
+}`,
 
     layout: compile(
-`<div>
+      `<div>
   <input type="text" id="algolia-query"/>
   <div id="algolia-stats-line">
     <div id="algolia-facets-open">
@@ -181,7 +176,7 @@ const defaultTemplates = {
     ),
 
     hierarchicalItem: compile(
-`<a class="[[cssClasses.link]]" href="[[url]]" title="[[name]]">
+      `<a class="[[cssClasses.link]]" href="[[url]]" title="[[name]]">
   [[name]]
   <span class="[[cssClasses.count]]">
     [[#helpers.formatNumber]]
@@ -193,7 +188,7 @@ const defaultTemplates = {
 
     // Instant search result template
     hit: compile(
-`<div
+      `<div
   class="search-result"
   data-algolia-position="[[ position ]]"
   data-algolia-queryid="[[ queryID ]]"
@@ -213,34 +208,34 @@ const defaultTemplates = {
     [[& _snippetResult.body_safe.value ]]
   </div>
 </div>`
-  ),
-
-    noResult: ({query, translations}) => (
-`<div id="no-results-message">
-  <p>${translations.no_result_for(query)}</p>
-  <p>${translations.no_result_actions()}</p>
-</div>`
     ),
 
-    poweredBy: ({subdomain, translations}) => (
+    noResult: ({ query, translations }) =>
+      `<div id="no-results-message">
+  <p>${translations.no_result_for(query)}</p>
+  <p>${translations.no_result_actions()}</p>
+</div>`,
+
+    poweredBy: ({ subdomain, translations }) =>
       compile(
-`<div class="[[ cssClasses.root ]]">
-  ${translations.search_by_algolia(`<a class="[[ cssClasses.link ]]" href="https://www.algolia.com/?utm_source=zendesk&utm_medium=link&utm_campaign=instantsearch-${subdomain}" target="_blank">Algolia</a>`)}
+        `<div class="[[ cssClasses.root ]]">
+  ${translations.search_by_algolia(
+    `<a class="[[ cssClasses.link ]]" href="https://www.algolia.com/?utm_source=zendesk&utm_medium=link&utm_campaign=instantsearch-${subdomain}" target="_blank">Algolia</a>`
+  )}
 </div>`
-      )
-    )
-  }
+      ),
+  },
 };
 
 export default function loadTemplates(options) {
   options.templates = {
     autocomplete: {
       ...defaultTemplates.autocomplete,
-      ...options.templates.autocomplete
+      ...options.templates.autocomplete,
     },
     instantsearch: {
       ...defaultTemplates.instantsearch,
-      ...options.templates.instantsearch
-    }
+      ...options.templates.instantsearch,
+    },
   };
 }

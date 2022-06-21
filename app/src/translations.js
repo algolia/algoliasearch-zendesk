@@ -19,7 +19,7 @@ const LOCALES_ASSOCIATIONS = {
   'fr-ch': 'fr',
   'fr-fr': 'fr',
   'nl-be': 'nl',
-  'pt-br': 'pt'
+  'pt-br': 'pt',
 };
 
 const TRANSLATIONS = {
@@ -52,7 +52,7 @@ const TRANSLATIONS = {
     uk: 'Категорії',
     vi: 'Loại',
     'zh-cn': '类别',
-    'zh-tw': '類別'
+    'zh-tw': '類別',
   },
   change_query: {
     ar: 'قم بتغيير الاستفسار',
@@ -84,7 +84,7 @@ const TRANSLATIONS = {
     uk: 'змініть свій запит',
     vi: 'Thay đổi truy vấn của bạn',
     'zh-cn': '更改您的查询',
-    'zh-tw': '變更問題'
+    'zh-tw': '變更問題',
   },
   clear_filters: {
     ar: 'قم بمسح المرشحات',
@@ -116,7 +116,7 @@ const TRANSLATIONS = {
     uk: 'очистіть свої фільтри',
     vi: 'xóa bộ lọc của bạn',
     'zh-cn': '清除过滤条件',
-    'zh-tw': '清理篩選'
+    'zh-tw': '清理篩選',
   },
   format_number: {
     ar: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ''),
@@ -140,7 +140,7 @@ const TRANSLATIONS = {
     sk: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '), // Non-breaking space
     sv: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
     tr: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-    uk: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+    uk: (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
   },
   filter: {
     ar: 'نتائج الترشيح',
@@ -171,7 +171,7 @@ const TRANSLATIONS = {
     uk: 'Фільтрувати результати',
     vi: 'Lọc kết quả',
     'zh-cn': '筛选结果',
-    'zh-tw': '篩選結果'
+    'zh-tw': '篩選結果',
   },
   nb_results: {
     ar: function (nb) {
@@ -240,7 +240,12 @@ const TRANSLATIONS = {
     ru: function (nb) {
       let suffix = '';
       if (nb % 10 === 1 && nb % 100 !== 11) suffix = '';
-      else if (nb % 10 >= 2 && nb % 10 <= 4 && (nb % 100 < 10 || nb % 100 >= 20)) suffix = 'а';
+      else if (
+        nb % 10 >= 2 &&
+        nb % 10 <= 4 &&
+        (nb % 100 < 10 || nb % 100 >= 20)
+      )
+        suffix = 'а';
       else suffix = 'ов';
       return `${this.format_number(nb)} результат${suffix}`;
     },
@@ -262,7 +267,12 @@ const TRANSLATIONS = {
     uk: function (nb) {
       let suffix = '';
       if (nb % 10 === 1 && nb % 100 !== 11) suffix = '';
-      else if (nb % 10 >= 2 && nb % 10 <= 4 && (nb % 100 < 10 || nb % 100 >= 20)) suffix = 'и';
+      else if (
+        nb % 10 >= 2 &&
+        nb % 10 <= 4 &&
+        (nb % 100 < 10 || nb % 100 >= 20)
+      )
+        suffix = 'и';
       else suffix = '';
       return `${this.format_number(nb)} результат${suffix}`;
     },
@@ -274,7 +284,7 @@ const TRANSLATIONS = {
     },
     'zh-tw': function (nb) {
       return `${this.format_number(nb)} 項結果`;
-    }
+    },
   },
   no_result_for: {
     ar: function (query) {
@@ -366,7 +376,7 @@ const TRANSLATIONS = {
     },
     'zh-tw': function (query) {
       return `查無 ${this.quoted(query)} 相關結果`;
-    }
+    },
   },
   no_result_actions: {
     ar: function () {
@@ -455,7 +465,7 @@ const TRANSLATIONS = {
     },
     'zh-tw': function () {
       return `${this.change_query}或${this.clear_filters}`;
-    }
+    },
   },
   placeholder: {
     ar: 'البحث في مقالاتنا',
@@ -487,22 +497,26 @@ const TRANSLATIONS = {
     uk: 'Пошук у наших статтях',
     vi: 'Tìm kiếm trong các bài viết của chúng tôi',
     'zh-cn': '在我们的文章中搜索',
-    'zh-tw': '在文章中搜尋'
+    'zh-tw': '在文章中搜尋',
   },
   quoted: {
-    cs: text => `„${escapeHTML(text)}“`,
-    el: text => `«${escapeHTML(text)}»`,
-    en: text => `"${escapeHTML(text)}"`,
-    fi: text => `”${escapeHTML(text)}”`,
-    'zh-cn': text => `“${escapeHTML(text)}”`,
-    'zh-tw': text => `「${escapeHTML(text)}」`
+    cs: (text) => `„${escapeHTML(text)}“`,
+    el: (text) => `«${escapeHTML(text)}»`,
+    en: (text) => `"${escapeHTML(text)}"`,
+    fi: (text) => `”${escapeHTML(text)}”`,
+    'zh-cn': (text) => `“${escapeHTML(text)}”`,
+    'zh-tw': (text) => `「${escapeHTML(text)}」`,
   },
   stats: {
     ar: function (nbHits, processing) {
-      return `تم العثور على ${this.nb_results(nbHits)} في ${processing} مللي ثانية`;
+      return `تم العثور على ${this.nb_results(
+        nbHits
+      )} في ${processing} مللي ثانية`;
     },
     bg: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} намерен${nbHits > 1 ? 'и' : ''} за ${processing} мс`;
+      return `${this.nb_results(nbHits)} намерен${
+        nbHits > 1 ? 'и' : ''
+      } за ${processing} мс`;
     },
     cs: function (nbHits, processing) {
       let suffix = '';
@@ -517,31 +531,43 @@ const TRANSLATIONS = {
       return `${this.nb_results(nbHits)} gefunden in ${processing} ms`;
     },
     el: function (nbHits, processing) {
-      return `Βρέθηκ${nbHits > 1 ? 'αν' : 'ε'} ${this.nb_results(nbHits)} σε ${processing} ms`;
+      return `Βρέθηκ${nbHits > 1 ? 'αν' : 'ε'} ${this.nb_results(
+        nbHits
+      )} σε ${processing} ms`;
     },
     en: function (nbHits, processing) {
       return `${this.nb_results(nbHits)} found in ${processing} ms`;
     },
     es: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} encontrado${nbHits > 1 ? 's' : ''} en ${processing} ms`;
+      return `${this.nb_results(nbHits)} encontrado${
+        nbHits > 1 ? 's' : ''
+      } en ${processing} ms`;
     },
     fi: function (nbHits, processing) {
       return `${this.nb_results(nbHits)} löydetty ajassa ${processing} ms`;
     },
     fr: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} trouvé${nbHits > 1 ? 's' : ''} en ${processing} ms`;
+      return `${this.nb_results(nbHits)} trouvé${
+        nbHits > 1 ? 's' : ''
+      } en ${processing} ms`;
     },
     hu: function (nbHits, processing) {
       return `${this.nb_results(nbHits)} ${processing} ms alatt`;
     },
     id: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} hasil ditemukan dalam ${processing} md`;
+      return `${this.nb_results(
+        nbHits
+      )} hasil ditemukan dalam ${processing} md`;
     },
     it: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} trovat${nbHits > 1 ? 'i' : 'o'} in ${processing} ms`;
+      return `${this.nb_results(nbHits)} trovat${
+        nbHits > 1 ? 'i' : 'o'
+      } in ${processing} ms`;
     },
     ja: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)}が${processing}ミリ秒で見つかりました。`;
+      return `${this.nb_results(
+        nbHits
+      )}が${processing}ミリ秒で見つかりました。`;
     },
     ko: function (nbHits, processing) {
       return `${processing} 밀리초에 ${this.nb_results(nbHits)} 결과가 검색됨`;
@@ -553,13 +579,17 @@ const TRANSLATIONS = {
       return `${this.nb_results(nbHits)} funnet etter ${processing} ms`;
     },
     pt: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} encontrado${nbHits > 1 ? 's' : ''} em ${processing} ms`;
+      return `${this.nb_results(nbHits)} encontrado${
+        nbHits > 1 ? 's' : ''
+      } em ${processing} ms`;
     },
     pl: function (nbHits, processing) {
       return `Znaleziono ${this.nb_results(nbHits)} w czasie ${processing} ms`;
     },
     ro: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} găsit${nbHits > 1 ? 'e' : ''} în ${processing} ms`;
+      return `${this.nb_results(nbHits)} găsit${
+        nbHits > 1 ? 'e' : ''
+      } în ${processing} ms`;
     },
     ru: function (nbHits, processing) {
       return `${this.nb_results(nbHits)} знайдено за ${processing} мс`;
@@ -571,13 +601,17 @@ const TRANSLATIONS = {
       return `${this.nb_results(nbHits)} nájdený${suffix} za ${processing} ms`;
     },
     sv: function (nbHits, processing) {
-      return `${this.nb_results(nbHits)} ${nbHits > 1 ? 'hittades' : ''} på ${processing} ms`;
+      return `${this.nb_results(nbHits)} ${
+        nbHits > 1 ? 'hittades' : ''
+      } på ${processing} ms`;
     },
     th: function (nbHits, processing) {
       return `พบ ${this.nb_results(nbHits)} ${processing} มิลลิวินาที`;
     },
     tr: function (nbHits, processing) {
-      return `${processing} ms içerisinde ${this.nb_results(nbHits)} sonuç bulundu`;
+      return `${processing} ms içerisinde ${this.nb_results(
+        nbHits
+      )} sonuç bulundu`;
     },
     uk: function (nbHits, processing) {
       return `${this.nb_results(nbHits)} знайдено за ${processing} мс`;
@@ -590,39 +624,39 @@ const TRANSLATIONS = {
     },
     'zh-tw': function (nbHits, processing) {
       return `${processing} 毫秒內搜尋到 ${this.nb_results(nbHits)}`;
-    }
+    },
   },
   search_by_algolia: {
-    ar: algolia => `البحث بواسطة ${algolia}`,
-    bg: algolia => `Търсене по ${algolia}`,
-    cs: algolia => `Vyhledávat s využitím služby ${algolia}`,
-    da: algolia => `Søg med ${algolia}`,
-    de: algolia => `Suche über ${algolia}`,
-    el: algolia => `Αναζήτηση κατά ${algolia}`,
-    en: algolia => `Search by ${algolia}`,
-    es: algolia => `Búsqueda por ${algolia}`,
-    fi: algolia => `Haun tarjoaa ${algolia}`,
-    fr: algolia => `Recherche par ${algolia}`,
-    hu: algolia => `Keresés az ${algolia}-val`,
-    id: algolia => `Cari menggunakan ${algolia}`,
-    it: algolia => `Cerca per ${algolia}`,
-    ja: algolia => `${algolia}で検索します。`,
-    ko: algolia => `${algolia}로 검색`,
-    nl: algolia => `Zoeken op ${algolia}`,
-    no: algolia => `Søk av ${algolia}`,
-    pl: algolia => `Szukaj przez ${algolia}`,
-    pt: algolia => `Pesquisar por ${algolia}`,
-    'pt-br': algolia => `Pesquise por ${algolia}`,
-    ro: algolia => `Căutați după ${algolia}`,
-    ru: algolia => `Найти в ${algolia}`,
-    sk: algolia => `Vyhľadávať podľa ${algolia}`,
-    sv: algolia => `Sök genom ${algolia}`,
-    th: algolia => `ค้นหาโดย ${algolia}`,
-    tr: algolia => `${algolia}'ya göre ara`,
-    uk: algolia => `Пошук за допомогою ${algolia}`,
-    vi: algolia => `Tìm kiếm theo ${algolia}`,
-    'zh-cn': algolia => `根据 ${algolia} 搜索`,
-    'zh-tw': algolia => `使用 ${algolia} 搜尋`
+    ar: (algolia) => `البحث بواسطة ${algolia}`,
+    bg: (algolia) => `Търсене по ${algolia}`,
+    cs: (algolia) => `Vyhledávat s využitím služby ${algolia}`,
+    da: (algolia) => `Søg med ${algolia}`,
+    de: (algolia) => `Suche über ${algolia}`,
+    el: (algolia) => `Αναζήτηση κατά ${algolia}`,
+    en: (algolia) => `Search by ${algolia}`,
+    es: (algolia) => `Búsqueda por ${algolia}`,
+    fi: (algolia) => `Haun tarjoaa ${algolia}`,
+    fr: (algolia) => `Recherche par ${algolia}`,
+    hu: (algolia) => `Keresés az ${algolia}-val`,
+    id: (algolia) => `Cari menggunakan ${algolia}`,
+    it: (algolia) => `Cerca per ${algolia}`,
+    ja: (algolia) => `${algolia}で検索します。`,
+    ko: (algolia) => `${algolia}로 검색`,
+    nl: (algolia) => `Zoeken op ${algolia}`,
+    no: (algolia) => `Søk av ${algolia}`,
+    pl: (algolia) => `Szukaj przez ${algolia}`,
+    pt: (algolia) => `Pesquisar por ${algolia}`,
+    'pt-br': (algolia) => `Pesquise por ${algolia}`,
+    ro: (algolia) => `Căutați după ${algolia}`,
+    ru: (algolia) => `Найти в ${algolia}`,
+    sk: (algolia) => `Vyhľadávať podľa ${algolia}`,
+    sv: (algolia) => `Sök genom ${algolia}`,
+    th: (algolia) => `ค้นหาโดย ${algolia}`,
+    tr: (algolia) => `${algolia}'ya göre ara`,
+    uk: (algolia) => `Пошук за допомогою ${algolia}`,
+    vi: (algolia) => `Tìm kiếm theo ${algolia}`,
+    'zh-cn': (algolia) => `根据 ${algolia} 搜索`,
+    'zh-tw': (algolia) => `使用 ${algolia} 搜尋`,
   },
   tags: {
     ar: 'العلامات',
@@ -651,18 +685,19 @@ const TRANSLATIONS = {
     uk: 'Ярлики',
     vi: 'Thẻ',
     'zh-cn': '标签',
-    'zh-tw': '標籤'
-  }
+    'zh-tw': '標籤',
+  },
 };
 
 function setLang(userTranslations, langKey) {
   const associatedLangKey = LOCALES_ASSOCIATIONS[langKey];
-  for (let key in TRANSLATIONS) {
+  for (const key in TRANSLATIONS) {
     if (!TRANSLATIONS.hasOwnProperty(key)) continue;
     const itemTranslation = TRANSLATIONS[key];
     const itemUserTranslation = userTranslations[key] || {};
 
-    let trad = itemUserTranslation[langKey] ||
+    let trad =
+      itemUserTranslation[langKey] ||
       itemTranslation[langKey] ||
       itemUserTranslation[associatedLangKey] ||
       itemTranslation[associatedLangKey] ||
@@ -670,14 +705,20 @@ function setLang(userTranslations, langKey) {
       itemTranslation.en;
 
     if (['change_query', 'clear_filters'].indexOf(key) !== -1) {
-      trad = `<span class="ais-link ais-${key.replace(/_/g, '-')}">${trad}</span>`;
+      trad = `<span class="ais-link ais-${key.replace(
+        /_/g,
+        '-'
+      )}">${trad}</span>`;
     }
     if (['nb_results', 'quoted'].indexOf(key) !== -1) {
       trad = (function (_trad) {
         return function (...args) {
-          return `<span class="ais-${key.replace(/_/g, '-')}">${_trad.call(this, ...args)}</span>`;
+          return `<span class="ais-${key.replace(/_/g, '-')}">${_trad.call(
+            this,
+            ...args
+          )}</span>`;
         };
-      }(trad));
+      })(trad);
     }
 
     if (typeof trad === 'function') {
