@@ -36,8 +36,8 @@ You can access it with the left sidebar in your dashboard.
 This connector will every day take your public Help Center articles and put them inside an Algolia index.
 In most cases, this should be enough to have an up-to-date search.
 
-However, if you'd rather have it updated right now, like when you add a lot of support articles, you can manually trigger a full reindex.
-On this page, just click the "Reindex" button in the bottom right corner. A few minutes later, your search index will be updated.
+However, if you'd rather have it updated sooner, you can manually trigger a full reindex.
+On this page, click the "Reindex" button in the bottom right corner. An indexing job will be pushed in our indexing queue. Depending on the load of the queue, it might take up to a few hours for your search index to be updated.
 
 ### Updating your Help Center theme
 
