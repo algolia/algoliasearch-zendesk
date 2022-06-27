@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # Exit on error
 set -e
@@ -7,7 +7,7 @@ set -e
 if [[ $ALGOLIASEARCH_ZENDESK_VERSION == "" ]]; then
   current=`json -f package.json version`
   read -p "New version number (current is ${current}): " version
-  export ALGOLIASEARCH_ZENDESK_VERSION=$version
+  export ALGOLIASEARCH_ZENDESK_VERSION=${version:-$current}
 fi
 
 # Ask for confirmation
