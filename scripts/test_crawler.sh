@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 APPLICATION_ID='' \
 API_KEY='' \
