@@ -1,4 +1,4 @@
-FROM ruby:2.2
+FROM ruby:2.7.6
 
 ADD . /opt/crawler
 
