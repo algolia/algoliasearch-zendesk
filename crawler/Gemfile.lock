@@ -12,22 +12,30 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    algoliasearch (1.18.2)
-      httpclient (~> 2.8.3)
-      json (>= 1.5.1)
+    algolia (2.3.2)
+      faraday (>= 0.15, < 3)
+      faraday-net_http_persistent (>= 0.15, < 3)
+      multi_json (~> 1.0)
+      net-http-persistent
     coderay (1.1.2)
+    connection_pool (2.4.1)
     faraday (0.17.5)
       multipart-post (>= 1.2, < 3)
+    faraday-net_http (2.1.0)
+    faraday-net_http_persistent (2.0.2)
+      faraday-net_http (< 3)
+      net-http-persistent (~> 4.0)
     hashie (3.6.0)
     htmlentities (4.3.4)
-    httpclient (2.8.3)
     inflection (1.0.0)
-    json (2.1.0)
     method_source (0.8.2)
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
+    multi_json (1.15.0)
     multipart-post (2.2.3)
+    net-http-persistent (4.0.2)
+      connection_pool (~> 2.2)
     pry (0.11.0)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -36,10 +44,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  algoliasearch
+  algolia (~> 2.3)
   htmlentities
   pry
   zendesk_api!
 
 BUNDLED WITH
-   2.3.16
+   2.4.14
