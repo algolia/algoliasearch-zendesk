@@ -24,13 +24,13 @@ raise "Missing ZENDESK_APP_NAME\n#{USAGE}" if zendesk_app_name.nil? || zendesk_a
 raise "Missing INDEX_PREFIX\n#{USAGE}" if index_prefix.nil? || index_prefix == ''
 
 # Initialize Algolia
-client = Algolia::Client.new(
+search_config = Algolia::Search::Config.new(
   application_id: app_id,
   api_key: api_key,
   user_agent: ZendeskIntegration::V2::UserAgent.to_s
 )
-
-idx = client.init_index "#{index_prefix}#{zendesk_app_name}_articles"
+client = Algolia::Search::Client.create_with_config(search_config)
+idx = client.init_index("#{index_prefix}#{zendesk_app_name}_articles")
 
 # Check if index exists
 
