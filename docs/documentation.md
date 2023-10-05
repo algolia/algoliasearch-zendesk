@@ -356,6 +356,5 @@ Also, some templates are using a `compile` function in this file. This function 
 
 In case you're using Zendesk's [IP restrictions feature](https://support.zendesk.com/hc/en-us/articles/203663706-Restricting-access-to-Zendesk-Support-and-your-Help-Center-using-IP-restrictions), you'll need to whitelist our IPs for our indexing to work.
 Here are those IPs:
-- `3.221.200.5`
-- `52.204.20.39`
-- `52.22.248.248`
+- `104.196.103.173`
+- `35.234.69.129`
