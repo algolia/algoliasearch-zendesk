@@ -68,11 +68,11 @@ Here is a full breakdown of the available options for the JavaScript library:
     applicationId: '<YOUR APPLICATION_ID>',
     apiKey: '<YOUR SEARCH ONLY API KEY>',
     subdomain: '<YOUR ZENDESK APPLICATION NAME>',
+    indexName: '<YOUR ALGOLIA INDEX NAME>',
 
     //
     // Optional configuration:
     //
-    indexPrefix: 'zendesk_',              // or your custom <INDEX_PREFIX>
     analytics: true,                      // should queries be processed by Algolia analytics
     baseUrl: '/hc/',                      // the base URL of your Help Center
     poweredBy: true,                      // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
@@ -97,6 +97,7 @@ Here is a full breakdown of the available options for the JavaScript library:
       useEditedAt: false                  // show edited_at timestamp in search results
     },
     instantsearchPage,                    // function to check if we're on the search page
+    indexPrefix: 'zendesk_',              // @deprecated use `indexName` instead
     templates: {                          // template objects (see the templates section)
       autocomplete: {},
       instantsearch: {}

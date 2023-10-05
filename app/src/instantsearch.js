@@ -14,6 +14,7 @@ class InstantSearch {
     apiKey,
     autocomplete: { inputSelector: autocompleteSelector },
     clickAnalytics,
+    indexName,
     indexPrefix,
     instantsearch: { enabled, hideAutocomplete, paginationSelector, selector },
     subdomain,
@@ -21,7 +22,7 @@ class InstantSearch {
     if (!enabled) return;
 
     this.locale = null;
-    this.indexName = `${indexPrefix}${subdomain}_articles`;
+    this.indexName = indexName || `${indexPrefix}${subdomain}_articles`;
     this.trackClick = createClickTracker(this, this.indexName);
 
     this._temporaryHiding({

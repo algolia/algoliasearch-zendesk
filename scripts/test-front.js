@@ -9,7 +9,7 @@ var lib = document.createElement('script'); lib.type = 'text/javascript'; lib.in
       apiKey: '',
       subdomain: '',
       poweredBy: false,
-      indexPrefix: 'zendesk_',
+      indexName: 'my_zendesk_articles',
       autocomplete: {
         enabled: true, // is the autocomplete feature enabled?
         inputSelector: '#query', // the DOM selector to select the search box

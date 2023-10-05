@@ -24,6 +24,7 @@ class Autocomplete {
     applicationId,
     apiKey,
     autocomplete: { enabled, inputSelector },
+    indexName,
     indexPrefix,
     subdomain,
   }) {
@@ -33,7 +34,7 @@ class Autocomplete {
 
     this.client = algoliasearch(applicationId, apiKey);
     this.client.addAlgoliaAgent('Zendesk Integration (__VERSION__)');
-    this.indexName = `${indexPrefix}${subdomain}_articles`;
+    this.indexName = indexName || `${indexPrefix}${subdomain}_articles`;
     this.index = this.client.initIndex(this.indexName);
     this.trackClick = createClickTracker(this, this.indexName);
   }

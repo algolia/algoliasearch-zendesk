@@ -1,11 +1,6 @@
 # JavaScript library: `algoliasearchZendeskHC`
 
 [![npm](https://img.shields.io/npm/v/algoliasearch.zendesk-hc.png)](https://www.npmjs.com/package/algoliasearch.zendesk-hc)
-
-[![Dependency Status](https://david-dm.org/algolia/algoliasearch-zendesk.png?path=app)](https://david-dm.org/algolia/algoliasearch-zendesk?path=app)
-[![devDependency Status](https://david-dm.org/algolia/algoliasearch-zendesk/dev-status.png?path=app)](https://david-dm.org/algolia/algoliasearch-zendesk?path=app#info=devDependencies)
-[![peerDependency Status](https://david-dm.org/algolia/algoliasearch-zendesk/peer-status.png?path=app)](https://david-dm.org/algolia/algoliasearch-zendesk?path=app#info=peerDependencies)
-
 [![GitHub license](https://img.shields.io/github/license/algolia/algoliasearch-zendesk.png)](../LICENSE)
 
 This JavaScript library allows you to replace the default search of your Zendesk Help Center by Algolia. [Algolia](https://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
@@ -37,7 +32,7 @@ This connector will every day take your public Help Center articles and put them
 In most cases, this should be enough to have an up-to-date search.
 
 However, if you'd rather have it updated sooner, you can manually trigger a full reindex.
-On this page, click the "Reindex" button in the bottom right corner. An indexing job will be pushed in our indexing queue. Depending on the load of the queue, it might take up to a few hours for your search index to be updated.
+On your [Connectors](https://dashboard.algolia.com/connectors/tasks) page, click the "Run task" button on the right of your task.
 
 ### Updating your Help Center theme
 
@@ -76,11 +71,11 @@ Here is a full breakdown of the available options for the JavaScript library:
     applicationId: '<YOUR APPLICATION_ID>',
     apiKey: '<YOUR SEARCH ONLY API KEY>',
     subdomain: '<YOUR ZENDESK APPLICATION NAME>',
+    indexName: '<YOUR ALGOLIA INDEX NAME>',
 
     //
     // Optional configuration:
     //
-    indexPrefix: 'zendesk_',              // or your custom <INDEX_PREFIX>
     analytics: true,                      // should queries be processed by Algolia analytics
     baseUrl: '/hc/',                      // the base URL of your Help Center
     poweredBy: true,                      // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
@@ -105,6 +100,7 @@ Here is a full breakdown of the available options for the JavaScript library:
       useEditedAt: false                  // show edited_at timestamp in search results
     },
     instantsearchPage,                    // function to check if we're on the search page
+    indexPrefix: 'zendesk_',              // @deprecated use `indexName` instead
     templates: {                          // template objects (see the templates section)
       autocomplete: {},
       instantsearch: {}
@@ -363,9 +359,8 @@ Also, some templates are using a `compile` function in this file. This function 
 
 In case you're using Zendesk's [IP restrictions feature](https://support.zendesk.com/hc/en-us/articles/203663706-Restricting-access-to-Zendesk-Support-and-your-Help-Center-using-IP-restrictions), you'll need to whitelist our IPs for our indexing to work.
 Here are those IPs:
-- `3.221.200.5`
-- `52.204.20.39`
-- `52.22.248.248`
+- `104.196.103.173`
+- `35.234.69.129`
 
 ## Development
 
@@ -430,6 +425,7 @@ When running, you can then add this custom script to your Help Center, inside th
     applicationId: 'FIXME',
     apiKey: 'FIXME',
     subdomain: 'FIXME',
+    indexName: 'FIXME',
   })
 </script>
 ```
