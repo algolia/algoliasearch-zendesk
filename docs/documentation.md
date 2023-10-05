@@ -14,7 +14,7 @@ permalink: /documentation/
 ## Synchronize Algolia with your Help Center
 
 <div align="center">
-  <img src="https://community.algolia.com/zendesk/img/algolia-zendesk.svg" alt="Data connection visualization" />
+  <img src="https://www.algolia.com/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fhilnmyskv%2Fimage%2Fupload%2Fv1671027406%2FAlgolia_com_Website_assets%2Fimages%2Fzendesk%2FZendesk-algolia.png&w=1200&q=75" alt="Data connection visualization" />
 </div>
 
 1. Create an [Algolia account](https://www.algolia.com/users/sign_up).
@@ -29,7 +29,7 @@ This connector will every day take your public Help Center articles and put them
 In most cases, this should be enough to have an up-to-date search.
 
 However, if you'd rather have it updated sooner, you can manually trigger a full reindex.
-On this page, click the "Reindex" button in the bottom right corner. An indexing job will be pushed in our indexing queue. Depending on the load of the queue, it might take up to a few hours for your search index to be updated.
+On your [Connectors](https://dashboard.algolia.com/connectors/tasks) page, click the "Run task" button on the right of your task.
 
 ## Updating your Help Center theme
 
