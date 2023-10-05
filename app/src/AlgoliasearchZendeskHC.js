@@ -59,6 +59,7 @@ const optionsStructure = {
     poweredBy: { type: 'boolean', value: true },
     responsive: { type: 'boolean', value: true },
     subdomain: { type: 'string', required: true },
+    indexName: { type: 'string', value: false},
     templates: {
       type: 'Object',
       value: {},

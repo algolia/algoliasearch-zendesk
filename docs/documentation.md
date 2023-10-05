@@ -68,11 +68,11 @@ Here is a full breakdown of the available options for the JavaScript library:
     applicationId: '<YOUR APPLICATION_ID>',
     apiKey: '<YOUR SEARCH ONLY API KEY>',
     subdomain: '<YOUR ZENDESK APPLICATION NAME>',
+    indexName: '<YOUR ALGOLIA INDEX NAME>',
 
     //
     // Optional configuration:
     //
-    indexPrefix: 'zendesk_',              // or your custom <INDEX_PREFIX>
     analytics: true,                      // should queries be processed by Algolia analytics
     baseUrl: '/hc/',                      // the base URL of your Help Center
     poweredBy: true,                      // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
@@ -97,6 +97,7 @@ Here is a full breakdown of the available options for the JavaScript library:
       useEditedAt: false                  // show edited_at timestamp in search results
     },
     instantsearchPage,                    // function to check if we're on the search page
+    indexPrefix: 'zendesk_',              // @deprecated use `indexName` instead
     templates: {                          // template objects (see the templates section)
       autocomplete: {},
       instantsearch: {}
@@ -355,6 +356,5 @@ Also, some templates are using a `compile` function in this file. This function 
 
 In case you're using Zendesk's [IP restrictions feature](https://support.zendesk.com/hc/en-us/articles/203663706-Restricting-access-to-Zendesk-Support-and-your-Help-Center-using-IP-restrictions), you'll need to whitelist our IPs for our indexing to work.
 Here are those IPs:
-- `3.221.200.5`
-- `52.204.20.39`
-- `52.22.248.248`
+- `104.196.103.173`
+- `35.234.69.129`

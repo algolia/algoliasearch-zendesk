@@ -30,9 +30,9 @@ export function createClickTracker(self, index) {
 // Extends instance with clickAnalytics specific attributes
 export function extendWithConversionTracking(
   self,
-  { clickAnalytics, indexPrefix, subdomain }
+  { clickAnalytics, indexName, indexPrefix, subdomain }
 ) {
-  const indexName = `${indexPrefix}${subdomain}_articles`;
+  const finalIndexName = indexName || `${indexPrefix}${subdomain}_articles`;
 
   if (!clickAnalytics) {
     self._saveLastQueryID = () => {};
@@ -60,7 +60,7 @@ export function extendWithConversionTracking(
     if (articleID !== lastClick.articleID) return;
 
     window.aa('convertedObjectIDsAfterSearch', {
-      index: indexName,
+      index: finalIndexName,
       eventName: 'article_conversion',
       queryID: lastClick.queryID,
       objectIDs: [lastClick.objectID],
