@@ -1,17 +1,18 @@
-<a name="2.31.0"></a>
-# [2.31.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.31.0...v2.31.0) (2023-10-05)
+<a name="2.31.1"></a>
+## [2.31.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.31.1...v2.31.1) (2023-10-09)
 
 
 
 
-<a name="2.31.0"></a>
-# [2.31.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.30.1...v2.31.0) (2023-10-05)
+<a name="2.31.1"></a>
+## [2.31.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.30.1...v2.31.1) (2023-10-09)
 
 
 ### Bug Fixes
 
 * add indexName option (#179) ([0995fd3](https://github.com/algolia/algoliasearch-zendesk/commit/0995fd3))
 * bundle update --bundler (#158) ([a6f3046](https://github.com/algolia/algoliasearch-zendesk/commit/a6f3046))
+* default indexName to empty string (#181) ([b4d4cc0](https://github.com/algolia/algoliasearch-zendesk/commit/b4d4cc0))
 * upgrade linting (#159) ([9191646](https://github.com/algolia/algoliasearch-zendesk/commit/9191646))
 * use bash in release scripts (#163) ([e7637f5](https://github.com/algolia/algoliasearch-zendesk/commit/e7637f5))
 
