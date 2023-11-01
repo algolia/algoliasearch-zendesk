@@ -283,6 +283,14 @@
     float: right;
     font-size: 0.8em;
   }
+  .search-result-path {    
+    font-size: 0.7em;
+    font-style: italic;
+    color: gray;
+    text-decoration-line: underline;
+    font-weight: bold;
+  }
+
   .search-result-body {
     margin-top: 5px;
     opacity: .7;

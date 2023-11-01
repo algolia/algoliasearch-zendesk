@@ -195,6 +195,7 @@ const defaultTemplates = {
   data-algolia-articleid="[[ id ]]"
   data-algolia-objectid="[[ objectID ]]"
 >
+  [[# showHitsFullPath ]]<div class="search-result-path">[[ section.full_path ]]</div>[[/ showHitsFullPath ]]
   <div class="search-result-meta">
     <time data-datetime="relative" datetime="[[# useEditedAt ]][[ edited_at_iso ]][[/ useEditedAt]][[^ useEditedAt ]][[ created_at_iso ]][[/ useEditedAt  ]]"></time>
   </div>

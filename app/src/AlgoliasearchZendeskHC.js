@@ -53,6 +53,7 @@ const optionsStructure = {
         selector: { type: 'string', value: '.search-results' },
         tagsLimit: { type: 'number', value: 15 },
         useEditedAt: { type: 'boolean', value: false },
+        showHitsFullPath: { type: 'boolean', value: false },
       },
     },
     instantsearchPage: { type: 'function', value: instantsearchPage },

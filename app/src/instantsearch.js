@@ -80,6 +80,7 @@ class InstantSearch {
       hideAutocomplete,
       tagsLimit,
       useEditedAt,
+      showHitsFullPath,
     },
     locale,
     poweredBy,
@@ -217,6 +218,7 @@ class InstantSearch {
           item: (hit) => ({
             ...hit,
             useEditedAt,
+            showHitsFullPath,
             baseUrl,
             position: hit.__hitIndex + 1,
             queryID:
