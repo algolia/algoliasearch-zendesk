@@ -72,7 +72,7 @@
     "gulp-istanbul": "^0.10.3",
     "gulp-mocha": "^2.2.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.2.0",
+    "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
@@ -82,6 +82,7 @@
     "merge-stream": "^1.0.0",
     "mochawesome": "^1.2.2",
     "prettier": "^2.7.1",
+    "sass": "^1.69.5",
     "stringify": "^5.2.0",
     "to-factory": "^1.0.0",
     "uglifyify": "^3.0.1",
@@ -89,6 +90,9 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.11.1",
     "yiewd": "^0.6.0"
+  },
+  "overrides": {
+    "graceful-fs": "^4.2.11"
   },
   "scripts": {
     "build:css": "gulp build:css",
