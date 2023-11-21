@@ -97,7 +97,8 @@ Here is a full breakdown of the available options for the JavaScript library:
       hideAutocomplete: true,             // whether or not to hide the autocomplete on the instantsearch page (ignored if reuseAutocomplete is used)
       selector: '.search-results',        // the DOM selector for the results container
       tagsLimit: 15,                      // maximum number of tags to display
-      useEditedAt: false                  // show edited_at timestamp in search results
+      useEditedAt: false,                 // show edited_at timestamp in search results
+      showHitsFullPath: false             // show section fullpath in search results
     },
     instantsearchPage,                    // function to check if we're on the search page
     indexPrefix: 'zendesk_',              // @deprecated use `indexName` instead

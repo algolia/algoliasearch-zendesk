@@ -198,6 +198,7 @@ const defaultTemplates = {
   <div class="search-result-meta">
     <time data-datetime="relative" datetime="[[# useEditedAt ]][[ edited_at_iso ]][[/ useEditedAt]][[^ useEditedAt ]][[ created_at_iso ]][[/ useEditedAt  ]]"></time>
   </div>
+  [[# showHitsFullPath ]]<div class="search-result-path">[[ section.full_path ]]</div>[[/ showHitsFullPath ]]
   <div class="search-result-link-wrapper">
     <a class="search-result-link" href="[[ baseUrl ]][[ locale.locale ]]/articles/[[ id ]]">
       [[& _highlightResult.title.value ]]
