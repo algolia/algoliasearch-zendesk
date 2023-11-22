@@ -4,8 +4,9 @@
 source 'https://rubygems.org'
 
 group :development, :test do
-  gem 'jekyll', '~> 2.5'
+  gem 'jekyll'
   gem 'haml'
+  gem 'pygments.rb'
   gem 'rouge'
   gem 'sass'
   gem 'guard'
