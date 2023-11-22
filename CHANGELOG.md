@@ -1,20 +1,37 @@
-<a name="2.31.1"></a>
-## [2.31.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.31.0...v2.31.1) (2023-10-09)
+<a name="2.32.0"></a>
+# [2.32.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.32.0...v2.32.0) (2023-11-22)
+
+
+
+
+<a name="2.32.0"></a>
+# [2.32.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.31.1...v2.32.0) (2023-11-22)
+
 
 ### Bug Fixes
 
-* default indexName to empty string (#181) ([b4d4cc0](https://github.com/algolia/algoliasearch-zendesk/commit/b4d4cc0))
+* **docs:** update dependencies ([b69ff57](https://github.com/algolia/algoliasearch-zendesk/commit/b69ff57))
+* local run, get rid of node-sass (#184) ([6688933](https://github.com/algolia/algoliasearch-zendesk/commit/6688933))
 
-<a name="2.31.0"></a>
-## [2.31.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.30.1...v2.31.0) (2023-10-05)
+### Features
+
+* **hits:** introduce hits fullpath in search results (#183) ([06bd790](https://github.com/algolia/algoliasearch-zendesk/commit/06bd790))
+* **root:** update package-lock.json ([bc54fe5](https://github.com/algolia/algoliasearch-zendesk/commit/bc54fe5))
+
+
+
+<a name="2.31.1"></a>
+## [2.31.1](https://github.com/algolia/algoliasearch-zendesk/compare/v2.30.1...v2.31.1) (2023-10-09)
 
 
 ### Bug Fixes
 
 * add indexName option (#179) ([0995fd3](https://github.com/algolia/algoliasearch-zendesk/commit/0995fd3))
 * bundle update --bundler (#158) ([a6f3046](https://github.com/algolia/algoliasearch-zendesk/commit/a6f3046))
+* default indexName to empty string (#181) ([b4d4cc0](https://github.com/algolia/algoliasearch-zendesk/commit/b4d4cc0))
 * upgrade linting (#159) ([9191646](https://github.com/algolia/algoliasearch-zendesk/commit/9191646))
 * use bash in release scripts (#163) ([e7637f5](https://github.com/algolia/algoliasearch-zendesk/commit/e7637f5))
+
 
 
 <a name="2.30.1"></a>
@@ -109,8 +126,8 @@
 
 ### Bug Fixes
 
-* gem version ([1f26ffc](https://github.com/algolia/algoliasearch-zendesk/commit/1f26ffc))
 * **user-agent:** fixed VERSION file reading ([2ac2b16](https://github.com/algolia/algoliasearch-zendesk/commit/2ac2b16))
+* gem version ([1f26ffc](https://github.com/algolia/algoliasearch-zendesk/commit/1f26ffc))
 
 ### Features
 
