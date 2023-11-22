@@ -23,11 +23,12 @@ class ZendeskIntegration::V2::Crawler
     logs:
   )
     # Algolia
-    @algolia_client = Algolia::Client.new(
+    search_config = Algolia::Search::Config.new(
       application_id: application_id,
       api_key: api_key,
       user_agent: ZendeskIntegration::V2::UserAgent.to_s
     )
+    @algolia_client = Algolia::Search::Client.create_with_config(search_config)
     @index_prefix = index_prefix
 
     # Zendesk
