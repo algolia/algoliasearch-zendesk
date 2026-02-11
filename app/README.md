@@ -21,7 +21,7 @@ To browse through the crawler, visit the [crawler/](../crawler/) folder.
 </div>
 
 1. Create an [Algolia account](https://www.algolia.com/users/sign_up).
-1. Follow the <a href="https://www.algolia.com/zendesk" rel="nofollow">Get Started</a> guide to connect your Zendesk Help Center with your Algolia account.
+1. Follow the <a href="https://www.algolia.com/doc/integration/zendesk/get-started" rel="nofollow">Get Started</a> guide to connect your Zendesk Help Center with your Algolia account.
 
 ### Indexing
 

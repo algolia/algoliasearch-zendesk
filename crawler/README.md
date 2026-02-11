@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This crawler is deprecated. The crawler used by [Algolia's connectors](https://dashboard.algolia.com/connectors) is hosted [here](https://github.com/algolia/data-ingestion-connectors/tree/main/connectors/custom/zendesk-js).
+
 # Indexing crawler
 
 [![GitHub license](https://img.shields.io/github/license/algolia/algoliasearch-zendesk.svg)](../LICENSE)
@@ -47,4 +50,3 @@ We're considering any contribution and PR, please go ahead!
 ## License
 
 This project is under the [MIT License](../LICENSE).
-
