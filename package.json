@@ -20,6 +20,7 @@
     "release": "./scripts/release.sh",
     "release:app": "./scripts/release-app.sh",
     "release:docs": "./scripts/release-docs.sh",
-    "release:git": "./scripts/release-git.sh"
+    "release:git": "./scripts/release-git.sh",
+    "zip:assets": "zip -r algoliasearch-zendesk.zip marketplace/*"
   }
 }
