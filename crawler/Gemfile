@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'algoliasearch'
+gem "algolia", "~> 2.3"
 # Fork needed to follow redirects
 gem 'zendesk_api', github: 'Jerskouille/zendesk_api_client_rb'
 gem 'htmlentities'
