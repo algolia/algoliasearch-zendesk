@@ -1,5 +1,5 @@
 > [!IMPORTANT]
-> This crawler is deprecated. The crawler used by [Algolia's connectors](https://dashboard.algolia.com/connectors) is hosted [here](https://github.com/algolia/data-ingestion-connectors/tree/main/connectors/custom/zendesk-js).
+> This crawler is deprecated. The ingestion is now performed by [Algolia's connectors platform](https://dashboard.algolia.com/connectors).
 
 # Indexing crawler
 

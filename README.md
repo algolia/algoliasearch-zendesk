@@ -12,7 +12,7 @@ We'll crawl your Zendesk API to extract your Help Center content and provide you
 ## Indexing
 Find the code of the legacy crawler and its documentation in the [crawler/](./crawler/) folder.
 
-The crawler used by the Connectors platform is located [here](https://github.com/algolia/data-ingestion-connectors/tree/main/connectors/custom/zendesk-js).
+The ingestion is now performed by [Algolia's connectors platform][https://dashboard.algolia.com/connectors).
 
 ## Front-end
 Follow the documentation [on the website](https://community.algolia.com/zendesk/documentation/).  
