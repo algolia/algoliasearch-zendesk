@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This crawler is deprecated. The ingestion is now performed by [Algolia's connectors platform](https://dashboard.algolia.com/connectors).
+
 # Indexing crawler
 
 [![GitHub license](https://img.shields.io/github/license/algolia/algoliasearch-zendesk.svg)](../LICENSE)
@@ -47,4 +50,3 @@ We're considering any contribution and PR, please go ahead!
 ## License
 
 This project is under the [MIT License](../LICENSE).
-
