@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "conventional-changelog": "^0.5.3",
-    "gh-pages": "^0.8.0",
+    "gh-pages": "^4.0.0",
     "json": "^9.0.3"
   },
   "scripts": {
