@@ -176,8 +176,8 @@ const defaultTemplates = {
     ),
 
     hierarchicalItem: compile(
-      `<a class="[[cssClasses.link]]" href="[[url]]" title="[[name]]">
-  [[name]]
+      `<a class="[[cssClasses.link]]" href="[[url]]" title="[[label]]">
+  [[label]]
   <span class="[[cssClasses.count]]">
     [[#helpers.formatNumber]]
       [[count]]

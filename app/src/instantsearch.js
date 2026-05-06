@@ -49,14 +49,13 @@ class InstantSearch {
         snippetEllipsisText: '...',
         clickAnalytics,
       },
-      searchFunction: ({ search }) => {
-        const helper = this.instantsearch.helper;
+      searchFunction: (helper) => {
         const query = helper.state.query;
         const optionalWords = getOptionalWords(query, this.locale);
         const page = helper.getPage();
         helper.setQueryParameter('optionalWords', optionalWords);
         helper.setPage(page);
-        search();
+        helper.search();
       },
     });
 
@@ -149,6 +148,8 @@ class InstantSearch {
         placeholder: translations.placeholder,
         autofocus: true,
         poweredBy,
+        magnifier: false,
+        reset: false,
         cssClasses: {
           root: reuseAutocomplete ? '' : 'ais-with-style',
         },
