@@ -74,7 +74,7 @@ const defaultTemplates = {
 
   instantsearch: {
     css: compile(
-      `.search-result-link, .ais-hierarchical-menu--link, .ais-link {
+      `.search-result-link, .ais-HierarchicalMenu-link {
   color: [[ color ]];
 }
 
@@ -100,7 +100,7 @@ const defaultTemplates = {
     padding: 0 9px;
   }
 
-  .ais-with-style.ais-search-box {
+  .ais-with-style.ais-SearchBox {
     margin-left: 0;
   }
 
@@ -153,7 +153,8 @@ const defaultTemplates = {
 
     layout: compile(
       `<div>
-  <input type="text" id="algolia-query"/>
+  <div id="algolia-query"></div>
+  <div id="algolia-powered-by-container"></div>
   <div id="algolia-stats-line">
     <div id="algolia-facets-open">
       [[ translations.filter ]]

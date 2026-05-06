@@ -1,5 +1,5 @@
 /* Search by */
-.ais-search-box--powered-by-link, .aa-powered-by-link {
+.ais-PoweredBy-link, .aa-powered-by-link {
   display: inline-block;
   width: 64px;
   height: 18px;
@@ -237,21 +237,25 @@
 /*! instantsearch.js 1.1.0 | © Algolia Inc. and other contributors; Licensed MIT | github.com/algolia/instantsearch.js */
 /***************************/
 
-.ais-with-style.ais-search-box {
+.ais-with-style.ais-SearchBox {
   margin-left: 30%;
   position: relative;
-  &:before {
-    content: "\1F50D";
-    font-family: "entypo";
-    font-size: 1.25em;
-    line-height: 0;
-    position: absolute;
-    text-align: center;
-    top: 18px;
-    width: 2.2em;
-    z-index: 1;
+  .ais-SearchBox-form {
+    position: relative;
+    &:before {
+      content: "\1F50D";
+      font-family: "entypo";
+      font-size: 1.25em;
+      line-height: 0;
+      position: absolute;
+      text-align: center;
+      top: 18px;
+      width: 2.2em;
+      z-index: 1;
+    }
   }
-  input {
+  .ais-SearchBox-input {
+    box-sizing: border-box;
     width: 100%;
     outline: none;
     padding: 10px;
@@ -259,7 +263,8 @@
   }
 }
 
-.ais-search-box--powered-by {
+#algolia-powered-by-container {
+  margin-left: 30%;
   font-size: .8em;
   text-align: right;
   margin-top: 3px;
@@ -328,11 +333,6 @@
   margin-left: 30%;
   margin-top: 15px;
   text-transform: uppercase;
-  .ais-stats--time {
-    text-transform: lowercase;
-    color: #BBB;
-    margin-left: 2px;
-  }
 }
 
 #algolia-facets {
@@ -345,24 +345,25 @@
     border: 1px solid #efefef;
   }
 
-  .ais-header {
+  .ais-Panel-header {
     text-align: left;
     text-transform: uppercase;
     font-weight: 300;
     font-size: 1em;
     border-bottom: 1px solid #efefef;
+    padding: 10px;
   }
-  .ais-header, .ais-hierarchical-menu--body, .ais-refinement-list--body {
+  .ais-Panel-body {
     padding: 10px;
   }
 
-  .ais-hierarchical-menu--list__lvl1 {
+  .ais-HierarchicalMenu-list--lvl1 {
     margin-left: 10px;
   }
-  .ais-hierarchical-menu--list__lvl2 {
+  .ais-HierarchicalMenu-list--lvl2 {
     margin-left: 10px;
   }
-  .ais-hierarchical-menu--link {
+  .ais-HierarchicalMenu-link {
     display: block;
     width: 80%;
     white-space: nowrap;
@@ -370,33 +371,31 @@
     text-overflow: ellipsis;
     cursor: pointer;
   }
-  .ais-hierarchical-menu--item {
+  .ais-HierarchicalMenu-item {
     line-height: 2em;
   }
-  .ais-hierarchical-menu--item__active > div > .ais-hierarchical-menu--link {
+  .ais-HierarchicalMenu-item--selected > div > .ais-HierarchicalMenu-link {
     font-weight: bold;
     &:hover {
       text-decoration: line-through;
       border: none;
     }
   }
-  .ais-hierarchical-menu--count {
+  .ais-HierarchicalMenu-count {
     display: none;
   }
 
   #algolia-labels {
     margin-top: 20px;
-    .ais-refinement-list--body {
+    .ais-RefinementList-list {
       margin-top: 5px;
-    }
-    .ais-refinement-list--list {
       margin-left: -4px;
       margin-right: -4px;
     }
-    .ais-refinement-list--item {
+    .ais-RefinementList-item {
       display: inline-block;
       max-width: 100%;
-      label {
+      .ais-RefinementList-label {
         display: inline-block;
         padding: 4px 8px;
         margin: 4px;
@@ -407,27 +406,25 @@
         cursor: pointer;
       }
     }
-    .ais-refinement-list--item label:hover, .ais-refinement-list--item__active label {
+    .ais-RefinementList-item .ais-RefinementList-label:hover,
+    .ais-RefinementList-item--selected .ais-RefinementList-label {
       text-decoration: none;
       background: #158EC2;
       color: white;
       -webkit-transition: all 0.3s ease;
       transition: all 0.3s ease;
     }
-    .ais-refinement-list--item__active label:hover {
+    .ais-RefinementList-item--selected .ais-RefinementList-label:hover {
       text-decoration: line-through;
     }
-    .ais-refinement-list--count, .ais-refinement-list--checkbox {
+    .ais-RefinementList-count,
+    .ais-RefinementList-checkbox {
       display: none;
     }
   }
 }
 
-.ais-link {
-  cursor: pointer;
-}
-
-.ais-hits__empty {
+.ais-Hits--empty {
   text-align: center;
   font-size: 1.8em;
   margin-top: 100px;
@@ -437,17 +434,19 @@
 #algolia-pagination {
   text-align: center;
   margin-top: 80px;
-  ul.ais-pagination {
+  .ais-Pagination-list {
     display: inline-block;
+    list-style: none;
+    padding: 0;
   }
-  .ais-pagination--item {
+  .ais-Pagination-item {
     display: inline-block;
     padding: 3px;
   }
-  .ais-pagination--item__disabled {
+  .ais-Pagination-item--disabled {
     visibility: hidden;
   }
-  .ais-pagination--item__active {
+  .ais-Pagination-item--selected {
     font-weight: bold;
     background: #efefef;
   }
