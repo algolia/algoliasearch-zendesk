@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import dartSass from 'sass';
 import gulp from 'gulp';
 import cssnano from 'gulp-cssnano';
 import header from 'gulp-header';
@@ -7,6 +6,7 @@ import rename from 'gulp-rename';
 import gulpSass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 import gutil from 'gulp-util';
+import dartSass from 'sass';
 
 import pjson from '../package.json';
 
