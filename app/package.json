@@ -28,7 +28,7 @@
     "node": ">=22"
   },
   "dependencies": {
-    "algoliasearch": "^3.18.1",
+    "algoliasearch": "^4.27.0",
     "autocomplete.js": "^0.28.1",
     "hogan.js": "^3.0.2",
     "instantsearch.js": "^1.0.0",

@@ -141,10 +141,9 @@ class Autocomplete {
   _source(params, locale, clickAnalytics) {
     return (query, callback) => {
       this.index
-        .search({
+        .search(query, {
           ...params,
           clickAnalytics,
-          query,
           optionalWords: getOptionalWords(query, locale),
         })
         .then((content) => {
