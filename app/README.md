@@ -437,6 +437,26 @@ In this case, you'll need to authorize insecure loading.
 This will most often be hidden behind a shield icon or the green lock icon in your location bar.  
 For instance, on Firefox: click the lock icon in the location bar > Right arrow with label "Show connection details" > Disable protection for now
 
+### Bundling note: `algoliasearch/lite`
+
+Both `app/src/autocomplete.js` and `app/src/instantsearch.js` import the search-only [lite client](https://www.npmjs.com/package/algoliasearch) from `algoliasearch/lite`.
+
+[`algoliasearch`](https://github.com/algolia/algoliasearch-client-javascript) ships per-environment builds via the package.json `exports` field (a Node build that uses `node:zlib`, a browser UMD build that doesn't).
+Our [Browserify](https://browserify.org/) version pre-dates `exports` support, so it falls back to the package's `lite.js` shim which always points at the Node build. That pulls in `browserify-zlib` and adds ~1.2 MB to the bundle for no runtime benefit.
+
+To work around it, the `browser` field in `package.json` aliases `algoliasearch/lite` to the self-contained UMD browser build:
+```json
+"browser": {
+  "algoliasearch/lite": "./node_modules/algoliasearch/dist/lite/builds/browser.umd.js"
+}
+```
+
+To measure the bundle:
+```sh
+npm run build:js
+du -h dist/algoliasearch.zendesk-hc.js
+```
+
 ### Documentation
 
 To update the documentation of the project, you only need to update this README.

@@ -1,6 +1,6 @@
 // Small hack to remove verticalAlign on the input
 // Makes IE11 fail though
-import algoliasearch from 'algoliasearch';
+import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import autocomplete from 'autocomplete.js';
 import _ from 'autocomplete.js/src/common/utils';
 import zepto from 'autocomplete.js/zepto';
@@ -35,7 +35,6 @@ class Autocomplete {
     this.client = algoliasearch(applicationId, apiKey);
     this.client.addAlgoliaAgent('Zendesk Integration (__VERSION__)');
     this.indexName = indexName || `${indexPrefix}${subdomain}_articles`;
-    this.index = this.client.initIndex(this.indexName);
     this.trackClick = createClickTracker(this, this.indexName);
   }
 
@@ -140,13 +139,19 @@ class Autocomplete {
 
   _source(params, locale, clickAnalytics) {
     return (query, callback) => {
-      this.index
-        .search(query, {
-          ...params,
-          clickAnalytics,
-          optionalWords: getOptionalWords(query, locale),
+      this.client
+        .searchForHits({
+          requests: [
+            {
+              indexName: this.indexName,
+              ...params,
+              clickAnalytics,
+              query,
+              optionalWords: getOptionalWords(query, locale),
+            },
+          ],
         })
-        .then((content) => {
+        .then(({ results: [content] }) => {
           const hitsWithPosition = this._addPositionToHits(
             content.hits,
             content.queryID,
