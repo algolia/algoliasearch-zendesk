@@ -1,5 +1,3 @@
-// Small hack to remove verticalAlign on the input
-// Makes IE11 fail though
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import autocomplete from 'autocomplete.js';
 import _ from 'autocomplete.js/src/common/utils';
@@ -10,6 +8,8 @@ import { createClickTracker } from './clickAnalytics';
 import removeCSS from './removeCSS';
 import getOptionalWords from './stopwords';
 
+// Small hack to remove verticalAlign on the input
+// Makes IE11 fail though
 if (!_.isMsie()) {
   const css = require('autocomplete.js/src/autocomplete/css');
   delete css.input.verticalAlign;
