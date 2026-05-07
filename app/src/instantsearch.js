@@ -140,21 +140,11 @@ class InstantSearch {
     ];
 
     if (poweredBy === true) {
-      const renderPoweredBy = templates.instantsearch.poweredBy({
-        subdomain,
-        translations,
-      });
-      widgets.push({
-        init() {
-          const $container = document.querySelector(
-            '#algolia-powered-by-container'
-          );
-          if (!$container) return;
-          $container.innerHTML = renderPoweredBy({
-            cssClasses: { root: 'ais-PoweredBy', link: 'ais-PoweredBy-link' },
-          });
-        },
-      });
+      widgets.push(
+        instantsearch.widgets.poweredBy({
+          container: '#algolia-powered-by-container',
+        })
+      );
     }
 
     if (reuseAutocomplete) {
