@@ -16,25 +16,60 @@
 }
 
 /***************************/
-/* autocomplete.js */
+/* @algolia/autocomplete-js */
 /***************************/
 
-.algolia-autocomplete {
-  width: 100%;
+.aa-zendesk-container {
   line-height: normal;
 }
 
-.aa-input {
+.aa-Form {
+  position: relative;
+  &:before {
+    content: "\1F50D";
+    font-family: "entypo";
+    font-size: 1.25em;
+    line-height: 0;
+    position: absolute;
+    text-align: center;
+    top: 18px;
+    left: 0;
+    width: 2.2em;
+    z-index: 1;
+  }
+}
+
+.aa-InputWrapperPrefix {
+  display: none;
+}
+
+.aa-Input {
+  box-sizing: border-box;
   width: 100%;
   outline: none;
+  padding: 10px;
+  padding-left: 32px;
+  padding-right: 28px;
 }
 
-.aa-hint {
-  width: 100%;
-  color: #999;
+.aa-InputWrapperSuffix {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
 }
 
-.aa-dropdown-menu {
+.aa-ClearButton {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+}
+
+.aa-Panel {
+  position: absolute;
+  z-index: 10000;
   margin-top: 9px;
   border: 1px solid #d9d9d9;
   border-radius: 3px;
@@ -43,10 +78,9 @@
   font-size: 14px;
   padding: 20px 16px 16px 16px;
   text-align: left;
-  position: relative;
 }
 
-.aa-suggestion {
+.aa-Item {
   cursor: pointer;
   padding-top: 5px;
 }
@@ -146,7 +180,8 @@
   padding: 4px 10% 4px 8px;
 }
 
-.aa-suggestion.aa-cursor .aa-article-hit--content {
+.aa-Item:hover .aa-article-hit--content,
+.aa-Item[aria-selected="true"] .aa-article-hit--content {
   background-color: #f8f8f8;
 }
 

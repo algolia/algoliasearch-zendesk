@@ -1,20 +1,10 @@
+import { autocomplete, getAlgoliaResults } from '@algolia/autocomplete-js';
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
-import autocomplete from 'autocomplete.js';
-import _ from 'autocomplete.js/src/common/utils';
-import zepto from 'autocomplete.js/zepto';
 
 import addCSS from './addCSS';
 import { createClickTracker } from './clickAnalytics';
 import removeCSS from './removeCSS';
 import getOptionalWords from './stopwords';
-
-// Small hack to remove verticalAlign on the input
-// Makes IE11 fail though
-if (!_.isMsie()) {
-  const css = require('autocomplete.js/src/autocomplete/css');
-  delete css.input.verticalAlign;
-  delete css.inputWithNoHint.verticalAlign;
-}
 
 const XS_WIDTH = 400;
 const SM_WIDTH = 600;
@@ -55,7 +45,7 @@ class Autocomplete {
     if (!enabled) return null;
 
     this.$inputs = document.querySelectorAll(inputSelector);
-    this.$inputs = Array.prototype.slice.call(this.$inputs, 0); // Transform to array
+    this.$inputs = Array.prototype.slice.call(this.$inputs, 0);
     this._disableZendeskAutocomplete();
 
     addCSS(templates.autocomplete.css({ color, highlightColor }));
@@ -64,53 +54,90 @@ class Autocomplete {
     for (let i = 0; i < this.$inputs.length; ++i) {
       const $input = this.$inputs[i];
 
-      // Get the width of the dropdown
-      const dropdownMenuWidth = $input.getBoundingClientRect().width;
+      // v1's `autocomplete()` requires a div container; it renders its own
+      // input + form inside. We hide the Zendesk theme's input rather than
+      // removing it, so any host-theme JS that references `#query` (form
+      // submit handlers, custom listeners) keeps working. v1 mounts in a
+      // sibling container of the same dimensions.
+      const inputRect = $input.getBoundingClientRect();
+      const containerWidth = inputRect.width;
+      const $container = document.createElement('div');
+      $container.className = 'aa-zendesk-container';
+      $container.style.width = `${containerWidth}px`;
+      $input.parentNode.insertBefore($container, $input.nextSibling);
+      $input.style.display = 'none';
 
-      const sizeModifier = this._sizeModifier(dropdownMenuWidth);
-      const nbSnippetWords = this._nbSnippetWords(dropdownMenuWidth);
+      const sizeModifier = this._sizeModifier(containerWidth);
+      const nbSnippetWords = this._nbSnippetWords(containerWidth);
       const params = {
         analytics,
         hitsPerPage,
-        facetFilters: `["locale.locale:${locale}"]`,
+        facetFilters: [`locale.locale:${locale}`],
         highlightPreTag: '<span class="aa-article-hit--highlight">',
         highlightPostTag: '</span>',
         attributesToSnippet: [`body_safe:${nbSnippetWords}`],
         snippetEllipsisText: '...',
       };
 
-      $input.setAttribute('placeholder', translations.placeholder);
-      const aa = autocomplete(
-        $input,
-        {
-          hint: false,
-          debug: process.env.NODE_ENV === 'development' || debug,
-          templates: this._templates({
-            poweredBy,
-            subdomain,
-            templates,
-            translations,
-          }),
-          appendTo: 'body',
+      const aa = autocomplete({
+        container: $container,
+        placeholder: translations.placeholder,
+        // Always render inline; we're replacing host-theme search bars
+        // that are themselves inline.
+        detachedMediaQuery: 'none',
+        debug: process.env.NODE_ENV === 'development' || debug,
+        onSubmit: ({ state }) => {
+          window.location.href = `${baseUrl}${locale}/search?query=${encodeURIComponent(
+            state.query
+          )}`;
         },
-        [
+        getSources: ({ query }) => [
           {
-            source: this._source(params, locale, clickAnalytics),
-            name: 'articles',
+            sourceId: 'articles',
+            getItems: () =>
+              getAlgoliaResults({
+                searchClient: this.client,
+                queries: [
+                  {
+                    indexName: this.indexName,
+                    query,
+                    params: {
+                      ...params,
+                      clickAnalytics,
+                      optionalWords: getOptionalWords(query, locale),
+                    },
+                  },
+                ],
+                transformResponse: ({ hits, results }) => [
+                  this._reorderedHits(
+                    this._addPositionToHits(
+                      hits[0],
+                      results[0].queryID,
+                      clickAnalytics
+                    )
+                  ),
+                ],
+              }),
+            getItemUrl: ({ item }) => `${baseUrl}${locale}/articles/${item.id}`,
+            onSelect: ({ item }) => {
+              if (clickAnalytics) {
+                this.trackClick(item, item._position, item._queryID);
+              }
+              window.location.href = `${baseUrl}${locale}/articles/${item.id}`;
+            },
             templates: {
-              suggestion: this._renderSuggestion(templates, sizeModifier),
+              header: this._renderHeader({
+                poweredBy,
+                subdomain,
+                templates,
+                translations,
+              }),
+              item: this._renderItem(templates, sizeModifier),
             },
           },
-        ]
-      );
-      aa.on(
-        'autocomplete:selected',
-        this._onSelected(baseUrl, locale, clickAnalytics)
-      );
-      aa.on('autocomplete:redrawn', function () {
-        aa.autocomplete.getWrapper().style.zIndex = 10000;
+        ],
       });
-      aa.typeahead = zepto($input).data('aaAutocomplete');
+
       this.autocompletes.push(aa);
     }
 
@@ -118,8 +145,8 @@ class Autocomplete {
   }
 
   enableDebugMode() {
-    this.autocompletes.forEach(function (aa) {
-      aa.typeahead.debug = true;
+    this.autocompletes.forEach((aa) => {
+      aa.setIsOpen(true);
     });
   }
 
@@ -135,32 +162,6 @@ class Autocomplete {
     if (inputWidth < XS_WIDTH) return 0;
     if (inputWidth < SM_WIDTH) return 3 + Math.floor(inputWidth / 45);
     return Math.floor(inputWidth / 35);
-  }
-
-  _source(params, locale, clickAnalytics) {
-    return (query, callback) => {
-      this.client
-        .searchForHits({
-          requests: [
-            {
-              indexName: this.indexName,
-              ...params,
-              clickAnalytics,
-              query,
-              optionalWords: getOptionalWords(query, locale),
-            },
-          ],
-        })
-        .then(({ results: [content] }) => {
-          const hitsWithPosition = this._addPositionToHits(
-            content.hits,
-            content.queryID,
-            clickAnalytics
-          );
-          const reorderedHits = this._reorderedHits(hitsWithPosition);
-          callback(reorderedHits);
-        });
-    };
   }
 
   _reorderedHits(hits) {
@@ -192,32 +193,25 @@ class Autocomplete {
     return flattenedHits;
   }
 
-  _templates({ poweredBy, subdomain, templates, translations }) {
-    const res = {};
-    if (poweredBy === true) {
-      res.header = templates.autocomplete.poweredBy({
-        content: translations.search_by_algolia(
-          templates.autocomplete.algolia(subdomain)
-        ),
-      });
-    }
-    return res;
+  _renderHeader({ poweredBy, subdomain, templates, translations }) {
+    if (poweredBy !== true) return undefined;
+    const html = templates.autocomplete.poweredBy({
+      content: translations.search_by_algolia(
+        templates.autocomplete.algolia(subdomain)
+      ),
+    });
+    return ({ html: h }) =>
+      h`<div dangerouslySetInnerHTML=${{ __html: html }} />`;
   }
 
-  _renderSuggestion(templates, sizeModifier) {
-    return (hit) => {
-      hit.sizeModifier = sizeModifier;
-      return templates.autocomplete.article(hit);
-    };
-  }
-
-  _onSelected(baseUrl, locale, clickAnalytics) {
-    return (event, suggestion, dataset) => {
-      if (clickAnalytics) {
-        const { _position, _queryID } = suggestion;
-        this.trackClick(suggestion, _position, _queryID);
-      }
-      location.href = `${baseUrl}${locale}/${dataset}/${suggestion.id}`;
+  _renderItem(templates, sizeModifier) {
+    return ({ item, html }) => {
+      const decorated = { ...item, sizeModifier };
+      return html`<div
+        dangerouslySetInnerHTML=${{
+          __html: templates.autocomplete.article(decorated),
+        }}
+      />`;
     };
   }
 
@@ -252,7 +246,7 @@ class Autocomplete {
 
   _addPositionToHits(hits, queryID, clickAnalytics) {
     if (!clickAnalytics) return hits;
-    return hits.map(function (hit, index) {
+    return hits.map((hit, index) => {
       hit._position = index + 1;
       hit._queryID = queryID;
       return hit;
