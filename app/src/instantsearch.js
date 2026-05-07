@@ -84,7 +84,6 @@ class InstantSearch {
     locale,
     poweredBy,
     responsive,
-    subdomain,
     templates,
     translations,
   }) {
