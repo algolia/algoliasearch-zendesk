@@ -149,19 +149,16 @@ class InstantSearch {
     if (reuseAutocomplete) {
       widgets.push(
         connectSearchBox(({ query, refine }, isFirstRender) => {
-          const $inputs = document.querySelectorAll(autocompleteSelector);
+          const $input = document.querySelector(autocompleteSelector);
+          if (!$input) return;
           if (isFirstRender) {
-            $inputs.forEach(($input) => {
-              $input.addEventListener('input', (event) => {
-                refine(event.target.value);
-              });
-            });
+            $input.addEventListener('input', (event) =>
+              refine(event.target.value)
+            );
           }
-          $inputs.forEach(($input) => {
-            if ($input !== document.activeElement && $input.value !== query) {
-              $input.value = query;
-            }
-          });
+          if ($input !== document.activeElement && $input.value !== query) {
+            $input.value = query;
+          }
         })({})
       );
     } else {
