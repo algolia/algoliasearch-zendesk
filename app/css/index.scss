@@ -274,6 +274,13 @@
 #algolia-hits {
   float: left;
   width: 70%;
+  // v3+ wraps hits in <ol class="ais-Hits-list"> which shows default
+  // list markers (1., 2., ...). Strip them and the default padding.
+  .ais-Hits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
   .search-result {
     border-top: 1px solid #efefef;
     margin-top: 10px;
