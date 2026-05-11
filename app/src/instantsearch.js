@@ -1,6 +1,5 @@
 import algoliasearch from 'algoliasearch';
 import instantsearch from 'instantsearch.js';
-import { connectSearchBox } from 'instantsearch.js/cjs/connectors';
 
 import addCSS from './addCSS';
 import { createClickTracker } from './clickAnalytics';
@@ -125,17 +124,9 @@ class InstantSearch {
     const widgets = [
       instantsearch.widgets.configure({
         ...this.baseSearchParameters,
-        facets: ['locale.locale'],
+        facetFilters: [`locale.locale:${this.locale}`],
         hitsPerPage,
       }),
-      {
-        init: ({ helper }) => {
-          // Filter by language
-          const page = helper.getPage();
-          helper.addFacetRefinement('locale.locale', this.locale);
-          helper.setPage(page);
-        },
-      },
     ];
 
     if (poweredBy === true) {
@@ -148,18 +139,20 @@ class InstantSearch {
 
     if (reuseAutocomplete) {
       widgets.push(
-        connectSearchBox(({ query, refine }, isFirstRender) => {
-          const $input = document.querySelector(autocompleteSelector);
-          if (!$input) return;
-          if (isFirstRender) {
-            $input.addEventListener('input', (event) =>
-              refine(event.target.value)
-            );
+        instantsearch.connectors.connectSearchBox(
+          ({ query, refine }, isFirstRender) => {
+            const $input = document.querySelector(autocompleteSelector);
+            if (!$input) return;
+            if (isFirstRender) {
+              $input.addEventListener('input', (event) =>
+                refine(event.target.value)
+              );
+            }
+            if ($input !== document.activeElement && $input.value !== query) {
+              $input.value = query;
+            }
           }
-          if ($input !== document.activeElement && $input.value !== query) {
-            $input.value = query;
-          }
-        })({})
+        )({})
       );
     } else {
       widgets.push(
@@ -325,10 +318,7 @@ class InstantSearch {
           // eslint-disable-next-line no-continue
           if (target.classList === undefined) continue;
           if (target.classList.contains('ais-clear-filters')) {
-            this.instantsearch.helper
-              .clearRefinements()
-              .addFacetRefinement('locale.locale', this.locale)
-              .search();
+            this.instantsearch.helper.clearRefinements().search();
           }
         }
       },

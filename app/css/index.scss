@@ -1,8 +1,7 @@
 /* Search by, for autocomplete (IS has a dedicated widget) */
 .aa-powered-by-link {
   display: inline-block;
-  width: 80px;
-  height: 18px;
+  width: 64px;
   text-indent: 101%;
   overflow: hidden;
   white-space: nowrap;
@@ -364,10 +363,10 @@
     padding: 10px;
   }
 
-  .ais-HierarchicalMenu-list--lvl1 {
+  .ais-HierarchicalMenu-list--lvl0 {
     margin-left: 10px;
   }
-  .ais-HierarchicalMenu-list--lvl2 {
+  .ais-HierarchicalMenu-list--lvl1 {
     margin-left: 10px;
   }
   .ais-HierarchicalMenu-link {
