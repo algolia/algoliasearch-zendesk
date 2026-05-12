@@ -1,3 +1,4 @@
+import algoliasearch from 'algoliasearch';
 import instantsearch from 'instantsearch.js';
 
 import addCSS from './addCSS';
@@ -32,31 +33,28 @@ class InstantSearch {
       paginationSelector,
     });
 
+    this.baseSearchParameters = {
+      analytics,
+      attributesToSnippet: ['body_safe:40'],
+      highlightPreTag: '<span class="ais-highlight">',
+      highlightPostTag: '</span>',
+      snippetEllipsisText: '...',
+      clickAnalytics,
+    };
+
     this.instantsearch = instantsearch({
-      appId: applicationId,
-      apiKey,
+      searchClient: algoliasearch(applicationId, apiKey),
       indexName: this.indexName,
-      urlSync: {
-        mapping: {
-          q: 'query',
-        },
+      routing: {
+        stateMapping: instantsearch.stateMappings.singleIndex(this.indexName),
       },
-      searchParameters: {
-        analytics,
-        attributesToSnippet: ['body_safe:40'],
-        highlightPreTag: '<span class="ais-highlight">',
-        highlightPostTag: '</span>',
-        snippetEllipsisText: '...',
-        clickAnalytics,
-      },
-      searchFunction: ({ search }) => {
-        const helper = this.instantsearch.helper;
+      searchFunction: (helper) => {
         const query = helper.state.query;
         const optionalWords = getOptionalWords(query, this.locale);
         const page = helper.getPage();
         helper.setQueryParameter('optionalWords', optionalWords);
         helper.setPage(page);
-        search();
+        helper.search();
       },
     });
 
@@ -85,7 +83,6 @@ class InstantSearch {
     locale,
     poweredBy,
     responsive,
-    subdomain,
     templates,
     translations,
   }) {
@@ -124,115 +121,111 @@ class InstantSearch {
 
     this._handleResponsiveness({ responsive, templates });
 
-    this.instantsearch.addWidget({
-      getConfiguration: () => ({ facets: ['locale.locale'] }),
-      init: ({ helper }) => {
-        // Filter by language
-        const page = helper.getPage();
-        helper.addFacetRefinement('locale.locale', this.locale);
-        helper.setPage(page);
-      },
-    });
+    const widgets = [
+      instantsearch.widgets.configure({
+        ...this.baseSearchParameters,
+        facetFilters: [`locale.locale:${this.locale}`],
+        hitsPerPage,
+      }),
+    ];
 
     if (poweredBy === true) {
-      poweredBy = {
-        template: templates.instantsearch.poweredBy({
-          subdomain,
-          translations,
-        }),
-      };
+      widgets.push(
+        instantsearch.widgets.poweredBy({
+          container: '#algolia-powered-by-container',
+        })
+      );
     }
 
-    this.instantsearch.addWidget(
-      instantsearch.widgets.searchBox({
-        container: searchBoxSelector,
-        placeholder: translations.placeholder,
-        autofocus: true,
-        poweredBy,
-        cssClasses: {
-          root: reuseAutocomplete ? '' : 'ais-with-style',
-        },
-      })
-    );
+    if (reuseAutocomplete) {
+      widgets.push(
+        instantsearch.connectors.connectSearchBox(
+          ({ query, refine }, isFirstRender) => {
+            const $input = document.querySelector(autocompleteSelector);
+            if (!$input) return;
+            if (isFirstRender) {
+              $input.addEventListener('input', (event) =>
+                refine(event.target.value)
+              );
+            }
+            if ($input !== document.activeElement && $input.value !== query) {
+              $input.value = query;
+            }
+          }
+        )({})
+      );
+    } else {
+      widgets.push(
+        instantsearch.widgets.searchBox({
+          container: searchBoxSelector,
+          placeholder: translations.placeholder,
+          autofocus: true,
+          showSubmit: false,
+          showReset: false,
+          cssClasses: {
+            root: 'ais-with-style',
+          },
+        })
+      );
+    }
 
-    this.instantsearch.addWidget(
+    widgets.push(
       instantsearch.widgets.stats({
         container: '#algolia-stats',
         templates: {
-          body: ({ nbHits, processingTimeMS }) =>
+          text: ({ nbHits, processingTimeMS }) =>
             translations.stats(nbHits, processingTimeMS),
         },
-        transformData: (data) => ({
-          ...data,
-          translations,
-        }),
-      })
-    );
-
-    this.instantsearch.addWidget(
+      }),
       instantsearch.widgets.pagination({
         container: '#algolia-pagination',
         cssClasses: {
           root: 'pagination',
         },
-      })
-    );
-
-    this.instantsearch.addWidget(
-      instantsearch.widgets.hierarchicalMenu({
+      }),
+      instantsearch.widgets.panel({
+        templates: { header: () => translations.categories },
+      })(instantsearch.widgets.hierarchicalMenu)({
         container: '#algolia-categories',
         attributes: ['category.title', 'section.full_path'],
         separator: ' > ',
         templates: {
-          header: translations.categories,
           item: templates.instantsearch.hierarchicalItem,
         },
-      })
-    );
-
-    this.instantsearch.addWidget(
-      instantsearch.widgets.refinementList({
+      }),
+      instantsearch.widgets.panel({
+        templates: { header: () => translations.tags },
+      })(instantsearch.widgets.refinementList)({
         container: '#algolia-labels',
-        attributeName: 'label_names',
+        attribute: 'label_names',
         operator: 'and',
-        templates: {
-          header: translations.tags,
-        },
         limit: tagsLimit,
-      })
-    );
-
-    this.instantsearch.addWidget(
+      }),
       instantsearch.widgets.hits({
         container: '#algolia-hits',
-        hitsPerPage,
         templates: {
-          empty: templates.instantsearch.noResult,
+          empty: (data) =>
+            templates.instantsearch.noResult({ ...data, translations }),
           item: templates.instantsearch.hit,
         },
-        transformData: {
-          empty: (data) => ({
-            ...data,
-            translations,
-          }),
-          item: (hit) => ({
+        transformItems: (items, { results }) =>
+          items.map((hit, index) => ({
             ...hit,
             useEditedAt,
             showHitsFullPath,
             baseUrl,
-            position: hit.__hitIndex + 1,
-            queryID:
-              this.instantsearch.helper.lastResults._rawResults[0].queryID,
-          }),
+            position: index + 1,
+            queryID: results.queryID,
+          })),
+      }),
+      {
+        init: () => {
+          this._addClickListener(clickAnalytics);
         },
-      })
+      }
     );
 
-    this.instantsearch.addWidget({
-      init: () => {
-        this._addClickListener(clickAnalytics);
-      },
-    });
+    this.instantsearch.addWidgets(widgets);
 
     let firstRender = true;
     this.instantsearch.on('render', () => {
@@ -325,10 +318,7 @@ class InstantSearch {
           // eslint-disable-next-line no-continue
           if (target.classList === undefined) continue;
           if (target.classList.contains('ais-clear-filters')) {
-            this.instantsearch.helper
-              .clearRefinements()
-              .addFacetRefinement('locale.locale', this.locale)
-              .search();
+            this.instantsearch.helper.clearRefinements().search();
           }
         }
       },
