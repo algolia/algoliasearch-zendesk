@@ -21,6 +21,9 @@
     "dist-es5-module/"
   ],
   "main": "dist-es5-module/index.js",
+  "browser": {
+    "algoliasearch/lite": "./node_modules/algoliasearch/dist/lite/builds/browser.umd.js"
+  },
   "browserify-shim": {
     "moment": "global:moment"
   },
@@ -28,7 +31,7 @@
     "node": ">=22"
   },
   "dependencies": {
-    "algoliasearch": "^4.27.0",
+    "algoliasearch": "^5.52.1",
     "autocomplete.js": "^0.28.1",
     "hogan.js": "^3.0.2",
     "instantsearch.js": "^4.96.1",

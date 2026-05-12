@@ -1,4 +1,4 @@
-import algoliasearch from 'algoliasearch';
+import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import instantsearch from 'instantsearch.js';
 
 import addCSS from './addCSS';
