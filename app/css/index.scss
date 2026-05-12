@@ -29,12 +29,13 @@
     content: "\1F50D";
     font-family: "entypo";
     font-size: 1.25em;
-    line-height: 0;
+    line-height: 1;
     position: absolute;
     text-align: center;
-    top: 18px;
+    top: 50%;
     left: 0;
     width: 2.2em;
+    transform: translateY(-50%);
     z-index: 1;
   }
 }
@@ -46,6 +47,8 @@
 .aa-Input {
   box-sizing: border-box;
   width: 100%;
+  height: 100%;
+  margin: 0;
   outline: none;
   padding: 10px;
   padding-left: 32px;
@@ -78,6 +81,12 @@
   font-size: 14px;
   padding: 20px 16px 16px 16px;
   text-align: left;
+}
+
+.aa-List {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .aa-Item {
