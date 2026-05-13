@@ -73,8 +73,6 @@ class Autocomplete {
         analytics,
         hitsPerPage,
         facetFilters: [`locale.locale:${locale}`],
-        highlightPreTag: '<span class="aa-article-hit--highlight">',
-        highlightPostTag: '</span>',
         attributesToSnippet: [`body_safe:${nbSnippetWords}`],
         snippetEllipsisText: '...',
       };
@@ -195,24 +193,11 @@ class Autocomplete {
 
   _renderHeader({ poweredBy, subdomain, templates, translations }) {
     if (poweredBy !== true) return undefined;
-    const html = templates.autocomplete.poweredBy({
-      content: translations.search_by_algolia(
-        templates.autocomplete.algolia(subdomain)
-      ),
-    });
-    return ({ html: h }) =>
-      h`<div dangerouslySetInnerHTML=${{ __html: html }} />`;
+    return templates.autocomplete.poweredBy({ subdomain, translations });
   }
 
   _renderItem(templates, sizeModifier) {
-    return ({ item, html }) => {
-      const decorated = { ...item, sizeModifier };
-      return html`<div
-        dangerouslySetInnerHTML=${{
-          __html: templates.autocomplete.article(decorated),
-        }}
-      />`;
-    };
+    return templates.autocomplete.article(sizeModifier);
   }
 
   _temporaryHiding(selector) {

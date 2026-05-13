@@ -2,74 +2,96 @@ import compile from './compile';
 
 const defaultTemplates = {
   autocomplete: {
-    // Algolia logo
-    algolia: (subdomain) =>
-      `<a
-  href="https://www.algolia.com/?utm_source=zendesk&utm_medium=link&utm_campaign=autocomplete-${subdomain}"
-  class="aa-powered-by-link"
->
-  Algolia
-</a>`,
+    // Autocompletion template for an article.
+    // Curried with `sizeModifier` so the inner function matches the
+    // `@algolia/autocomplete-js` template signature `({ item, html }) => vdom`.
+    article:
+      (sizeModifier) =>
+      ({ item, html, components }) => {
+        const className = [
+          'aa-article-hit',
+          item.isCategoryHeader && 'aa-article-hit__category-first',
+          item.isSectionHeader && 'aa-article-hit__section-first',
+          sizeModifier && `aa-article-hit__${sizeModifier}`,
+        ]
+          .filter(Boolean)
+          .join(' ');
 
-    // Autocompletion template for an article
-    article: compile(
-      `<div
-  class="
-    aa-article-hit
-    [[# isCategoryHeader ]]aa-article-hit__category-first[[/ isCategoryHeader ]]
-    [[# isSectionHeader ]]aa-article-hit__section-first[[/ isSectionHeader ]]
-    [[# sizeModifier ]]aa-article-hit__[[ sizeModifier ]][[/ sizeModifier]]
-  "
->
-  <div class="aa-article-hit--category">
-    <span class="aa-article-hit--category--content">
-      [[ category.title ]]
-    </span>
-  </div>
-  <div class="aa-article-hit--line">
-    <div class="aa-article-hit--section">
-      [[ section.title ]]
-    </div>
-    <div class="aa-article-hit--content">
-      <div class="aa-article-hit--headline">
-        <span class="aa-article-hit--title">
-          [[& _highlightResult.title.value ]]
-        </span>
-      </div>
-      [[# _snippetResult.body_safe.value ]]
-        <div class="aa-article-hit--body">[[& _snippetResult.body_safe.value ]]</div>
-      [[/ _snippetResult.body_safe.value ]]
-    </div>
-  </div>
-</div>
-<div class="clearfix"></div>`
-    ),
+        return html`
+          <div class=${className}>
+            <div class="aa-article-hit--category">
+              <span class="aa-article-hit--category--content">
+                ${item.category.title}
+              </span>
+            </div>
+            <div class="aa-article-hit--line">
+              <div class="aa-article-hit--section">
+                ${item.section.title}
+              </div>
+              <div class="aa-article-hit--content">
+                <div class="aa-article-hit--headline">
+                  <span class="aa-article-hit--title">
+                    ${components.Highlight({ hit: item, attribute: 'title' })}
+                  </span>
+                </div>
+                ${item._snippetResult &&
+                item._snippetResult.body_safe &&
+                item._snippetResult.body_safe.value &&
+                html`
+                  <div class="aa-article-hit--body">
+                    ${components.Snippet({ hit: item, attribute: 'body_safe' })}
+                  </div>
+                `}
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        `;
+      },
 
-    // Powered By
-    poweredBy: compile(
-      `<div class="aa-powered-by">
-  [[& content ]]
-</div>`
-    ),
+    // Powered By header. Returns a v1-compatible template function.
+    // The link is composed as vdom; the localized "Search by ..." wrapper
+    // text is spliced in via a sentinel so translations stay as plain
+    // text (no HTML injection from translation values).
+    poweredBy:
+      ({ subdomain, translations }) =>
+      ({ html }) => {
+        const SENTINEL = '\x00LINK\x00';
+        const wrapped = translations.search_by_algolia(SENTINEL);
+        const [before = '', after = ''] = wrapped.split(SENTINEL);
+        const link = html`
+          <a
+            class="aa-powered-by-link"
+            href=${`https://www.algolia.com/?utm_source=zendesk&utm_medium=link&utm_campaign=autocomplete-${subdomain}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Algolia
+          </a>
+        `;
+        return html`
+          <div class="aa-powered-by">${before}${link}${after}</div>
+        `;
+      },
 
     // CSS to add to handle the color
-    css: compile(
-      `.aa-article-hit--highlight {
-  color: [[ color ]];
+    css: ({ color, highlightColor }) => `
+.aa-article-hit mark {
+  color: ${color};
 }
 
 .aa-article-hit--section {
-  color: [[ color ]];
+  color: ${color};
 }
 
-.aa-article-hit--title .aa-article-hit--highlight {
-  color: [[ highlightColor ]];
+.aa-article-hit--title mark {
+  color: ${highlightColor};
 }
 
-.aa-article-hit--title .aa-article-hit--highlight::before {
-  background-color: [[ highlightColor ]];
-}`
-    ),
+.aa-article-hit--title mark::before {
+  background-color: ${highlightColor};
+}
+`,
   },
 
   instantsearch: {

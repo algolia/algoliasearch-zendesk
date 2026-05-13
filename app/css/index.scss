@@ -220,9 +220,11 @@
   font-size: 1.1em;
   font-weight: bold;
 
-  .aa-article-hit--highlight {
+  mark {
     position: relative;
     z-index: 1;
+    background: none;
+    color: inherit;
 
     &::before {
       content: "";
@@ -261,7 +263,8 @@
   margin-top: 4px;
   line-height: 1.25em;
 
-  .aa-article-hit--highlight {
+  mark {
+    background: none;
     color: #666;
     font-weight: bold;
   }
