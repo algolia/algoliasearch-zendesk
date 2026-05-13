@@ -351,7 +351,9 @@
     margin-top: 5px;
     opacity: .7;
 
-    .ais-highlight {
+    mark {
+      background: none;
+      color: inherit;
       font-weight: bold;
     }
   }
@@ -365,9 +367,11 @@
     cursor: pointer;
   }
 
-  .search-result-link .ais-highlight {
+  .search-result-link mark {
     position: relative;
     z-index: 1;
+    background: none;
+    color: inherit;
 
     &::before {
       content: "";

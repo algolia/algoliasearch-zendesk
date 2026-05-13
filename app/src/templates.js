@@ -100,11 +100,11 @@ const defaultTemplates = {
   color: [[ color ]];
 }
 
-.search-result-link .ais-highlight {
+.search-result-link mark {
   color: [[ highlightColor ]];
 }
 
-.search-result-link .ais-highlight::before {
+.search-result-link mark::before {
   background-color: [[ highlightColor ]];
 }
 

@@ -36,8 +36,6 @@ class InstantSearch {
     this.baseSearchParameters = {
       analytics,
       attributesToSnippet: ['body_safe:40'],
-      highlightPreTag: '<span class="ais-highlight">',
-      highlightPostTag: '</span>',
       snippetEllipsisText: '...',
       clickAnalytics,
     };
