@@ -25,13 +25,11 @@ const defaultTemplates = {
               </span>
             </div>
             <div class="aa-article-hit--line">
-              <div class="aa-article-hit--section">
-                ${item.section.title}
-              </div>
+              <div class="aa-article-hit--section">${item.section.title}</div>
               <div class="aa-article-hit--content">
                 <div class="aa-article-hit--headline">
                   <span class="aa-article-hit--title">
-                    ${components.Highlight({ hit: item, attribute: 'title' })}
+                    <${components.Highlight} hit=${item} attribute="title" />
                   </span>
                 </div>
                 ${item._snippetResult &&
@@ -39,7 +37,7 @@ const defaultTemplates = {
                 item._snippetResult.body_safe.value &&
                 html`
                   <div class="aa-article-hit--body">
-                    ${components.Snippet({ hit: item, attribute: 'body_safe' })}
+                    <${components.Snippet} hit=${item} attribute="body_safe" />
                   </div>
                 `}
               </div>
