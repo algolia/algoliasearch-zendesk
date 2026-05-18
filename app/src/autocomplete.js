@@ -62,7 +62,6 @@ class Autocomplete {
       const inputRect = $input.getBoundingClientRect();
       const containerWidth = inputRect.width;
       const $container = document.createElement('div');
-      $container.className = 'aa-zendesk-container';
       $container.style.width = `${containerWidth}px`;
       $input.parentNode.insertBefore($container, $input.nextSibling);
       $input.style.display = 'none';
