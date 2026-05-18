@@ -52,7 +52,7 @@ const defaultTemplates = {
     // text is spliced in via a sentinel so translations stay as plain
     // text (no HTML injection from translation values).
     poweredBy:
-      ({ subdomain, translations }) =>
+      ({ translations }) =>
       ({ html }) => {
         const SENTINEL = '\x00LINK\x00';
         const wrapped = translations.search_by_algolia(SENTINEL);
@@ -60,7 +60,9 @@ const defaultTemplates = {
         const link = html`
           <a
             class="aa-powered-by-link"
-            href=${`https://www.algolia.com/?utm_source=zendesk&utm_medium=link&utm_campaign=autocomplete-${subdomain}`}
+            href=${`https://www.algolia.com/?utm_source=zendesk&utm_medium=website&utm_content=${encodeURIComponent(
+              window.location.hostname
+            )}&utm_campaign=poweredby`}
             target="_blank"
             rel="noopener noreferrer"
           >
