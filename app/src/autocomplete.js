@@ -45,7 +45,7 @@ class Autocomplete {
     if (!enabled) return null;
 
     this.$inputs = document.querySelectorAll(inputSelector);
-    this.$inputs = Array.prototype.slice.call(this.$inputs, 0);
+    this.$inputs = Array.prototype.slice.call(this.$inputs, 0); // Transform to array
     this._disableZendeskAutocomplete();
 
     addCSS(templates.autocomplete.css({ color, highlightColor }));
@@ -79,8 +79,6 @@ class Autocomplete {
       const aa = autocomplete({
         container: $container,
         placeholder: translations.placeholder,
-        // Always render inline; we're replacing host-theme search bars
-        // that are themselves inline.
         detachedMediaQuery: 'none',
         debug: process.env.NODE_ENV === 'development' || debug,
         onSubmit: ({ state }) => {
@@ -191,7 +189,9 @@ class Autocomplete {
   }
 
   _renderHeader({ poweredBy, subdomain, templates, translations }) {
-    if (poweredBy !== true) return undefined;
+    if (poweredBy !== true) {
+      return undefined;
+    }
     return templates.autocomplete.poweredBy({ subdomain, translations });
   }
 

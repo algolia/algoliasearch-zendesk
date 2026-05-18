@@ -2,9 +2,7 @@ import compile from './compile';
 
 const defaultTemplates = {
   autocomplete: {
-    // Autocompletion template for an article.
-    // Curried with `sizeModifier` so the inner function matches the
-    // `@algolia/autocomplete-js` template signature `({ item, html }) => vdom`.
+    // Autocompletion template for an article
     article:
       (sizeModifier) =>
       ({ item, html, components }) => {
