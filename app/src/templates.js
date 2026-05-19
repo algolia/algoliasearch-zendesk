@@ -45,30 +45,19 @@ const defaultTemplates = {
         `;
       },
 
-    // Powered By header. Returns a v1-compatible template function.
-    // The link is composed as vdom; the localized "Search by ..." wrapper
-    // text is spliced in via a sentinel so translations stay as plain
-    // text (no HTML injection from translation values).
     poweredBy:
       ({ translations }) =>
       ({ html }) => {
-        const SENTINEL = '\x00LINK\x00';
-        const wrapped = translations.search_by_algolia(SENTINEL);
-        const [before = '', after = ''] = wrapped.split(SENTINEL);
-        const link = html`
-          <a
-            class="aa-powered-by-link"
-            href=${`https://www.algolia.com/?utm_source=zendesk&utm_medium=website&utm_content=${encodeURIComponent(
-              window.location.hostname
-            )}&utm_campaign=poweredby`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Algolia
-          </a>
-        `;
+        const link = `<a class="aa-powered-by-link" href="https://www.algolia.com/?utm_source=zendesk&utm_medium=website&utm_content=${encodeURIComponent(
+          window.location.hostname
+        )}&utm_campaign=poweredby" target="_blank" rel="noopener noreferrer">Algolia</a>`;
         return html`
-          <div class="aa-powered-by">${before}${link}${after}</div>
+          <div
+            class="aa-powered-by"
+            dangerouslySetInnerHTML=${{
+              __html: translations.search_by_algolia(link),
+            }}
+          ></div>
         `;
       },
 
