@@ -73,11 +73,11 @@
       });
 
       var $master = document.querySelector('input[name=master]');
-      console.log($master);
       $master.addEventListener('input', function () {
-        search.search.autocompletes.forEach(function (autocomplete) {
-          autocomplete.autocomplete.setVal($master.value);
-          autocomplete.autocomplete.open();
+        search.search.autocompletes.forEach(function (aa) {
+          aa.setQuery($master.value);
+          aa.refresh();
+          aa.setIsOpen(true);
         });
       });
     </script>
