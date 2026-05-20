@@ -52,12 +52,9 @@ const defaultTemplates = {
           window.location.hostname
         )}&utm_campaign=poweredby" target="_blank" rel="noopener noreferrer">Algolia</a>`;
         return html`
-          <div
-            class="aa-powered-by"
-            dangerouslySetInnerHTML=${{
-              __html: translations.search_by_algolia(link),
-            }}
-          ></div>
+          <div class="aa-powered-by">
+            ${html([translations.search_by_algolia(link)])}
+          </div>
         `;
       },
 
