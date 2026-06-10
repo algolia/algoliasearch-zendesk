@@ -13,56 +13,56 @@ permalink: /documentation/
 
 ## Synchronize Algolia with your Help Center
 
-<div align="center">
-  <img src="https://www.algolia.com/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fhilnmyskv%2Fimage%2Fupload%2Fv1671027406%2FAlgolia_com_Website_assets%2Fimages%2Fzendesk%2FZendesk-algolia.png&w=1200&q=75" alt="Data connection visualization" />
-</div>
-
 1. Create an [Algolia account](https://www.algolia.com/users/sign_up).
 1. Follow the <a href="https://www.algolia.com/doc/integration/zendesk/get-started" rel="nofollow">Get Started</a> guide to connect your Zendesk Help Center with your Algolia account.
 
 ## Indexing
 
-When you install our Zendesk integration, it creates what we call a connector in your Algolia account.
-You can access it with the left sidebar in your dashboard.
+When you install our Zendesk integration, it creates a connector in your Algolia account.
+You can access it with the left sidebar in your dashboard, in the `Data sources > Connectors` section.
 
-This connector will every day take your public Help Center articles and put them inside an Algolia index.
-In most cases, this should be enough to have an up-to-date search.
-
-However, if you'd rather have it updated sooner, you can manually trigger a full reindex.
-On your [Connectors](https://dashboard.algolia.com/connectors/tasks) page, click the "Run task" button on the right of your task.
+This connector will browse regularly your public Help Center articles and send them inside an Algolia index.
+You can define the crawling frequency during the connector setup.
+You can also manually trigger a full reindex: on your [Connectors](https://dashboard.algolia.com/connectors/tasks) page, click the "Run task" button on the right of your task.
 
 ## Updating your Help Center theme
 
 Once your data has been extracted to Algolia, you need to update your Help Center theme in order to replace the search feature by Algolia.
 
-* Open the **Document Head** template in the **Theme Editor**:
-  1. Head to your Zendesk Help Center
-  1. Click **General > Customize the design** in the top bar
-  1. In the **Theme** section, click on **Edit theme**
-  1. In the top left corner dropdown, select the **Document Head** template
-
-<div align="center">
-  <img src="https://res.cloudinary.com/hilnmyskv/image/upload/v1522421354/Onboarding--First-Gif_wsuvrs.gif" alt="Document Head opening GIF" />
-</div>
-
-* Copy the **JavaScript** snippet & **Publish** changes:
-  1. Paste the code we provide you while connecting your Zendesk Help Center with Algolia at the end of the template.
-  1. Click **Save** and ensure everything is working using the preview on the right (if you have some small CSS issues, [read this part](#customizing-the-css))
-  1. Click **Publish Changes**
-
-<div align="center">
-  <img src="https://res.cloudinary.com/hilnmyskv/image/upload/v1522421175/Onboarding--Second-Gif_y0i5pe.gif" alt="Document Head editing GIF" />
-</div>
-
-&nbsp;
+1. Head to your Zendesk Help Center admin
+1. Click **Customize design** in the sidebar
+   Make a copy of your current theme to be able to [Preview the changes](https://support.zendesk.com/hc/en-us/articles/4408845893274-Previewing-your-help-center-theme) 
+1. Click on the **Customize** link on the theme you want to add Algolia to. Then click on **Edit code**
+1. Add the following code to the end of the `document_head.hbs` template:
+   ```
+   <link
+     rel="stylesheet"
+     type="text/css"
+     href="https://cdn.jsdelivr.net/npm/algoliasearch.zendesk-hc@3.0.0/dist/algoliasearch.zendesk-hc.min.css"
+   />
+   <script
+     type="text/javascript"
+     src="https://cdn.jsdelivr.net/npm/algoliasearch.zendesk-hc@3.0.0/dist/algoliasearch.zendesk-hc.min.js"
+   ></script>
+   <script type="text/javascript">
+     algoliasearchZendeskHC({
+       applicationId: "ALGOLIA_APPLICATION_ID",
+       apiKey: "ALGOLIA_SEARCH_API_KEY",
+       subdomain: "ZENDESK_SUBDOMAIN",
+       indexName: "ALGOLIA_INDEX_NAME",
+     });
+   </script>
+   ```
+1. Click **Publish**
+1. Click **Preview** and ensure everything is working. If you have some CSS issues, [read this part](#customizing-the-css)
 
 ## Available options
 
 Here is a full breakdown of the available options for the JavaScript library:
 
 ```html
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.css">
-<script type="text/javascript" src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/3/algoliasearch.zendesk-hc.min.css">
+<script type="text/javascript" src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/3/algoliasearch.zendesk-hc.min.js"></script>
 <script type="text/javascript">
   algoliasearchZendeskHC({
     applicationId: '<YOUR APPLICATION_ID>',
@@ -76,7 +76,7 @@ Here is a full breakdown of the available options for the JavaScript library:
     analytics: true,                      // should queries be processed by Algolia analytics
     baseUrl: '/hc/',                      // the base URL of your Help Center
     poweredBy: true,                      // show the "Search by Algolia" link (required if you're on Algolia's FREE plan)
-    clickAnalytics: false,                // whether or not to enable the clickAnalytics feature (available on the Enterprise plan)
+    clickAnalytics: false,                // whether or not to enable the clickAnalytics feature
     debug: false,                         // debug mode prevents the autocomplete to close when trying to inspect it
     color: '#158EC2',                     // main color (used for links)
     highlightColor: '#158EC2',            // highlight color to emphasize matching text
@@ -301,12 +301,6 @@ For all the other locales, we'll index `{ "label_names": ["Wow"] }`.
 
 We do not index community forums for now. If you're using them, you'll probably want to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
 
-## Indexing private articles
-
-Since we're providing a front-end search, and we can't securely know which access a user has in Zendesk's templates, we have to limit our indexing to public articles only.
-A public article is not a draft and is visible to Everybody.
-If you're in such a scenario, we recommend you to disable `instantsearch` by setting `enabled: false` and just use the auto-complete feature.
-
 ## Removing specific articles from the search results
 
 You can let our script know that you'd want for an article not to be indexed. For this, all you need to do is to add an `algolia-ignore` tag on your article.
@@ -333,7 +327,7 @@ Example:
 
 The `analytics` parameter enables searches capturing, for reports about popular queries, searches without results, and more. It defaults to `true`.
 
-The `clickAnalytics` parameter enables click capturing in search results, for reports about the click rate and average position of clicks for specific queries. It defaults to `false`, as this feature is only accessible on our Enterprise plan.
+The `clickAnalytics` parameter enables click capturing in search results, for reports about the click rate and average position of clicks for specific queries. It defaults to `false`.
 
 With `clickAnalytics` enabled, you can use `algoliasearchZendeskHC.trackConversion()` on an article page to capture a “conversion” if your articles include Calls To Action.
 
@@ -343,19 +337,29 @@ __WARNING__: We don't provide any guarantee that we won't change the templates b
 If you chose to modify a template, you'll need to lock your version to MAJOR.MINOR.PATCH instead of just MAJOR in
 
 ```html
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.css">
-<script type="text/javascript" src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/2/algoliasearch.zendesk-hc.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/3.0.0/algoliasearch.zendesk-hc.min.css">
+<script type="text/javascript" src="//cdn.jsdelivr.net/algoliasearch.zendesk-hc/3.0.0/algoliasearch.zendesk-hc.min.js"></script>
 ```
 
 The latest version is [![version](https://img.shields.io/npm/v/algoliasearch.zendesk-hc.png)](https://www.npmjs.com/package/algoliasearch.zendesk-hc).
 
-With your version locked in place, you can now look at [`templates.js`](https://github.com/algolia/algoliasearch-zendesk/blob/master/app/src/templates.js) to know which keys you can override.
+With your version locked in place, you can now look at [`templates.js`](https://github.com/algolia/algoliasearch-zendesk/blob/master/app/src /templates.js) to know which keys you can override.
 The code here is ES6, you'll need to rewrite your custom template using Vanilla JavaScript instead.
-Also, some templates are using a `compile` function in this file. This function is internally calling the [`Hogan.js` template engine](http://mustache.github.io/mustache.5.html) with square brackets instead of braces (because Zendesk templates already use braces). This function is available using `algoliasearchZendeskHC.compile`.
 
-## Whitelisting our IPs
+InstantSearch templates (`templates.instantsearch.*`) use the [`Hogan.js` template engine](http://mustache.github.io/mustache.5.html) via the `compile` helper (`algoliasearchZendeskHC.compile`), with square brackets instead of braces (because Zendesk templates already use braces).
 
-In case you're using Zendesk's [IP restrictions feature](https://support.zendesk.com/hc/en-us/articles/203663706-Restricting-access-to-Zendesk-Support-and-your-Help-Center-using-IP-restrictions), you'll need to whitelist our IPs for our indexing to work.
-Here are those IPs:
-- `104.196.103.173`
-- `35.234.69.129`
+Since v3, autocomplete templates (`templates.autocomplete.*`) uses the [`@algolia/autocomplete-js` v1 template format](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/templates). If you were overriding any of them before v3, you'll need to update them.
+
+### Migrate autocomplete templates to v3
+
+```js
+// Before: Hogan string
+article: `<div class="my-hit">[[& _highlightResult.title.value ]]</div>`,
+
+// After: function returning vdom
+article: (sizeModifier) => ({ item, html, components }) => html`
+  <div class="my-hit">
+    <${components.Highlight} hit=${item} attribute="title" />
+  </div>
+`,
+```
