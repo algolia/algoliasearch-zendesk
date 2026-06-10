@@ -4,7 +4,7 @@ The `package.json` holds multiple scripts:
 - `build:css`: Compiles the CSS files to `dist/algoliasearch.zendesk-hc.css`
 - `build:docs`: Extracts the documentation from this `README.md` to [`../docs/documentation.md`](../docs/documentation.md)
 - `build:js`: Compiles the JS files to `dist/algoliasearch.zendesk-hc.js` and `dist-es5-module/*.js`
-- `build`: Launches all 3 previous builds
+- `build`: Launches all 3 previous builds commands
 - `clean`: Removes `dist/` and `dist-es5-module`
 - `dev`: Launches `build` and `server`, and watches the files to rebuild them if needed
 - `lint`: Lints the JS files

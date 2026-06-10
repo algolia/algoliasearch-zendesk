@@ -10,7 +10,7 @@ We're also present there.
 All PRs should target the `develop` branch.
 
 For bug-fixes, typos, etc. feel free to open one directly.
-For features, since we made opiniated choices in this project, please open an issue first to double check it is in line with these choices (and avoid losing time).
+For features, since we made opinionated choices in this project, please open an issue first to double check it is in line with these choices (and avoid losing time).
 
 Our commit convention is based on [conventional-changelog-angular](https://github.com/conventional-changelog/conventional-changelog-angular).
 A commit syntax is `<tag>(<scope>): <message>` like so `feat(instantsearch): add facets` or `docs(contributing): add guidelines`.
