@@ -20,5 +20,4 @@ echo
 
 # Run the other release scripts
 npm run release:app
-npm run release:docs
 npm run release:git
