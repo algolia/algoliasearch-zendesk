@@ -7,7 +7,7 @@ import babel from 'gulp-babel';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
 import sourcemaps from 'gulp-sourcemaps';
-import uglify from 'gulp-uglify';
+import terser from 'gulp-terser';
 import gutil from 'gulp-util';
 import mergeStream from 'merge-stream';
 import stringify from 'stringify';
@@ -79,7 +79,7 @@ function bundle({ b, prod }) {
   dist = dist
     .pipe(buffer())
     .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(header(banner))
     .pipe(rename(`${exportedFileBasename}.min.js`))
     .pipe(sourcemaps.write('./'))
