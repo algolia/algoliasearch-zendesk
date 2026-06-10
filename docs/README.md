@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> This documentation website is deprecated.
+> Documentation is available at https://www.algolia.com/doc/integration/zendesk/get-started.
+
 # Documentation website
 
 [![GitHub license](https://img.shields.io/github/license/algolia/algoliasearch-zendesk.svg)](../LICENSE)
