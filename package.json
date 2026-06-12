@@ -10,7 +10,7 @@
     "url": "https://github.com/algolia/algoliasearch-zendesk.git"
   },
   "devDependencies": {
-    "conventional-changelog": "^0.5.3",
+    "conventional-changelog": "^7.2.0",
     "gh-pages": "^0.8.0",
     "json": "^10.0.0"
   },
