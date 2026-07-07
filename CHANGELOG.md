@@ -1,6 +1,23 @@
-<a name="2.32.0"></a>
-# [2.32.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.32.0...v2.32.0) (2023-11-22)
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/algolia/algoliasearch-zendesk/compare/v3.0.0...v3.0.0) (2026-07-07)
 
+
+
+
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/algolia/algoliasearch-zendesk/compare/v2.32.0...v3.0.0) (2026-07-07)
+
+
+### Bug Fixes
+
+* **build:** swap gulp-uglify for gulp-terser to handle modern JS (#197) ([6510318](https://github.com/algolia/algoliasearch-zendesk/commit/6510318))
+
+### Features
+
+* **dependencies:** replace algoliasearch to algolia package (#178) ([34e5aaf](https://github.com/algolia/algoliasearch-zendesk/commit/34e5aaf))
+* **deps:** upgrade algoliasearch v4 -> v5 (#189) ([8921627](https://github.com/algolia/algoliasearch-zendesk/commit/8921627))
+* **ui:** upgrade to algoliasearch and instantsearch v4 (#188) ([d975cf6](https://github.com/algolia/algoliasearch-zendesk/commit/d975cf6))
+* **UI:** upgrade autocomplete to v1 (#190) ([68a9992](https://github.com/algolia/algoliasearch-zendesk/commit/68a9992))
 
 
 
