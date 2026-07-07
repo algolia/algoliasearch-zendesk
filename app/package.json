@@ -35,7 +35,7 @@
     "algoliasearch": "^5.52.1",
     "hogan.js": "^3.0.2",
     "instantsearch.js": "^4.96.1",
-    "js-cookie": "^2.2.1",
+    "js-cookie": "^3.0.7",
     "stopwords": "https://github.com/6/stopwords/tarball/ccec79a4ba22d65eb095bc277d79a7ad8096552c",
     "unorm": "^1.4.1",
     "vietnamese-stopwords": "0.0.2"
