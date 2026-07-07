@@ -10,11 +10,13 @@ This integration makes it easy to replace the default search of your Zendesk Hel
 We'll crawl your Zendesk API to extract your Help Center content and provide you a small code snippet to power your search with Algolia.
 
 ## Indexing
-The ingestion is performed by [Algolia's connectors platform][https://dashboard.algolia.com/connectors).
+The ingestion is performed by [Algolia's connectors platform](https://dashboard.algolia.com/connectors).
+
 Follow [the documentation](https://www.algolia.com/doc/integration/zendesk/get-started#set-up-the-algolia-connector) to setup your Zendesk connector.
 
 ## Front-end
 Follow [the documentation](https://www.algolia.com/doc/integration/zendesk/get-started#update-your-theme) to update your Zendesk theme and replace the default search with Algolia.
+
 If you want to contribute or browse the code, follow [this link to the app/](./app/) folder.
 
 ## Development
